@@ -10,8 +10,8 @@ system is portable, written in TCL with a limited set of TCL extensions in C.
 INSTALLING
 
     Summary:
-        1. bsdmake
-	2. sudo bsdmake install
+        1. make
+	2. sudo make install
 	3. edit /etc/ports.conf
 
     All necessary code and TCL will be compiled and installed as follows:
