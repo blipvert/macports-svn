@@ -159,13 +159,15 @@ portdir irc/epic description {The (E)nhanced (P)rogrammable (I)RC-II (C)lient} p
 infobot 176
 portdir irc/infobot description {IRC Bot written in Perl with a rabid AI} platforms {darwin freebsd} name infobot version 0.45.3 categories irc maintainers eric@opendarwin.org
 ircii 161
-portdir irc/ircii description {an IRC and ICB client} platforms darwin variants ipv6 name ircii version 20020912 categories irc maintainers kevin@opendarwin.org
+portdir irc/ircii description {an IRC and ICB client} platforms darwin variants ipv6 name ircii version 20021103 categories irc maintainers kevin@opendarwin.org
 irssi 217
 portdir irc/irssi description {modular IRC client} platforms darwin variants {ipv6 ssl} name irssi depends_lib {lib:glib:glib lib:libdl:dlcompat} version 0.8.6 categories irc revision 1 maintainers jpm@opendarwin.org
 shadowirc 172
 portdir irc/shadowirc description {GPL licensed GUI IRC client for Mac OS X} platforms darwin name shadowirc version 2.0a categories irc maintainers landonf@opendarwin.org
 thirdeye 206
 portdir irc/thirdeye description {Colorful and effective script for the epic irc client} platforms darwin name thirdeye version 1.72 categories irc maintainers eric@opendarwin.org depends_run bin:epic:epic
+tkirc 412
+portdir irc/tkirc description {A Tk-based GUI for the ircII Internet Relay Chat client} platforms darwin name tkirc version 2.46 categories irc maintainers jkh@opendarwin.org long_description {Tkirc is a frontend for unix's ircII (shell-client for the Internet Relay Chat) based on Tcl/Tk. If you know how to use ircII, you should not have any problems using tkirc.} depends_run {bin:ircII:ircii bin:wish8.4:tk}
 xchat 208
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.1:gettext version 1.8.10 categories irc maintainers mij@opendarwin.org
 xchat2 196
