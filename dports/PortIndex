@@ -4,8 +4,8 @@ bladeenc 197
 portdir audio/bladeenc description {Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.} platforms {darwin freebsd} name bladeenc version 0.94.2 categories audio maintainers jkh@opendarwin.org
 esound 521
 portdir audio/esound description {Enlightened Sound Daemon} platforms darwin name esound depends_lib lib:audiofile.0:audiofile version 0.2.29 categories audio revision 1 maintainers ranger@befunk.com long_description {EsounD, the Enlightened Sound Daemon, is a server process that mixes several audio streams for playback by a single audio device. For example, if you're listening to music on a CD and you receive a sound-related event from ICQ, the two applications won't have to jockey for the use of your sound card.}
-lame 496
-portdir audio/lame description {Lame Ain't an MP3 Encoder} platforms {darwin freebsd} name lame version 3.92 categories audio revision 0 maintainers jpm@opendarwin.org long_description {LAME is an educational tool to be used for learning about MP3 encoding. The goal of the LAME project is to use the open source model to improve the psycho acoustics, noise shaping and speed of MP3. LAME is not for everyone - it is distributed as source code only and requires the ability to use a C compiler.}
+lame 498
+portdir audio/lame description {Lame Ain't an MP3 Encoder} platforms {darwin freebsd} name lame version 3.93.1 categories audio revision 1 maintainers jpm@opendarwin.org long_description {LAME is an educational tool to be used for learning about MP3 encoding. The goal of the LAME project is to use the open source model to improve the psycho acoustics, noise shaping and speed of MP3. LAME is not for everyone - it is distributed as source code only and requires the ability to use a C compiler.}
 libmikmod 188
 portdir audio/libmikmod description {portable sound library} platforms darwin name libmikmod depends_lib lib:libesd.0:esound version 3.1.10 categories audio maintainers mij@opendarwin.org
 libsndfile 174
@@ -171,7 +171,7 @@ portdir irc/tkirc description {A Tk-based GUI for the ircII Internet Relay Chat 
 xchat 208
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.1:gettext version 1.8.10 categories irc maintainers mij@opendarwin.org
 xchat2 196
-portdir irc/xchat2 description {IRC client for gtk2} platforms darwin name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 1.9.6 categories irc maintainers mij@opendarwin.org
+portdir irc/xchat2 description {IRC client for gtk2} platforms darwin name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 1.9.7 categories irc maintainers mij@opendarwin.org
 g77 154
 portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers mike+g77@gene-hacker.net
 nqc 154
@@ -204,6 +204,8 @@ ssmtp 192
 portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} platforms {darwin freebsd} name ssmtp version 2.50 categories mail maintainers eric@opendarwin.org
 fftw 189
 portdir math/fftw description {Fast C routines to compute the Discrete Fourier Transform} platforms darwin name fftw version 2.1.3 categories math revision 0 maintainers jpm@opendarwin.org
+gnuplot 232
+portdir math/gnuplot description XXX platforms darwin variants x11 name gnuplot depends_lib {lib:libgd:gd lib:libreadline:readline} version 3.8h.0 categories {math sci} revision 0 maintainers jpm@opendarwin.org long_description XXX
 arla 212
 portdir net/arla description {free AFS implementation from KTH} platforms darwin variants krbafs name arla version 0.35.10 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description XXX
 curl 263
