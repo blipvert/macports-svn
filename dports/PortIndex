@@ -630,6 +630,8 @@ cvsync 381
 portdir net/cvsync description {cvsync is a portable CVS repository synchronization utility} platforms darwin name cvsync version 0.24.3 categories net maintainers jcorley1@nc.rr.com long_description {cvsync is a portable CVS repository synchronization utility. cvsync is freely available under the BSD license and is a compelling, if not raw, replacement for CVSup written in C.}
 darkstat 433
 portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.5 categories net homepage http://members.optushome.com.au/emikulic/net/darkstat/ revision 3 maintainers jpm@opendarwin.org long_description {darkstat is a network traffic analyzer. It's basically a packet sniffer which runs as a background process on a cable/DSL router and gathers all sorts of useless but interesting statistics.}
+ddclient 323
+portdir net/ddclient platforms darwin description {Update dynamic DNS entries} name ddclient version 3.6.3beta2 categories net homepage http://burry.ca:4141/ddclient/ maintainers rshaw@opendarwin.org long_description {ddclient is a Perl client used to update dynamic DNS entries for accounts on many dynamic DNS services.}
 desproxy 308
 portdir net/desproxy description {tunnels tcp, as socks, etc. through an http-proxy} name desproxy depends_lib lib:libintl:gettext version 0.1.0-pre1 categories net homepage http://www maintainers mww@opendarwin.org long_description {Desproxy makes you able to stablish TCP connections through HTTP proxies}
 dhcp 1053
