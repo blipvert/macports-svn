@@ -16,6 +16,8 @@ postgresql 186
 portdir databases/postgresql description {The most advanced open-source database available anywhere} portname postgresql categories net portversion 7.2.1 maintainers eric@opendarwin.org
 apr 219
 portdir devel/apr description {the apache group's portability library} depends_lib {lib:libexpat.0:expat lib:libiconv.2:libiconv} portname apr categories devel portversion 0.9.1 maintainers rooneg@electricjellyfish.net
+ctags 144
+portdir devel/ctags description {Reimplementation of ctags(1)} portname ctags categories devel portversion 5.3 maintainers pogma@opendarwin.org
 dlcompat 179
 portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} portname dlcompat categories devel portversion 20020929 maintainers eric@opendarwin.org
 gettext 141
