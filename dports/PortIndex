@@ -98,8 +98,8 @@ joe 153
 portdir editors/joe description {Joe's Own Editor} platforms {darwin freebsd} name joe version 2.9.8-pre1 categories editors maintainers noses@noses.com
 nano 502
 portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants {stable unstable} name nano version 1.0.9 categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
-vim 196
-portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.174 categories editors maintainers landonf@opendarwin.org
+vim 192
+portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.262 categories editors maintainers mij@opendarwin.org
 bochs 199
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org depends_run bin:wget:wget
 dopewars 438
@@ -162,8 +162,8 @@ shadowirc 172
 portdir irc/shadowirc description {GPL licensed GUI IRC client for Mac OS X} platforms darwin name shadowirc version 2.0a categories irc maintainers landonf@opendarwin.org
 thirdeye 206
 portdir irc/thirdeye description {Colorful and effective script for the epic irc client} platforms darwin name thirdeye version 1.72 categories irc maintainers eric@opendarwin.org depends_run bin:epic:epic
-xchat 209
-portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.1:gettext version 1.8.10 categories irc maintainers eric@opendarwin.org
+xchat 208
+portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.1:gettext version 1.8.10 categories irc maintainers mij@opendarwin.org
 xchat2 196
 portdir irc/xchat2 description {IRC client for gtk2} platforms darwin name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 1.9.6 categories irc maintainers mij@opendarwin.org
 g77 154
@@ -334,8 +334,8 @@ libiconv 321
 portdir textproc/libiconv platforms {darwin freebsd} description {Character set conversion library} name libiconv version 1.8 categories textproc maintainers eric@opendarwin.org long_description {A character-set conversion library which implements the iconv() API for dealing with unicode and other types of conversion.}
 libxml2 197
 portdir textproc/libxml2 description {gnome xml library} platforms darwin name libxml2 depends_lib lib:libiconv:libiconv version 2.4.25 categories textproc maintainers mike+libxslt@gene-hacker.net
-libxslt 208
-portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
+libxslt 209
+portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml2 version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
 mmencode 659
 portdir textproc/mmencode description {Translate to and from mail-oriented encoding formats} platforms darwin name mmencode version 2.7 categories textproc maintainers mij@opendarwin.org long_description {The mimencode program simply converts a byte stream into (or out of) one of the standard mail encoding formats defined by MIME, the proposed standard for internet multimedia mail formats. Such an encoding is necessary because binary data cannot be sent through the mail. The encodings under- stood by mimencode are preferable to the use of the uuencode/uudecode programs, for use in mail, in several respects that were important to the authors of MIME.}
 openjade 186
