@@ -188,8 +188,8 @@ tcl 140
 portdir lang/tcl description {Tool Command Language} platforms darwin name tcl version 8.4.1 categories lang maintainers jkh@opendarwin.org
 abook 154
 portdir mail/abook description {Address book with mutt support} platforms darwin name abook version 0.4.17 categories mail maintainers fkr@opendarwin.org
-exim 216
-portdir mail/exim description {complete replacement for sendmail} platforms darwin name exim depends_lib path:/usr/include/netinet/ip_var.h:netinet-headers version 4.10 categories mail maintainers fkr@opendarwin.org
+exim 227
+portdir mail/exim description {complete replacement for sendmail} platforms darwin name exim depends_lib path:/usr/include/netinet/ip_var.h:netinet-headers version 4.12 categories mail revision 1 maintainers fkr@opendarwin.org
 mutt 244
 portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl nntp} name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail maintainers eric@opendarwin.org
 newmail 463
