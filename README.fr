@@ -18,29 +18,21 @@ INSTALLATION
 		Lancez 'sudo make install' pour installer les ports darwin sur votre système.
 
 	3. [optionnel] éditez /etc/ports/ports.conf
-		Le fichier de configuration /etc.ports/ports.conf utilise
-		les mêmes directives qu'un fichier Portfile, et peut être
-		utilisé pour outrepasser toutes les options par défaut des
-		ports. Vous pouvez si vous le souhaitez activer les options
-		de "verbosité" et de déboguage dans ce fichier, la liste
-		des options disponibles est la suivante :
+		le fichier de conf "/etc/ports/ports.conf"
+		definis la majeure partie des options de configuration  de
+		l'infrastructure "DarwinPorts" si vous desirez changer les
+		chemins et emplacements ou sonts stockŽs les donnŽes, changez
+		les options suivantes:
 
-		portdbpath - Spécifie l'emplacement où stocker les données spécifiques au système de ports.
+		portdbpath - Spécifie l'annuaire où stocker les données spécifiques au système de ports.
 
-		ports_debug - Accepte "yes"[oui] ou "non"[non] comme valeur.
-			    Si utilisée, les messages de déboguage seront affichés.
-
-		port_verbose - Accepte "yes"[oui] ou "non"[non] comme valeur.
-			     Si utilisée, les messages d'informations seront affichés.
+		prefix - Indique l'annuaire dans lequel pour installer des ports
 
 	3. éditez /etc/ports/sources.conf
 		Le fichier /etc/ports/sources.conf liste l'emplacement des
-		hiérarchies des ports locale et distante. Par défaut, la
-		recherche s'effectuera dans votre répertoire relatif actuel
-		donc assurez-vous que vous êtes au premier niveau du
-		répertoire (darwinports) ou bien assurez-vous d'ajouter une
-		entrée pour votre hiérarchie locale des ports (normalement
-		le répertoire darwinports/dports)
+		hiérarchies des ports locale et distante. Bien assurez-vous
+		d'ajouter une entrée pour votre hiérarchie locale des ports
+		(normalement le répertoire darwinports/dports)
 
     Tout le code TCL nécessaire sera compilé et installé comme indiqué ci-
     dessous:

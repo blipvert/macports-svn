@@ -27,26 +27,20 @@ INSTALLATION
 		Run 'sudo make install' to install darwinports on your system.
 
 	3. [optional] edit /etc/ports/ports.conf
-		The /etc/ports/ports.conf configuration file takes the same
-		directives as a Portfile, and can be used to override all
-		ports' defaults. You may wish to set things like debugging
-		and "verbosity" options in this file, the list of available
-		options being as follows:
+		The /etc/ports/ports.conf configuration file defines several
+		configuration options for the DarwinPorts infrastructure. If
+		you wish to change installation paths or the location at
+		which various port system specific data is stored, change the
+		following settings:
 
 		portdbpath - Specifies path to store ports system specific data.
 
-		ports_debug - Takes either a "yes" or "no" value.
-			    If set, debug messages are printed
-
-		ports_verbose - Takes either a "yes" or "no" value.
-			    If set, informational messages are printed
+		prefix - Specifies directory in which to install ports
 
 	3. edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
-		both local and remote port software hierarchies. By default,
-		it will search relative to your current directory so make
-		sure you're in the top level directory (darwinports) or
-		be sure to add an entry for your local ports tree
+		both local and remote port software hierarchies. Be sure
+		to add an entry for your local ports tree
 		(usually the darwinports/dports directory)
 
     All necessary code and TCL will be compiled and installed as follows:
