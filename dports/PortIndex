@@ -318,8 +318,12 @@ DarwinPortsStartup 219
 portdir sysutils/DarwinPortsStartup description {System startup item to start things installed from darwinports} platforms darwin name DarwinPortsStartup version 1.0 categories sysutils maintainers kevin@opendarwin.org
 dpkg 195
 portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
+cyrus-sasl 86
+portdir sysutils/sasl2 name cyrus-sasl version 2.1.9 maintainers kevin@opendarwin.org
 screen 206
 portdir sysutils/screen description {Screen manager with VT100/ANSI terminal emulation} platforms darwin variants darwin name screen version 3.9.11 categories sysutils revision 0 maintainers digdog@mac.com
+sendmail 88
+portdir sysutils/sendmail name sendmail version 8.12.6 maintainers kevin@opendarwin.org
 wmcpuload 388
 portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
 wmmemmon 402
