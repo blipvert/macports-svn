@@ -43,7 +43,7 @@ subdirectory of the ports distribution, in the form of:
 	software/<category>/<portname>
 
     To build a port, cd to the port's directory and run 'portbuild'. To install
-a port, run 'portbuild -t install'. Please refer to the portbuild man page for
+a port, run 'portbuild install'. Please refer to the portbuild man page for
 complete documentation on the 'portbuild' command.
 
 CREATING NEW PORTS
