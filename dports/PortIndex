@@ -6,6 +6,8 @@ audiofile 157
 portdir audio/audiofile description {Library for dealing with SGI audio files} name audiofile version 0.2.3 categories audio maintainers eric@opendarwin.org
 lame 157
 portdir audio/lame description {Lame Ain't an MP3 Encoder} platforms {darwin freebsd} name lame version 3.92 categories audio maintainers jpm@opendarwin.org
+libsndfile 174
+portdir audio/libsndfile description {Library for reading and writing audio files} platforms darwin name libsndfile version 1.0.1 categories audio maintainers sean@sfarc.net
 dgpsip 182
 portdir comms/dgpsip description {Differential GPS over IP communication device} platforms {darwin freebsd} name dgpsip version 1.32 categories comms maintainers eric@opendarwin.org
 scud 190
@@ -52,6 +54,8 @@ emacs 192
 portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin carbon x11} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 vim 196
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.174 categories editors maintainers landonf@opendarwin.org
+nano 482
+portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants unstable name nano version 1.0.9 categories editors maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
 nethack 185
 portdir games/nethack description {Classic dungeon adventure game.} platforms {darwin freebsd} variants x11 name nethack version 3.4.0 categories games maintainers kevin@opendarwin.org
 fortune 203
@@ -92,6 +96,8 @@ shadowirc 172
 portdir irc/shadowirc description {GPL licensed GUI IRC client for Mac OS X} platforms darwin name shadowirc version 2.0a categories irc maintainers landonf@opendarwin.org
 ircii 108
 portdir irc/ircii variants ipv6 name ircii version 20020912 categories irc maintainers kevin@opendarwin.org
+xchat 192
+portdir irc/xchat description {IRC client with gtk and text interfaces} variants x11 name xchat depends_lib lib:libintl.2:gettext version 1.8.10 categories irc maintainers eric@opendarwin.org
 perl5.8 184
 portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers mike+perlport@gene-hacker.net
 nqc 154
@@ -102,6 +108,8 @@ mutt 244
 portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl nntp} name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail maintainers eric@opendarwin.org
 ssmtp 192
 portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} platforms {darwin freebsd} name ssmtp version 2.50 categories mail maintainers eric@opendarwin.org
+postfix 147
+portdir mail/postfix description {Fast and robust mail transfer agent} name postfix version 1.1.11 categories mail maintainers eric@opendarwin.org
 ethereal 200
 portdir net/ethereal description {Graphical network analyzer and capture tool} platforms darwin name ethereal depends_lib lib:libgtk.1:gtk version 0.9.7 categories net maintainers eric@opendarwin.org
 fetch 195
@@ -126,8 +134,8 @@ fragroute 539
 portdir net/fragroute description {intercept, modify, and rewrite egress traffic} platforms darwin name fragroute depends_lib {lib:libpcap:libpcap lib:libdnet:libdnet lib:libevent:libevent} version 1.2 categories {net security} maintainers jpm@opendarwin.org long_description {fragroute intercepts, modifies, and rewrites egress traffic destined for a specified host, implementing most of the attacks described in the Secure Networks {Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection} paper of January 1998.}
 libdnet 523
 portdir net/libdnet description {portable low-level networking library} platforms darwin name libdnet version 1.5 categories net maintainers jpm@opendarwin.org long_description {libdnet provides a simplified, portable interface to several low-level networking routines, including: network address manipulation, kernel arp(4) cache and route(4) table lookup and manipulation, network firewalling (IP filter, ipfw, ipchains, pf, ...), network interface lookup and manipulation, raw IP packet and Ethernet frame transmission}
-honeyd 606
-portdir net/honeyd description {Network Rhapsody for You} platforms darwin name honeyd depends_lib {lib:libevent:libevent lib:libdnet:libdnet lib:libpcap:libpcap} version 0.3 categories {net security} maintainers jpm@opendarwin.org long_description {Honeyd is a small daemon that creates virtual hosts on a network. The hosts can be configured to run arbitrary services, and their TCP personality can be adapted so that they appear to be running certain versions of operating systems. Honeyd enables a single host to claim multiple addresses - I have tested up to 65536 - on a LAN for network simulation.}
+honeyd 625
+portdir net/honeyd description {a virtual honey net daemon with personality} platforms darwin name honeyd depends_lib {lib:libevent:libevent lib:libdnet:libdnet lib:libpcap:libpcap} version 0.3 categories {net security} maintainers jpm@opendarwin.org long_description {Honeyd is a small daemon that creates virtual hosts on a network. The hosts can be configured to run arbitrary services, and their TCP personality can be adapted so that they appear to be running certain versions of operating systems. Honeyd enables a single host to claim multiple addresses - I have tested up to 65536 - on a LAN for network simulation.}
 nylon 351
 portdir net/nylon description {A Unix SOCKS 4 and 5 proxy server} platforms darwin name nylon depends_lib lib:libevent:libevent version 1.0 categories {net security} maintainers jpm@opendarwin.org long_description {nylon is a proxy server which currently supports SOCKS version 4 and 5 as well as a mirror mode which allows nylon to mirror services.}
 libnet 990
@@ -136,10 +144,12 @@ dsniff 797
 portdir net/dsniff description {collection of tools for network auditing and penetration testing} platforms darwin name dsniff depends_lib {lib:BAD_MATCH:libpcap lib:libnet:libnet lib:libnids:libnids} version 2.3 categories net maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
 libnids 436
 portdir net/libnids description {E-component of Network Intrusion Detection System} platforms darwin name libnids depends_lib lib:libnet:libnet version 1.17rc1 categories net maintainers jpm@opendarwin.org long_description {Libnids is an implementation of an E-component of Network Intrusion Detection System. It emulates the IP stack of Linux 2.0.x. Libnids offers IP defragmentation, TCP stream assembly and TCP port scan detection.}
+ncftp 160
+portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net maintainers fkr@grummel.net
 teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
-gnupg 189
-portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} variants darwin name gnupg version 1.0.7 categories security maintainers eric@opendarwin.org
+gnupg 173
+portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.0 categories security maintainers eric@opendarwin.org
 bochs 188
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators maintainers jpm@opendarwin.org depends_run bin:wget:wget
 chef 202
@@ -186,12 +196,10 @@ gtk 308
 portdir x11/gtk description {Gimp Tool Kit} platforms {darwin freebsd} name gtk version 1.2.10 categories x11 maintainers eric@opendarwin.org long_description {This is GTK+ version 1.2.10. GTK+, which stands for the Gimp ToolKit, is a library for creating graphical user interfaces for the X Window System.}
 wmclock 394
 portdir x11/wmclock description {A dockable clock applet} platforms {darwin freebsd} name wmclock version 1.0.12.2 categories x11 maintainers landonf@opendarwin.org long_description {Wmclock is an applet which displays the date and time in a dockable tile in the same style as the clock from the NEXTSTEP(tm) operating system. Wmclock is specially designed for the WindowMaker window manager.}
-wmcpuload 383
-portdir x11/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
-wmmemmon 397
-portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMMemMon is a program to monitor memory/swap usage. It is a dockapp that is supported by X window managers such as WindowMaker, AfterStep, BlackBox, and Enlightenment.}
 xpm 344
 portdir x11/xpm description {The X Pixmap Library} platforms darwin name xpm version 3.4k categories {x11 graphics} long_description {XPM (X PixMap) is a format for storing/retrieving X pixmaps to/from files. It is used by a large number of common X applications and has become something of a de-facto standard.} maintainers jkh@opendarwin.org
+fvwm 416
+portdir x11/fvwm description {A very simple window manager supporting a pager} platforms darwin name fvwm depends_lib {lib:libX11.6:XFree86 lib:libXpm.4:xpm} version 1.24r categories {x11-wm x11} long_description {One of the earlier paging window managers with what is still considered to be a very elegant and minimal feature set yet highly configurable and expandable via plug-ins.} maintainers jkh@opendarwin.org
 slrn 215
 portdir news/slrn description {A powerful console-based newsreader} name slrn depends_lib {lib:libslang.a:slang lib:libiconv:libiconv} version 0.9.7.4 categories {news net} revision 1 maintainers olaf@foellinger.de
 DarwinPortsStartup 219
@@ -200,5 +208,9 @@ darwinports 207
 portdir sysutils/darwinports description {A port to install the latest darwinports} platforms {darwin freebsd} name darwinports version 1.0 categories {misc sysutils} maintainers mike+dports@gene-hacker.net
 dpkg 195
 portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
+wmcpuload 388
+portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
+wmmemmon 402
+portdir sysutils/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMMemMon is a program to monitor memory/swap usage. It is a dockapp that is supported by X window managers such as WindowMaker, AfterStep, BlackBox, and Enlightenment.}
 xtail 185
 portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com
