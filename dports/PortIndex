@@ -138,8 +138,8 @@ ircii 161
 portdir irc/ircii description {an IRC and ICB client} platforms darwin variants ipv6 name ircii version 20020912 categories irc maintainers kevin@opendarwin.org
 xchat 209
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.2:gettext version 1.8.10 categories irc maintainers eric@opendarwin.org
-irssi 211
-portdir irc/irssi description {modular IRC client} platforms darwin variants ipv6 name irssi depends_lib {lib:glib:glib lib:libdl:dlcompat} version 0.8.6 categories irc revision 1 maintainers jpm@opendarwin.org
+irssi 217
+portdir irc/irssi description {modular IRC client} platforms darwin variants {ipv6 ssl} name irssi depends_lib {lib:glib:glib lib:libdl:dlcompat} version 0.8.6 categories irc revision 1 maintainers jpm@opendarwin.org
 thirdeye 206
 portdir irc/thirdeye description {Colorful and effective script for the epic irc client} platforms darwin name thirdeye version 1.72 categories irc maintainers eric@opendarwin.org depends_run bin:epic:epic
 bitchx 238
@@ -186,8 +186,8 @@ lftp 171
 portdir net/lftp description {Sophisticated file transfer program} platforms darwin variants ssl name lftp version 2.6.2 categories net maintainers charlie@rubberduck.com
 libpcap 261
 portdir net/libpcap description {Packet Capture library} platforms darwin name libpcap version 0.7.1 categories net revision 0 maintainers jpm@opendarwin.org long_description {even those packets destined for other hosts, are accessible through this mechanism.}
-wget 434
-portdir net/wget description {internet file retriever} platforms {darwin freebsd} name wget version 1.8.2 categories net revision 0 maintainers jpm@opendarwin.org long_description {GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP, the most widely-used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without Xsupport, etc.}
+wget 447
+portdir net/wget description {internet file retriever} platforms {darwin freebsd} variants ssl name wget version 1.8.2 categories net revision 0 maintainers jpm@opendarwin.org long_description {GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP, the most widely-used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without Xsupport, etc.}
 fragroute 550
 portdir net/fragroute description {intercept, modify, and rewrite egress traffic} platforms darwin name fragroute depends_lib {lib:libpcap:libpcap lib:libdnet:libdnet lib:libevent:libevent} version 1.2 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {fragroute intercepts, modifies, and rewrites egress traffic destined for a specified host, implementing most of the attacks described in the Secure Networks {Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection} paper of January 1998.}
 libdnet 534
@@ -218,8 +218,8 @@ dnstracer 374
 portdir net/dnstracer description {trace a chain of DNS servers to the source} platforms {darwin freebsd} name dnstracer version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description {dnstracer determines where a given Domain Name Server (DNS) gets its information from, and follows the chain of DNS servers back to the servers which know the data.}
 gaim 186
 portdir net/gaim description {AIM message service client with a gtk-based interface} name gaim depends_lib lib:libgtk.1:gtk version 0.59.3 categories net maintainers eric@opendarwin.org
-curl 243
-portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} name curl depends_lib {lib:libpcap:libpcap lib:libdl:dlcompat} version 7.10.2 categories {net www} revision 1 maintainers jpm@opendarwin.org
+curl 256
+portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} variants ssl name curl depends_lib {lib:libpcap:libpcap lib:libdl:dlcompat} version 7.10.2 categories {net www} revision 1 maintainers jpm@opendarwin.org
 micq 149
 portdir net/micq description {portable text-mode ICQ clone} platforms darwin name micq version 0.4.9.4 categories net maintainers fkr@opendarwin.org
 teTeX 205
@@ -238,6 +238,8 @@ john 213
 portdir security/john description {John the Ripper password cracker} platforms darwin variants {stable unstable} name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
 skey 182
 portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org
+mhash 216
+portdir security/mhash description {library provides an easy way to access strong hashes such as MD5 and SHA1} platforms darwin name mhash version 0.8.17 categories security revision 0 maintainers jpm@opendarwin.org
 bochs 199
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org depends_run bin:wget:wget
 chef 202
