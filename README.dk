@@ -1,0 +1,127 @@
+HVAD ER DARWIN PORTS SYSTEMET
+
+    DarwinPorts er en infrastruktur til at bygge, installere og 
+håndtere software, designet til at have de samme funktionaliteter som 
+FreeBSD ports har, og stadigt have muligheden for at lave fremtidige 
+udvidelser. 
+
+    DarwinPorts kan på nuværende tidspunkt bygges og køres på
+MacOS X 10.2 (Darwin 6.0). Systemet er flytbart, skrevet i TCL med et 
+begrænset antal TCL udvidelser skrevet i C.
+
+    For i dybdegående dokumentation om det indre af ports systemets
+arkitektur, henvises til base/docs/INTERNALS.
+
+    Bemærk venligst at DarwinPorts er opdelt i to dele. "darwin ports 
+infrastrukturen", som findes i base/ underbiblioteket og som er den 
+eneste obligatoriske komponent af systemet, og "dports" biblioteket 
+som indeholder de faktiske software beskrivelser. Det sidstnævnte er
+frivilligt og kan enten hentes over net eller der kan benyttes en 
+lokal kopi. Se dokumentation om /etc/ports/sources.conf herunder.
+
+INSTALLATION
+
+    Installations Skridt:
+        1. make
+		Eksekver 'make' for at kompilere alt den nødvendige 
+		software.
+		For installation af DarwinPorts på FreeBSD skal man også
+		vidre give gruppeejerskab: 'make DSTGRP=wheel'
+		
+
+	2. sudo make install
+		Eksekver 'sudo make install' for at installere 
+		DarwinPorts på dit system. 
+		Igen kræver installation på FreeBSD gruppeejerskabet:
+		'sudo make install DSTGRP=wheel'.	
+
+        3. [frivilligt] rediger /etc/ports/ports.conf
+		/etc/ports/ports.conf konfigurationsfilen definere flere
+		konfigurations muligheder for DarwinPorts 
+		infrastrukturen.
+
+		Hvis du vil ændre installationsbibliotekerne eller 
+		stedet hvor de forskellige port system data er gemt, 
+		kan du ændre de følgende indstillinger: 
+
+		portdbpath - Specificerer stien til hvor ports 
+		systemet data bliver gemt.
+
+		prefix - Specificerer biblioteket til hvor ports bliver 
+		installeret.
+
+	4. rediger /etc/ports/sources.conf
+		/etc/ports/sources.conf filen indeholder en liste over
+		både lokale og fjerne port software hierakier. Husk at
+		tilføje dit lokale ports tree 
+		(sædvanligvis darwinports/dports biblioteket).
+
+    Al nødvendig kode og TCL vil blive kompileret og installeret som så:
+	[Mac OS X] /System/Library/Tcl/8.3/darwinports1.0
+	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
+	    - TCL bibliotek til kommunikation med DarwinPorts systemet.
+
+	PREFIX er sat til /opt/local, men dette kan ændres på make 
+	kommandolinien og det har indflydelse på installationen af 
+	følgende komponenter:
+
+	$PREFIX/bin/port
+	    - Kommandolinie port bygge værktøj
+	$PREFIX/share/darwinports/
+	    - internt TCL bibliotek til ports systemet.
+
+	De følgende filer er til at tilpasse systemet:
+
+	/etc/defaults/ports.conf
+	    - Port standard indstillinger.
+	/etc/ports/ports.conf
+	    - Bruger indstilbare port indstillinger.
+	/etc/ports/sources.conf
+	    - Liste af ports kilder (steder hvorfra man får ports data).
+
+
+AT BRUGE PORT KOMMANDO'EN
+
+    Hvis du ikke allerede har, tilføj /opt/local/bin til din path 
+(eller $PREFIX/bin hvis du har installeret DarwinPorts et andet sted).
+Hvis du er usikker hvordan, tilføj den følgende linie til din ~/.cshrc
+fil.
+
+	set path=($path /opt/local/bin)
+
+    Dine ændringer til ~/.cshrc vil først blive benyttet når du
+åbner en ny shell.
+
+    Den følgende kommando vil bygge og installere en ny port:
+
+	port install <portname>
+
+    For at finde en specific port, skal man bruge "port search".
+
+	port search vi
+
+    Der henvises til port man siden for den komplette dokumentation
+til port kommandoen.
+
+    Det er også muligt at lave operationer, såsom bygge og hente, for 
+alle ports på i systemet ved at bruge portall kommandoen. 
+Den tager som udgangspunkt de samme argumenter som port kommandoen,
+men operere iterativt på alle ports i dports/. Når du bruger 
+"make clean" fra dette bibliotek, bliver "portall clean" også 
+kaldt for at lave en komplet oprydning.
+
+
+AT LAVE NYE PORTS
+
+    Ports består af et bibliotek som indeholder både en Portfile og 
+andre associerede filer. På nuværende tidspunkt er det kun patch 
+filer som vedlages, og disse er sandsynligvis holdt på et minimum.
+
+    En Portfile består af TCL, som bliver evalueret af en TCL 
+fortolker som bliver startet af DarwinPorts Systemet. 
+Portfiler bruger en nem og ligetil nøgleord/værdi par syntax, 
+mens det er muligt at bruge den fulde funktionalitet af TCL 
+hvor det er nødvendigt.
+
+    For at komme igang, se på base/doc/exampleport og portfile(7) 
+man siden.
