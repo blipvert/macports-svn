@@ -146,8 +146,8 @@ dopewars 501
 portdir games/dopewars description {Rewrite of a game originally based on {Drug Wars}} platforms darwin variants {gtk1 gtk2} name dopewars depends_lib {lib:libdl.1:dlcompat lib:libintl.1:gettext lib:libesd.0:esound} version 1.5.8 categories games homepage http://dopewars.sourceforge.net/ maintainers mij@opendarwin.org long_description {The idea of dopewars is to deal drugs on the streets of New York, amassing a huge fortune and paying off the loan shark, while avoiding the ever annoying police.}
 fortune 220
 portdir games/fortune description {Infamous electronic fortune-cookie generator} platforms darwin name fortune depends_lib lib:libcompat.1:libcompat version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
-freeciv 310
-portdir games/freeciv description {A civilisation clone} platforms darwin variants {gtk1 gtk2} name freeciv depends_lib {lib:libintl.1:gettext lib:libSDL:libsdl lib:libesd.0:esound lib:libreadline.4:readline} version 1.14.0 categories games homepage http://www.freeciv.org/ maintainers michaelm@opendarwin.org
+freeciv 326
+portdir games/freeciv description {A civilisation clone} platforms darwin variants {gtk1 gtk2} name freeciv depends_lib {lib:libintl.1:gettext lib:libSDL:libsdl lib:libesd.0:esound lib:libreadline.4:readline lib:imlib:imlib} version 1.14.0 categories games homepage http://www.freeciv.org/ maintainers michaelm@opendarwin.org
 larn 164
 portdir games/larn description {Text-based cavern exploring game} platforms darwin name larn version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 nethack 185
@@ -222,14 +222,14 @@ xchat 377
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin name xchat depends_lib {lib:libintl.1:gettext lib:libgtk.1:gtk} version 1.8.11 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat is a graphical IRC client based on GTK that has many features and can be scripted with Perl and/or Python.}
 xchat2 374
 portdir irc/xchat2 description {IRC client for gtk2} platforms darwin variants xft name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 2.0.0 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
-g77 154
-portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers mike+g77@gene-hacker.net
+g77 153
+portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers michaelm@opendarwin.org
 gawk 387
 portdir lang/gawk platforms darwin description {The GNU awk utility.} name gawk version 3.1.1 categories lang homepage http://www.gnu.org/software/gawk/gawk.html maintainers marius@caos.aamu.edu long_description {This is GNU Awk. It should be upwardly compatible with the Bell Labs research version of awk. It is almost completely compliant with the 1993 POSIX 1003.2 standard for awk.}
 nqc 153
 portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories lang maintainers landonf@opendarwin.org
-perl5.8 218
-portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers mike+perlport@gene-hacker.net
+perl5.8 212
+portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers michaelm@opendarwin.org
 python 203
 portdir lang/python description {An interpreted, object-oriented programming language} platforms darwin variants {nothreads puredarwin} name python version 2.2.2 categories lang maintainers pat@ekman.cx
 ruby 190
@@ -268,6 +268,8 @@ curl 445
 portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} variants {darwin ssl ipv6} name curl version 7.10.3 categories {net www} homepage http://curl.haxx.se/ revision 2 maintainers jpm@opendarwin.org long_description {curl is a client to get documents/files from servers, using any of the supported protocols. The command is designed to work without user interaction or any kind of interactivity.}
 darkstat 433
 portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.5 categories net homepage http://members.optushome.com.au/emikulic/net/darkstat/ revision 3 maintainers jpm@opendarwin.org long_description {darkstat is a network traffic analyzer. It's basically a packet sniffer which runs as a background process on a cable/DSL router and gathers all sorts of useless but interesting statistics.}
+dnstop 229
+portdir net/dnstop description {dnstop is a libpcap application that displays tables of DNS traffic} name dnstop version 20030228 categories net homepage http://dnstop.measurement-factory.com/ maintainers michaelm@opendarwin.org
 dnstracer 425
 portdir net/dnstracer description {trace a chain of DNS servers to the source} platforms {darwin freebsd} name dnstracer version 1.6 categories net homepage http://www.mavetju.org/unix/dnstracer.php revision 0 maintainers jpm@opendarwin.org long_description {dnstracer determines where a given Domain Name Server (DNS) gets its information from, and follows the chain of DNS servers back to the servers which know the data.}
 dsniff 887
@@ -356,6 +358,8 @@ ghostscript 188
 portdir print/ghostscript platforms {darwin freebsd} variants {afpl gnu devel thirdparty fonts} name ghostscript version 7.04 categories print revision 0 maintainers digdog@opendarwin.org
 teTeX 474
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories {print textproc} long_description {teTeX is a TeX distribution for UNIX compatible systems. It contains the latest versions of TeX & friends and nearly everything you need for happy TeX'ing. For more information have a look at the lengthy FEATURES file of the distribution.} maintainers landonf@opendarwin.org
+atlas 230
+portdir science/atlas description {Portably optimal linear algebra software} name atlas version 3.4.1 categories {sci devel} homepage http://math-atlas.sourceforge.net depends_build bin:g77:g77 maintainers michaelm@opendarwin.org
 gromacs 724
 portdir science/gromacs description {The World's fastest Molecular Dynamics} platforms darwin name gromacs depends_lib lib:fftw:fftw version 3.1.5_pre1 categories {sci math} revision 0 maintainers jpm@opendarwin.org long_description {GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles. It is primarily designed for biochemical molecules like proteins and lipids that have a lot of complicated bonded interactions, but since GROMACS is extremely fast at calculating the nonbonded interactions (that usually dominate simulations) many groups are also using it for research on non-biological systems, e.g. polymers.}
 mapm 176
@@ -372,8 +376,8 @@ krbafs 579
 portdir security/krbafs description {AFS library} platforms darwin variants strongcrypto name krbafs version 1.1 categories security homepage http://web.mit.edu/openafs/krbafs/ revision 0 maintainers jpm@opendarwin.org long_description {krbafs provides a set of AFS client utility functions for managing the AFS client and user's tokens for MIT Kerberos and Kerberos for Macintosh, the Kerberos implementation included with Mac OS X 10.1. It also provides afs_string_to_key() and the Kerberos 4 lifetime functions if they are not available in the local Kerberos implementation.}
 mhash 322
 portdir security/mhash description {provides easy access strong hashes} platforms darwin name mhash version 0.8.17 categories security homepage http://mhash.sourceforge.net/ revision 0 maintainers jpm@opendarwin.org long_description {Libmhash is a library which implements some hash algorithms like crc32, md5 and sha-1.}
-nmap 207
-portdir security/nmap description {Port scanning utility} platforms darwin name nmap depends_lib lib:libpcap:libpcap version 3.00 categories security homepage http://nmap.org/ maintainers mij@opendarwin.org
+nmap 324
+portdir security/nmap description {Port scanning utility} platforms darwin name nmap depends_lib lib:libpcap:libpcap version 3.00 categories security homepage http://nmap.org/ maintainers mij@opendarwin.org long_description {Nmap (\"Network Mapper\") is an open source utility for network exploration or security auditing.}
 skey 202
 portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org long_description {}
 pdksh 219
@@ -428,8 +432,8 @@ dict 515
 portdir textproc/dict description {Dictionary Server Protocol (RFC2229) client} platforms {darwin freebsd} name dict version 1.7.1 categories {textproc spelling} homepage http://www.dict.org/ maintainers landonf@opendarwin.org long_description {The Dictionary Server Protocol (DICT) is a TCP transaction based query/response protocol that allows a client to access dictionary definitions from a set of natural language dictionary databases. dict(1) is a client which can access DICT servers from the command line.}
 docbook-xml 196
 portdir textproc/docbook-xml description {the docbook xml dtds} platforms darwin name docbook-xml version 4.2 categories textproc depends_build bin:unzip:unzip maintainers michaelm@opendarwin.org
-docbook-xsl 140
-portdir textproc/docbook-xsl description {the docbook xsl stylesheets} platforms darwin name docbook-xsl version 1.55.0 categories textproc
+docbook-xsl 176
+portdir textproc/docbook-xsl description {the docbook xsl stylesheets} platforms darwin name docbook-xsl version 1.55.0 categories textproc maintainers michaelm@opendarwin.org
 dos2unix 166
 portdir textproc/dos2unix description {Convert text between dos, unix, and mac formats} name dos2unix version 3.0 categories textproc maintainers eric@opendarwin.org
 expat 160
@@ -472,8 +476,6 @@ rman 463
 portdir textproc/rman description {Man page format converter} platforms darwin name rman version 3.0.9 categories textproc homepage http://polyglotman.sourceforge.net/ maintainers lomion@mac.com long_description {PolyglotMan takes formatted man pages from most of the popular flavours of UN*X and transforms them into any number of source formats. It can produce ASCII-only, section headers-only, TkMan, {[tn]roff,} Ensemble, SGML, HTML, LaTeX, RTF, Perl 5 POD.}
 rtfreader 538
 portdir textproc/rtfreader description {Utility to read Microsoft RTF files} platforms darwin name rtfreader version 1.0 categories textproc homepage http://www.fiction.net/blong/programs/#rtf maintainers mij@opendarwin.org long_description {RTF is the Microsoft Rich Text Format, a more portable, mostly ASCII formatting language that is exported by word processors like MS Word. The files generally have the extension .rtf, but occasionally have .doc extensions as well. This parser is from the Microsoft spec, ported to Unix systems.}
-sgmlformat 352
-portdir textproc/sgmlformat description {Generates groff and HTML from Linuxdoc and DocBook documents} platforms darwin name sgmlformat depends_lib lib:libcompat.1:libcompat version 1.7 categories textproc maintainers mij@opendarwin.org long_description {{Generates groff and HTML from Linuxdoc and DocBook documents}} depends_run bin:onsgmls:openjade
 tkman 388
 portdir textproc/tkman description {TK-based GUI for manpage viewing.} platforms {darwin macosx} name tkman depends_lib {bin:rman:rman bin:agrep:glimpse lib:libXrender.1.1:XFree86 lib:libtk8.4:tk} version 2.1 categories textproc long_description {A TK Based Manpage viewer. TkMan offers indexing, searching and browsing of man pages, info pages and TeX pages.} maintainers lomion@mac.com
 tnef2txt 478
@@ -486,8 +488,8 @@ apache 513
 portdir www/apache platforms {darwin freebsd} description {The extremely popular Apache http server} variants mod_perl name apache version 1.3.27 categories www revision 1.0 maintainers mike+apacheport@gene-hacker.net long_description {Apache is an HTTP server designed as a plug-in replacement for the NCSA server version 1.3 (or 1.4). It fixes numerous bugs in the NCSA server and includes many frequently requested new features, and has an API which allows it to be extended to meet users' needs more easily.}
 cadaver 473
 variants {darwin ssl} description {Commandline client for DAV} portdir www/cadaver homepage http://www.webdav.org/cadaver/ platforms darwin depends_lib lib:libexpat.0:expat name cadaver long_description {cadaver is a command-line WebDAV client for Unix. It supports file upload, download, on-screen display, namespace operations (move/copy), collection creation and deletion, and locking operations.} maintainers jpm@opendarwin.org categories www version 0.21.0 revision 0
-libapreq 337
-portdir www/libapreq description {C Libraries for Apache::Request and Apache::Cookie} platforms darwin name libapreq depends_lib bin:httpd:apache version 1.1 categories www maintainers mike+apacheport@gene-hacker.net long_description {C API to the Apache Request object, split off from the Perl API because of OS X build peculiarities.}
+libapreq 356
+portdir www/libapreq description {C Libraries for Apache::Request and Apache::Cookie} platforms darwin variants os_apache name libapreq depends_lib bin:httpd:apache version 1.1 categories www maintainers mike+apacheport@gene-hacker.net long_description {C API to the Apache Request object, split off from the Perl API because of OS X build peculiarities.}
 libapreq-perl 404
 portdir www/libapreq-perl description {Perl Libraries for Apache::Request and Apache::Cookie} platforms darwin name libapreq-perl depends_lib {bin:perl5.8..:perl5.8 lib:libapreq.1.0.1:libapreq} version 1.1 categories www maintainers mike+apacheport@gene-hacker.net long_description {Perl API to the Apache Request object and Apache::Cookie, split off from the C API because of OS X build peculiarities.}
 libwww 384
