@@ -55,15 +55,17 @@ INSTALLATION
 		prefix - Specificerer biblioteket til hvor ports bliver 
 		installeret.
 
-	5. rediger /etc/ports/sources.conf
+	5. [frivilligt] rediger /etc/ports/sources.conf
 		/etc/ports/sources.conf filen indeholder en liste over
-		både lokale og fjerne port software hierakier. Husk at
-		tilføje dit lokale ports tree 
-		(sædvanligvis darwinports/dports biblioteket).
+		både lokale og fjerne port software hierakier. Hvis
+		--with-dports-dir=DIR argument ikke er givet til
+		./configure scriptet, bliver default dports træet 
+		(darwinport/dports, fra din installationskopi) tilføjet
+		til sources.conf. 
 
     Al nødvendig kode og TCL vil blive kompileret og installeret som så:
 	[Mac OS X 10.2] /System/Library/Tcl/darwinports1.0
-	[Mac OS X 10.3] /Library/Tcl/darwinports1.0
+ 	[Mac OS X 10.3] /Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL bibliotek til kommunikation med DarwinPorts systemet.
 
