@@ -280,8 +280,6 @@ clisp 654
 portdir lang/clisp platforms darwin description {The Clisp Common Lisp Implementation} name clisp version 2.29 categories lang homepage http://clisp.cons.org/ maintainers gwright@comcast.net long_description {CLISP is a Common Lisp implementation by Bruno Haible, formerly of Karlsruhe University, and Michael Stoll, formerly of Munich University, both in Germany. It mostly supports the Lisp described in the ANSI Common Lisp standard. CLISP includes an interpreter, a compiler, almost all of CLOS, a foreign language interface and a socket interface. An X11 interface is available through CLX and Garnet. Command line editing is provided by readline.}
 cm3 449
 portdir lang/cm3 platforms darwin description {Critical Mass Modula-3 Compiler} variants {{darwin powerpc}} name cm3 version 5.2.4 categories lang homepage http://www.elegosoft.com/cm3/ maintainers landonf@opendarwin.org long_description {CM3 5.1 is the first open source release of Critical Mass Modula-3. It is a complete easy-to-use and easy-to-install Modula-3 system that contains considerable enhancements over its ancestor DEC SRC Modula-3.}
-expect 455
-portdir lang/expect platforms darwin description {Tcl extensions to support scripting of interactive programs} name expect version 5.38.0 categories lang homepage http://expect.nist.gov/ maintainers landonf@opendarwin.org long_description {Expect is a program that performs programmed dialogue with other interactive programs. It uses pseudo-ttys to control the child processes, so it is not affected by programs that refuse to read from stdin or pipes.}
 g77 167
 portdir lang/g77 description {gnu fortran 77 comiler} platforms {darwin freebsd} name g77 version 3.2.2 categories lang revision 2 maintainers michaelm@opendarwin.org
 gawk 387
