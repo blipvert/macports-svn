@@ -1,11 +1,11 @@
 WAS IST DAS DARWIN PORTS SYSTEM
 
     DarwinPorts ist eine Infrastruktur zum Kompilieren, Installieren und
-    Paketisieren von Software. Entwickelt, um die gleiche Funktionalitaet wie
+    Paketisieren von Software, entwickelt, um die gleiche Funktionalitaet wie
     das FreeBSD Ports-System zu bieten und gleichzeitig erweiterbar zu bleiben.
 
-    DarwinPorts laeuft zur Zeit auf MacOS X 10.2 (Darwin 6.0), ist aber auf
-    Portierbarkeit ausgelegt. Implementiert ist DarwinPorts in TCL mit einigen 
+    DarwinPorts laeuft zur Zeit auf MacOS X 10.2 (Darwin 6.0) und MacOS X 10.3, ist 
+	aber auf Portierbarkeit ausgelegt. Implementiert ist DarwinPorts in TCL mit einigen 
     TCL-Erweiterungen, die in C geschrieben sind.
 
 	Der "DarwinPorts User Guide" ist online verfuegbar unter der Adresse:
@@ -22,26 +22,30 @@ INSTALLATION
 
     Installations-Schritte:
     
-    1. make
-        'make' aufrufen, um die DarwinPorts Infrastruktur zu kompilieren. Um 
+	1. cd base/
+	   ./configure
+		In das base/ Verzeichniss wechseln und das ./configure Skript aufrufen. Optional
+		koennen dem configure-Skript Parameter mitgeben (siehe unten)
 
-    2. sudo make install
-        'sudo make install' aufrufen, um die in Schritt 1 kompilierte Infrastruktur
+	2. make
+		'make' aufrufen, um die DarwinPorts Infrastruktur zu kompilieren. Um 
 
-    3. [optional] /etc/ports/ports.conf editieren
-        Die Haupt-Konfigurationsdatei fuer DarwinPorts heisst 'ports.conf' und 
-        liegt im Verzeichniss '/etc/ports'. In der Konfigurationsdatei ist festgelegt, 
-        unterhalb welchem Verzeichnisses (Prefix) Software aus den DarwinPorts installiert
-        wird und wo DarwinPorts-spezifische Daten gespeichert werden:
+	3. sudo make install
+		'sudo make install' aufrufen, um die in Schritt 1 kompilierte Infrastruktur
+
+	4. [optional] /etc/ports/ports.conf editieren
+		Die Haupt-Konfigurationsdatei fuer DarwinPorts heisst 'ports.conf' und 
+		liegt im Verzeichniss '/etc/ports'. In der Konfigurationsdatei ist festgelegt, 
+		unterhalb welchem Verzeichnisses (Prefix) Software aus den DarwinPorts installiert
+		wird und wo DarwinPorts-spezifische Daten gespeichert werden:
     
-        portdbpath - legt fest wo DarwinPorts-spezifische Daten gespeichert werden.
-	    prefix - legt das Verzeichniss fest, wo DarwinPorts-Software installiert
-        wird.
+		portdbpath - legt fest wo DarwinPorts-spezifische Daten gespeichert werden.
+		prefix - legt das Verzeichniss fest, wo DarwinPorts-Software installiert wird.
 
-    4. /etc/ports/sources.conf editieren
-        In der Datei '/etc/ports/sources.conf' wird angegeben, wo
-        das 'dports/'-Verzeichniss liegt. Dieses muss angepasst werden,
-        damit das DarwinPorts System benutzt werden kann!
+	5. /etc/ports/sources.conf editieren
+		In der Datei '/etc/ports/sources.conf' wird angegeben, wo
+		das 'dports/'-Verzeichniss liegt. Dieses muss angepasst werden,
+		damit das DarwinPorts System benutzt werden kann!
 
     Die DarwinPorts Infrastruktur wird an folgenden Stellen installiert:
 	[Mac OS X] /System/Library/Tcl/darwinports1.0
@@ -65,12 +69,17 @@ DAS PORT KOMMANDO BENUTZEN
     hinzugefuegt werden (oder $PREFIX/bin, falls das Prefix explizit bei
     der Installation angegeben wurde).
 
-    Falls nicht sicher, wie dies zu machen ist, folgende Zeile der Datei 
-    '~/.cshrc' hinzufuegen:
+    Falls Jaguar (OS X 10.2) verwendet wird, folgende Zeile der Datei 
+    '~/.cshrc' hinzufuegen (gilt fuer alle (t)csh Benutzer):
 
     set path=($path /opt/local/bin)
 
-    Aenderungen an der ~/.cshrc werden erst beim Oeffnen einer neuen Shell
+	Falls Panther (OS X 10.3) verwendet wird, folgende Zeile der Datei
+	'~/.profile' hinzufuegen (gilt fuer alle sh/bash Benutzer):
+
+	export PATH=$PATH:/opt/local/bin
+
+    Aenderungen an der ~/.cshrc werden erst beim Starten einer neuen Shell
     beruecksichtigt.
 
     Folgendes Kommando kompiliert und installiert einen Port:
