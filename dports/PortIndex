@@ -54,6 +54,8 @@ ispell 194
 portdir textproc/ispell description {An interactive spelling checker for multiple languages} portname ispell categories {textproc spelling} portversion 3.2.06 maintainers landonf@opendarwin.org
 libiconv 159
 portdir textproc/libiconv description {Character set conversion library} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
+links 168
+portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} portname links categories www portversion 2.0 maintainers landonf@opendarwin.org
 gtk 160
 portdir x11/gtk description {Gimp Tool Kit} depends_lib lib:libglib.1:devel/glib portname gtk categories x11 portversion 1.2.10 maintainers eric@opendarwin.org
 XFree86 141
