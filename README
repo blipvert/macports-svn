@@ -41,14 +41,17 @@ INSTALLATION
 		ports_verbose - Takes either a "yes" or "no" value.
 			    If set, informational messages are printed
 
-	3. edit /etc/ports/sources.conf
+	3. [optional] edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
-		both local and remote port software hierarchies. There is
-		no default specified, so be sure to add an entry for your
-		local ports tree. (usually the darwinports/dports directory)
+		both local and remote port software hierarchies. By default,
+		it will search relative to your current directory so make
+		sure you're in the top level directory (darwinports) or
+		be sure to add an entry for your local ports tree
+		(usually the darwinports/dports directory)
 
     All necessary code and TCL will be compiled and installed as follows:
-	/System/Library/Tcl/8.3/darwinports1.0
+	[Mac OS X] /System/Library/Tcl/8.3/darwinports1.0
+	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL library for interfacing with the Darwin Ports System
 
 	PREFIX is set to /opt/local but can be overridden on the make command
