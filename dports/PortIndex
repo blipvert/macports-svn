@@ -68,6 +68,8 @@ ctags 779
 portdir devel/ctags description {Reimplementation of ctags(1)} platforms {darwin freebsd} name ctags version 5.3 categories devel homepage http://ctags.sourceforge.net/ maintainers pogma@opendarwin.org long_description {Exuberant Ctags generates an index (or tag) file of source language objects in source files that allows these items to be quickly and easily located by a text editor or other utility. Alternatively, it can generate a cross reference file which lists, in human-readable form, information about the various objects found in a set of source code files. Supported languages include: Assembler, AWK, ASP, BETA, Bourne/Korn/Zsh Shell, C, C++, COBOL, Eiffel, Fortran, Java, Lisp, Lua, Make, Pascal, Perl, PHP, Python, REXX, Ruby, S-Lang, Scheme, Tcl, Vim and Yacc.}
 cvsweb 491
 portdir devel/cvsweb description {WWW interface for CVS repositories} platforms darwin variants {darwin freebsd} name cvsweb version 2.0.6 categories {devel www} homepage http://www.freebsd.org/projects/cvsweb.html revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
+distcc 508
+portdir devel/distcc description {Distributed C compiler} platforms darwin name distcc version 0.15 categories devel homepage http://distcc.samba.org/ maintainers jkh@opendarwin.org long_description {distcc is a program to distribute compilation of C or C++ code across several machines on a network without requiring that they share filesystems, have the same headers/libraries or have syncronized clocks. distcc should always generate the same results as a local compile but is often 2 to 3 times faster.}
 dlcompat 364
 portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} platforms darwin name dlcompat version 20021117 categories devel homepage http://www.opendarwin.org/projects/dlcompat/ maintainers eric@opendarwin.org long_description {dlcompat provides the dlopen() interface for dynamic loading of modules for applications that need it.}
 gettext 583
@@ -212,6 +214,8 @@ xchat2 343
 portdir irc/xchat2 description {IRC client for gtk2} platforms darwin variants xft name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 1.9.8 categories irc maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
 g77 154
 portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers mike+g77@gene-hacker.net
+gawk 387
+portdir lang/gawk platforms darwin description {The GNU awk utility.} name gawk version 3.1.1 categories lang homepage http://www.gnu.org/software/gawk/gawk.html maintainers marius@caos.aamu.edu long_description {This is GNU Awk. It should be upwardly compatible with the Bell Labs research version of awk. It is almost completely compliant with the 1993 POSIX 1003.2 standard for awk.}
 nqc 154
 portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories devel maintainers landonf@opendarwin.org
 ocaml 604
@@ -438,6 +442,8 @@ rtfreader 486
 portdir textproc/rtfreader description {Utility to read Microsoft RTF files} platforms darwin name rtfreader version 1.0 categories textproc maintainers mij@opendarwin.org long_description {RTF is the Microsoft Rich Text Format, a more portable, mostly ASCII formatting language that is exported by word processors like MS Word. The files generally have the extension .rtf, but occasionally have .doc extensions as well. This parser is from the Microsoft spec, ported to Unix systems.}
 sed 606
 portdir textproc/sed platforms darwin description {GNU version of the stream editor, sed} name sed version 4.0.5 categories textproc homepage http://www.gnu.org/software/sed/sed.html revision 1 maintainers marius@caos.aamu.edu long_description {Sed (streams editor) isn't really a true text editor or text processor. Instead, it is used to filter text, i.e., it takes text input and performs some operation (or set of operations) on it and outputs the modified text. Sed is typically used for extracting part of a file using pattern matching or substituting multiple occurances of a string within a file.}
+tkman 427
+portdir textproc/tkman description {TK-based GUI for manpage viewing.} platforms {darwin macosx} name tkman depends_lib {bin:rman:rman bin:agrep:glimpse lib:libXrender.1.1:XFree86 lib:libtk8.4:tk} version 2.1 homepage http://tkman.sourceforge.net/ categories textproc long_description {A TK Based Manpage viewer. TkMan offers indexing, searching and browsing of man pages, info pages and TeX pages.} maintainers lomion@mac.com
 tnef2txt 421
 portdir textproc/tnef2txt description {Converts Microsoft TNEF attachments to ASCII text} platforms darwin name tnef2txt version 1.4 categories textproc maintainers mij@opendarwin.org long_description {This is a simple program used to decode Microsoft's Translation Neutral Encapsulation Format (TNEF), which is used by various Microsoft OS products to transfer MAPI information through text only gateways such as SMTP.}
 tth 143
