@@ -286,6 +286,8 @@ gnupg 173
 portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.1 categories security maintainers eric@opendarwin.org
 john 213
 portdir security/john description {John the Ripper password cracker} platforms darwin variants {stable unstable} name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
+keychain 388
+portdir security/keychain description {A user-friendly front-end to ssh-agent(1)} platforms darwin name keychain version 2.0.2 categories security revision 0 maintainers jpm@opendarwin.org long_description {Keychain is a shell script which acts as user-friendly front-end to ssh-agent(1), allowing you to have one long-running ssh-agent process per system rather than per login session.}
 krbafs 546
 portdir security/krbafs description {AFS library} platforms darwin variants {nocrypto strongcrypto} name krbafs version 1.1 categories security revision 0 maintainers jpm@opendarwin.org long_description {krbafs provides a set of AFS client utility functions for managing the AFS client and user's tokens for MIT Kerberos and Kerberos for Macintosh, the Kerberos implementation included with Mac OS X 10.1. It also provides afs_string_to_key() and the Kerberos 4 lifetime functions if they are not available in the local Kerberos implementation.}
 mhash 216
