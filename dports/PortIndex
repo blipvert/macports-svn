@@ -118,6 +118,8 @@ wtf 179
 portdir games/wtf description {translates common Internet acronyms} platforms {darwin freebsd} name wtf version 20021005 categories games maintainers rooneg@electricjellyfish.net
 wump 181
 portdir games/wump description {Text-based cave exploring and wumpus hunting game} platforms darwin name wump version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
+xracer 361
+portdir games/xracer description {WipeOut clone for OpenGL and X11} platforms darwin name xracer depends_lib {lib:libdl.1:dlcompat lib:libjpeg.9:jpeg lib:libglut.3:glut lib:libX11.6:XFree86} version 0.96.9 categories {x11 games} long_description {XRacer is a Wipeout clone. At the moment it is incomplete, but work is undergoing} maintainers jkh@opendarwin.org
 xscorch 536
 portdir games/xscorch description {multiplayer tank shoot-em-up game} platforms darwin name xscorch depends_lib {lib:libmikmod.2:libmikmod lib:libgtk.1:gtk} version 0.1.15 categories games maintainers mij@opendarwin.org long_description {XScorch is a clone of the olden-days DOS game Scorch. It is an extremely addictive war game where any mixture of human and computer AIs control separate tanks (teams are possible) and attempt to blow up or arrange to blow up the other tanks on the field. The last tank on the field is the winner.}
 gd 247
@@ -126,6 +128,8 @@ gdk-pixbuf 190
 portdir graphics/gdk-pixbuf description {generic image handling library for Gtk+ programs} platforms darwin name gdk-pixbuf version 0.18.0 categories graphics maintainers mij@opendarwin.org
 gimp 258
 portdir graphics/gimp description {GNU Image Manipulation Program} platforms darwin name gimp depends_lib {lib:libgtk.1:gtk lib:libintl.1:gettext lib:libjpeg.9:jpeg lib:libpng.3:libpng} version 1.2.3 categories {graphics x11} maintainers eric@opendarwin.org
+glut 396
+portdir graphics/glut description {The OpenGL Utility Toolkit (GLUT)} platforms darwin name glut depends_lib {lib:libGL.1:XFree86 lib:libX11.6:XFree86} version 3.7 categories {x11 graphics} long_description {An indispensible toolkit for OpenGL programmers, this provides many of the windowing and input management primitives that OpenGL itself does not deal with.} maintainers jkh@opendarwin.org
 graphviz 291
 portdir graphics/graphviz description {Graph visualization software from AT&T and Bell Labs} platforms darwin name graphviz depends_lib {lib:libX11.6:XFree86 lib:libjpeg.9:jpeg lib:libpng.3:libpng lib:libfreetype.6:freetype} version 1.8.5 categories graphics maintainers eric@opendarwin.org
 imlib 306
@@ -174,6 +178,8 @@ perl5.8 201
 portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants threads name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers mike+perlport@gene-hacker.net
 python 190
 portdir lang/python description {An interpreted, object-oriented programming language} platforms darwin variants nothreads name python version 2.2.2 categories lang maintainers pat@ekman.cx
+ruby 190
+portdir lang/ruby description {Powerful and clean object-oriented scripting language} platforms darwin variants devel name ruby version 1.6.7 categories lang maintainers eric@opendarwin.org
 slang 195
 portdir lang/slang description {Library that includes a powerful scripting language with a C-like syntax} platforms darwin name slang version 1.4.6 categories lang maintainers olaf@foellinger.de
 tcl 140
@@ -264,6 +270,8 @@ tcptrace 220
 portdir net/tcptrace description {A TCP dump file analysis tool} platforms darwin name tcptrace depends_lib lib:libpcap:libpcap version 6.2.0 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
 wget 447
 portdir net/wget description {internet file retriever} platforms {darwin freebsd} variants ssl name wget version 1.8.2 categories net revision 0 maintainers jpm@opendarwin.org long_description {GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP, the most widely-used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without Xsupport, etc.}
+pan2 196
+portdir news/pan2 description {News reader for gtk2} platforms darwin name pan2 depends_lib {lib:libgtk.2:gtk2 lib:libxml2.2:libxml2} version 0.13.2 categories news maintainers mij@opendarwin.org
 slrn 232
 portdir news/slrn description {A powerful console-based newsreader} platforms darwin name slrn depends_lib {lib:libslang.a:slang lib:libiconv:libiconv} version 0.9.7.4 categories {news net} revision 1 maintainers olaf@foellinger.de
 tin 173
@@ -312,6 +320,24 @@ xtail 185
 portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com
 antiword 287
 portdir textproc/antiword description {Utility to read Microsoft Word (.doc) files} platforms darwin name antiword version 0.33 categories textproc maintainers mij@opendarwin.org long_description {Antiword is a utility that can read binary files from Microsoft Word 6, 7, 97, and 2000.}
+aspell 212
+portdir textproc/aspell description {Spell checker with better logic than ispell} platforms darwin variants {de dk en es fr it nl ru} name aspell version 0.50.3 categories textproc maintainers mij@opendarwin.org
+aspell-dict-de 176
+portdir textproc/aspell-dict-de description {German dictionary for aspell} platforms darwin name aspell-dict-de version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-dk 176
+portdir textproc/aspell-dict-dk description {Danish dictionary for aspell} platforms darwin name aspell-dict-dk version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-en 177
+portdir textproc/aspell-dict-en description {English dictionary for aspell} platforms darwin name aspell-dict-en version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-es 177
+portdir textproc/aspell-dict-es description {Spanish dictionary for aspell} platforms darwin name aspell-dict-es version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-fr 176
+portdir textproc/aspell-dict-fr description {French dictionary for aspell} platforms darwin name aspell-dict-fr version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-it 177
+portdir textproc/aspell-dict-it description {Italian dictionary for aspell} platforms darwin name aspell-dict-it version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-nl 175
+portdir textproc/aspell-dict-nl description {Dutch dictionary for aspell} platforms darwin name aspell-dict-nl version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell-dict-ru 177
+portdir textproc/aspell-dict-ru description {Russian dictionary for aspell} platforms darwin name aspell-dict-ru version 0.50 categories textproc maintainers mij@opendarwin.org
 chef 202
 portdir textproc/chef platforms {darwin freebsd} description {trunsletes inpoot text intu sveedeesh} name chef version 19930426 categories {textproc amusements} maintainers rooneg@electricjellyfish.net
 cowsay 199
