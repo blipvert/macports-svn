@@ -48,6 +48,8 @@ jakarta-ant 212
 portdir devel/jakarta-ant description {Java opensource build system} platforms {darwin freebsd} variants darwin name jakarta-ant version 1.5.1 categories {java jakarta} revision 0 maintainers sean@fuzzymagic.com
 libcompat 192
 portdir devel/libcompat description {Compatibility library with functionality from 4BSD} platforms darwin name libcompat version 4.6.2-RELEASE categories devel maintainers eric@opendarwin.org
+libdvdcss 180
+portdir devel/libdvdcss description {portable abstraction library for DVD decryption} platforms darwin name libdvdcss version 1.2.3 categories devel maintainers fkr@opendarwin.org
 libevent 574
 portdir devel/libevent description {asynchronous event library} platforms darwin name libevent version 0.6 categories devel revision 0 maintainers jpm@opendarwin.org long_description {The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached.libevent is meant to replace the asynchronous event loop found in event driven network servers. An application just needs to call event_dispatch() and can then add or remove events dynamically without having to change the event loop.}
 netinet-headers 222
@@ -156,10 +158,14 @@ abook 154
 portdir mail/abook description {Address book with mutt support} platforms darwin name abook version 0.4.17 categories mail maintainers fkr-ml@grummel.net
 mutt 244
 portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl nntp} name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail maintainers eric@opendarwin.org
+newmail 463
+portdir mail/newmail description {Utility to check for new mail in multiple mailboxes} platforms darwin name newmail version 1.0.1 categories mail maintainers mij@opendarwin.org long_description {newmail looks at mailboxes and determines if any new mail has arrived. The mailboxes to be examined are specified as command line arguments. If a directory is specified, all mailboxes inside will be checked. By default, it runs every 15 minutes by the user's shell.}
 pine 254
 portdir mail/pine description {Text based tool for reading, sending, and managing emails.} variants ssl name pine version 4.44 categories mail maintainers {{[Fink]} Jeffrey Whitaker <jsw@cdc.noaa.gov> / {[DarwinPorts]} Sean Brandt <sean@fuzzymagic.com>}
 postfix 241
 portdir mail/postfix description {Fast and robust mail transfer agent} platforms darwin name postfix version 1.1.11 categories mail maintainers eric@opendarwin.org depends_run path:/Library/StartupItems/DarwinPortsStartup:DarwinPortsStartup
+spamprobe 439
+portdir mail/spamprobe description {Spam detector that uses Bayesian analysis} platforms darwin name spamprobe depends_lib lib:libdb:db4 version 0.7g categories mail maintainers mij@opendarwin.org long_description {Spamprobe is a fast, intelligent, automatic spam detector using Bayesian analysis of word counts in spam and non-spam email. It is intended for use with procmail to filter inbound mail. No manual rule creation is required.}
 ssmtp 192
 portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} platforms {darwin freebsd} name ssmtp version 2.50 categories mail maintainers eric@opendarwin.org
 fftw 189
@@ -181,7 +187,7 @@ portdir net/fetch description {FreeBSD file fetching utility} platforms darwin n
 fragroute 550
 portdir net/fragroute description {intercept, modify, and rewrite egress traffic} platforms darwin name fragroute depends_lib {lib:libpcap:libpcap lib:libdnet:libdnet lib:libevent:libevent} version 1.2 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {fragroute intercepts, modifies, and rewrites egress traffic destined for a specified host, implementing most of the attacks described in the Secure Networks {Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection} paper of January 1998.}
 honeyd 636
-portdir net/honeyd description {a virtual honey net daemon with personality} platforms darwin name honeyd depends_lib {lib:libevent:libevent lib:libdnet:libdnet lib:libpcap:libpcap} version 0.3 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {Honeyd is a small daemon that creates virtual hosts on a network. The hosts can be configured to run arbitrary services, and their TCP personality can be adapted so that they appear to be running certain versions of operating systems. Honeyd enables a single host to claim multiple addresses - I have tested up to 65536 - on a LAN for network simulation.}
+portdir net/honeyd description {a virtual honey net daemon with personality} platforms darwin name honeyd depends_lib {lib:libevent:libevent lib:libdnet:libdnet lib:libpcap:libpcap} version 0.4 categories {net security} revision 1 maintainers jpm@opendarwin.org long_description {Honeyd is a small daemon that creates virtual hosts on a network. The hosts can be configured to run arbitrary services, and their TCP personality can be adapted so that they appear to be running certain versions of operating systems. Honeyd enables a single host to claim multiple addresses - I have tested up to 65536 - on a LAN for network simulation.}
 lftp 171
 portdir net/lftp description {Sophisticated file transfer program} platforms darwin variants ssl name lftp version 2.6.2 categories net maintainers charlie@rubberduck.com
 libdnet 534
@@ -194,6 +200,8 @@ libnids 447
 portdir net/libnids description {E-component of Network Intrusion Detection System} platforms darwin name libnids depends_lib lib:libnet:libnet version 1.17rc1 categories net revision 0 maintainers jpm@opendarwin.org long_description {Libnids is an implementation of an E-component of Network Intrusion Detection System. It emulates the IP stack of Linux 2.0.x. Libnids offers IP defragmentation, TCP stream assembly and TCP port scan detection.}
 libpcap 261
 portdir net/libpcap description {Packet Capture library} platforms darwin name libpcap version 0.7.1 categories net revision 0 maintainers jpm@opendarwin.org long_description {even those packets destined for other hosts, are accessible through this mechanism.}
+mudix 185
+portdir net/mudix description {ncurses-based MUD client with triggers, aliases, colors} platforms darwin name mudix version 4.2 categories net revision 0 maintainers fkr@opendarwin.org
 ncftp 345
 portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net revision 1 maintainers fkr@grummel.net long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. Please see http://www.ncftpd.com/ncftp/ for more information.}
 netcat 189
@@ -220,8 +228,10 @@ ghostscript 188
 portdir print/ghostscript platforms {darwin freebsd} variants {afpl gnu devel thirdparty fonts} name ghostscript version 7.04 categories print revision 0 maintainers digdog@opendarwin.org
 teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
+mapm 172
+portdir sci/mapm3 platforms darwin description {cli tool for calculating Quantitative Trait Loci} name mapm version 3 categories sci maintainers mike+mapm3@gene-hacker.net
 gnupg 173
-portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.0 categories security maintainers eric@opendarwin.org
+portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.1 categories security maintainers eric@opendarwin.org
 john 213
 portdir security/john description {John the Ripper password cracker} platforms darwin variants {stable unstable} name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
 krbafs 546
@@ -242,6 +252,8 @@ wmmemmon 402
 portdir sysutils/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMMemMon is a program to monitor memory/swap usage. It is a dockapp that is supported by X window managers such as WindowMaker, AfterStep, BlackBox, and Enlightenment.}
 xtail 185
 portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com
+antiword 287
+portdir textproc/antiword description {Utility to read Microsoft Word (.doc) files} platforms darwin name antiword version 0.33 categories textproc maintainers mij@opendarwin.org long_description {Antiword is a utility that can read binary files from Microsoft Word 6, 7, 97, and 2000.}
 chef 202
 portdir textproc/chef platforms {darwin freebsd} description {trunsletes inpoot text intu sveedeesh} name chef version 19930426 categories {textproc amusements} maintainers rooneg@electricjellyfish.net
 cowsay 199
@@ -260,6 +272,8 @@ figlet 201
 portdir textproc/figlet description {banner-like program prints strings as ASCII art} platforms {darwin freebsd} name figlet version 2.2 categories {textproc amusements} maintainers jkh@opendarwin.org
 glimpse 199
 portdir textproc/glimpse description {A text search engine. Free for personal use.} name glimpse depends_lib lib:libdl.1:dlcompat version 4.17.1 categories textproc maintainers lomifeh@earthlink.net
+htmldoc 449
+portdir textproc/htmldoc description {Converts HTML files to PDF or PostScript} platforms darwin name htmldoc depends_lib {lib:libjpeg.9:jpeg lib:libpng.3:libpng} version 1.8.23 categories textproc maintainers mij@opendarwin.org long_description {htmldoc can convert HTML files to PDF or PostScript, generate a table-of-contents for books, and generate indexed HTML files. It also generates files on-the-fly for web applications or for batch jobs.}
 ispell 213
 portdir textproc/ispell platforms {darwin freebsd} description {An interactive spelling checker for multiple languages} name ispell version 3.2.06 categories {textproc spelling} maintainers landonf@opendarwin.org
 libiconv 321
@@ -268,10 +282,16 @@ libxml2 196
 portdir textproc/libxml description {gnome xml library} platforms darwin name libxml2 depends_lib lib:libiconv:libiconv version 2.4.25 categories textproc maintainers mike+libxslt@gene-hacker.net
 libxslt 208
 portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
+mmencode 659
+portdir textproc/mmencode description {Translate to and from mail-oriented encoding formats} platforms darwin name mmencode version 2.7 categories textproc maintainers mij@opendarwin.org long_description {The mimencode program simply converts a byte stream into (or out of) one of the standard mail encoding formats defined by MIME, the proposed standard for internet multimedia mail formats. Such an encoding is necessary because binary data cannot be sent through the mail. The encodings under- stood by mimencode are preferable to the use of the uuencode/uudecode programs, for use in mail, in several respects that were important to the authors of MIME.}
 openjade 186
 portdir textproc/openjade platforms {darwin freebsd} description {James Clark's implementation of DSSSL} name openjade version 1.3.1 categories textproc maintainers kevin@opendarwin.org
 rman 157
 portdir textproc/rman description {Man page format converter} platforms darwin name rman version 3.0.9 categories textproc maintainers lomifeh@earthlink.net
+rtfreader 486
+portdir textproc/rtfreader description {Utility to read Microsoft RTF files} platforms darwin name rtfreader version 1.0 categories textproc maintainers mij@opendarwin.org long_description {RTF is the Microsoft Rich Text Format, a more portable, mostly ASCII formatting language that is exported by word processors like MS Word. The files generally have the extension .rtf, but occasionally have .doc extensions as well. This parser is from the Microsoft spec, ported to Unix systems.}
+tnef2txt 421
+portdir textproc/tnef2txt description {Converts Microsoft TNEF attachments to ASCII text} platforms darwin name tnef2txt version 1.4 categories textproc maintainers mij@opendarwin.org long_description {This is a simple program used to decode Microsoft's Translation Neutral Encapsulation Format (TNEF), which is used by various Microsoft OS products to transfer MAPI information through text only gateways such as SMTP.}
 tth 143
 portdir textproc/tth description {a TeX to HTML transaltor} platforms darwin name tth version 3.13 categories print maintainers digdog@mac.com
 apache 529
@@ -280,6 +300,8 @@ libwww 384
 portdir www/libwww platforms darwin description {The W3C WWW Reference Library} name libwww version 5.4.0 categories www maintainers landonf@opendarwin.org long_description {Libwww is a general-purpose Web API written in C for Unix and Windows (Win32). With a highly extensible and layered API, it can accommodate many different types of applications including clients, robots, etc.}
 links 308
 portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} variants x11 name links version 2.1pre3 categories www long_description {Lynx-like WWW browser that supports tables, menus, and so on for text-only displays.} maintainers landonf@opendarwin.org
+lynx 142
+portdir www/lynx description {Text-based web browser} platforms darwin name lynx version 2.8.4 categories www maintainers eric@opendarwin.org
 neon 466
 portdir www/neon description {An HTTP and WebDAV client library with a C interface} platforms darwin name neon depends_lib lib:libexpat.0.4:expat version 0.23.5 categories www maintainers rooneg@electricjellyfish.net long_description {neon is an HTTP and WebDAV client library with a C language API. It provides a high-level interface to HTTP and WebDAV methods and a low-level interface to HTTP request handling, easily allowing the implementation of new methods.}
 w3m 159
@@ -305,6 +327,6 @@ portdir x11/wmcpuload description {An lcd dockapp that displays the current cpul
 wmmemmon 183
 portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org
 XFree86 247
-portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.2.0.1 categories x11 maintainers eric@opendarwin.org long_description {The XFree86 project's X window system implementation}
+portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.2.1.1 categories x11 maintainers eric@opendarwin.org long_description {The XFree86 project's X window system implementation}
 xpm 344
 portdir x11/xpm description {The X Pixmap Library} platforms darwin name xpm version 3.4k categories {x11 graphics} long_description {XPM (X PixMap) is a format for storing/retrieving X pixmaps to/from files. It is used by a large number of common X applications and has become something of a de-facto standard.} maintainers jkh@opendarwin.org
