@@ -24,8 +24,8 @@ perforce 156
 portdir devel/perforce description {Fast source code management system} portname perforce categories devel portversion 02.1 maintainers eric@opendarwin.org
 pkgconfig 176
 portdir devel/pkgconfig description {System for managing library compile and link flags} portname pkgconfig categories devel portversion 0.12.0 maintainers eric@opendarwin.org
-emacs 159
-portdir editors/emacs description {{The GNU Emacs text editor}} variants x11 portname emacs categories editors portversion 21.2 maintainers jkh@opendarwin.org
+emacs 157
+portdir editors/emacs description {The GNU Emacs text editor} variants x11 portname emacs categories editors portversion 21.2 maintainers jkh@opendarwin.org
 vim 177
 portdir editors/vim description {Vi workalike with many additional features} variants x11 portname vim categories editors portversion 6.1.174 maintainers landonf@opendarwin.org
 nethack 166
@@ -74,8 +74,8 @@ libiconv 159
 portdir textproc/libiconv description {Character set conversion library} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
 openjade 290
 portdir textproc/openjade description {Jade is James Clark's implementation of DSSSL -- Document Style Semantics and Specification Language -- an ISO standard for formatting SGML (and XML) documents.} portname openjade categories textproc portversion 1.3.1 maintainers kevin@opendarwin.org
-apache 170
-portdir www/apache description {{The extremely popular Apache http server}} portname apache categories www portversion 1.3.26 maintainers mike+apacheport@gene-hacker.net
+apache 168
+portdir www/apache description {The extremely popular Apache http server} portname apache categories www portversion 1.3.26 maintainers mike+apacheport@gene-hacker.net
 libwww 147
 portdir www/libwww description {The W3C WWW Reference Library} portname libwww categories www portversion 5.4.0 maintainers landonf@opendarwin.org
 links 168
