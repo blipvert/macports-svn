@@ -1,60 +1,62 @@
-bladeenc 180
-portdir audio/bladeenc description {{Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.}} portname bladeenc categories audio portversion 0.94.2 maintainers jkh@opendarwin.org
+bladeenc 178
+portdir audio/bladeenc description {Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.} portname bladeenc categories audio portversion 0.94.2 maintainers jkh@opendarwin.org
 mad 133
 portdir audio/mad description {MPEG Audio Decoder} portname mad categories audio portversion 0.14.2b maintainers eric@opendarwin.org
-dgpsip 165
-portdir comms/dgpsip description {{Differential GPS over IP communication device}} portname dgpsip categories comms portversion 1.32 maintainers eric@opendarwin.org
-scud 173
-portdir comms/scud description {{Tell your CID capable modem to answer those annoying calls}} portname scud categories comms portversion 1.4 maintainers eric@opendarwin.org
-postgresql 188
-portdir databases/postgresql description {{The most advanced open-source database available anywhere}} portname postgresql categories net portversion 7.2.1 maintainers eric@opendarwin.org
-dlcompat 174
-portdir devel/dlcompat description {{dlopen(3) compatibility library for Mac OS X / Darwin}} portname dlcompat categories devel portversion 0 maintainers eric@opendarwin.org
-gettext 143
-portdir devel/gettext description {{GNU gettext package}} portname gettext categories devel portversion 0.11.5 maintainers eric@opendarwin.org
-glib 176
-portdir devel/glib description {{Library with data structure functions and other constructs}} portname glib categories devel portversion 1.2.10 maintainers eric@opendarwin.org
-perforce 158
-portdir devel/perforce description {{Fast source code management system}} portname perforce categories devel portversion 02.1 maintainers eric@opendarwin.org
-pkgconfig 178
-portdir devel/pkgconfig description {{System for managing library compile and link flags}} portname pkgconfig categories devel portversion 0.12.0 maintainers eric@opendarwin.org
-vim 181
-portdir editors/vim description {{Vi "workalike" with many additional features}} variants x11 portname vim categories editors portversion 6.1.166 maintainers landonf@opendarwin.org
-nethack 168
-portdir games/nethack description {{Classic dungeon adventure game.}} variants x11 portname nethack categories games portversion 3.4.0 maintainers kevin@opendarwin.org
-jpegsrc 166
-portdir graphics/libjpeg description {{Library for manipulating JPEG images}} portname jpegsrc categories graphics portversion v6b maintainers leimy2k@opendarwin.org
-libpng 162
-portdir graphics/libpng description {{Library for manipulating PNG images}} portname libpng categories graphics portversion 1.2.4 maintainers eric@opendarwin.org
-SDL 167
-portdir graphics/libsdl description {{Cross-platform multi-media development API}} portname SDL categories graphics portversion 1.2.4 maintainers leimy@opendarwin.org
-SDL_image 290
-portdir graphics/libsdl_image description {{Add on library for libSDL handling several image formats}} depends_lib {lib:libSDL:graphics/libsdl lib:libpng:graphics/libpng lib:libjpeg:graphics/libjpeg} portname SDL_image categories graphics portversion 1.2.2 maintainers leimy@opendarwin.org
-epic 160
-portdir irc/epic description {{The (E)nhanced (P)rogrammable (I)RC-II (C)lient}} portname epic categories irc portversion 1.0.1 maintainers eric@opendarwin.org
-infobot 159
-portdir irc/infobot description {{IRC Bot written in Perl with a rabid AI}} portname infobot categories irc portversion 0.45.3 maintainers eric@opendarwin.org
-mutt 217
-portdir mail/mutt description {{Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)}} depends_lib lib:libiconv.2:textproc/libiconv portname mutt categories mail portversion 1.4 maintainers eric@opendarwin.org
-ssmtp 175
-portdir mail/ssmtp description {{Sendmail alternative for small routers (outgoing mail only)}} portname ssmtp categories mail portversion 2.50 maintainers eric@opendarwin.org
-fetch 196
-portdir net/fetch description {{The FreeBSD file fetching utility}} depends_lib lib:libfetch.3:net/libfetch portname fetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
-libfetch 170
-portdir net/libfetch description {{The FreeBSD file fetching utility library}} portname libfetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
-nmap 152
-portdir net/nmap description {{Port scanning utility for large networks}} portname nmap categories net portversion 3.00 maintainers eric@opendarwin.org
-cowsay 182
-portdir textproc/cowsay description {{Configurable talking characters in ASCII art}} portname cowsay categories {textproc amusements} portversion 3.03 maintainers jkh@opendarwin.org
-dict 180
-portdir textproc/dict description {{Dictionary Server Protocol (RFC2229) client}} portname dict categories {textproc spelling} portversion 1.7.1 maintainers landonf@opendarwin.org
-figlet 184
-portdir textproc/figlet description {{banner-like program prints strings as ASCII art}} portname figlet categories {textproc amusements} portversion 2.2 maintainers jkh@opendarwin.org
-ispell 196
-portdir textproc/ispell description {{An interactive spelling checker for multiple languages}} portname ispell categories {textproc spelling} portversion 3.2.06 maintainers landonf@opendarwin.org
-libiconv 161
-portdir textproc/libiconv description {{Character set conversion library}} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
-XFree86 143
-portdir x11/XFree86 description {{X11R6 windowing system}} portname XFree86 categories x11 portversion 4.2.0.1 maintainers eric@opendarwin.org
-fluxbox 245
-portdir x11-wm/fluxbox description {{Lightweight window manager based on Blackbox 0.61.1}} depends_lib {lib:libX11.6:x11/XFree86 lib:libXext.6:x11/XFree86} portname fluxbox categories x11-wm portversion 0.1.10 maintainers landonf@opendarwin.org
+dgpsip 163
+portdir comms/dgpsip description {Differential GPS over IP communication device} portname dgpsip categories comms portversion 1.32 maintainers eric@opendarwin.org
+scud 171
+portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} portname scud categories comms portversion 1.4 maintainers eric@opendarwin.org
+postgresql 186
+portdir databases/postgresql description {The most advanced open-source database available anywhere} portname postgresql categories net portversion 7.2.1 maintainers eric@opendarwin.org
+dlcompat 172
+portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} portname dlcompat categories devel portversion 0 maintainers eric@opendarwin.org
+gettext 141
+portdir devel/gettext description {GNU gettext package} portname gettext categories devel portversion 0.11.5 maintainers eric@opendarwin.org
+glib 174
+portdir devel/glib description {Library with data structure functions and other constructs} portname glib categories devel portversion 1.2.10 maintainers eric@opendarwin.org
+perforce 156
+portdir devel/perforce description {Fast source code management system} portname perforce categories devel portversion 02.1 maintainers eric@opendarwin.org
+pkgconfig 176
+portdir devel/pkgconfig description {System for managing library compile and link flags} portname pkgconfig categories devel portversion 0.12.0 maintainers eric@opendarwin.org
+vim 177
+portdir editors/vim description {Vi workalike with many additional features} variants x11 portname vim categories editors portversion 6.1.166 maintainers landonf@opendarwin.org
+nethack 166
+portdir games/nethack description {Classic dungeon adventure game.} variants x11 portname nethack categories games portversion 3.4.0 maintainers kevin@opendarwin.org
+jpegsrc 164
+portdir graphics/libjpeg description {Library for manipulating JPEG images} portname jpegsrc categories graphics portversion v6b maintainers leimy2k@opendarwin.org
+libpng 160
+portdir graphics/libpng description {Library for manipulating PNG images} portname libpng categories graphics portversion 1.2.4 maintainers eric@opendarwin.org
+SDL 165
+portdir graphics/libsdl description {Cross-platform multi-media development API} portname SDL categories graphics portversion 1.2.4 maintainers leimy@opendarwin.org
+SDL_image 288
+portdir graphics/libsdl_image description {Add on library for libSDL handling several image formats} depends_lib {lib:libSDL:graphics/libsdl lib:libpng:graphics/libpng lib:libjpeg:graphics/libjpeg} portname SDL_image categories graphics portversion 1.2.2 maintainers leimy@opendarwin.org
+epic 158
+portdir irc/epic description {The (E)nhanced (P)rogrammable (I)RC-II (C)lient} portname epic categories irc portversion 1.0.1 maintainers eric@opendarwin.org
+infobot 157
+portdir irc/infobot description {IRC Bot written in Perl with a rabid AI} portname infobot categories irc portversion 0.45.3 maintainers eric@opendarwin.org
+mutt 215
+portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} depends_lib lib:libiconv.2:textproc/libiconv portname mutt categories mail portversion 1.4 maintainers eric@opendarwin.org
+ssmtp 173
+portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} portname ssmtp categories mail portversion 2.50 maintainers eric@opendarwin.org
+fetch 194
+portdir net/fetch description {The FreeBSD file fetching utility} depends_lib lib:libfetch.3:net/libfetch portname fetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
+libfetch 168
+portdir net/libfetch description {The FreeBSD file fetching utility library} portname libfetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
+nmap 150
+portdir net/nmap description {Port scanning utility for large networks} portname nmap categories net portversion 3.00 maintainers eric@opendarwin.org
+cowsay 180
+portdir textproc/cowsay description {Configurable talking characters in ASCII art} portname cowsay categories {textproc amusements} portversion 3.03 maintainers jkh@opendarwin.org
+dict 178
+portdir textproc/dict description {Dictionary Server Protocol (RFC2229) client} portname dict categories {textproc spelling} portversion 1.7.1 maintainers landonf@opendarwin.org
+figlet 182
+portdir textproc/figlet description {banner-like program prints strings as ASCII art} portname figlet categories {textproc amusements} portversion 2.2 maintainers jkh@opendarwin.org
+ispell 194
+portdir textproc/ispell description {An interactive spelling checker for multiple languages} portname ispell categories {textproc spelling} portversion 3.2.06 maintainers landonf@opendarwin.org
+libiconv 159
+portdir textproc/libiconv description {Character set conversion library} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
+gtk 160
+portdir x11/gtk description {Gimp Tool Kit} depends_lib lib:libglib.1:devel/glib portname gtk categories x11 portversion 1.2.10 maintainers eric@opendarwin.org
+XFree86 141
+portdir x11/XFree86 description {X11R6 windowing system} portname XFree86 categories x11 portversion 4.2.0.1 maintainers eric@opendarwin.org
+fluxbox 243
+portdir x11-wm/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} depends_lib {lib:libX11.6:x11/XFree86 lib:libXext.6:x11/XFree86} portname fluxbox categories x11-wm portversion 0.1.10 maintainers landonf@opendarwin.org
