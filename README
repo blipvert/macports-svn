@@ -45,4 +45,4 @@ instantiated by the Darwin Ports System. Portfiles use extremely straight-
 forward key/value pair syntax, while allowing the author to use the full
 extent of TCL's functionality where necessary.
 
-    To get started, refer to software/example/exampleport.
+    To get started, refer to doc/exampleport.
