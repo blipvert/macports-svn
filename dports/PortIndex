@@ -126,8 +126,6 @@ shikenjo 610
 portdir devel/shikenjo description {Unit testing framework for Objective-C} platforms darwin name shikenjo depends_lib path:/Library/Frameworks/SenTestingKit:sentestingkit version 25 categories devel homepage http://sente.epfl.ch/software/ocunit/ maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
 swig 793
 portdir devel/swig description {Tool to wrap C/C++ libraries in high-level languages.} platforms darwin name swig version 1.3.17 categories devel maintainers kevin@opendarwin.org long_description {SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages. SWIG is primarily used with common scripting languages such as Perl, Python, Tcl/Tk, Ruby, Guile and MzScheme, however the list of supported languages also includes non-scripting languages such as Java and OCAML. SWIG is most commonly used to create high-level interpreted programming environments, user interfaces, and as a tool for testing and prototyping C/C++ software. SWIG may be freely used, distributed, and modified for commercial and noncommercial use.}
-swig 795
-portdir devel/tcllib description {Tool to wrap C/C++ libraries in high-level languages.} platforms darwin name swig version 1.3.17 categories devel maintainers kevin@opendarwin.org long_description {SWIG is a software development tool that connects programs written in C and C++ with a variety of high-level programming languages. SWIG is primarily used with common scripting languages such as Perl, Python, Tcl/Tk, Ruby, Guile and MzScheme, however the list of supported languages also includes non-scripting languages such as Java and OCAML. SWIG is most commonly used to create high-level interpreted programming environments, user interfaces, and as a tool for testing and prototyping C/C++ software. SWIG may be freely used, distributed, and modified for commercial and noncommercial use.}
 twisted 848
 portdir devel/twisted description {Event-based Python framework for internet apps} platforms darwin name twisted version 1.0.0 categories {devel net python} homepage http://twistedmatrix.com/ depends_build bin:python:python revision 0 maintainers jpm@opendarwin.org long_description {Twisted is an event-based framework for internet applications. It includes a web server, a telnet server, a chat server, a news server, a generic client and server for remote object access, and APIs for creating new protocols and services. Twisted supports integration of the Tk, GTK+, Qt or wxPython event loop with its main event loop. The Win32 event loop is also supported, as is basic support for running servers on top of Jython. Twisted works with Python 2.1 and Python 2.2. Twisted even supports the CVS versions of Python, so it is ready for Python 2.3.}
 viewcvs 606
@@ -142,6 +140,8 @@ nano 510
 portdir editors/nano description {Nano's ANOther editor - enhanced free Pico Clone} platforms {darwin freebsd} name nano version 1.2.0 categories editors homepage http://www.nano-editor.org/ revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
 vim 316
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.343 categories editors homepage http://www.vim.org/ maintainers mij@opendarwin.org long_description {Vim is a virtually compatible, extremely enhanced version of the vi editor.}
+bochs 488
+portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org long_description {Bochs is a highly portable open source IA-32 (x86) PC emulator written in C++, that runs on most popular platforms. It includes emulation of the Intel x86 CPU, common I/O devices, and a custom BIOS. Currently, bochs can be compiled to emulate a 386, 486 or Pentium CPU.} depends_run bin:wget:wget
 dopewars 501
 portdir games/dopewars description {Rewrite of a game originally based on {Drug Wars}} platforms darwin variants {gtk1 gtk2} name dopewars depends_lib {lib:libdl.1:dlcompat lib:libintl.1:gettext lib:libesd.0:esound} version 1.5.8 categories games homepage http://dopewars.sourceforge.net/ maintainers mij@opendarwin.org long_description {The idea of dopewars is to deal drugs on the streets of New York, amassing a huge fortune and paying off the loan shark, while avoiding the ever annoying police.}
 fortune 220
@@ -151,7 +151,7 @@ portdir games/freeciv description {A civilisation clone} platforms darwin varian
 larn 164
 portdir games/larn description {Text-based cavern exploring game} platforms darwin name larn version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 nethack 185
-portdir games/nethack description {Classic dungeon adventure game.} platforms {darwin freebsd} variants x11 name nethack version 3.4.0 categories games maintainers kevin@opendarwin.org
+portdir games/nethack description {Classic dungeon adventure game.} platforms {darwin freebsd} variants x11 name nethack version 3.4.1 categories games maintainers kevin@opendarwin.org
 netris 158
 portdir games/netris description {networked tetris on the console} platforms darwin name netris version 0.5 categories games maintainers kevin@opendarwin.org
 othello 168
@@ -226,8 +226,8 @@ g77 154
 portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers mike+g77@gene-hacker.net
 gawk 387
 portdir lang/gawk platforms darwin description {The GNU awk utility.} name gawk version 3.1.1 categories lang homepage http://www.gnu.org/software/gawk/gawk.html maintainers marius@caos.aamu.edu long_description {This is GNU Awk. It should be upwardly compatible with the Bell Labs research version of awk. It is almost completely compliant with the 1993 POSIX 1003.2 standard for awk.}
-nqc 154
-portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories devel maintainers landonf@opendarwin.org
+nqc 153
+portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories lang maintainers landonf@opendarwin.org
 perl5.8 218
 portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers mike+perlport@gene-hacker.net
 python 203
@@ -250,6 +250,8 @@ pine 618
 portdir mail/pine description {Text based tool for reading, sending, and managing emails.} variants ssl name pine version 4.44 categories mail maintainers {{[Fink]} Jeffrey Whitaker <jsw@cdc.noaa.gov> / {[DarwinPorts]} Sean Brandt <sean@fuzzymagic.com>} long_description {Pine (Program for Internet News & Email) is a tool for reading, sending, and managing electronic messages. It was designed specifically with novice computer users in mind, but can be tailored to accommodate the needs of {power users} as well. Pine uses Internet message protocols (e.g. RFC-822, SMTP, MIME, IMAP, NNTP) and runs on Unix and PCs.}
 spamprobe 491
 portdir mail/spamprobe description {Spam detector that uses Bayesian analysis} platforms darwin name spamprobe depends_lib lib:libdb:db4 version 0.8b categories mail homepage http://sourceforge.net/projects/spamprobe/ maintainers mij@opendarwin.org long_description {Spamprobe is a fast, intelligent, automatic spam detector using Bayesian analysis of word counts in spam and non-spam email. It is intended for use with procmail to filter inbound mail. No manual rule creation is required.}
+sylpheed 450
+portdir mail/sylpheed description {Fast, lightweight GTK+ mail client} platforms darwin name sylpheed depends_lib {lib:libgtk.1:gtk lib:libImlib.1:imlib} version 0.8.10 categories mail homepage http://sylpheed.good-day.net/ maintainers mij@opendarwin.org long_description {Sylpheed is a fast, lightweight email client written in GTK+. The appearance and interface are similar to popular Windows clients, such as Outlook Express, Becky!, and Datula.}
 fftw 786
 portdir math/fftw description {Fast C routines to compute the Discrete Fourier Transform} platforms darwin name fftw version 2.1.3 categories math homepage http://www.fftw.org/ revision 0 maintainers jpm@opendarwin.org long_description {FFTW is a C subroutine library for computing the Discrete Fourier Transform (DFT) in one or more dimensions, of both real and complex data, and of arbitrary input size. We believe that FFTW, which is free software, should become the FFT library of choice for most applications. Our benchmarks, performed on a variety of platforms, show that FFTW's performance is typically superior to that of other publicly available FFT software. Moreover, FFTW's performance is portable: the program will perform well on most architectures without modification.}
 gnuplot 563
@@ -324,6 +326,8 @@ nylon 404
 portdir net/nylon description {A Unix SOCKS 4 and 5 proxy server} platforms darwin name nylon depends_lib lib:libevent:libevent version 1.1 categories {net security} homepage http://monkey.org/~marius/nylon/ revision 1 maintainers jpm@opendarwin.org long_description {nylon is a proxy server which currently supports SOCKS version 4 and 5 as well as a mirror mode which allows nylon to mirror services.}
 pure-ftpd 1077
 portdir net/pureftpd platforms darwin description {A fast and standard-conformant FTP server} variants {french german spanish italian polish danish romanian brazilian slovak dutch korean swedish norwegian russian traditional-chinese simplified-chinese czech} name pure-ftpd version 1.0.14 categories net homepage http://www.pureftpd.org maintainers matt@opendarwin.org long_description {Pure-FTPd is a fast, production-quality, standard-conformant FTP server, based upon Troll-FTPd. Unlike other popular FTP servers, it's designed to be secure in default configuration, has no known buffer overflow, it is really trivial to set up and it is especially designed for modern kernels. Features include chroot()ed and/or virtual chroot()ed home directories, virtual domains, built-in 'ls', anti-warez system, bounded ports for passive downloads, FXP protocol, bandwidth throttling, ratios, LDAP / MySQL / PostgreSQL-based authentication, fortune files, Apache-like log files, fast standalone mode, text / HTML / XML real-time status report, virtual users, virtual quotas and more.}
+pycurl 368
+portdir net/pycurl description {python interface to libcurl} platforms darwin name pycurl depends_lib {bin:XXX:curl bin:python:python} version 7.10.3 categories {net devel python} revision 0 maintainers jpm@opendarwin.org long_description {Python module interface to the cURL library which is a tool for transferring files with URL syntax, supporting many protocols.}
 radmind 616
 portdir net/radmind description {Remotely administer the file systems of multiple unix machines} platforms darwin name radmind version 0.9.1 categories net revision 0 maintainers jpm@opendarwin.org long_description {A suite of Unix command-line tools and a server designed to remotely administer the file systems of multiple Unix machines. At its core, radmind operates as a tripwire. It is able to detect changes to any managed filesystem object, e.g. files, directories, links, etc. However, radmind goes further than just integrity checking: once a change is detected, radmind can optionally reverse the change.}
 rdesktop 637
@@ -368,6 +372,8 @@ krbafs 579
 portdir security/krbafs description {AFS library} platforms darwin variants strongcrypto name krbafs version 1.1 categories security homepage http://web.mit.edu/openafs/krbafs/ revision 0 maintainers jpm@opendarwin.org long_description {krbafs provides a set of AFS client utility functions for managing the AFS client and user's tokens for MIT Kerberos and Kerberos for Macintosh, the Kerberos implementation included with Mac OS X 10.1. It also provides afs_string_to_key() and the Kerberos 4 lifetime functions if they are not available in the local Kerberos implementation.}
 mhash 322
 portdir security/mhash description {provides easy access strong hashes} platforms darwin name mhash version 0.8.17 categories security homepage http://mhash.sourceforge.net/ revision 0 maintainers jpm@opendarwin.org long_description {Libmhash is a library which implements some hash algorithms like crc32, md5 and sha-1.}
+nmap 207
+portdir security/nmap description {Port scanning utility} platforms darwin name nmap depends_lib lib:libpcap:libpcap version 3.00 categories security homepage http://nmap.org/ maintainers mij@opendarwin.org
 skey 202
 portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org long_description {}
 pdksh 219
@@ -446,10 +452,10 @@ libiconv 321
 portdir textproc/libiconv platforms {darwin freebsd} description {Character set conversion library} name libiconv version 1.8 categories textproc maintainers eric@opendarwin.org long_description {A character-set conversion library which implements the iconv() API for dealing with unicode and other types of conversion.}
 libxml 672
 variants darwin description {XML parsing library} portdir textproc/libxml homepage http://xmlsoft.org/ platforms darwin depends_lib bin:pkg-config:pkgconfig name libxml long_description {Libxml is the XML C library developed for the Gnome project. XML itself is a metalanguage to design markup languages, i.e. text language where semantic and structure are added to the content using extra markup information enclosed between angle brackets. HTML is the most well-known markup language. Though the library is written in C a variety of language bindings make it available in other environments.} maintainers jpm@opendarwin.org categories textproc version 1.8.17 revision 0
-libxml2 197
-portdir textproc/libxml2 description {gnome xml library} platforms darwin name libxml2 depends_lib lib:libiconv:libiconv version 2.4.25 categories textproc maintainers mike+libxslt@gene-hacker.net
-libxslt 209
-portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml2 version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
+libxml2 191
+portdir textproc/libxml2 description {gnome xml library} platforms darwin name libxml2 depends_lib lib:libiconv:libiconv version 2.5.2 categories textproc maintainers michaelm@opendarwin.org
+libxslt 204
+portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml2 version 1.0.27 categories textproc maintainers michaelm@opendarwin.org
 linuxdoc 279
 portdir textproc/linuxdoc description {Linuxdoc SGML DTD} platforms darwin name linuxdoc version 1.1 categories textproc maintainers mij@opendarwin.org long_description {{Linuxdoc SGML DTD}} depends_run {bin:mkcatalog:mkcatalog bin:/opt/local/share/sgml/iso8879/catalog:iso8879}
 man2html 320
@@ -466,6 +472,8 @@ rman 463
 portdir textproc/rman description {Man page format converter} platforms darwin name rman version 3.0.9 categories textproc homepage http://polyglotman.sourceforge.net/ maintainers lomion@mac.com long_description {PolyglotMan takes formatted man pages from most of the popular flavours of UN*X and transforms them into any number of source formats. It can produce ASCII-only, section headers-only, TkMan, {[tn]roff,} Ensemble, SGML, HTML, LaTeX, RTF, Perl 5 POD.}
 rtfreader 538
 portdir textproc/rtfreader description {Utility to read Microsoft RTF files} platforms darwin name rtfreader version 1.0 categories textproc homepage http://www.fiction.net/blong/programs/#rtf maintainers mij@opendarwin.org long_description {RTF is the Microsoft Rich Text Format, a more portable, mostly ASCII formatting language that is exported by word processors like MS Word. The files generally have the extension .rtf, but occasionally have .doc extensions as well. This parser is from the Microsoft spec, ported to Unix systems.}
+sgmlformat 352
+portdir textproc/sgmlformat description {Generates groff and HTML from Linuxdoc and DocBook documents} platforms darwin name sgmlformat depends_lib lib:libcompat.1:libcompat version 1.7 categories textproc maintainers mij@opendarwin.org long_description {{Generates groff and HTML from Linuxdoc and DocBook documents}} depends_run bin:onsgmls:openjade
 tkman 388
 portdir textproc/tkman description {TK-based GUI for manpage viewing.} platforms {darwin macosx} name tkman depends_lib {bin:rman:rman bin:agrep:glimpse lib:libXrender.1.1:XFree86 lib:libtk8.4:tk} version 2.1 categories textproc long_description {A TK Based Manpage viewer. TkMan offers indexing, searching and browsing of man pages, info pages and TeX pages.} maintainers lomion@mac.com
 tnef2txt 478
