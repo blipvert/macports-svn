@@ -4,10 +4,10 @@ WHAT IS THE DARWIN PORTS SYSTEM
 designed to meet the same functionality requirements as the FreeBSD ports
 architecture while maintaining extensibility for future enhancement.
 
-    DarwinPorts currently builds and runs on MacOS X 10.2 (Darwin 6.0). The
-system is portable, written in TCL with a limited set of TCL extensions in C.
+    DarwinPorts currently builds and runs on MacOS X 10.2 (Darwin 6.0) and MacOS X 10.3. 
+The system is portable, written in TCL with a limited set of TCL extensions in C.
 
-	The "DarwinPorts User Guide" is available at:
+    The "DarwinPorts User Guide" is available at:
 	http://www.opendarwin.org/projects/darwinports/guide/
 
     For in-depth documentation on the internals of the ports system
@@ -23,15 +23,19 @@ documentation on /etc/ports/sources.conf below.
 INSTALLATION
 
     Installation Steps:
-        1. make
+
+	1. cd base/
+	   ./configure
+		Switch to the base/ directory and run the configure-script. Optionally
+		parameters can be passed to the configure-script (see below).
+    
+	2. make
 		Run 'make' to compile all necessary software.
 		
-
-	2. sudo make install
+	3. sudo make install
 		Run 'sudo make install' to install DarwinPorts on your system.
 
-
-	3. [optional] edit /etc/ports/ports.conf
+	4. [optional] edit /etc/ports/ports.conf
 		The /etc/ports/ports.conf configuration file defines several
 		configuration options for the DarwinPorts infrastructure. If
 		you wish to change installation paths or the location at
@@ -39,10 +43,9 @@ INSTALLATION
 		following settings:
 
 		portdbpath - Specifies path to store ports system specific data.
-
 		prefix - Specifies directory in which to install ports
 
-	4. edit /etc/ports/sources.conf
+	5. edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
 		both local and remote port software hierarchies. Be sure
 		to add an entry for your local ports tree
