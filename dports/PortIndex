@@ -60,8 +60,6 @@ netcat 99
 portdir net/netcat portname netcat categories net portversion 1.10 maintainers eric@opendarwin.org
 nmap 150
 portdir net/nmap description {Port scanning utility for large networks} portname nmap categories net portversion 3.00 maintainers eric@opendarwin.org
-wmcpuload 188
-portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} portname wmcpuload categories {sysutils x11} portversion 1.0.0 maintainers landonf@opendarwin.org
 cowsay 180
 portdir textproc/cowsay description {Configurable talking characters in ASCII art} portname cowsay categories {textproc amusements} portversion 3.03 maintainers jkh@opendarwin.org
 dict 178
@@ -78,9 +76,13 @@ apache 170
 portdir www/apache description {{The extremely popular Apache http server}} portname apache categories www portversion 1.3.26 maintainers mike+apacheport@gene-hacker.net
 links 168
 portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} portname links categories www portversion 2.0 maintainers landonf@opendarwin.org
+fluxbox 232
+portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} portname fluxbox categories x11-wm portversion 0.1.10 maintainers landonf@opendarwin.org
 gtk 123
 portdir x11/gtk description {Gimp Tool Kit} portname gtk categories x11 portversion 1.2.10 maintainers eric@opendarwin.org
+wmcpuload 183
+portdir x11/wmcpuload description {An lcd dockapp that displays the current cpuload} portname wmcpuload categories {sysutils x11} portversion 1.0.0 maintainers landonf@opendarwin.org
+wmmemmon 191
+portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} portname wmmemmon categories {sysutils x11} portversion 0.7.0 maintainers landonf@opendarwin.org
 XFree86 156
 portdir x11/XFree86 description {X11R6 windowing system} variants devel portname XFree86 categories x11 portversion 4.2.0.1 maintainers eric@opendarwin.org
-fluxbox 235
-portdir x11-wm/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} portname fluxbox categories x11-wm portversion 0.1.10 maintainers landonf@opendarwin.org
