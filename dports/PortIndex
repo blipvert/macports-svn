@@ -54,20 +54,20 @@ postgresql 508
 portdir databases/postgresql description {The most advanced open-source database available anywhere} platforms {darwin freebsd} variants {darwin server} name postgresql version 7.2.1 categories databases maintainers eric@opendarwin.org long_description {PostgreSQL is Object-Relational Database Management System. It supports almost all SQL constructs, including transactions, subselects, and user-defined types and functions. Write-ahead logging means increased performance while retaining data integrity.}
 sqlite 556
 portdir databases/sqlite platforms {darwin freebsd} description {an embedded SQL database engine} name sqlite version 2.7.2 categories databases maintainers rooneg@electricjellyfish.net long_description {SQLite is an SQL database engine in a C library. Programs that link the SQLite library can have SQL database access without running a separate RDBMS process. The distribution comes with a standalone command-line access program (sqlite) that can be used to administer an SQLite database and which serves as an example of how to use the SQLite library.}
-apr 228
-portdir devel/apr description {the apache group's portability library} platforms darwin name apr depends_lib {lib:libexpat.0:expat lib:libiconv.2:libiconv} version 0.9.1 categories devel maintainers rooneg@electricjellyfish.net
+apr 450
+portdir devel/apr description {the apache group's portability library} platforms darwin name apr depends_lib {lib:libexpat.0:expat lib:libiconv.2:libiconv} version 0.9.1 categories devel maintainers rooneg@electricjellyfish.net long_description {The Apache Portable Runtime is a library of C data structures and routines, forming a system portability layer that covers as many operating systems as possible, including Unices, Win32, BeOS, and OS/2.}
 atk 281
 portdir devel/atk description {GNOME accessibility toolkit} platforms darwin name atk depends_lib lib:libglib.2:glib2 version 1.0.3 categories devel maintainers mij@opendarwin.org long_description {ATK is the GNOME Accessibility ToolKit - http://developer.gnome.org/projects/gap/}
-ccache 170
-portdir devel/ccache description {object-file caching compiler wrapper} platforms {darwin freebsd} name ccache version 1.9 categories devel maintainers ranger@befunk.com
-ctags 163
-portdir devel/ctags description {Reimplementation of ctags(1)} platforms {darwin freebsd} name ctags version 5.3 categories devel maintainers pogma@opendarwin.org
+ccache 440
+portdir devel/ccache description {object-file caching compiler wrapper} platforms {darwin freebsd} name ccache version 1.9 categories devel maintainers ranger@befunk.com long_description {ccache is a compiler cache. It acts as a caching pre-processor to C/C++ compilers, using the -E compiler switch and a hash to detect when a compilation can be satisfied from cache. This often results in a 5 to 10 times speedup in common compilations.}
+ctags 740
+portdir devel/ctags description {Reimplementation of ctags(1)} platforms {darwin freebsd} name ctags version 5.3 categories devel maintainers pogma@opendarwin.org long_description {Exuberant Ctags generates an index (or tag) file of source language objects in source files that allows these items to be quickly and easily located by a text editor or other utility. Alternatively, it can generate a cross reference file which lists, in human-readable form, information about the various objects found in a set of source code files. Supported languages include: Assembler, AWK, ASP, BETA, Bourne/Korn/Zsh Shell, C, C++, COBOL, Eiffel, Fortran, Java, Lisp, Lua, Make, Pascal, Perl, PHP, Python, REXX, Ruby, S-Lang, Scheme, Tcl, Vim and Yacc.}
 cvsweb 412
 portdir devel/cvsweb description {WWW interface for CVS repositories} platforms darwin name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
 dlcompat 188
 portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} platforms darwin name dlcompat version 20021117 categories devel maintainers eric@opendarwin.org
-gettext 210
-portdir devel/gettext description {GNU gettext package} platforms darwin name gettext depends_lib {lib:libiconv.2:libiconv lib:libdl.1:dlcompat} version 0.10.40 categories devel maintainers eric@opendarwin.org
+gettext 537
+portdir devel/gettext description {GNU gettext package} platforms darwin name gettext depends_lib {lib:libiconv.2:libiconv lib:libdl.1:dlcompat} version 0.10.40 categories devel maintainers eric@opendarwin.org long_description {This is the GNU gettext package. It is interesting for authors or maintainers of other packages or programs which they want to see internationalized. As one step the handling of messages in different languages should be implemented. For this task GNU gettext provides the needed tools and library functions.}
 glib 193
 portdir devel/glib description {Library with data structure functions and other constructs} platforms {darwin freebsd} name glib version 1.2.10 categories devel maintainers eric@opendarwin.org
 glib2 331
