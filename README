@@ -24,7 +24,7 @@ INSTALLING
 	3. edit /etc/ports.conf
 		The /etc/ports.conf configuration file takes the same
 		directives as a Portfile, and can be used to override all
-		ports' defaults. There are optional and required directives
+		ports' defaults. There are required and optional directives
 		that you should configure at install time.
 
 		sysportpath - (required) Specifies the path to the software
