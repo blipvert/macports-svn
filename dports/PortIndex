@@ -4,16 +4,38 @@ bladeenc 197
 portdir audio/bladeenc description {Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.} platforms {darwin freebsd} name bladeenc version 0.94.2 categories audio maintainers jkh@opendarwin.org
 esound 521
 portdir audio/esound description {Enlightened Sound Daemon} platforms darwin name esound depends_lib lib:audiofile.0:audiofile version 0.2.29 categories audio revision 1 maintainers ranger@befunk.com long_description {EsounD, the Enlightened Sound Daemon, is a server process that mixes several audio streams for playback by a single audio device. For example, if you're listening to music on a CD and you receive a sound-related event from ICQ, the two applications won't have to jockey for the use of your sound card.}
+icecast 497
+portdir audio/icecast description {A streaming mp3 audio server} platforms darwin name icecast version 1.3.12 categories {audio net} revision 0 maintainers jpm@opendarwin.org long_description {Icecast is a streaming mp3 audio server. Icecast provides nearly all the functionality of the Shoutcast server. It will accept encoding streams from encoders like winamp, shout and ices. It can also add itself to a directory server such as our own icecast.linuxpower.org or Nullsoft's yp.shoutcast.com.}
+ices 326
+portdir audio/ices description {Stream audio to an icecast server} platforms darwin variants {lame vorbis xml} name ices depends_lib lib:libshout.2:libshout version 0.2.3 categories {audio net} revision 0 maintainers jpm@opendarwin.org long_description {ices is a small but powerful and flexible encoder for icecast servers.}
 lame 498
 portdir audio/lame description {Lame Ain't an MP3 Encoder} platforms {darwin freebsd} name lame version 3.93.1 categories audio revision 1 maintainers jpm@opendarwin.org long_description {LAME is an educational tool to be used for learning about MP3 encoding. The goal of the LAME project is to use the open source model to improve the psycho acoustics, noise shaping and speed of MP3. LAME is not for everyone - it is distributed as source code only and requires the ability to use a C compiler.}
+libao 445
+portdir audio/libao description {A Cross-platform Audio Library} platforms darwin variants esd name libao depends_lib lib:libdl.1:dlcompat version 0.8.3 categories audio revision 0 maintainers jpm@opendarwin.org long_description {libao is a way to easily add cross-platform audio output to your program. Output devices are implemented as dynamic plugins, and support for OSS, ESD, ALSA, aRTs, Solaris, and Irix outputs are currently supported.}
 libmikmod 188
 portdir audio/libmikmod description {portable sound library} platforms darwin name libmikmod depends_lib lib:libesd.0:esound version 3.1.10 categories audio maintainers mij@opendarwin.org
+libogg 308
+portdir audio/libogg description {Ogg Bitstream Library} platforms darwin name libogg version 1.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Libogg is a library for manipulating ogg bitstreams. It handles both making ogg bitstreams and getting packets from ogg bitstreams.}
+libshout 538
+portdir audio/libshout description {Data and connectivity library for the icecast server} platforms darwin name libshout version 1.0.9 categories {audio net} revision 0 maintainers jpm@opendarwin.org long_description {A port of the libshout library. Libshout allows applications to easily communicate and broadcast to an Icecast streaming media server. It handles the socket connections, metadata communication, and data streaming for the calling application, and lets developers focus on feature sets instead of implementation details.}
 libsndfile 174
 portdir audio/libsndfile description {Library for reading and writing audio files} platforms darwin name libsndfile version 1.0.1 categories audio maintainers sean@sfarc.net
+libvorbis 425
+portdir audio/libvorbis description {The Vorbis General Audio Compression Codec} platforms darwin name libvorbis depends_lib lib:libogg.0:libogg version 1.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format for audio and music at fixed and variable bitrates from 16 to 128 kbps/channel.}
 mad 152
 portdir audio/mad description {MPEG Audio Decoder} platforms {darwin freebsd} name mad version 0.14.2b categories audio maintainers eric@opendarwin.org
 mpg123 577
 portdir audio/mpg123 description {fast mp3 player for linux and unix systems} platforms darwin name mpg123 depends_lib {lib:libaudiofile.0:audiofile lib:ibesd.0:esound} version pre0.59s categories audio revision 0 maintainers jpm@opendarwin.org long_description {Mpg123 is a fast, free and portable MPEG audio player for Unix. It supports MPEG 1.0/2.0 layers 1, 2 and 3. For full CD quality playback (44 kHz, 16 bit, stereo) a Pentium, SPARCstation10, DEC Alpha or similar CPU is required. Mono and/or reduced quality playback (22 kHz or 11 kHz) is even possible on 486 CPUs.}
+normalize 573
+portdir audio/normalize description {A tool to normalize WAV and MP3 audio} platforms darwin variants {mad audiofile} name normalize depends_lib {lib:libexpat.0:expat lib:libintl.1:gettext lib:libiconv.2:libiconv} version 0.7.6 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Normalize is an overly complicated tool for adjusting the volume of wave files to a standard volume level. This is useful for things like creating mp3 mixes, where different recording levels on different albums can cause the volume to vary greatly from song to song.}
+shntool 479
+portdir audio/shntool description {Multi-purpose .wav/.shn processing utility} platforms darwin name shntool depends_lib {lib:libexpat.0:expat lib:libintl.1:gettext lib:libiconv.2:libiconv bin:shorten:shorten} version 1.2.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {shntool is a multi-purpose .wav/.shn processing tool. Input and output files are transparent to shntool, meaning that it can perform its functions upon both .wav and .shn data.}
+shorten 770
+portdir audio/shorten description {Fast compression for waveform files} platforms darwin name shorten version 3.5.0 categories {audio archivers} revision 0 maintainers jpm@opendarwin.org long_description {Shorten reduces the size of waveform files (such as audio) using Huffman coding of prediction residuals and optional additional quantisation. In lossless mode the amount of compression obtained depends on the nature of the waveform. Those composing of low frequencies and low amplitudes give the best compression, which may be 2:1 or better. Lossy compression operates by specifying a minimum acceptable segmental signal to noise ratio or a maximum bit rate. Lossy compression operates by zeroing the lower order bits of the waveform, so retaining waveform shape.}
+sox 486
+portdir audio/sox description {SOund eXchange - universal sound sample translator} platforms darwin name sox version 12.17.3 categories audio revision 0 maintainers jpm@opendarwin.org long_description {SoX (also known as Sound eXchange) translates sound samples between different file formats, and optionally applies various sound effects. SoX is intended as the Swiss Army knife of sound processing tools. It doesn't do anything very well, but sooner or later it comes in very handy.}
+vorbis-tools 803
+portdir audio/vorbis-tools description {The Ogg Vorbis CODEC tools} platforms darwin name vorbis-tools depends_lib {lib:libcurl.2:curl lib:libexpat.0:expat lib:libintl.1:gettext lib:libiconv.2:libiconv lib:libao.2:libao lib:libogg.0:libogg lib:libvorbis.0:libvorbis} version 1.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Ogg Vorbis is a fully Open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format for mid to high quality (8kHz-48.0kHz, 16+ bit, polyphonic) audio and music at fixed and variable bitrates from 16 to 128 kbps/channel. This places Vorbis in the same competetive class as audio representations such as MPEG-4 (AAC), and similar to, but higher performance than MPEG-1/2 audio layer 3, MPEG-4 audio (TwinVQ), WMA and PAC.}
 dgpsip 182
 portdir comms/dgpsip description {Differential GPS over IP communication device} platforms {darwin freebsd} name dgpsip version 1.32 categories comms maintainers eric@opendarwin.org
 scud 190
@@ -62,6 +84,8 @@ libevent 574
 portdir devel/libevent description {asynchronous event library} platforms darwin name libevent version 0.6 categories devel revision 0 maintainers jpm@opendarwin.org long_description {The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached.libevent is meant to replace the asynchronous event loop found in event driven network servers. An application just needs to call event_dispatch() and can then add or remove events dynamically without having to change the event loop.}
 netinet-headers 222
 portdir devel/netinet-headers description {temporary port providing netinet missing headers for jaguar} platforms darwin name netinet-headers version 1.0.1 categories devel maintainers mike+missing-headers@gene-hacker.net
+orbit 480
+portdir devel/orbit description {High-performance CORBA ORB with support for the C language} platforms darwin name orbit depends_lib {lib:glib:glib lib:libintl.1:gettext lib:libdl:dlcompat} version 0.5.17 categories devel revision 0 maintainers jpm@opendarwin.org long_description {ORBit is a high-performance CORBA ORB with support for the C language. It allows programs to send requests and receive replies from other programs, regardless of the locations of the two programs.}
 otest 567
 portdir devel/otest description {Unit testing framework for Objective-C} platforms darwin name otest depends_lib path:/Library/Frameworks/SenTestingKit.framework:sentestingkit version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
 pcre 184
@@ -96,8 +120,8 @@ emacs 198
 portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin devel x11 carbon} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 joe 153
 portdir editors/joe description {Joe's Own Editor} platforms {darwin freebsd} name joe version 2.9.8-pre1 categories editors maintainers noses@noses.com
-nano 502
-portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants {stable unstable} name nano version 1.0.9 categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
+nano 493
+portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants unstable name nano version 1.0.9 categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
 vim 192
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.262 categories editors maintainers mij@opendarwin.org
 bochs 488
@@ -213,11 +237,11 @@ portdir net/cftp description {full-screen ftp client} platforms darwin name cftp
 curl 461
 portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} variants {ssl ipv6} name curl depends_lib {lib:libpcap:libpcap lib:libdl:dlcompat} version 7.10.2 categories {net www} revision 1 maintainers jpm@opendarwin.org long_description {curl is a client to get documents/files from servers, using any of the supported protocols. The command is designed to work without user interaction or any kind of interactivity.}
 darkstat 369
-portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.3 categories net revision 1 maintainers jpm@opendarwin.org long_description {darkstat is a network traffic analyzer. It's basically a packet sniffer which runs as a background process on a cable/DSL router and gathers all sorts of useless but interesting statistics.}
+portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.4 categories net revision 2 maintainers jpm@opendarwin.org long_description {darkstat is a network traffic analyzer. It's basically a packet sniffer which runs as a background process on a cable/DSL router and gathers all sorts of useless but interesting statistics.}
 dnstracer 374
 portdir net/dnstracer description {trace a chain of DNS servers to the source} platforms {darwin freebsd} name dnstracer version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description {dnstracer determines where a given Domain Name Server (DNS) gets its information from, and follows the chain of DNS servers back to the servers which know the data.}
-dsniff 813
-portdir net/dsniff description {collection of tools for network auditing and penetration testing} platforms darwin variants {stable unstable} name dsniff depends_lib {lib:libnet:libnet lib:libnids:libnids} version 2.3 categories net revision 0 maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
+dsniff 786
+portdir net/dsniff description {network auditing and penetration testing tools} platforms darwin variants unstable name dsniff depends_lib {lib:libnet:libnet lib:libnids:libnids} version 2.3 categories net revision 0 maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
 ethereal 200
 portdir net/ethereal description {Graphical network analyzer and capture tool} platforms darwin name ethereal depends_lib lib:libgtk.1:gtk version 0.9.7 categories net maintainers eric@opendarwin.org
 ettercap 598
@@ -300,8 +324,8 @@ ccrypt 198
 portdir security/ccrypt platforms darwin description {ccrypt is an utility for encrypting and decrypting files and streams.} name ccrypt version 1.3 categories security maintainers ports@syrius.org
 gnupg 173
 portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.1 categories security maintainers eric@opendarwin.org
-john 372
-portdir security/john description {Featureful Unix password cracker} platforms darwin variants {stable unstable} name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description {John the Ripper is a UNIX password cracker, currently available for UNIX (tested with Linux x86, FreeBSD x86, Solaris 2.x SPARC, OSF/1 Alpha), DOS, WinNT/Win95.}
+john 363
+portdir security/john description {Featureful Unix password cracker} platforms darwin variants unstable name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description {John the Ripper is a UNIX password cracker, currently available for UNIX (tested with Linux x86, FreeBSD x86, Solaris 2.x SPARC, OSF/1 Alpha), DOS, WinNT/Win95.}
 keychain 388
 portdir security/keychain description {A user-friendly front-end to ssh-agent(1)} platforms darwin name keychain version 2.0.2 categories security revision 0 maintainers jpm@opendarwin.org long_description {Keychain is a shell script which acts as user-friendly front-end to ssh-agent(1), allowing you to have one long-running ssh-agent process per system rather than per login session.}
 krbafs 546
@@ -318,12 +342,8 @@ DarwinPortsStartup 219
 portdir sysutils/DarwinPortsStartup description {System startup item to start things installed from darwinports} platforms darwin name DarwinPortsStartup version 1.0 categories sysutils maintainers kevin@opendarwin.org
 dpkg 195
 portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
-cyrus-sasl 86
-portdir sysutils/sasl2 name cyrus-sasl version 2.1.9 maintainers kevin@opendarwin.org
 screen 206
 portdir sysutils/screen description {Screen manager with VT100/ANSI terminal emulation} platforms darwin variants darwin name screen version 3.9.11 categories sysutils revision 0 maintainers digdog@mac.com
-sendmail 88
-portdir sysutils/sendmail name sendmail version 8.12.6 maintainers kevin@opendarwin.org
 wmcpuload 388
 portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
 wmmemmon 402
@@ -422,8 +442,8 @@ gtk 308
 portdir x11/gtk description {Gimp Tool Kit} platforms {darwin freebsd} name gtk version 1.2.10 categories x11 maintainers eric@opendarwin.org long_description {This is GTK+ version 1.2.10. GTK+, which stands for the Gimp ToolKit, is a library for creating graphical user interfaces for the X Window System.}
 gtk-engines 345
 portdir x11/gtk-engines description {Theme engine for GTK+} platforms darwin name gtk-engines depends_lib lib:libImlib.1:imlib version 0.12 categories x11 maintainers mij@opendarwin.org long_description {gtk-engines is a theme engine for GTK+. It provides the ability to change the way widgets, buttons, etc. look when using GTK+ applications.}
-gtk-engines2 345
-portdir x11/gtk-engines2 description {Theme engine for GTK+} platforms darwin name gtk-engines2 depends_lib lib:libgtk.2:gtk2 version 1.9.0 categories x11 maintainers mij@opendarwin.org long_description {gtk-engines is a theme engine for GTK+. It provides the ability to change the way widgets, buttons, etc. look when using GTK+ applications.}
+gtk-engines2 350
+portdir x11/gtk-engines2 description {Theme engine for gtk2} platforms darwin name gtk-engines2 depends_lib lib:libgtk.2:gtk2 version 1.9.0 categories x11 maintainers mij@opendarwin.org long_description {gtk-engines2 is a theme engine for GTK+ 2. It provides the ability to change the way widgets, buttons, etc. look when using GTK+ 2 applications.}
 gtk2 338
 portdir x11/gtk2 description {Gimp ToolKit version 2} platforms darwin name gtk2 depends_lib {lib:libintl.1:gettext lib:libglib.2:glib2 lib:libjpeg.9:jpeg lib:libtiff.3:tiff lib:libpng.3:libpng lib:libungif.4:libungif lib:libatk.1:atk lib:libpango.1:pango lib:libX11.6:XFree86} version 2.0.9 categories x11 maintainers mij@opendarwin.org
 kdebase3 672
@@ -436,6 +456,8 @@ pango 228
 portdir x11/pango description {Framework for the layout and rendering of i18n text} platforms darwin name pango depends_lib {lib:libglib.2:glib2 lib:libintl.1:gettext} version 1.0.5 categories x11 maintainers mij@opendarwin.org
 qt3 401
 portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.2:libpng lib:libjpeg.9:jpeg} version 3.0.5 categories x11 revision 1 maintainers ranger@befunk.com long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
+rxvt 399
+portdir x11/rxvt description {Low memory usage colour xterm replacement} platforms darwin name rxvt depends_lib {lib:libX11.6:XFree86 lib:libfreetype.6:freetype} version 2.7.8 categories x11 revision 0 maintainers jpm@opendarwin.org long_description {Rxvt is an xterm replacement which uses a little less memory, and is suitable for use on machines with small memories. Tek4010 support is removed.}
 tk 127
 portdir x11/tk description {Tcl Tool Kit} platforms darwin name tk version 8.4.1 categories x11 maintainers jkh@opendarwin.org
 vtwm 175
