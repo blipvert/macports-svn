@@ -1,7 +1,7 @@
-audiofile 174
-portdir audio/audiofile description {Library for dealing with SGI audio files} platforms darwin name audiofile version 0.2.3 categories audio maintainers eric@opendarwin.org
-bladeenc 197
-portdir audio/bladeenc description {Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.} platforms {darwin freebsd} name bladeenc version 0.94.2 categories audio maintainers jkh@opendarwin.org
+audiofile 314
+portdir audio/audiofile description {Library for dealing with SGI audio files} platforms darwin name audiofile version 0.2.3 categories audio maintainers eric@opendarwin.org long_description {The Silicon Graphics Audio File Library provides a uniform programming interface to standard digital audio file formats.}
+bladeenc 440
+portdir audio/bladeenc description {Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.} platforms {darwin freebsd} name bladeenc version 0.94.2 categories audio maintainers jkh@opendarwin.org long_description {Blade's MP3 Encoder (BladeEnc) is a freeware MP3 encoder. It is based on the same ISO compression routines as mpegEnc, so you can expect roughly the same, or better, quality. The main difference is the appearance and speed.}
 esound 521
 portdir audio/esound description {Enlightened Sound Daemon} platforms darwin name esound depends_lib lib:audiofile.0:audiofile version 0.2.29 categories audio revision 1 maintainers ranger@befunk.com long_description {EsounD, the Enlightened Sound Daemon, is a server process that mixes several audio streams for playback by a single audio device. For example, if you're listening to music on a CD and you receive a sound-related event from ICQ, the two applications won't have to jockey for the use of your sound card.}
 icecast 497
@@ -12,18 +12,18 @@ lame 498
 portdir audio/lame description {Lame Ain't an MP3 Encoder} platforms {darwin freebsd} name lame version 3.93.1 categories audio revision 1 maintainers jpm@opendarwin.org long_description {LAME is an educational tool to be used for learning about MP3 encoding. The goal of the LAME project is to use the open source model to improve the psycho acoustics, noise shaping and speed of MP3. LAME is not for everyone - it is distributed as source code only and requires the ability to use a C compiler.}
 libao 445
 portdir audio/libao description {A Cross-platform Audio Library} platforms darwin variants esd name libao depends_lib lib:libdl.1:dlcompat version 0.8.3 categories audio revision 0 maintainers jpm@opendarwin.org long_description {libao is a way to easily add cross-platform audio output to your program. Output devices are implemented as dynamic plugins, and support for OSS, ESD, ALSA, aRTs, Solaris, and Irix outputs are currently supported.}
-libmikmod 188
-portdir audio/libmikmod description {portable sound library} platforms darwin name libmikmod depends_lib lib:libesd.0:esound version 3.1.10 categories audio maintainers mij@opendarwin.org
+libmikmod 372
+portdir audio/libmikmod description {portable sound library} platforms darwin name libmikmod depends_lib lib:libesd.0:esound version 3.1.10 categories audio maintainers mij@opendarwin.org long_description {libmikmod is a portable sound library for Unix systems. It can play IT, XM, S3M, MTM, 669, STM, ULT, FAR, MED, AMF, DSM, IMF, GDM, STX, OKT, and MOD module formats.}
 libogg 308
 portdir audio/libogg description {Ogg Bitstream Library} platforms darwin name libogg version 1.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Libogg is a library for manipulating ogg bitstreams. It handles both making ogg bitstreams and getting packets from ogg bitstreams.}
 libshout 538
 portdir audio/libshout description {Data and connectivity library for the icecast server} platforms darwin name libshout version 1.0.9 categories {audio net} revision 0 maintainers jpm@opendarwin.org long_description {A port of the libshout library. Libshout allows applications to easily communicate and broadcast to an Icecast streaming media server. It handles the socket connections, metadata communication, and data streaming for the calling application, and lets developers focus on feature sets instead of implementation details.}
-libsndfile 174
-portdir audio/libsndfile description {Library for reading and writing audio files} platforms darwin name libsndfile version 1.0.1 categories audio maintainers sean@sfarc.net
+libsndfile 456
+portdir audio/libsndfile description {Library for reading and writing audio files} platforms darwin name libsndfile version 1.0.1 categories audio maintainers sean@sfarc.net long_description {libsndfile is a C library for reading and writing sound files such as AIFF, AU and WAV files through one standard interface. It can currently read/write 8, 16, 24 and 32-bit PCM files as well as 32-bit floating point WAV files and a number of compressed formats.}
 libvorbis 425
 portdir audio/libvorbis description {The Vorbis General Audio Compression Codec} platforms darwin name libvorbis depends_lib lib:libogg.0:libogg version 1.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format for audio and music at fixed and variable bitrates from 16 to 128 kbps/channel.}
-mad 152
-portdir audio/mad description {MPEG Audio Decoder} platforms {darwin freebsd} name mad version 0.14.2b categories audio maintainers eric@opendarwin.org
+mad 397
+portdir audio/mad description {MPEG Audio Decoder} platforms {darwin freebsd} name mad version 0.14.2b categories audio maintainers eric@opendarwin.org long_description {MAD is a high-quality MPEG audio decoder. It currently supports MPEG-1 as well as the MPEG-2 extension to Lower Sampling Frequencies. All three audio layers (Layer I, Layer II, and Layer III a.k.a. MP3) are fully implemented.}
 mpg123 577
 portdir audio/mpg123 description {fast mp3 player for linux and unix systems} platforms darwin name mpg123 depends_lib {lib:libaudiofile.0:audiofile lib:ibesd.0:esound} version pre0.59s categories audio revision 0 maintainers jpm@opendarwin.org long_description {Mpg123 is a fast, free and portable MPEG audio player for Unix. It supports MPEG 1.0/2.0 layers 1, 2 and 3. For full CD quality playback (44 kHz, 16 bit, stereo) a Pentium, SPARCstation10, DEC Alpha or similar CPU is required. Mono and/or reduced quality playback (22 kHz or 11 kHz) is even possible on 486 CPUs.}
 normalize 573
@@ -36,14 +36,14 @@ sox 486
 portdir audio/sox description {SOund eXchange - universal sound sample translator} platforms darwin name sox version 12.17.3 categories audio revision 0 maintainers jpm@opendarwin.org long_description {SoX (also known as Sound eXchange) translates sound samples between different file formats, and optionally applies various sound effects. SoX is intended as the Swiss Army knife of sound processing tools. It doesn't do anything very well, but sooner or later it comes in very handy.}
 vorbis-tools 803
 portdir audio/vorbis-tools description {The Ogg Vorbis CODEC tools} platforms darwin name vorbis-tools depends_lib {lib:libcurl.2:curl lib:libexpat.0:expat lib:libintl.1:gettext lib:libiconv.2:libiconv lib:libao.2:libao lib:libogg.0:libogg lib:libvorbis.0:libvorbis} version 1.0 categories audio revision 0 maintainers jpm@opendarwin.org long_description {Ogg Vorbis is a fully Open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format for mid to high quality (8kHz-48.0kHz, 16+ bit, polyphonic) audio and music at fixed and variable bitrates from 16 to 128 kbps/channel. This places Vorbis in the same competetive class as audio representations such as MPEG-4 (AAC), and similar to, but higher performance than MPEG-1/2 audio layer 3, MPEG-4 audio (TwinVQ), WMA and PAC.}
-dgpsip 182
-portdir comms/dgpsip description {Differential GPS over IP communication device} platforms {darwin freebsd} name dgpsip version 1.32 categories comms maintainers eric@opendarwin.org
-scud 190
-portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} platforms {darwin freebsd} name scud version 1.4 categories comms maintainers eric@opendarwin.org
-db4 178
-portdir databases/db4 description {The Berkely DB package, revision 4} platforms {darwin freebsd} name db4 version 4.1.24 categories databases maintainers landonf@opendarwin.org
-gdbm 161
-portdir databases/gdbm description {The GNU database manager} platforms {darwin freebsd} name gdbm version 1.8.2 categories databases maintainers digdog@mac.com
+dgpsip 1527
+portdir comms/dgpsip description {Differential GPS over IP communication device} platforms {darwin freebsd} name dgpsip version 1.32 categories comms maintainers eric@opendarwin.org long_description {On a stationary GPS without a differential correction signal, you should see a 20 m average radius {drunken walk} pattern. On the same receiver with DGPS corrections and a good view of the sky, the error the same receiver with DGPS corrections and a good view of the sky, the error should be reduced to approximately 2 m average radius. If you've always wanted to know exactly where your house is located without that annoying GPS wander, but didn't want to spend the money for a DGPS radio, here is your big chance! I'd like to announce a fun DGPS hack. I've written a small Un*x server and client for redistributing DGPS correction signals over the Net. Basically the server grabs the serial byte stream from my DGPS radio and sends it off over a TCP connection. The client does the same thing but in reverse. The result is that you can receive the local DGPS corrections from absolutely anywhere by using the Internet as the world's largest extension cord. You'll still need to be within 1000 miles or so of San Francisco, California, USA for best results. However chances are better error will still be reduced if you are 2000 to 3000 miles away. Several respondents from 2000 miles away have noted that the remote differential signals have diminished the SA-induced position and velocity errors by approximately 3 times.}
+scud 428
+portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} platforms {darwin freebsd} name scud version 1.4 categories comms maintainers eric@opendarwin.org long_description {If you have the caller id service from your phone provider and your modem has caller id capability (accepts AT+VCID=2 or AT#CID=2 commands), This port can cause the modem to answer the call giving the caller an earful.}
+db4 743
+portdir databases/db4 description {The Berkely DB package, revision 4} platforms {darwin freebsd} name db4 version 4.1.24 categories databases maintainers landonf@opendarwin.org long_description {Revision 4 of the Berkeley DB library. This version uses an incompatible underlying database format than revision 1 and a different standard API. Utilities are included in the distribution to convert v1.85 databases to v4 databases, and a backwards compatible API is provided to maintain compatibility with programs using the v1.85 interface. There are minor interface changes in this release which may require that DB applications be modified and recompiled. For a complete discussion of interface changes, see: http://www.sleepycat.com/update/}
+gdbm 409
+portdir databases/gdbm description {The GNU database manager} platforms {darwin freebsd} name gdbm version 1.8.2 categories databases maintainers digdog@mac.com long_description {The GNU `dbm' is a library of database functions that use extendible hashing and works similar to the standard UNIX `dbm' functions. These routines are provided to a programmer needing to create and manipulate a hashed database.}
 gtksql 251
 portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} platforms darwin variants mysql name gtksql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} version 0.3 categories databases maintainers eric@opendarwin.org
 mysql 218
@@ -56,8 +56,8 @@ sqlite 186
 portdir databases/sqlite platforms {darwin freebsd} description {an embedded SQL database engine} name sqlite version 2.7.2 categories databases maintainers rooneg@electricjellyfish.net
 apr 228
 portdir devel/apr description {the apache group's portability library} platforms darwin name apr depends_lib {lib:libexpat.0:expat lib:libiconv.2:libiconv} version 0.9.1 categories devel maintainers rooneg@electricjellyfish.net
-atk 180
-portdir devel/atk description {GNOME accessibility toolkit} platforms darwin name atk depends_lib lib:libglib.2:glib2 version 1.0.3 categories devel maintainers mij@opendarwin.org
+atk 281
+portdir devel/atk description {GNOME accessibility toolkit} platforms darwin name atk depends_lib lib:libglib.2:glib2 version 1.0.3 categories devel maintainers mij@opendarwin.org long_description {ATK is the GNOME Accessibility ToolKit - http://developer.gnome.org/projects/gap/}
 ccache 170
 portdir devel/ccache description {object-file caching compiler wrapper} platforms {darwin freebsd} name ccache version 1.9 categories devel maintainers ranger@befunk.com
 ctags 163
@@ -70,8 +70,8 @@ gettext 210
 portdir devel/gettext description {GNU gettext package} platforms darwin name gettext depends_lib {lib:libiconv.2:libiconv lib:libdl.1:dlcompat} version 0.10.40 categories devel maintainers eric@opendarwin.org
 glib 193
 portdir devel/glib description {Library with data structure functions and other constructs} platforms {darwin freebsd} name glib version 1.2.10 categories devel maintainers eric@opendarwin.org
-glib2 183
-portdir devel/glib2 description {Library with data structure functions and other constructs} platforms darwin name glib2 version 2.0.7 categories devel maintainers mij@opendarwin.org
+glib2 331
+portdir devel/glib2 description {Library with data structure functions and other constructs} platforms darwin name glib2 version 2.0.7 categories devel maintainers mij@opendarwin.org long_description {Glib is a library which includes support routines for C, such as lists, trees, hashes, memory allocation, and many other things.}
 gmp 179
 portdir devel/gmp description {GNU multiple precision arithmetic library} platforms {darwin freebsd} name gmp version 4.1 categories {devel math} maintainers bertrand@caudium.net
 jakarta-ant 212
@@ -122,8 +122,8 @@ joe 153
 portdir editors/joe description {Joe's Own Editor} platforms {darwin freebsd} name joe version 2.9.8-pre1 categories editors maintainers noses@noses.com
 nano 493
 portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants unstable name nano version 1.0.9 categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
-vim 192
-portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.262 categories editors maintainers mij@opendarwin.org
+vim 287
+portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.262 categories editors maintainers mij@opendarwin.org long_description {Vim is a virtually compatible, extremely enhanced version of the vi editor.}
 bochs 488
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org long_description {Bochs is a highly portable open source IA-32 (x86) PC emulator written in C++, that runs on most popular platforms. It includes emulation of the Intel x86 CPU, common I/O devices, and a custom BIOS. Currently, bochs can be compiled to emulate a 386, 486 or Pentium CPU.} depends_run bin:wget:wget
 dopewars 438
@@ -148,8 +148,8 @@ xscorch 536
 portdir games/xscorch description {multiplayer tank shoot-em-up game} platforms darwin name xscorch depends_lib {lib:libmikmod.2:libmikmod lib:libgtk.1:gtk} version 0.1.15 categories games maintainers mij@opendarwin.org long_description {XScorch is a clone of the olden-days DOS game Scorch. It is an extremely addictive war game where any mixture of human and computer AIs control separate tanks (teams are possible) and attempt to blow up or arrange to blow up the other tanks on the field. The last tank on the field is the winner.}
 gd 247
 portdir graphics/gd description {GD creates PNG and JPEG images, among other formats} platforms darwin variants x11 name gd depends_lib {lib:libpng:libpng lib:libjpeg:jpeg} version 1.8.4 categories graphics maintainers mike+gdport@gene-hacker.net
-gdk-pixbuf 190
-portdir graphics/gdk-pixbuf description {generic image handling library for Gtk+ programs} platforms darwin name gdk-pixbuf version 0.18.0 categories graphics maintainers mij@opendarwin.org
+gdk-pixbuf 366
+portdir graphics/gdk-pixbuf description {generic image handling library for Gtk+ programs} platforms darwin name gdk-pixbuf version 0.18.0 categories graphics maintainers mij@opendarwin.org long_description {The GdkPixBuf library provides a number of features, such as image loading facilities, a cache interface, and rendering of a GdkPixBuf into various formats.}
 gimp 258
 portdir graphics/gimp description {GNU Image Manipulation Program} platforms darwin name gimp depends_lib {lib:libgtk.1:gtk lib:libintl.1:gettext lib:libjpeg.9:jpeg lib:libpng.3:libpng} version 1.2.3 categories {graphics x11} maintainers eric@opendarwin.org
 glut 396
@@ -192,10 +192,10 @@ thirdeye 206
 portdir irc/thirdeye description {Colorful and effective script for the epic irc client} platforms darwin name thirdeye version 1.72 categories irc maintainers eric@opendarwin.org depends_run bin:epic:epic
 tkirc 412
 portdir irc/tkirc description {A Tk-based GUI for the ircII Internet Relay Chat client} platforms darwin name tkirc version 2.46 categories irc maintainers jkh@opendarwin.org long_description {Tkirc is a frontend for unix's ircII (shell-client for the Internet Relay Chat) based on Tcl/Tk. If you know how to use ircII, you should not have any problems using tkirc.} depends_run {bin:ircII:ircii bin:wish8.4:tk}
-xchat 208
-portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.1:gettext version 1.8.10 categories irc maintainers mij@opendarwin.org
-xchat2 196
-portdir irc/xchat2 description {IRC client for gtk2} platforms darwin name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 1.9.7 categories irc maintainers mij@opendarwin.org
+xchat 340
+portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin variants x11 name xchat depends_lib lib:libintl.1:gettext version 1.8.10 categories irc maintainers mij@opendarwin.org long_description {XChat is a graphical IRC client based on GTK that has many features and can be scripted with Perl and/or Python.}
+xchat2 330
+portdir irc/xchat2 description {IRC client for gtk2} platforms darwin name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 1.9.7 categories irc maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
 g77 154
 portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers mike+g77@gene-hacker.net
 nqc 154
@@ -276,6 +276,8 @@ mtr 661
 portdir net/mtr description {combines 'traceroute' and 'ping' in a single tool} platforms darwin name mtr version 0.52 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {As mtr starts, it investigates the network connection between the host mtr runs on and HOSTNAME. by sending packets with purposly low TTLs. It continues to send pack- ets with low TTL, noting the response time of the inter- vening routers. This allows mtr to print the response percentage and response times of the internet route to HOSTNAME. A sudden increase in packetloss or response time is often an indication of a bad (or simply over- loaded) link.}
 mudix 324
 portdir net/mudix description {ncurses-based MUD client with triggers, aliases, colors} platforms darwin name mudix version 4.3 categories net revision 1 maintainers fkr@opendarwin.org long_description {ncurses-based MUD client, targeted at people that dislike tintin++, tinyfugue, and don't want to use an X11 MUD client.}
+ncftp 348
+portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net revision 1 maintainers fkr@opendarwin.org long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. Please see http://www.ncftpd.com/ncftp/ for more information.}
 netcat 189
 portdir net/netcat description {Utility for managing network connections} platforms {darwin freebsd} variants darwin name netcat version 1.10 categories net maintainers eric@opendarwin.org
 ngrep 131
@@ -300,8 +302,8 @@ tcptrace 539
 portdir net/tcptrace description {A TCP dump file analysis tool} platforms darwin name tcptrace depends_lib lib:libpcap:libpcap version 6.2.0 categories net revision 0 maintainers jpm@opendarwin.org long_description {tcptrace a TCP dump file analysis tool written by Shawn Ostermann at Ohio University. It is NOT a packet capture program. It reads output dump files in the formats of several popular packet capturing programs: tcpdump, snoop, etherpeek, and netm. It can also output (ie, convert thus converting to) tcpdump format files.}
 wget 447
 portdir net/wget description {internet file retriever} platforms {darwin freebsd} variants ssl name wget version 1.8.2 categories net revision 0 maintainers jpm@opendarwin.org long_description {GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP, the most widely-used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without Xsupport, etc.}
-pan2 196
-portdir news/pan2 description {News reader for gtk2} platforms darwin name pan2 depends_lib {lib:libgtk.2:gtk2 lib:libxml2.2:libxml2} version 0.13.2 categories news maintainers mij@opendarwin.org
+pan2 308
+portdir news/pan2 description {News reader for gtk2} platforms darwin name pan2 depends_lib {lib:libgtk.2:gtk2 lib:libxml2.2:libxml2} version 0.13.2 categories news maintainers mij@opendarwin.org long_description {Pan2 is a newsreader for GTK2/GNOME2 that is based on the Agent newsreader for Windows OSes.}
 slrn 232
 portdir news/slrn description {A powerful console-based newsreader} platforms darwin name slrn depends_lib {lib:libslang.a:slang lib:libiconv:libiconv} version 0.9.7.4 categories {news net} revision 1 maintainers olaf@foellinger.de
 tin 191
