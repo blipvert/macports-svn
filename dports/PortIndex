@@ -364,8 +364,8 @@ gbuffy 355
 portdir mail/gbuffy description {A multiple mailbox biff program written in GTK} platforms darwin name gbuffy depends_lib {lib:libgtk.1:gtk lib:libPropList.1:libproplist} version 0.2.4 categories mail homepage http://www.fiction.net/blong/programs/gbuffy/ maintainers mij@opendarwin.org long_description {{A multiple mailbox biff program written in GTK}}
 hypermail 392
 portdir mail/hypermail description {Hypermail, mail to cross-referenced HTML converter} platforms darwin variants gdbm name hypermail version 2.1.7 categories {mail textproc} homepage http://www.hypermail.org/ maintainers blb@pobox.com long_description {Hypermail is a program that takes a file of mail messages in UNIX mailbox format and generates a set of cross-referenced HTML documents.}
-imap-uw 282
-portdir mail/imap-uw description {University of Washington IMAP daemon} platforms darwin variants ssl_plain name imap-uw version 2002c1 categories mail homepage http://www.washington.edu/imap/ maintainers mij@opendarwin.org long_description {{University of Washington IMAP daemon}}
+imap-uw 281
+portdir mail/imap-uw description {University of Washington IMAP daemon} platforms darwin variants ssl_plain name imap-uw version 2002d categories mail homepage http://www.washington.edu/imap/ maintainers mij@opendarwin.org long_description {{University of Washington IMAP daemon}}
 mutt 730
 portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl compress nntp} name mutt depends_lib {lib:libiconv.2:libiconv lib:libintl.1:gettext} version 1.4.1 categories mail homepage http://www.mutt.org/ maintainers eric@opendarwin.org long_description {Mutt -- {The Mongrel of Mail User Agents} (part Elm, part Pine, part mh, part slrn, part everything else) is an interactive screen-oriented mailer program that supersedes Elm, Pine, mail and mailx. Features include color support, message threading, MIME support (including RFC1522 support for encoded headers), customizable key bindings, POP3, Delivery Status Notification (DSN) support, and PGP/MIME.}
 newmail 500
@@ -789,7 +789,7 @@ portdir x11/oroborus description {Oroborus basically is a really minimalistic wi
 pango 382
 portdir x11/pango description {Framework for the layout and rendering of i18n text} platforms darwin name pango depends_lib {lib:libglib.2:glib2 lib:libX11.6:XFree86} version 1.0.5 categories x11 revision 2 maintainers mij@opendarwin.org long_description {The goal of the Pango project is to provide an open-source framework for the layout and rendering of internationalized text.}
 qt3 442
-portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql cups puredarwin} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.3:libpng lib:libjpeg.62:jpeg} version 3.1.2 categories x11 revision 3 maintainers {ranger@befunk.com, leimy@opendarwin.org} long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
+portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql cups puredarwin} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.3:libpng lib:libjpeg.62:jpeg} version 3.1.2 categories x11 revision 4 maintainers {ranger@befunk.com, leimy@opendarwin.org} long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
 render 291
 portdir x11/render description {X Render Extension headers and documentation} platforms darwin name render depends_lib lib:libX11.6:XFree86 version 0.8 categories x11 homepage http://fontconfig.org/ maintainers blb@pobox.com long_description {{X Render Extension headers and documentation}}
 rxvt 430
