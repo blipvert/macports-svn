@@ -6,12 +6,12 @@ dgpsip 163
 portdir comms/dgpsip description {Differential GPS over IP communication device} portname dgpsip categories comms portversion 1.32 maintainers eric@opendarwin.org
 scud 171
 portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} portname scud categories comms portversion 1.4 maintainers eric@opendarwin.org
-db4 110
-portdir databases/db4 portname db4 categories databases portversion 4.0.14 maintainers landonf@opendarwin.org
-gtksql 179
-portdir databases/gtksql variants mysql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} portname gtksql categories databases portversion 0.3 maintainers eric@opendarwin.org
-mysql 145
-portdir databases/mysql depends_lib lib:libdl.0:dlcompat portname mysql categories databases portversion 3.23.52 maintainers eric@opendarwin.org
+db4 159
+portdir databases/db4 description {The Berkely DB package, revision 4} portname db4 categories databases portversion 4.0.14 maintainers landonf@opendarwin.org
+gtksql 242
+portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} variants mysql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} portname gtksql categories databases portversion 0.3 maintainers eric@opendarwin.org
+mysql 193
+portdir databases/mysql description {Multithreaded SQL database server} depends_lib lib:libdl.0:dlcompat portname mysql categories databases portversion 3.23.52 maintainers eric@opendarwin.org
 postgresql 186
 portdir databases/postgresql description {The most advanced open-source database available anywhere} portname postgresql categories net portversion 7.2.1 maintainers eric@opendarwin.org
 dlcompat 172
@@ -70,8 +70,10 @@ ispell 194
 portdir textproc/ispell description {An interactive spelling checker for multiple languages} portname ispell categories {textproc spelling} portversion 3.2.06 maintainers landonf@opendarwin.org
 libiconv 159
 portdir textproc/libiconv description {Character set conversion library} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
-openjade 292
-portdir textproc/openjade description {{Jade is James Clark's implementation of DSSSL -- Document Style Semantics and Specification Language -- an ISO standard for formatting SGML (and XML) documents.}} portname openjade categories textproc portversion 1.3.1 maintainers kevin@opendarwin.org
+openjade 290
+portdir textproc/openjade description {Jade is James Clark's implementation of DSSSL -- Document Style Semantics and Specification Language -- an ISO standard for formatting SGML (and XML) documents.} portname openjade categories textproc portversion 1.3.1 maintainers kevin@opendarwin.org
+apache 170
+portdir www/apache description {{The extremely popular Apache http server}} portname apache categories www portversion 1.3.26 maintainers mike+apacheport@gene-hacker.net
 links 168
 portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} portname links categories www portversion 2.0 maintainers landonf@opendarwin.org
 gtk 123
