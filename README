@@ -10,33 +10,38 @@ system is portable, written in TCL with a limited set of TCL extensions in C.
     For in-depth documentation on the internals of the ports system
 architecture, refer to docs/INTERNALS.
 
-INSTALLING
+    Please note that darwinports is split into two parts.  The "darwin ports
+infrastructure", which lives in the base/ subdirectory and is the only
+mandatory component of the system, and the "dports" directory which contains
+the actual ported software descriptions.  The latter is optional and can be
+either fetched on demand over the net or a local copy can be used.  See
+documentation on /etc/ports/sources.conf below.
+
+INSTALLATION
 
     Installation Steps:
         1. make
-		Run 'make' within the darwinports directory to compile
-		all necessary software.
+		Run 'make' to compile all necessary software.
 
 	2. sudo make install
-		Run 'sudo make install' within the darwinports directory
-		to install darwinports on your system.
+		Run 'sudo make install' to install darwinports on your system.
 
-	3. edit /etc/ports/ports.conf
+	3. [optional] edit /etc/ports/ports.conf
 		The /etc/ports/ports.conf configuration file takes the same
 		directives as a Portfile, and can be used to override all
-		ports' defaults. There are required and optional directives
-		that you should configure at install time.
+		ports' defaults. You may wish to set things like debugging
+		and "verbosity" options in this file, the list of available
+		options being as follows:
 
-		portdbpath - (options) Specifies path to store ports system
-			    specific data.
+		portdbpath - Specifies path to store ports system specific data.
 
-		ports_debug - (optional) Takes either a "yes" or "no" value.
+		ports_debug - Takes either a "yes" or "no" value.
 			    If set, debug messages are printed
 
-		ports_verbose - (optional) Takes either a "yes" or "no" value.
+		ports_verbose - Takes either a "yes" or "no" value.
 			    If set, informational messages are printed
 
-	3. edit /etc/ports/sources.conf
+	3. [optional] edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
 		both local and remote port software hierarchies. By default,
 		the ports system will fetch ports from www.opendarwin.org.
