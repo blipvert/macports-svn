@@ -1,3 +1,5 @@
+audiofile 157
+portdir audio/audiofile description {Library for dealing with SGI audio files} name audiofile version 0.2.3 categories audio maintainers eric@opendarwin.org
 bladeenc 197
 portdir audio/bladeenc description {Blade's MP3 Encoder (BladeEnc), a freeware MP3 encoder.} platforms {darwin freebsd} name bladeenc version 0.94.2 categories audio maintainers jkh@opendarwin.org
 lame 157
@@ -42,18 +44,26 @@ readline 182
 portdir devel/readline description {Library that provides command line editing} platforms {darwin freebsd} name readline version 4.3 categories devel maintainers eric@opendarwin.org
 subversion 275
 portdir devel/subversion description {a cvs like version control system, but without the suck} platforms darwin name subversion depends_lib {lib:libexpat.0:expat lib:libneon.23:neon lib:libapr-0.0:apr} version 0.14.3 categories devel maintainers rooneg@electricjellyfish.net
-emacs 185
-portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin x11} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
+emacs 192
+portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin carbon x11} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 vim 196
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.174 categories editors maintainers landonf@opendarwin.org
+fortune 165
+portdir games/fortune description {Infamous electronic fortune-cookie generator} name fortune version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 nethack 185
 portdir games/nethack description {Classic dungeon adventure game.} platforms {darwin freebsd} variants x11 name nethack version 3.4.0 categories games maintainers kevin@opendarwin.org
+othello 151
+portdir games/othello description {Clone of Othello played in the terminal} name othello version 0.03 categories games maintainers zizban@adelphia.net
 wtf 179
 portdir games/wtf description {translates common Internet acronyms} platforms {darwin freebsd} name wtf version 20021005 categories games maintainers rooneg@electricjellyfish.net
+wump 116
+portdir games/wump description pah name wump version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 gd 247
 portdir graphics/gd description {GD creates PNG and JPEG images, among other formats} platforms darwin variants x11 name gd depends_lib {lib:libpng:libpng lib:libjpeg:jpeg} version 1.8.4 categories graphics maintainers mike+gdport@gene-hacker.net
 gimp 258
 portdir graphics/gimp description {GNU Image Manipulation Program} platforms darwin name gimp depends_lib {lib:libgtk.1:gtk lib:libintl.2:gettext lib:libjpeg.9:jpeg lib:libpng.3:libpng} version 1.2.3 categories {graphics x11} maintainers eric@opendarwin.org
+imlib 272
+portdir graphics/imlib description {Graphics library related to the enlightenment window manager} name imlib depends_lib {lib:libjpeg.9:jpeg lib:libtiff.3:tiff lib:libungif.4:libungif lib:libpng.3:libpng} version 1.9.14 categories graphics maintainers eric@opendarwin.org
 jpeg 173
 portdir graphics/jpeg description {Library for manipulating JPEG images} platforms {darwin freebsd} name jpeg version 6b categories graphics maintainers eric@opendarwin.org
 lcms 192
@@ -72,26 +82,34 @@ epic 177
 portdir irc/epic description {The (E)nhanced (P)rogrammable (I)RC-II (C)lient} platforms {darwin freebsd} name epic version 1.0.1 categories irc maintainers eric@opendarwin.org
 infobot 176
 portdir irc/infobot description {IRC Bot written in Perl with a rabid AI} platforms {darwin freebsd} name infobot version 0.45.3 categories irc maintainers eric@opendarwin.org
+ircii 108
+portdir irc/ircii variants ipv6 name ircii version 20020912 categories irc maintainers kevin@opendarwin.org
 shadowirc 172
 portdir irc/shadowirc description {GPL licensed GUI IRC client for Mac OS X} platforms darwin name shadowirc version 2.0a categories irc maintainers landonf@opendarwin.org
 nqc 154
 portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories devel maintainers landonf@opendarwin.org
 perl5.8 184
 portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers mike+perlport@gene-hacker.net
-mutt 215
-portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail maintainers eric@opendarwin.org
+slang 191
+portdir lang/slang description {library that includes a powerful scripting language with a C-like syntax} name slang version 1.4.6 categories {slang libraries} maintainers olaf@foellinger.de
+mutt 244
+portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl nntp} name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail maintainers eric@opendarwin.org
 ssmtp 192
 portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} platforms {darwin freebsd} name ssmtp version 2.50 categories mail maintainers eric@opendarwin.org
+darkstat 149
+portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.2 categories net maintainers jpm@opendarwin.org
 ethereal 200
 portdir net/ethereal description {Graphical network analyzer and capture tool} platforms darwin name ethereal depends_lib lib:libgtk.1:gtk version 0.9.6 categories net maintainers eric@opendarwin.org
-fetch 199
-portdir net/fetch description {The FreeBSD file fetching utility} platforms darwin name fetch depends_lib lib:libfetch.3:libfetch version 4.6.2-RELEASE categories net maintainers eric@opendarwin.org
-libfetch 169
-portdir net/libfetch description {The FreeBSD file fetching library} platforms darwin name libfetch version 4.6.2-RELEASE categories net maintainers eric@opendarwin.org
+fetch 195
+portdir net/fetch description {FreeBSD file fetching utility} platforms darwin name fetch depends_lib lib:libfetch.3:libfetch version 4.6.2-RELEASE categories net maintainers eric@opendarwin.org
+lftp 154
+portdir net/lftp description {Sophisticated file transfer program} variants ssl name lftp version 2.6.2 categories net maintainers charlie@rubberduck.com
+libfetch 165
+portdir net/libfetch description {FreeBSD file fetching library} platforms darwin name libfetch version 4.6.2-RELEASE categories net maintainers eric@opendarwin.org
 libpcap 147
 portdir net/libpcap description {Packet Capture library} platforms darwin name libpcap version 0.7.1 categories net maintainers jpm@opendarwin.org
-netcat 191
-portdir net/netcat description {A utility for managing network connections} platforms {darwin freebsd} variants darwin name netcat version 1.10 categories net maintainers eric@opendarwin.org
+netcat 189
+portdir net/netcat description {Utility for managing network connections} platforms {darwin freebsd} variants darwin name netcat version 1.10 categories net maintainers eric@opendarwin.org
 nmap 169
 portdir net/nmap description {Port scanning utility for large networks} platforms {darwin freebsd} name nmap version 3.00 categories net maintainers eric@opendarwin.org
 snort 181
@@ -102,10 +120,12 @@ teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
 gnupg 189
 portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} variants darwin name gnupg version 1.0.7 categories security maintainers eric@opendarwin.org
-darwinports 237
-portdir sysutils/darwinports description {A port to install the latest darwinports} platforms {darwin freebsd} variants {cvs_all cvs_dports} name darwinports version 1.0 categories {misc sysutils} maintainers mike+dports@gene-hacker.net
+darwinports 207
+portdir sysutils/darwinports description {A port to install the latest darwinports} platforms {darwin freebsd} name darwinports version 1.0 categories {misc sysutils} maintainers mike+dports@gene-hacker.net
 DarwinPortsStartup 219
 portdir sysutils/DarwinPortsStartup description {System startup item to start things installed from darwinports} platforms darwin name DarwinPortsStartup version 1.0 categories sysutils maintainers kevin@opendarwin.org
+dpkg 195
+portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
 xtail 185
 portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com
 chef 202
@@ -114,37 +134,43 @@ cowsay 199
 portdir textproc/cowsay platforms {darwin freebsd} description {Configurable talking characters in ASCII art} name cowsay version 3.03 categories {textproc amusements} maintainers jkh@opendarwin.org
 dict 197
 portdir textproc/dict description {Dictionary Server Protocol (RFC2229) client} platforms {darwin freebsd} name dict version 1.7.1 categories {textproc spelling} maintainers landonf@opendarwin.org
+docbook-xml 113
+portdir textproc/docbook-xml description {the docbook xml dtds} name docbook-xml version 4.2 categories textproc
+docbook-xsl 123
+portdir textproc/docbook-xsl description {the docbook xsl stylesheets} name docbook-xsl version 1.55.0 categories textproc
 expat 160
 portdir textproc/expat platforms darwin description {XML 1.0 parser written in C} name expat version 1.95.5 categories textproc maintainers eric@opendarwin.org
 figlet 201
 portdir textproc/figlet description {banner-like program prints strings as ASCII art} platforms {darwin freebsd} name figlet version 2.2 categories {textproc amusements} maintainers jkh@opendarwin.org
 ispell 213
 portdir textproc/ispell platforms {darwin freebsd} description {An interactive spelling checker for multiple languages} name ispell version 3.2.06 categories {textproc spelling} maintainers landonf@opendarwin.org
-libiconv 178
-portdir textproc/libiconv platforms {darwin freebsd} description {Character set conversion library} name libiconv version 1.8 categories textproc maintainers eric@opendarwin.org
+libiconv 321
+portdir textproc/libiconv platforms {darwin freebsd} description {Character set conversion library} name libiconv version 1.8 categories textproc maintainers eric@opendarwin.org long_description {A character-set conversion library which implements the iconv() API for dealing with unicode and other types of conversion.}
 libxml2 179
 portdir textproc/libxml description {gnome xml library} name libxml2 depends_lib lib:libiconv:libiconv version 2.4.25 categories textproc maintainers mike+libxslt@gene-hacker.net
 libxslt 191
 portdir textproc/libxslt description {gnome xslt library and xsltproc} name libxslt depends_lib lib:libxml2:libxml version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
 openjade 186
 portdir textproc/openjade platforms {darwin freebsd} description {James Clark's implementation of DSSSL} name openjade version 1.3.1 categories textproc maintainers kevin@opendarwin.org
-apache 221
-portdir www/apache platforms {darwin freebsd} description {The extremely popular Apache http server} variants {mod_perl mod_perl_expt} name apache version 1.3.27 categories www maintainers mike+apacheport@gene-hacker.net
-libwww 156
-portdir www/libwww platforms darwin description {The W3C WWW Reference Library} name libwww version 5.4.0 categories www maintainers landonf@opendarwin.org
-links 187
-portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} name links version 2.0 categories www maintainers landonf@opendarwin.org
-neon 217
-portdir www/neon description {An HTTP and WebDAV client library with a C interface} platforms darwin name neon depends_lib lib:libexpat.0.4:expat version 0.23.4 categories www maintainers rooneg@electricjellyfish.net
-fluxbox 251
-portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} platforms {darwin freebsd} name fluxbox depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} version 0.1.10 categories x11-wm maintainers landonf@opendarwin.org
-gtk 142
-portdir x11/gtk description {Gimp Tool Kit} platforms {darwin freebsd} name gtk version 1.2.10 categories x11 maintainers eric@opendarwin.org
-wmclock 165
-portdir x11/wmclock description {A dockable clock applet} platforms {darwin freebsd} name wmclock version 1.0.12.2 categories x11 maintainers landonf@opendarwin.org
-wmcpuload 202
-portdir x11/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org
-wmmemmon 210
-portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org
-XFree86 175
-portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.2.0.1 categories x11 maintainers eric@opendarwin.org
+apache 516
+portdir www/apache platforms {darwin freebsd} description {The extremely popular Apache http server} variants {mod_perl mod_perl_expt} name apache version 1.3.27 categories www maintainers mike+apacheport@gene-hacker.net long_description {Apache is an HTTP server designed as a plug-in replacement for the NCSA server version 1.3 (or 1.4). It fixes numerous bugs in the NCSA server and includes many frequently requested new features, and has an API which allows it to be extended to meet users' needs more easily.}
+libwww 384
+portdir www/libwww platforms darwin description {The W3C WWW Reference Library} name libwww version 5.4.0 categories www maintainers landonf@opendarwin.org long_description {Libwww is a general-purpose Web API written in C for Unix and Windows (Win32). With a highly extensible and layered API, it can accommodate many different types of applications including clients, robots, etc.}
+links 291
+portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} name links version 2.0 categories www long_description {Lynx-like WWW browser that supports tables, menus, and so on for text-only displays.} maintainers landonf@opendarwin.org
+neon 466
+portdir www/neon description {An HTTP and WebDAV client library with a C interface} platforms darwin name neon depends_lib lib:libexpat.0.4:expat version 0.23.5 categories www maintainers rooneg@electricjellyfish.net long_description {neon is an HTTP and WebDAV client library with a C language API. It provides a high-level interface to HTTP and WebDAV methods and a low-level interface to HTTP request handling, easily allowing the implementation of new methods.}
+w3m 165
+portdir www/w3m description {pager/text based browser} default_variants +m17n variants m17n name w3m version 0.3.1 categories www maintainers charlie@rubberduck.com
+fluxbox 324
+portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} platforms {darwin freebsd} name fluxbox depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} version 0.1.10 categories x11-wm long_description {{Lightweight window manager based on Blackbox 0.61.1}} maintainers landonf@opendarwin.org
+gtk 308
+portdir x11/gtk description {Gimp Tool Kit} platforms {darwin freebsd} name gtk version 1.2.10 categories x11 maintainers eric@opendarwin.org long_description {This is GTK+ version 1.2.10. GTK+, which stands for the Gimp ToolKit, is a library for creating graphical user interfaces for the X Window System.}
+wmclock 394
+portdir x11/wmclock description {A dockable clock applet} platforms {darwin freebsd} name wmclock version 1.0.12.2 categories x11 maintainers landonf@opendarwin.org long_description {Wmclock is an applet which displays the date and time in a dockable tile in the same style as the clock from the NEXTSTEP(tm) operating system. Wmclock is specially designed for the WindowMaker window manager.}
+wmcpuload 383
+portdir x11/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
+wmmemmon 397
+portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMMemMon is a program to monitor memory/swap usage. It is a dockapp that is supported by X window managers such as WindowMaker, AfterStep, BlackBox, and Enlightenment.}
+XFree86 247
+portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.2.0.1 categories x11 maintainers eric@opendarwin.org long_description {The XFree86 project's X window system implementation}
