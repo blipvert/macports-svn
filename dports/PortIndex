@@ -289,7 +289,7 @@ portdir editors/vim description {Vi workalike with many additional features} pla
 vimdrop 410
 portdir editors/vimdrop description {droplet for getting files loaded into vim} platforms darwin name vimdrop version 0.8 categories editors homepage http://mywebpages.comcast.net/pgorman2003/ maintainers mail@mweissmann.de long_description {OS-X applescript droplet for getting files loaded into the editor defined by the {$EDITOR} variable. To use vim, add a 'set EDITOR=vim' to your .cshrc or .login file.}
 xemacs 632
-portdir editors/xemacs description {The XEmacs editor, based on GNU Emacs} platforms darwin name xemacs version 21.5.10 categories editors maintainers jkh@opendarwin.org long_description {GNU Emacs is a self-documenting, customizable, extensible real-time display editor. Users new to Emacs will be able to use basic features fairly rapidly by studying the tutorial and using the self-documentation features. Emacs also has an extensive interactive manual browser. It is easily extensible since its editing commands are written in Lisp. XEmacs adds many extensions to GNU Emacs to take particilar advantage of the X Window System.}
+portdir editors/xemacs description {The XEmacs editor, based on GNU Emacs} platforms darwin name xemacs version 21.5.16 categories editors maintainers jkh@opendarwin.org long_description {GNU Emacs is a self-documenting, customizable, extensible real-time display editor. Users new to Emacs will be able to use basic features fairly rapidly by studying the tutorial and using the self-documentation features. Emacs also has an extensive interactive manual browser. It is easily extensible since its editing commands are written in Lisp. XEmacs adds many extensions to GNU Emacs to take particilar advantage of the X Window System.}
 bochs 488
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org long_description {Bochs is a highly portable open source IA-32 (x86) PC emulator written in C++, that runs on most popular platforms. It includes emulation of the Intel x86 CPU, common I/O devices, and a custom BIOS. Currently, bochs can be compiled to emulate a 386, 486 or Pentium CPU.} depends_run bin:wget:wget
 freesci 451
@@ -522,8 +522,8 @@ onlisp 231
 portdir lang/onlisp description {Lytha Ayth's texinfo version of Paul Graham's book On Lisp} name onlisp version 0.0.1 categories lang homepage http://t2100cdt.kippona.net/linux/lisp/ revision 1.0 maintainers kogule@opendarwin.org
 openmcl 478
 portdir lang/openmcl platforms darwin description {The OpenMCL Common Lisp Implementation} name openmcl version 0.13.6 categories lang homepage http://openmcl.clozure.com/ maintainers {waqar@opendarwin.org gwright@comcast.net} long_description {OpenMCL is an opensourced Common Lisp implementation, derived from Digitool's Macintosh Common Lisp product. OpenMCL currently runs under LinuxPPC and, as of version 0.10, under Darwin, the BSD/Mach layer on which MacOS X is based.}
-perl5.8 197
-portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 version 5.8.0 categories lang revision 3 maintainers michaelm@opendarwin.org
+perl5.8 169
+portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants threads name perl5.8 version 5.8.1 categories lang maintainers michaelm@opendarwin.org
 python 203
 portdir lang/python description {An interpreted, object-oriented programming language} platforms darwin variants {nothreads puredarwin} name python version 2.2.2 categories lang maintainers pat@ekman.cx
 python21 463
@@ -710,8 +710,8 @@ mudix 364
 portdir net/mudix description {ncurses-based MUD client with triggers, aliases, colors} platforms darwin name mudix version 4.3 categories net homepage http://dw.nl.eu.org/mudix.html revision 2 maintainers fkr@opendarwin.org long_description {ncurses-based MUD client, targeted at people that dislike tintin++, tinyfugue, and don't want to use an X11 MUD client.}
 mutella 335
 portdir net/mutella description {A command line Gnutella client} platforms darwin name mutella depends_lib lib:readline:readline version 0.4.3 categories net homepage http://mutella.sourceforge.net/ maintainers max@clarksys.com long_description {Mutella is a terminal-mode Gnutella client with an intuitive and easy to use interface.}
-naim 346
-portdir net/naim description {ncurses-based client for multiple messenger systems.} platforms darwin name naim version 0.11.6.1 categories net homepage http://site.n.ml.org/info/naim/ maintainers fkr@opendarwin.org long_description {naim is a ncurses-based messenger client, that supports all major messaging protocol such as AIM, ICQ, IRC etc.}
+naim 344
+portdir net/naim description {ncurses-based client for multiple messenger systems.} platforms darwin name naim version 0.11.6.1 categories net homepage http://shell.n.ml.org/n/naim/ maintainers fkr@opendarwin.org long_description {naim is a ncurses-based messenger client, that supports all major messaging protocol such as AIM, ICQ, IRC etc.}
 ncftp 518
 portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.6 categories net homepage http://www.ncftpd.com/ncftp/ maintainers fkr@opendarwin.org long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. The main program is simply called 'ncftp'. There are also separate utility programs for one-shot FTP (i.e. for shell scripts and command line junkies), these include 'ncftpget', 'ncftpput', and 'ncftpls'.}
 nessus-core 440
@@ -1064,8 +1064,8 @@ libapreq 337
 portdir www/libapreq description {C Libraries for Apache::Request and Apache::Cookie} platforms darwin name libapreq depends_lib bin:httpd:apache version 1.1 categories www maintainers mike+apacheport@gene-hacker.net long_description {C API to the Apache Request object, split off from the Perl API because of OS X build peculiarities.}
 libapreq-perl 404
 portdir www/libapreq-perl description {Perl Libraries for Apache::Request and Apache::Cookie} platforms darwin name libapreq-perl depends_lib {bin:perl5.8..:perl5.8 lib:libapreq.1.0.1:libapreq} version 1.1 categories www maintainers mike+apacheport@gene-hacker.net long_description {Perl API to the Apache Request object and Apache::Cookie, split off from the C API because of OS X build peculiarities.}
-libwww 399
-portdir www/libwww platforms darwin description {The W3C WWW Reference Library} variants expat name libwww version 5.4.0 categories www maintainers landonf@opendarwin.org long_description {Libwww is a general-purpose Web API written in C for Unix and Windows (Win32). With a highly extensible and layered API, it can accommodate many different types of applications including clients, robots, etc.}
+libwww 410
+portdir www/libwww platforms darwin description {The W3C WWW Reference Library} variants expat name libwww version 5.4.0 categories www revision 1 maintainers landonf@opendarwin.org long_description {Libwww is a general-purpose Web API written in C for Unix and Windows (Win32). With a highly extensible and layered API, it can accommodate many different types of applications including clients, robots, etc.}
 links 330
 portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} variants x11 name links version 2.1pre11 categories www long_description {Lynx-like WWW browser with text and graphics modes with many features like displaying tables, menus, etc.} maintainers landonf@opendarwin.org
 lynx 374
