@@ -7,7 +7,7 @@ portdir comms/dgpsip description {Differential GPS over IP communication device}
 scud 171
 portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} portname scud categories comms portversion 1.4 maintainers eric@opendarwin.org
 db4 159
-portdir databases/db4 description {The Berkely DB package, revision 4} portname db4 categories databases portversion 4.0.14 maintainers landonf@opendarwin.org
+portdir databases/db4 description {The Berkely DB package, revision 4} portname db4 categories databases portversion 4.1.24 maintainers landonf@opendarwin.org
 gtksql 242
 portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} variants mysql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} portname gtksql categories databases portversion 0.3 maintainers eric@opendarwin.org
 mysql 193
@@ -60,6 +60,8 @@ netcat 99
 portdir net/netcat portname netcat categories net portversion 1.10 maintainers eric@opendarwin.org
 nmap 150
 portdir net/nmap description {Port scanning utility for large networks} portname nmap categories net portversion 3.00 maintainers eric@opendarwin.org
+wmcpuload 188
+portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} portname wmcpuload categories {sysutils x11} portversion 1.0.0 maintainers landonf@opendarwin.org
 cowsay 180
 portdir textproc/cowsay description {Configurable talking characters in ASCII art} portname cowsay categories {textproc amusements} portversion 3.03 maintainers jkh@opendarwin.org
 dict 178
