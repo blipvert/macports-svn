@@ -1,16 +1,16 @@
 WHAT IS THE DARWIN PORTS SYSTEM
 
-    Darwin Ports is a software build, install, and packaging infrastructure
+    DarwinPorts is a software build, install, and packaging infrastructure
 designed to meet the same functionality requirements as the FreeBSD ports
 architecture while maintaining extensibility for future enhancement.
 
-    Darwin Ports currently builds and runs on MacOS X 10.2 (Darwin 6.0). The
+    DarwinPorts currently builds and runs on MacOS X 10.2 (Darwin 6.0). The
 system is portable, written in TCL with a limited set of TCL extensions in C.
 
     For in-depth documentation on the internals of the ports system
 architecture, refer to base/docs/INTERNALS.
 
-    Please note that darwinports is split into two parts.  The "darwin ports
+    Please note that DarwinPorts is split into two parts.  The "darwin ports
 infrastructure", which lives in the base/ subdirectory and is the only
 mandatory component of the system, and the "dports" directory which contains
 the actual ported software descriptions.  The latter is optional and can be
@@ -22,9 +22,15 @@ INSTALLATION
     Installation Steps:
         1. make
 		Run 'make' to compile all necessary software.
+		In order to install DarwinPorts on FreeBSD the default group-ownership
+		must be passed: 'make DSTGRP=wheel'
+		
 
 	2. sudo make install
-		Run 'sudo make install' to install darwinports on your system.
+		Run 'sudo make install' to install DarwinPorts on your system.
+		Again, installing on FreeBSD require the group-ownership to be
+		passed: 'sudo make install DSTGRP=wheel'
+
 
 	3. [optional] edit /etc/ports/ports.conf
 		The /etc/ports/ports.conf configuration file defines several
@@ -46,7 +52,7 @@ INSTALLATION
     All necessary code and TCL will be compiled and installed as follows:
 	[Mac OS X] /System/Library/Tcl/8.3/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
-	    - TCL library for interfacing with the Darwin Ports System
+	    - TCL library for interfacing with the DarwinPorts System
 
 	PREFIX is set to /opt/local but can be overridden on the make command
 	line and affects the installation of the following components:
@@ -69,7 +75,7 @@ INSTALLATION
 USING THE PORT COMMAND
 
     If you haven't already, add /opt/local/bin to your path (or $PREFIX/bin
-if you've elected to install darwinports somewhere else). If you're
+if you've elected to install DarwinPorts somewhere else). If you're
 unsure how, add the following line to your ~/.cshrc file.
 
 	set path=($path /opt/local/bin)
@@ -102,8 +108,8 @@ files. Currently the only bundled files are patch files, and these are likely
 to be kept to a minimum.
 
     A Portfile consists of valid TCL, evaluated by a TCL interpreter
-instantiated by the Darwin Ports System. Portfiles use extremely straight-
+instantiated by the DarwinPorts System. Portfiles use extremely straight-
 forward key/value pair syntax, while allowing the author to use the full
 extent of TCL's functionality where necessary.
 
-    To get started, refer to doc/exampleport and the portfile(7) man page.
+    To get started, refer to base/doc/exampleport and the portfile(7) man page.
