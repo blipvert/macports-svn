@@ -221,7 +221,7 @@ portdir irc/tkirc description {A Tk-based GUI for the ircII Internet Relay Chat 
 xchat 377
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin name xchat depends_lib {lib:libintl.1:gettext lib:libgtk.1:gtk} version 1.8.11 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat is a graphical IRC client based on GTK that has many features and can be scripted with Perl and/or Python.}
 xchat2 374
-portdir irc/xchat2 description {IRC client for gtk2} platforms darwin variants xft name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 2.0.0 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
+portdir irc/xchat2 description {IRC client for gtk2} platforms darwin variants xft name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 2.0.1 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
 g77 167
 portdir lang/g77 description {gnu fortran 77 comiler} platforms {darwin freebsd} name g77 version 3.2.2 categories lang revision 2 maintainers michaelm@opendarwin.org
 gawk 387
@@ -360,8 +360,6 @@ ghostscript 188
 portdir print/ghostscript platforms {darwin freebsd} variants {afpl gnu devel thirdparty fonts} name ghostscript version 7.04 categories print revision 0 maintainers digdog@opendarwin.org
 teTeX 474
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories {print textproc} long_description {teTeX is a TeX distribution for UNIX compatible systems. It contains the latest versions of TeX & friends and nearly everything you need for happy TeX'ing. For more information have a look at the lengthy FEATURES file of the distribution.} maintainers landonf@opendarwin.org
-atlas 230
-portdir science/atlas description {Portably optimal linear algebra software} name atlas version 3.4.1 categories {sci devel} homepage http://math-atlas.sourceforge.net depends_build bin:g77:g77 maintainers michaelm@opendarwin.org
 gromacs 724
 portdir science/gromacs description {The World's fastest Molecular Dynamics} platforms darwin name gromacs depends_lib lib:fftw:fftw version 3.1.5_pre1 categories {sci math} revision 0 maintainers jpm@opendarwin.org long_description {GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles. It is primarily designed for biochemical molecules like proteins and lipids that have a lot of complicated bonded interactions, but since GROMACS is extremely fast at calculating the nonbonded interactions (that usually dominate simulations) many groups are also using it for research on non-biological systems, e.g. polymers.}
 mapm 176
@@ -380,10 +378,14 @@ mhash 322
 portdir security/mhash description {provides easy access strong hashes} platforms darwin name mhash version 0.8.17 categories security homepage http://mhash.sourceforge.net/ revision 0 maintainers jpm@opendarwin.org long_description {Libmhash is a library which implements some hash algorithms like crc32, md5 and sha-1.}
 nmap 324
 portdir security/nmap description {Port scanning utility} platforms darwin name nmap depends_lib lib:libpcap:libpcap version 3.00 categories security homepage http://nmap.org/ maintainers mij@opendarwin.org long_description {Nmap (\"Network Mapper\") is an open source utility for network exploration or security auditing.}
+openssl 517
+portdir security/openssl platforms {darwin freebsd} description {OpenSSL SSL/TLS cryptography library} name openssl depends_lib lib:libz.1:zlib version 0.9.7a categories security maintainers ssen@opendarwin.org long_description {The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) protocols as well as a full-strength general purpose cryptography library.}
 skey 202
 portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org long_description {}
 pdksh 219
 portdir shells/pdksh description {A Public Domain clone of ksh} platforms darwin name pdksh version 5.2.14 categories shells maintainers ryanwilcox@mac.com long_description {The public domain version of the Korn Shell}
+bzip2 179
+portdir sysutils/bzip2 platforms darwin description {bzip2 compression library and tools} name bzip2 version 1.0.2 categories {sysutils archivers} maintainers ssen@opendarwin.org
 cdrtools 425
 portdir sysutils/cdrtools description {ISO 9660 filesystem and CD creation tools} name cdrtools version 2.0 categories sysutils homepage http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html revision 1 long_description {The cdrtools software includes programs to create and/or extract ISO 9660 filesystems, verify their integrity, and write them to a disc.} maintainers fkr@opendarwin.org
 darwinports 430
@@ -394,6 +396,8 @@ dpkg 195
 portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
 pilot-link 244
 portdir sysutils/pilot-link description {palm-pilot libraries and tools} platforms darwin name pilot-link depends_lib {lib:libiconv:libiconv lib:libreadline:readline} version 0.10.99 categories sysutils revision 1 maintainers ranger@befunk.com
+rpm 237
+portdir sysutils/rpm platforms darwin description {RedHat Package Manager} variants darwin name rpm depends_lib {lib:libbz2.1.0:bzip2 lib:libiconv.2:libiconv} version 4.0.4 categories {sysutils archivers} maintainers ssen@opendarwin.org
 screen 736
 portdir sysutils/screen description {Screen manager with VT100/ANSI terminal emulation} platforms darwin variants darwin name screen version 3.9.11 categories sysutils revision 0 maintainers digdog@mac.com long_description {Screen is a full-screen window manager that multiplexes a physical terminal between several processes (typically interactive shells). Each virtual terminal provides the functions of a DEC VT100 terminal and, in addition, several control functions from the ANSI X3.64 (ISO 6429) and ISO 2022 standards (e.g. insert/delete line and support for multiple character sets). There is a scrollback history buffer for each virtual terminal and a copy-and-paste mechanism that allows moving text regions between windows.}
 unzip 547
