@@ -83,10 +83,6 @@ unsure how, add the following line to your ~/.cshrc file.
     Your changes to ~/.cshrc will not take effect until you have opened
 a new shell.
 
-    To update your local indexes, run:
-
-        port sync
-
     The following command will build and install a port:
 
 	port install <portname>

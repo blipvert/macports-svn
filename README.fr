@@ -76,10 +76,6 @@ UTILISATION DE LA COMMANDE PORT
 
     Vos changements dans ~/cshrc ne seront pris en compte que lorsque vous ouvrirez un nouveau shell.
 
-    Pour mettre à jour vos index locaux, lancez la commande :
-
-	port sync
-
     La commande suivante construira et installera le port :
 
 	port install <nom_du_port>
