@@ -33,7 +33,7 @@ INSTALLATION
 		port_verbose - Accepte "yes"[oui] ou "non"[non] comme valeur.
 			     Si utilisée, les messages d'informations seront affichés.
 
-	3. [optionnel] éditez /etc/ports/sources.conf
+	3. éditez /etc/ports/sources.conf
 		Le fichier /etc/ports/sources.conf liste l'emplacement des
 		hiérarchies des ports locale et distante. Par défaut, la
 		recherche s'effectuera dans votre répertoire relatif actuel
