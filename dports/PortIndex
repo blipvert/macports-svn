@@ -6,6 +6,8 @@ dgpsip 163
 portdir comms/dgpsip description {Differential GPS over IP communication device} portname dgpsip categories comms portversion 1.32 maintainers eric@opendarwin.org
 scud 171
 portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} portname scud categories comms portversion 1.4 maintainers eric@opendarwin.org
+mysql 151
+portdir databases/mysql depends_lib lib:libdl.0:devel/dlcompat portname mysql categories databases portversion 3.23.52 maintainers eric@opendarwin.org
 postgresql 186
 portdir databases/postgresql description {The most advanced open-source database available anywhere} portname postgresql categories net portversion 7.2.1 maintainers eric@opendarwin.org
 dlcompat 172
@@ -19,7 +21,7 @@ portdir devel/perforce description {Fast source code management system} portname
 pkgconfig 176
 portdir devel/pkgconfig description {System for managing library compile and link flags} portname pkgconfig categories devel portversion 0.12.0 maintainers eric@opendarwin.org
 vim 177
-portdir editors/vim description {Vi workalike with many additional features} variants x11 portname vim categories editors portversion 6.1.166 maintainers landonf@opendarwin.org
+portdir editors/vim description {Vi workalike with many additional features} variants x11 portname vim categories editors portversion 6.1.174 maintainers landonf@opendarwin.org
 nethack 166
 portdir games/nethack description {Classic dungeon adventure game.} variants x11 portname nethack categories games portversion 3.4.0 maintainers kevin@opendarwin.org
 jpegsrc 164
@@ -42,6 +44,8 @@ fetch 194
 portdir net/fetch description {The FreeBSD file fetching utility} depends_lib lib:libfetch.3:net/libfetch portname fetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
 libfetch 168
 portdir net/libfetch description {The FreeBSD file fetching utility library} portname libfetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
+netcat 99
+portdir net/netcat portname netcat categories net portversion 1.10 maintainers eric@opendarwin.org
 nmap 150
 portdir net/nmap description {Port scanning utility for large networks} portname nmap categories net portversion 3.00 maintainers eric@opendarwin.org
 cowsay 180
@@ -54,10 +58,12 @@ ispell 194
 portdir textproc/ispell description {An interactive spelling checker for multiple languages} portname ispell categories {textproc spelling} portversion 3.2.06 maintainers landonf@opendarwin.org
 libiconv 159
 portdir textproc/libiconv description {Character set conversion library} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
+openjade 292
+portdir textproc/openjade description {{Jade is James Clark's implementation of DSSSL -- Document Style Semantics and Specification Language -- an ISO standard for formatting SGML (and XML) documents.}} portname openjade categories textproc portversion 1.3.1 maintainers kevin@opendarwin.org
 links 168
 portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} portname links categories www portversion 2.0 maintainers landonf@opendarwin.org
-gtk 160
-portdir x11/gtk description {Gimp Tool Kit} depends_lib lib:libglib.1:devel/glib portname gtk categories x11 portversion 1.2.10 maintainers eric@opendarwin.org
+gtk 123
+portdir x11/gtk description {Gimp Tool Kit} portname gtk categories x11 portversion 1.2.10 maintainers eric@opendarwin.org
 XFree86 141
 portdir x11/XFree86 description {X11R6 windowing system} portname XFree86 categories x11 portversion 4.2.0.1 maintainers eric@opendarwin.org
 fluxbox 243
