@@ -12,7 +12,7 @@ QU'EST-CE QUE DARWINPORTS
 
 		Le "DarwinPorts User Guide" est disponible à :
 		http://www.opendarwin.org/projects/darwinports/guide/
-
+	
 	Pour une documentation plus appronfondie sur l'architecture
 	interne de ce système de ports, reportez-vous au fichier
 	base/docs/INTERNALS.
@@ -56,11 +56,13 @@ INSTALLATION
 
 		prefix - Indique la base dans laquelle installer les ports
 
-	4. éditez /etc/ports/sources.conf
+	5. [optionnel] éditez /etc/ports/sources.conf
 		Le fichier /etc/ports/sources.conf liste l'emplacement des
-		hiérarchies des ports locales et distantes. Assurez-vous
-                bien d'ajouter une entrée pour votre hiérarchie locale des
-                ports (normalement le répertoire darwinports/dports).
+		hiérarchies des ports locales et distantes. Si l'argument
+		"--with-dports-dir=RÉP." n'a pas été utilisé lors du
+		lancement du script "./configure", la hiérarchie de dports
+		(darwinports/dports, depuis la copie que vous avez
+		installé) sera ajoutée au fichier "source.conf".
 
     Tout le code TCL nécessaire sera compilé et installé comme indiqué ci-
     dessous:
