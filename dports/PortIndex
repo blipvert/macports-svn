@@ -49,7 +49,7 @@ portdir devel/ctags description {Reimplementation of ctags(1)} platforms {darwin
 readline 182
 portdir devel/readline description {Library that provides command line editing} platforms {darwin freebsd} name readline version 4.3 categories devel maintainers eric@opendarwin.org
 subversion 275
-portdir devel/subversion description {a cvs like version control system, but without the suck} platforms darwin name subversion depends_lib {lib:libexpat.0:expat lib:libneon.23:neon lib:libapr-0.0:apr} version 0.14.3 categories devel maintainers rooneg@electricjellyfish.net
+portdir devel/subversion description {a cvs like version control system, but without the suck} platforms darwin name subversion depends_lib {lib:libexpat.0:expat lib:libneon.23:neon lib:libapr-0.0:apr} version 0.14.5 categories devel maintainers rooneg@electricjellyfish.net
 libevent 574
 portdir devel/libevent description {asynchronous event library} platforms darwin name libevent version 0.6 categories devel revision 0 maintainers jpm@opendarwin.org long_description {The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached.libevent is meant to replace the asynchronous event loop found in event driven network servers. An application just needs to call event_dispatch() and can then add or remove events dynamically without having to change the event loop.}
 libcompat 175
@@ -60,8 +60,10 @@ poll-emulator 323
 portdir devel/poll-emulator description {Library to provide poll(2) functionality} platforms {darwin freebsd} name poll-emulator version 1.3 categories devel revision 1 maintainers ranger@befunk.com long_description {This package implements the System V poll(2) system call for Unix-like systems that do not support poll.}
 pcre 184
 portdir devel/pcre description {Perl Compatible Regular Expressions Library} platforms {darwin freebsd} name pcre version 3.9 categories devel revision 1 maintainers ranger@befunk.com
-cvsweb 448
-portdir devel/cvsweb description {WWW interface for CVS repositories} platforms {darwin freebsd} variants {darwin freebsd} name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
+cvsweb 412
+portdir devel/cvsweb description {WWW interface for CVS repositories} platforms darwin name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
+viewcvs 551
+portdir devel/viewcvs description {Viewing the content of CVS repositories with a Webbrowser} platforms darwin name viewcvs version 0.9.2 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {ViewCVS was inspired by cvsweb (Zeller's version). ViewCVS can browse directories, change logs, and specific revisions of files. It can display diffs between versions and show selections of files based on tags or branches. In addition, ViewCVS has annotation or blame support, and the beginnings of Bonsai-like query facilities.}
 emacs 198
 portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin devel x11 carbon} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 vim 196
@@ -153,7 +155,7 @@ portdir net/nmap description {Port scanning utility for large networks} platform
 snort 589
 portdir net/snort description {The Open Source Network Intrusion Detection System} platforms {darwin freebsd} name snort version 1.9.0 categories net revision 0 maintainers jpm@opendarwin.org long_description {Snort is an open source network intrusion detection system, capable of performing real-time traffic analysis and packet logging on IP networks. It can perform protocol analysis, content searching/matching and can be used to detect a variety of attacks and probes, such as buffer overflows, stealth port scans, CGI attacks, SMB probes, OS fingerprinting attempts, and much more.}
 darkstat 369
-portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.2 categories net revision 0 maintainers jpm@opendarwin.org long_description {darkstat is a network traffic analyzer. It's basically a packet sniffer which runs as a background process on a cable/DSL router and gathers all sorts of useless but interesting statistics.}
+portdir net/darkstat description {network traffic analyzer} platforms darwin name darkstat version 2.3 categories net revision 1 maintainers jpm@opendarwin.org long_description {darkstat is a network traffic analyzer. It's basically a packet sniffer which runs as a background process on a cable/DSL router and gathers all sorts of useless but interesting statistics.}
 lftp 154
 portdir net/lftp description {Sophisticated file transfer program} variants ssl name lftp version 2.6.2 categories net maintainers charlie@rubberduck.com
 libpcap 261
@@ -254,6 +256,10 @@ fvwm 416
 portdir x11/fvwm description {A very simple window manager supporting a pager} platforms darwin name fvwm depends_lib {lib:libX11.6:XFree86 lib:libXpm.4:xpm} version 1.24r categories {x11-wm x11} long_description {One of the earlier paging window managers with what is still considered to be a very elegant and minimal feature set yet highly configurable and expandable via plug-ins.} maintainers jkh@opendarwin.org
 vtwm 158
 portdir x11/vtwm description {Twm with a virtual desktop and optional Motif-like features} name vtwm version 5.4.6a categories x11 maintainers mdales@mac.com
+wmcpuload 175
+portdir x11/wmcpuload description {An lcd dockapp that displays the current cpuload} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org
+wmmemmon 183
+portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org
 fftw 189
 portdir math/fftw description {Fast C routines to compute the Discrete Fourier Transform} platforms darwin name fftw version 2.1.3 categories math revision 0 maintainers jpm@opendarwin.org
 slrn 215
