@@ -72,8 +72,8 @@ ispell 194
 portdir textproc/ispell description {An interactive spelling checker for multiple languages} portname ispell categories {textproc spelling} portversion 3.2.06 maintainers landonf@opendarwin.org
 libiconv 159
 portdir textproc/libiconv description {Character set conversion library} portname libiconv categories textproc portversion 1.8 maintainers eric@opendarwin.org
-openjade 290
-portdir textproc/openjade description {Jade is James Clark's implementation of DSSSL -- Document Style Semantics and Specification Language -- an ISO standard for formatting SGML (and XML) documents.} portname openjade categories textproc portversion 1.3.1 maintainers kevin@opendarwin.org
+openjade 167
+portdir textproc/openjade description {James Clark's implementation of DSSSL} portname openjade categories textproc portversion 1.3.1 maintainers kevin@opendarwin.org
 apache 168
 portdir www/apache description {The extremely popular Apache http server} portname apache categories www portversion 1.3.26 maintainers mike+apacheport@gene-hacker.net
 libwww 147
