@@ -44,16 +44,16 @@ db4 743
 portdir databases/db4 description {The Berkely DB package, revision 4} platforms {darwin freebsd} name db4 version 4.1.24 categories databases maintainers landonf@opendarwin.org long_description {Revision 4 of the Berkeley DB library. This version uses an incompatible underlying database format than revision 1 and a different standard API. Utilities are included in the distribution to convert v1.85 databases to v4 databases, and a backwards compatible API is provided to maintain compatibility with programs using the v1.85 interface. There are minor interface changes in this release which may require that DB applications be modified and recompiled. For a complete discussion of interface changes, see: http://www.sleepycat.com/update/}
 gdbm 409
 portdir databases/gdbm description {The GNU database manager} platforms {darwin freebsd} name gdbm version 1.8.2 categories databases maintainers digdog@mac.com long_description {The GNU `dbm' is a library of database functions that use extendible hashing and works similar to the standard UNIX `dbm' functions. These routines are provided to a programmer needing to create and manipulate a hashed database.}
-gtksql 251
-portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} platforms darwin variants mysql name gtksql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} version 0.3 categories databases maintainers eric@opendarwin.org
-mysql 218
-portdir databases/mysql description {Multithreaded SQL database server} platforms darwin variants server name mysql depends_lib lib:libdl.1:dlcompat version 3.23.52 categories databases maintainers eric@opendarwin.org
-mysqltcl 248
-portdir databases/mysqltcl description {Simple API for Mysql-Database and Tcl scripting language.} platforms darwin name mysqltcl depends_lib lib:libmysqlclient.10:mysql version 2.0rc15 categories {databases devel} maintainers kevin@opendarwin.org
-postgresql 236
-portdir databases/postgresql description {The most advanced open-source database available anywhere} platforms {darwin freebsd} variants {darwin server} name postgresql version 7.2.1 categories databases maintainers eric@opendarwin.org
-sqlite 186
-portdir databases/sqlite platforms {darwin freebsd} description {an embedded SQL database engine} name sqlite version 2.7.2 categories databases maintainers rooneg@electricjellyfish.net
+gtksql 521
+portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} platforms darwin variants mysql name gtksql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} version 0.3 categories databases long_description {GtkSQL is a graphical query tool for PostgreSQL/MySQL. It is similar to PostgreSQL's psql, or the Microsoft Query Analyser. It allows the user to work on multiple queries simultaneously and has auto-completion of SQL-Keywords, table names and fields.} maintainers eric@opendarwin.org
+mysql 335
+portdir databases/mysql description {Multithreaded SQL database server} platforms darwin variants server name mysql depends_lib lib:libdl.1:dlcompat version 3.23.52 categories databases maintainers eric@opendarwin.org long_description {MySQL is a n open-source, multi-threaded SQL database with a command syntax very similar to mSQL.}
+mysqltcl 390
+portdir databases/mysqltcl description {Simple API for Mysql-Database and Tcl scripting language.} platforms darwin name mysqltcl depends_lib lib:libmysqlclient.10:mysql version 2.0rc15 categories {databases devel} maintainers kevin@opendarwin.org long_description {MySQLTcl is a collection of Tcl commands and a Tcl global array that provide access to one or more mysql database servers.}
+postgresql 508
+portdir databases/postgresql description {The most advanced open-source database available anywhere} platforms {darwin freebsd} variants {darwin server} name postgresql version 7.2.1 categories databases maintainers eric@opendarwin.org long_description {PostgreSQL is Object-Relational Database Management System. It supports almost all SQL constructs, including transactions, subselects, and user-defined types and functions. Write-ahead logging means increased performance while retaining data integrity.}
+sqlite 556
+portdir databases/sqlite platforms {darwin freebsd} description {an embedded SQL database engine} name sqlite version 2.7.2 categories databases maintainers rooneg@electricjellyfish.net long_description {SQLite is an SQL database engine in a C library. Programs that link the SQLite library can have SQL database access without running a separate RDBMS process. The distribution comes with a standalone command-line access program (sqlite) that can be used to administer an SQLite database and which serves as an example of how to use the SQLite library.}
 apr 228
 portdir devel/apr description {the apache group's portability library} platforms darwin name apr depends_lib {lib:libexpat.0:expat lib:libiconv.2:libiconv} version 0.9.1 categories devel maintainers rooneg@electricjellyfish.net
 atk 281
