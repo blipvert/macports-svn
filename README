@@ -8,7 +8,7 @@ architecture while maintaining extensibility for future enhancement.
 system is portable, written in TCL with a limited set of TCL extensions in C.
 
     For in-depth documentation on the internals of the ports system
-architecture, refer to docs/INTERNALS.
+architecture, refer to base/docs/INTERNALS.
 
     Please note that darwinports is split into two parts.  The "darwin ports
 infrastructure", which lives in the base/ subdirectory and is the only
