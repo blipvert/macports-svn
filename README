@@ -41,11 +41,11 @@ INSTALLATION
 		ports_verbose - Takes either a "yes" or "no" value.
 			    If set, informational messages are printed
 
-	3. [optional] edit /etc/ports/sources.conf
+	3. edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
-		both local and remote port software hierarchies. By default,
-		the ports system will fetch ports from www.opendarwin.org.
-		If you wish to use a local ports tree, specify it here.
+		both local and remote port software hierarchies. There is
+		no default specified, so be sure to add an entry for your
+		local ports tree. (usually the darwinports/dports directory)
 
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
