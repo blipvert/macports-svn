@@ -17,9 +17,9 @@ INSTALLING
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
 	    - TCL library for interfacing with the Darwin Ports System
-	/usr/local/bin/portbuild
+	/opt/local/bin/portbuild
 	    - Command line port building utility
-	/usr/local/share/darwinports/
+	/opt/local/share/darwinports/
 	    - TCL libraries internal to the ports system
 	/etc/ports.conf
 	    - System-wide port settings
