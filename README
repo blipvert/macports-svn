@@ -45,11 +45,12 @@ INSTALLATION
 		portdbpath - Specifies path to store ports system specific data.
 		prefix - Specifies directory in which to install ports
 
-	5. edit /etc/ports/sources.conf
+	5. [optional] edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
-		both local and remote port software hierarchies. Be sure
-		to add an entry for your local ports tree
-		(usually the darwinports/dports directory)
+		both local and remote port software hierarchies. If the --with-dports-dir=DIR
+		argument was not specified for the ./configure script, the default dports-tree
+		(darwinports/dports, the copy from which you install) will be added to
+		sources.conf.
 
     All necessary code and TCL will be compiled and installed as follows:
 	[Mac OS X] /System/Library/Tcl/darwinports1.0
