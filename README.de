@@ -52,7 +52,8 @@ INSTALLATION
 		Verzeichnisses) hinzugefuegt.
 
     Die DarwinPorts Infrastruktur wird an folgenden Stellen installiert:
-	[Mac OS X] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.2] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.3] /Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL Bibliothek zum Zugriff auf das DarwinPorts System.
     
