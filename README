@@ -24,8 +24,8 @@ INSTALLING
 	    - Command line port building utility
 	/opt/local/share/darwinports/
 	    - TCL libraries internal to the ports system
-	/etc/ports.conf
-	    - System-wide port settings
+	/etc/defaults/ports.conf
+	    - System-wide port default settings
 
     The /etc/ports.conf configuration file takes the same directives as
 a Portfile, and can be used to override all ports' defaults. There are optional
