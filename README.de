@@ -8,6 +8,9 @@ WAS IST DAS DARWIN PORTS SYSTEM
     Portierbarkeit ausgelegt. Implementiert ist DarwinPorts in TCL mit einigen 
     TCL-Erweiterungen, die in C geschrieben sind.
 
+	Der "DarwinPorts User Guide" ist online verfuegbar unter der Adresse:
+	http://www.opendarwin.org/projects/darwinports/guide/
+
     In base/doc/INTERNALS ist eine detaillierte Beschreibung der Architektur 
     zu finden.
 

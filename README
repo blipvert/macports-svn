@@ -7,6 +7,9 @@ architecture while maintaining extensibility for future enhancement.
     DarwinPorts currently builds and runs on MacOS X 10.2 (Darwin 6.0). The
 system is portable, written in TCL with a limited set of TCL extensions in C.
 
+	The "DarwinPorts User Guide" is available at:
+	http://www.opendarwin.org/projects/darwinports/guide/
+
     For in-depth documentation on the internals of the ports system
 architecture, refer to base/doc/INTERNALS.
 
