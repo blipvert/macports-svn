@@ -10,7 +10,7 @@ MacOS X 10.2 (Darwin 6.0). Systemet er flytbart, skrevet i TCL med et
 begrænset antal TCL udvidelser skrevet i C.
 
     For i dybdegående dokumentation om det indre af ports systemets
-arkitektur, henvises til base/docs/INTERNALS.
+arkitektur, henvises til base/doc/INTERNALS.
 
     Bemærk venligst at DarwinPorts er opdelt i to dele. "darwin ports 
 infrastrukturen", som findes i base/ underbiblioteket og som er den 
@@ -25,15 +25,11 @@ INSTALLATION
         1. make
 		Eksekver 'make' for at kompilere alt den nødvendige 
 		software.
-		For installation af DarwinPorts på FreeBSD skal man også
-		vidre give gruppeejerskab: 'make DSTGRP=wheel'
 		
 
 	2. sudo make install
 		Eksekver 'sudo make install' for at installere 
 		DarwinPorts på dit system. 
-		Igen kræver installation på FreeBSD gruppeejerskabet:
-		'sudo make install DSTGRP=wheel'.	
 
         3. [frivilligt] rediger /etc/ports/ports.conf
 		/etc/ports/ports.conf konfigurationsfilen definere flere
@@ -57,13 +53,13 @@ INSTALLATION
 		(sædvanligvis darwinports/dports biblioteket).
 
     Al nødvendig kode og TCL vil blive kompileret og installeret som så:
-	[Mac OS X] /System/Library/Tcl/8.3/darwinports1.0
+	[Mac OS X] /System/Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL bibliotek til kommunikation med DarwinPorts systemet.
 
-	PREFIX er sat til /opt/local, men dette kan ændres på make 
-	kommandolinien og det har indflydelse på installationen af 
-	følgende komponenter:
+	PREFIX er sat til /opt/local, men dette kan ændres ved at
+	at skifte til base/ biblioteket og eksekvere ./configure manuelt
+	med --prefix argumentet sat.
 
 	$PREFIX/bin/port
 	    - Kommandolinie port bygge værktøj
