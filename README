@@ -31,8 +31,9 @@ INSTALLING
 a Portfile, and can be used to override all ports' defaults. There are optional
 and required directives that you should configure at install time.
 
-	sysportpath	- (required) Specifies the path to the ports system.
-			    Used to find and build port dependencies
+	sysportpath	- (required) Specifies the path to the software/
+			    directory. Used to find and build port
+			    dependencies
 	ports_debug	- (optional) Takes either a "yes" or "no" value.
 			    If set, debug messages are printed
 	ports_verbose	- (optional) Takes either a "yes" or "no" value.
