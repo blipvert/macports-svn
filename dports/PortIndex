@@ -304,26 +304,26 @@ wget 447
 portdir net/wget description {internet file retriever} platforms {darwin freebsd} variants ssl name wget version 1.8.2 categories net revision 0 maintainers jpm@opendarwin.org long_description {GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP, the most widely-used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without Xsupport, etc.}
 pan2 308
 portdir news/pan2 description {News reader for gtk2} platforms darwin name pan2 depends_lib {lib:libgtk.2:gtk2 lib:libxml2.2:libxml2} version 0.13.2 categories news maintainers mij@opendarwin.org long_description {Pan2 is a newsreader for GTK2/GNOME2 that is based on the Agent newsreader for Windows OSes.}
-slrn 232
-portdir news/slrn description {A powerful console-based newsreader} platforms darwin name slrn depends_lib {lib:libslang.a:slang lib:libiconv:libiconv} version 0.9.7.4 categories {news net} revision 1 maintainers olaf@foellinger.de
-tin 191
-portdir news/tin platforms darwin description {tin is a threaded NNTP and spool based UseNet newsreader} variants unstable name tin version 1.4.6 categories news maintainers ports@syrius.org
+slrn 432
+portdir news/slrn description {A powerful console-based newsreader} platforms darwin name slrn depends_lib {lib:libslang.a:slang lib:libiconv:libiconv} version 0.9.7.4 categories {news net} revision 1 long_description {slrn is an easy to use but powerful NNTP/spool based newsreader. It is highly customizable, supports scoring, free key bindings, and can be extended using the SLang macro language.} maintainers olaf@foellinger.de
+tin 468
+portdir news/tin platforms darwin description {tin is a threaded NNTP and spool based UseNet newsreader} variants unstable name tin version 1.4.6 categories news maintainers ports@syrius.org long_description {tin is a full-screen easy to use Usenet reader. It can read news locally or remotely via a NTTP (Network News Transport Protocol) server. It will automatically utilize NOV (News OVerview) style index files if available locally or via the NNTP XOVER command.}
 a2ps 326
 portdir print/a2ps description {an Any to PostScript filter.} platforms darwin name a2ps version 4.13b categories print revision 0 maintainers jpm@opendarwin.org long_description {a2ps is a utilty that allows the user to do PostScript manipulations. It is able to pass on processing to other filters, such as gzip and dvips.}
-freetype 182
-portdir print/freetype description {Free and portable render engine for TrueType fonts} platforms darwin name freetype version 2.1.1 categories print maintainers eric@opendarwin.org
+freetype 535
+portdir print/freetype description {Free and portable render engine for TrueType fonts} platforms darwin name freetype version 2.1.1 categories print maintainers eric@opendarwin.org long_description {The FreeType engine is a free and portable TrueType font rendering engine. It has been developed to provide TT support to a great variety of platforms and environments. Notice that FreeType is a *library*. It is *not* a font server for your preferred environment, even though it was designed to allow the design of many font servers.}
 ghostscript 188
 portdir print/ghostscript platforms {darwin freebsd} variants {afpl gnu devel thirdparty fonts} name ghostscript version 7.04 categories print revision 0 maintainers digdog@opendarwin.org
-teTeX 205
-portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
+teTeX 467
+portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print long_description {teTeX is _the_ TeX distribution for UNIX compatible systems. It contains the latest versions of TeX & friends and nearly everything you need for happy TeX'ing. For more information have a look at the lengthy FEATURES file of the distribution.} maintainers landonf@opendarwin.org
 gromacs 720
 portdir sci/gromacs description {The World's fastest Molecular Dynamics} platforms darwin name gromacs depends_lib lib:fftw:fftw version 3.1.5_pre1 categories {sci math} revision 0 maintainers jpm@opendarwin.org long_description {GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles. It is primarily designed for biochemical molecules like proteins and lipids that have a lot of complicated bonded interactions, but since GROMACS is extremely fast at calculating the nonbonded interactions (that usually dominate simulations) many groups are also using it for research on non-biological systems, e.g. polymers.}
 mapm 172
 portdir sci/mapm3 platforms darwin description {cli tool for calculating Quantitative Trait Loci} name mapm version 3 categories sci maintainers mike+mapm3@gene-hacker.net
-ccrypt 198
-portdir security/ccrypt platforms darwin description {ccrypt is an utility for encrypting and decrypting files and streams.} name ccrypt version 1.3 categories security maintainers ports@syrius.org
-gnupg 173
-portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.1 categories security maintainers eric@opendarwin.org
+ccrypt 1056
+portdir security/ccrypt platforms darwin description {ccrypt is an utility for encrypting and decrypting files and streams.} name ccrypt version 1.3 categories security maintainers ports@syrius.org long_description {Utility for encrypting and decrypting files and streams. It was designed to replace the standard unix crypt utility, which is notorious for using a very weak encryption algorithm. ccrypt is based on the Rijndael cipher, which is the U.S. government's chosen candidate for the Advanced Encryption Standard (AES, see http://www.nist.gov/aes/). This cipher is believed to provide very strong security. Unlike unix crypt, the algorithm provided by ccrypt is not symmetric, i.e., one must specify whether to encrypt or decrypt. The most common way to invoke ccrypt is via the commands ccencrypt and ccdecrypt. There is also a ccat command for decrypting a file directly to the terminal, thus reducing the likelihood of leaving temporary plaintext files around. In addition, there is a compatibility mode for decrypting legacy unix crypt files.}
+gnupg 389
+portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.1 categories security maintainers eric@opendarwin.org long_description {GnuPG is a complete and free replacement for PGP. Because it does not use the patented IDEA algorithm, it can be used without any restrictions. GnuPG is an RFC2440 (OpenPGP) compliant application.}
 john 363
 portdir security/john description {Featureful Unix password cracker} platforms darwin variants unstable name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description {John the Ripper is a UNIX password cracker, currently available for UNIX (tested with Linux x86, FreeBSD x86, Solaris 2.x SPARC, OSF/1 Alpha), DOS, WinNT/Win95.}
 keychain 388
@@ -332,8 +332,8 @@ krbafs 546
 portdir security/krbafs description {AFS library} platforms darwin variants {nocrypto strongcrypto} name krbafs version 1.1 categories security revision 0 maintainers jpm@opendarwin.org long_description {krbafs provides a set of AFS client utility functions for managing the AFS client and user's tokens for MIT Kerberos and Kerberos for Macintosh, the Kerberos implementation included with Mac OS X 10.1. It also provides afs_string_to_key() and the Kerberos 4 lifetime functions if they are not available in the local Kerberos implementation.}
 mhash 322
 portdir security/mhash description {library provides an easy way to access strong hashes such as MD5 and SHA1} platforms darwin name mhash version 0.8.17 categories security revision 0 maintainers jpm@opendarwin.org long_description {Libmhash is a library which implements some hash algorithms like crc32, md5 and sha-1.}
-skey 182
-portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org
+skey 202
+portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org long_description {}
 cdrtools 347
 portdir sysutils/cdrtools description {ISO 9660 filesystem and CD creation tools} platforms darwin name cdrtools version 1.11a40 categories sysutils revision 1 long_description {The cdrtools software includes programs to create and/or extract ISO 9660 filesystems, verify their integrity, and write them to a disc.} maintainers fkr@opendarwin.org
 darwinports 207
@@ -342,14 +342,14 @@ DarwinPortsStartup 219
 portdir sysutils/DarwinPortsStartup description {System startup item to start things installed from darwinports} platforms darwin name DarwinPortsStartup version 1.0 categories sysutils maintainers kevin@opendarwin.org
 dpkg 195
 portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
-screen 206
-portdir sysutils/screen description {Screen manager with VT100/ANSI terminal emulation} platforms darwin variants darwin name screen version 3.9.11 categories sysutils revision 0 maintainers digdog@mac.com
+screen 736
+portdir sysutils/screen description {Screen manager with VT100/ANSI terminal emulation} platforms darwin variants darwin name screen version 3.9.11 categories sysutils revision 0 maintainers digdog@mac.com long_description {Screen is a full-screen window manager that multiplexes a physical terminal between several processes (typically interactive shells). Each virtual terminal provides the functions of a DEC VT100 terminal and, in addition, several control functions from the ANSI X3.64 (ISO 6429) and ISO 2022 standards (e.g. insert/delete line and support for multiple character sets). There is a scrollback history buffer for each virtual terminal and a copy-and-paste mechanism that allows moving text regions between windows.}
 wmcpuload 388
 portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
 wmmemmon 402
 portdir sysutils/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMMemMon is a program to monitor memory/swap usage. It is a dockapp that is supported by X window managers such as WindowMaker, AfterStep, BlackBox, and Enlightenment.}
-xtail 185
-portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com
+xtail 768
+portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com long_description {xtail watches the growth of files. It's like running a {tail -f} on a bunch of files at once. My favorite usage is: xtail /var/log/* You can specify both filenames and directories on the command line. If you specify a directory, it watches all the files in that directory. It will notice when new files are created (and start watching them) or when old files are deleted (and stop watching them). The version 2.1 release fixes a Y2K bug, replaces the fixed-length file list with a dynamically allocated one, and implements package configuration with GNU autoconf.}
 antiword 287
 portdir textproc/antiword description {Utility to read Microsoft Word (.doc) files} platforms darwin name antiword version 0.33 categories textproc maintainers mij@opendarwin.org long_description {Antiword is a utility that can read binary files from Microsoft Word 6, 7, 97, and 2000.}
 aspell 404
@@ -424,16 +424,16 @@ libwww 384
 portdir www/libwww platforms darwin description {The W3C WWW Reference Library} name libwww version 5.4.0 categories www maintainers landonf@opendarwin.org long_description {Libwww is a general-purpose Web API written in C for Unix and Windows (Win32). With a highly extensible and layered API, it can accommodate many different types of applications including clients, robots, etc.}
 links 308
 portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} variants x11 name links version 2.1pre3 categories www long_description {Lynx-like WWW browser that supports tables, menus, and so on for text-only displays.} maintainers landonf@opendarwin.org
-lynx 142
-portdir www/lynx description {Text-based web browser} platforms darwin name lynx version 2.8.4 categories www maintainers eric@opendarwin.org
+lynx 360
+portdir www/lynx description {Text-based web browser} platforms darwin name lynx version 2.8.4 categories www maintainers eric@opendarwin.org long_description {lynx is a program which allows a user to access World-Wide Web servers and other information servers. It uses only ascii representation so that it can be used from ascii-terminals and dial-in lines.}
 neon 466
 portdir www/neon description {An HTTP and WebDAV client library with a C interface} platforms darwin name neon depends_lib lib:libexpat.0.4:expat version 0.23.5 categories www maintainers rooneg@electricjellyfish.net long_description {neon is an HTTP and WebDAV client library with a C language API. It provides a high-level interface to HTTP and WebDAV methods and a low-level interface to HTTP request handling, easily allowing the implementation of new methods.}
 urlview 318
 portdir www/urlview description {URL extractor/launcher} platforms darwin name urlview version 0.9 categories www maintainers mij@opendarwin.org long_description {Urlview is a screen-oriented program for extracting URLs from text files. It displays a menu from which you can launch a command to view a specific item.}
-w3m 159
-portdir www/w3m description {pager/text based browser} platforms darwin variants m17n name w3m version 0.3.1 categories www maintainers charlie@rubberduck.com
-wml 147
-portdir www/wml platforms darwin description {Website META Language} name wml version 2.0.8 categories {www lang} maintainers ports@kruschwitz.biz
+w3m 325
+portdir www/w3m description {pager/text based browser} platforms darwin variants m17n name w3m version 0.3.1 categories www maintainers charlie@rubberduck.com long_description {w3m is a pager/text-based WWW browser. It is a similar application to Lynx, but it has several features Lynx doesn't have, like tables and frames.}
+wml 251
+portdir www/wml platforms darwin description {Website META Language} name wml version 2.0.8 categories {www lang} maintainers ports@kruschwitz.biz long_description {WML is a free and extensible Webdesigner's off-line HTML generation toolkit for Unix}
 fluxbox 330
 portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} platforms {darwin freebsd} name fluxbox depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} version 0.1.10 categories {x11-wm x11} long_description {{Lightweight window manager based on Blackbox 0.61.1}} maintainers landonf@opendarwin.org
 fvwm 416
@@ -448,8 +448,8 @@ gtk2 477
 portdir x11/gtk2 description {Gimp ToolKit version 2} platforms darwin name gtk2 depends_lib {lib:libintl.1:gettext lib:libglib.2:glib2 lib:libjpeg.9:jpeg lib:libtiff.3:tiff lib:libpng.3:libpng lib:libungif.4:libungif lib:libatk.1:atk lib:libpango.1:pango lib:libX11.6:XFree86} version 2.0.9 categories x11 maintainers mij@opendarwin.org long_description {This is GTK+ version 2.x. GTK+, which stands for Gimp ToolKit, is a library for creating GUIs for the X Windows System.}
 kdebase3 672
 portdir x11/kdebase3 description {Base Programs for the K Desktop Environment} platforms darwin name kdebase3 depends_lib {lib:libxml2.2:libxml2 lib:libxslt.1:libxslt lib:libtiff.3:tiff lib:libqt-mt.3:qt3 lib:libartsc.1:arts lib:libdl.1:dlcompat lib:libjpeg.9:jpeg lib:libpng.2:libpng lib:libpoll.1:poll-emulator lib:libcups.2:cups bin:grrrnoincludedepends:cups lib:libX11.6:XFree86 lib:libaudiofile.0:audiofile lib:libesd.0:esound lib:libXm.1:lesstif lib:libXm.2:lesstif lib:libfreetype.6:XFree86 lib:libpcre.0:pcre bin:pcre-config:pcre} version 3.0.8 categories x11 revision 1 maintainers ranger@befunk.com long_description {Base Programs for the K Desktop Environment}
-lesstif 242
-portdir x11/lesstif description {An Open Source implementation of OSF/Motif.} platforms darwin variants {motif12 motif20 xdnd} name lesstif depends_lib lib:libX11.a:XFree86 version 0.93.36 categories x11 revision 0 maintainers lomion@mac.com
+lesstif 492
+portdir x11/lesstif description {An Open Source implementation of OSF/Motif.} platforms darwin variants {motif12 motif20 xdnd} name lesstif depends_lib lib:libX11.a:XFree86 version 0.93.36 categories x11 revision 0 maintainers lomion@mac.com long_description {This is an independent implementation of the Motif widget set, originally developed by the Hungry Programmers. It has been somewhat superceded by the openMotif toolkit now that the OSF has open-sourced the original reference bits.}
 openMotif 304
 portdir x11/openMotif description {The Open Motif toolkit for X11} platforms darwin name openMotif depends_lib lib:libX11.6:Xfree86 version 2.2.2 categories x11 revision 0 maintainers jkh@opendarwin.org long_description {This is The Open Group's full version of Motif based on the original OSF sources.}
 pango 372
@@ -458,8 +458,8 @@ qt3 401
 portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.2:libpng lib:libjpeg.9:jpeg} version 3.0.5 categories x11 revision 1 maintainers ranger@befunk.com long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
 rxvt 399
 portdir x11/rxvt description {Low memory usage colour xterm replacement} platforms darwin name rxvt depends_lib {lib:libX11.6:XFree86 lib:libfreetype.6:freetype} version 2.7.8 categories x11 revision 0 maintainers jpm@opendarwin.org long_description {Rxvt is an xterm replacement which uses a little less memory, and is suitable for use on machines with small memories. Tek4010 support is removed.}
-tk 127
-portdir x11/tk description {Tcl Tool Kit} platforms darwin name tk version 8.4.1 categories x11 maintainers jkh@opendarwin.org
+tk 329
+portdir x11/tk description {Tcl Tool Kit} platforms darwin name tk version 8.4.1 categories x11 maintainers jkh@opendarwin.org long_description {This is Tk version 8.4.1, a GUI toolkit for Tcl. The best way to get started with Tcl is to read ``Tcl and the Tk Toolkit'' by John K. Ousterhout, Addison-Wesley, ISBN 0-201-63337-X.}
 vtwm 175
 portdir x11/vtwm description {Twm with a virtual desktop and optional Motif-like features} platforms darwin name vtwm version 5.4.6a categories x11 maintainers mdales@mac.com
 wmclock 394
