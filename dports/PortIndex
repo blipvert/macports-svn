@@ -11,11 +11,11 @@ portdir databases/db4 description {The Berkely DB package, revision 4} portname 
 gtksql 242
 portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} variants mysql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} portname gtksql categories databases portversion 0.3 maintainers eric@opendarwin.org
 mysql 193
-portdir databases/mysql description {Multithreaded SQL database server} depends_lib lib:libdl.0:dlcompat portname mysql categories databases portversion 3.23.52 maintainers eric@opendarwin.org
+portdir databases/mysql description {Multithreaded SQL database server} depends_lib lib:libdl.1:dlcompat portname mysql categories databases portversion 3.23.52 maintainers eric@opendarwin.org
 postgresql 186
 portdir databases/postgresql description {The most advanced open-source database available anywhere} portname postgresql categories net portversion 7.2.1 maintainers eric@opendarwin.org
-dlcompat 172
-portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} portname dlcompat categories devel portversion 0 maintainers eric@opendarwin.org
+dlcompat 179
+portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} portname dlcompat categories devel portversion 20020929 maintainers eric@opendarwin.org
 gettext 141
 portdir devel/gettext description {GNU gettext package} portname gettext categories devel portversion 0.11.5 maintainers eric@opendarwin.org
 glib 174
@@ -74,8 +74,8 @@ snort 163
 portdir net/snort description {The Open Source Network Intrusion Detection System} portname snort categories net portversion 1.8.7 maintainers jean_pierre@mac.com
 teTeX 196
 portdir print/teTeX description {TeX and METAFONT} depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} portname teTeX categories print portversion 3.14159 maintainers landonf@opendarwin.org
-gnupg 122
-portdir security/gnupg description {GNU pretty-good-privacy package} portname gnupg categories security portversion 1.0.7
+gnupg 154
+portdir security/gnupg description {GNU pretty-good-privacy package} portname gnupg categories security portversion 1.0.7 maintainers eric@opendarwin.org
 chef 183
 portdir textproc/chef description {trunsletes inpoot text intu sveedeesh} portname chef categories {textproc amusements} portversion 19930426 maintainers rooneg@electricjellyfish.net
 cowsay 180
