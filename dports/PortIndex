@@ -224,8 +224,10 @@ curl 256
 portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} variants ssl name curl depends_lib {lib:libpcap:libpcap lib:libdl:dlcompat} version 7.10.2 categories {net www} revision 1 maintainers jpm@opendarwin.org
 micq 149
 portdir net/micq description {portable text-mode ICQ clone} platforms darwin name micq version 0.4.9.4 categories net maintainers fkr@opendarwin.org
-jabber 231
-portdir net/jabber description XXX platforms darwin name jabber depends_lib {lib:libiconv:libiconv lib:libexpat.0:expat lib:libintl.2:gettext lib:libpth.a:pth} version 1.4.2 categories net revision 0 maintainers jpm@opendarwin.org
+jabber 287
+portdir net/jabber description {Online presence and instant messaging server} platforms darwin variants ssl name jabber depends_lib {lib:libiconv:libiconv lib:libexpat.0:expat lib:libintl.2:gettext lib:libpth.a:pth} version 1.4.2 categories net revision 0 maintainers jpm@opendarwin.org
+pycurl 221
+portdir net/pycurl description {python interface to libcurl} platforms darwin name pycurl depends_lib {bin:XXX:curl bin:python:python} version 7.10.2 categories {net develpython} revision 0 maintainers jpm@opendarwin.org
 teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
 freetype 182
@@ -346,3 +348,5 @@ screen 206
 portdir sysutils/screen description {Screen manager with VT100/ANSI terminal emulation} platforms darwin variants darwin name screen version 3.9.11 categories sysutils revision 0 maintainers digdog@mac.com
 mapm 172
 portdir sci/mapm3 platforms darwin description {cli tool for calculating Quantitative Trait Loci} name mapm version 3 categories sci maintainers mike+mapm3@gene-hacker.net
+gromacs 212
+portdir sci/gromacs description {The World's fastest Molecular Dynamics} platforms darwin name gromacs depends_lib lib:fftw:fftw version 3.1.5_pre1 categories {sci math} revision 0 maintainers jpm@opendarwin.org
