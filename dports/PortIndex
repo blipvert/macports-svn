@@ -37,7 +37,7 @@ portdir devel/ctags description {Reimplementation of ctags(1)} platforms {darwin
 cvsweb 412
 portdir devel/cvsweb description {WWW interface for CVS repositories} platforms darwin name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
 dlcompat 188
-portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} platforms darwin name dlcompat version 20020929 categories devel maintainers eric@opendarwin.org
+portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} platforms darwin name dlcompat version 20021117 categories devel maintainers eric@opendarwin.org
 gettext 150
 portdir devel/gettext description {GNU gettext package} platforms darwin name gettext version 0.11.5 categories devel maintainers eric@opendarwin.org
 glib 193
@@ -55,7 +55,7 @@ portdir devel/libevent description {asynchronous event library} platforms darwin
 netinet-headers 222
 portdir devel/netinet-headers description {temporary port providing netinet missing headers for jaguar} platforms darwin name netinet-headers version 1.0.1 categories devel maintainers mike+missing-headers@gene-hacker.net
 otest 567
-portdir devel/otest description {Unit testing framework for Objective-C} platforms darwin name otest depends_lib file:/Library/Frameworks/SenTestingKit.framework:sentestingkit version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
+portdir devel/otest description {Unit testing framework for Objective-C} platforms darwin name otest depends_lib path:/Library/Frameworks/SenTestingKit.framework:sentestingkit version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
 pcre 184
 portdir devel/pcre description {Perl Compatible Regular Expressions Library} platforms {darwin freebsd} name pcre version 3.9 categories devel revision 1 maintainers ranger@befunk.com
 perforce 191
@@ -186,6 +186,8 @@ fetch 195
 portdir net/fetch description {FreeBSD file fetching utility} platforms darwin name fetch depends_lib lib:libfetch.3:libfetch version 4.6.2-RELEASE categories net maintainers eric@opendarwin.org
 fragroute 550
 portdir net/fragroute description {intercept, modify, and rewrite egress traffic} platforms darwin name fragroute depends_lib {lib:libpcap:libpcap lib:libdnet:libdnet lib:libevent:libevent} version 1.2 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {fragroute intercepts, modifies, and rewrites egress traffic destined for a specified host, implementing most of the attacks described in the Secure Networks {Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection} paper of January 1998.}
+gaim 186
+portdir net/gaim description {AIM message service client with a gtk-based interface} name gaim depends_lib lib:libgtk.1:gtk version 0.59.3 categories net maintainers eric@opendarwin.org
 honeyd 636
 portdir net/honeyd description {a virtual honey net daemon with personality} platforms darwin name honeyd depends_lib {lib:libevent:libevent lib:libdnet:libdnet lib:libpcap:libpcap} version 0.4 categories {net security} revision 1 maintainers jpm@opendarwin.org long_description {Honeyd is a small daemon that creates virtual hosts on a network. The hosts can be configured to run arbitrary services, and their TCP personality can be adapted so that they appear to be running certain versions of operating systems. Honeyd enables a single host to claim multiple addresses - I have tested up to 65536 - on a LAN for network simulation.}
 lftp 171
@@ -200,6 +202,8 @@ libnids 447
 portdir net/libnids description {E-component of Network Intrusion Detection System} platforms darwin name libnids depends_lib lib:libnet:libnet version 1.17rc1 categories net revision 0 maintainers jpm@opendarwin.org long_description {Libnids is an implementation of an E-component of Network Intrusion Detection System. It emulates the IP stack of Linux 2.0.x. Libnids offers IP defragmentation, TCP stream assembly and TCP port scan detection.}
 libpcap 261
 portdir net/libpcap description {Packet Capture library} platforms darwin name libpcap version 0.7.1 categories net revision 0 maintainers jpm@opendarwin.org long_description {even those packets destined for other hosts, are accessible through this mechanism.}
+micq 149
+portdir net/micq description {portable text-mode ICQ clone} platforms darwin name micq version 0.4.9.4 categories net maintainers fkr@opendarwin.org
 mudix 185
 portdir net/mudix description {ncurses-based MUD client with triggers, aliases, colors} platforms darwin name mudix version 4.2 categories net revision 0 maintainers fkr@opendarwin.org
 ncftp 345
