@@ -277,7 +277,7 @@ portdir net/mtr description {combines 'traceroute' and 'ping' in a single tool} 
 mudix 324
 portdir net/mudix description {ncurses-based MUD client with triggers, aliases, colors} platforms darwin name mudix version 4.3 categories net revision 1 maintainers fkr@opendarwin.org long_description {ncurses-based MUD client, targeted at people that dislike tintin++, tinyfugue, and don't want to use an X11 MUD client.}
 ncftp 348
-portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net revision 1 maintainers fkr@opendarwin.org long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. Please see http://www.ncftpd.com/ncftp/ for more information.}
+portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net revision 2 maintainers fkr@opendarwin.org long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. Please see http://www.ncftpd.com/ncftp/ for more information.}
 netcat 189
 portdir net/netcat description {Utility for managing network connections} platforms {darwin freebsd} variants darwin name netcat version 1.10 categories net maintainers eric@opendarwin.org
 ngrep 131
@@ -352,24 +352,24 @@ xtail 185
 portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com
 antiword 287
 portdir textproc/antiword description {Utility to read Microsoft Word (.doc) files} platforms darwin name antiword version 0.33 categories textproc maintainers mij@opendarwin.org long_description {Antiword is a utility that can read binary files from Microsoft Word 6, 7, 97, and 2000.}
-aspell 212
-portdir textproc/aspell description {Spell checker with better logic than ispell} platforms darwin variants {de dk en es fr it nl ru} name aspell version 0.50.3 categories textproc maintainers mij@opendarwin.org
-aspell-dict-de 176
-portdir textproc/aspell-dict-de description {German dictionary for aspell} platforms darwin name aspell-dict-de version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-dk 176
-portdir textproc/aspell-dict-dk description {Danish dictionary for aspell} platforms darwin name aspell-dict-dk version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-en 177
-portdir textproc/aspell-dict-en description {English dictionary for aspell} platforms darwin name aspell-dict-en version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-es 177
-portdir textproc/aspell-dict-es description {Spanish dictionary for aspell} platforms darwin name aspell-dict-es version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-fr 176
-portdir textproc/aspell-dict-fr description {French dictionary for aspell} platforms darwin name aspell-dict-fr version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-it 177
-portdir textproc/aspell-dict-it description {Italian dictionary for aspell} platforms darwin name aspell-dict-it version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-nl 175
-portdir textproc/aspell-dict-nl description {Dutch dictionary for aspell} platforms darwin name aspell-dict-nl version 0.50 categories textproc maintainers mij@opendarwin.org
-aspell-dict-ru 177
-portdir textproc/aspell-dict-ru description {Russian dictionary for aspell} platforms darwin name aspell-dict-ru version 0.50 categories textproc maintainers mij@opendarwin.org
+aspell 404
+portdir textproc/aspell description {Spell checker with better logic than ispell} platforms darwin variants {de dk en es fr it nl ru} name aspell version 0.50.3 categories textproc maintainers mij@opendarwin.org long_description {Aspell is a spell checker designed to eventually replace ispell. Aspell's main feature is that it does a much better job of coming up with possible suggestions than ispell.}
+aspell-dict-de 226
+portdir textproc/aspell-dict-de description {German dictionary for aspell} platforms darwin name aspell-dict-de version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with German dictionary.}
+aspell-dict-dk 226
+portdir textproc/aspell-dict-dk description {Danish dictionary for aspell} platforms darwin name aspell-dict-dk version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with Danish dictionary.}
+aspell-dict-en 228
+portdir textproc/aspell-dict-en description {English dictionary for aspell} platforms darwin name aspell-dict-en version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with English dictionary.}
+aspell-dict-es 228
+portdir textproc/aspell-dict-es description {Spanish dictionary for aspell} platforms darwin name aspell-dict-es version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with Spanish dictionary.}
+aspell-dict-fr 226
+portdir textproc/aspell-dict-fr description {French dictionary for aspell} platforms darwin name aspell-dict-fr version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with French dictionary.}
+aspell-dict-it 228
+portdir textproc/aspell-dict-it description {Italian dictionary for aspell} platforms darwin name aspell-dict-it version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with Italian dictionary.}
+aspell-dict-nl 224
+portdir textproc/aspell-dict-nl description {Dutch dictionary for aspell} platforms darwin name aspell-dict-nl version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with Dutch dictionary.}
+aspell-dict-ru 228
+portdir textproc/aspell-dict-ru description {Russian dictionary for aspell} platforms darwin name aspell-dict-ru version 0.50 categories textproc maintainers mij@opendarwin.org long_description {Aspell with Russian dictionary.}
 chef 202
 portdir textproc/chef platforms {darwin freebsd} description {trunsletes inpoot text intu sveedeesh} name chef version 19930426 categories {textproc amusements} maintainers rooneg@electricjellyfish.net
 cowsay 199
@@ -428,8 +428,8 @@ lynx 142
 portdir www/lynx description {Text-based web browser} platforms darwin name lynx version 2.8.4 categories www maintainers eric@opendarwin.org
 neon 466
 portdir www/neon description {An HTTP and WebDAV client library with a C interface} platforms darwin name neon depends_lib lib:libexpat.0.4:expat version 0.23.5 categories www maintainers rooneg@electricjellyfish.net long_description {neon is an HTTP and WebDAV client library with a C language API. It provides a high-level interface to HTTP and WebDAV methods and a low-level interface to HTTP request handling, easily allowing the implementation of new methods.}
-urlview 145
-portdir www/urlview description {URL extractor/launcher} platforms darwin name urlview version 0.9 categories www maintainers mij@opendarwin.org
+urlview 318
+portdir www/urlview description {URL extractor/launcher} platforms darwin name urlview version 0.9 categories www maintainers mij@opendarwin.org long_description {Urlview is a screen-oriented program for extracting URLs from text files. It displays a menu from which you can launch a command to view a specific item.}
 w3m 159
 portdir www/w3m description {pager/text based browser} platforms darwin variants m17n name w3m version 0.3.1 categories www maintainers charlie@rubberduck.com
 wml 147
@@ -444,16 +444,16 @@ gtk-engines 345
 portdir x11/gtk-engines description {Theme engine for GTK+} platforms darwin name gtk-engines depends_lib lib:libImlib.1:imlib version 0.12 categories x11 maintainers mij@opendarwin.org long_description {gtk-engines is a theme engine for GTK+. It provides the ability to change the way widgets, buttons, etc. look when using GTK+ applications.}
 gtk-engines2 350
 portdir x11/gtk-engines2 description {Theme engine for gtk2} platforms darwin name gtk-engines2 depends_lib lib:libgtk.2:gtk2 version 1.9.0 categories x11 maintainers mij@opendarwin.org long_description {gtk-engines2 is a theme engine for GTK+ 2. It provides the ability to change the way widgets, buttons, etc. look when using GTK+ 2 applications.}
-gtk2 338
-portdir x11/gtk2 description {Gimp ToolKit version 2} platforms darwin name gtk2 depends_lib {lib:libintl.1:gettext lib:libglib.2:glib2 lib:libjpeg.9:jpeg lib:libtiff.3:tiff lib:libpng.3:libpng lib:libungif.4:libungif lib:libatk.1:atk lib:libpango.1:pango lib:libX11.6:XFree86} version 2.0.9 categories x11 maintainers mij@opendarwin.org
+gtk2 477
+portdir x11/gtk2 description {Gimp ToolKit version 2} platforms darwin name gtk2 depends_lib {lib:libintl.1:gettext lib:libglib.2:glib2 lib:libjpeg.9:jpeg lib:libtiff.3:tiff lib:libpng.3:libpng lib:libungif.4:libungif lib:libatk.1:atk lib:libpango.1:pango lib:libX11.6:XFree86} version 2.0.9 categories x11 maintainers mij@opendarwin.org long_description {This is GTK+ version 2.x. GTK+, which stands for Gimp ToolKit, is a library for creating GUIs for the X Windows System.}
 kdebase3 672
 portdir x11/kdebase3 description {Base Programs for the K Desktop Environment} platforms darwin name kdebase3 depends_lib {lib:libxml2.2:libxml2 lib:libxslt.1:libxslt lib:libtiff.3:tiff lib:libqt-mt.3:qt3 lib:libartsc.1:arts lib:libdl.1:dlcompat lib:libjpeg.9:jpeg lib:libpng.2:libpng lib:libpoll.1:poll-emulator lib:libcups.2:cups bin:grrrnoincludedepends:cups lib:libX11.6:XFree86 lib:libaudiofile.0:audiofile lib:libesd.0:esound lib:libXm.1:lesstif lib:libXm.2:lesstif lib:libfreetype.6:XFree86 lib:libpcre.0:pcre bin:pcre-config:pcre} version 3.0.8 categories x11 revision 1 maintainers ranger@befunk.com long_description {Base Programs for the K Desktop Environment}
 lesstif 242
 portdir x11/lesstif description {An Open Source implementation of OSF/Motif.} platforms darwin variants {motif12 motif20 xdnd} name lesstif depends_lib lib:libX11.a:XFree86 version 0.93.36 categories x11 revision 0 maintainers lomion@mac.com
 openMotif 304
 portdir x11/openMotif description {The Open Motif toolkit for X11} platforms darwin name openMotif depends_lib lib:libX11.6:Xfree86 version 2.2.2 categories x11 revision 0 maintainers jkh@opendarwin.org long_description {This is The Open Group's full version of Motif based on the original OSF sources.}
-pango 228
-portdir x11/pango description {Framework for the layout and rendering of i18n text} platforms darwin name pango depends_lib {lib:libglib.2:glib2 lib:libintl.1:gettext} version 1.0.5 categories x11 maintainers mij@opendarwin.org
+pango 372
+portdir x11/pango description {Framework for the layout and rendering of i18n text} platforms darwin name pango depends_lib {lib:libglib.2:glib2 lib:libintl.1:gettext} version 1.0.5 categories x11 maintainers mij@opendarwin.org long_description {The goal of the Pango project is to provide an open-source framework for the layout and rendering of internationalized text.}
 qt3 401
 portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.2:libpng lib:libjpeg.9:jpeg} version 3.0.5 categories x11 revision 1 maintainers ranger@befunk.com long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
 rxvt 399
