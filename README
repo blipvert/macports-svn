@@ -21,21 +21,26 @@ INSTALLING
 		Run 'sudo make install' within the darwinports directory
 		to install darwinports on your system.
 
-	3. edit /etc/ports.conf
-		The /etc/ports.conf configuration file takes the same
+	3. edit /etc/ports/ports.conf
+		The /etc/ports/ports.conf configuration file takes the same
 		directives as a Portfile, and can be used to override all
 		ports' defaults. There are required and optional directives
 		that you should configure at install time.
 
-		sysportpath - (required) Specifies the path to the software
-			    directory. Used to find and build port
-			    dependencies
+		portdbpath - (options) Specifies path to store ports system
+			    specific data.
 
 		ports_debug - (optional) Takes either a "yes" or "no" value.
 			    If set, debug messages are printed
 
 		ports_verbose - (optional) Takes either a "yes" or "no" value.
 			    If set, informational messages are printed
+
+	3. edit /etc/ports/sources.conf
+		The /etc/ports/sources.conf file lists the location of
+		both local and remote port software hierarchies. By default,
+		the ports system will fetch ports from www.opendarwin.org.
+		If you wish to use a local ports tree, specify it here.
 
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
@@ -46,6 +51,10 @@ INSTALLING
 	    - TCL libraries internal to the ports system
 	/etc/defaults/ports.conf
 	    - System-wide port default settings
+	/etc/ports/ports.conf
+	    - User customizable port settings
+	/etc/ports/sources.conf
+	    - List of port sources
 
 
 USING THE PORT COMMAND
@@ -58,14 +67,20 @@ unsure how, add the following line to your ~/.cshrc file.
     Your changes to ~/.cshrc will not take effect until you have opened
 a new shell.
 
-    All included port descriptions are currently stored in the software/
-subdirectory of the ports distribution, in the form of:
+    To update your local indexes, run:
 
-	software/<category>/<portname>
+        port sync
 
-    To build a port, cd to the port's directory and run 'port'. To install
-a port, run 'port install'. Please refer to the port man page for
-complete documentation on the port command.
+    The following command will build and install a port:
+
+	port install <portname>
+
+    To find a specific port, try using "port search".
+
+	port search vi
+
+    Please refer to the port man page for complete documentation on the port
+    command.
 
 CREATING NEW PORTS
 
@@ -78,4 +93,4 @@ instantiated by the Darwin Ports System. Portfiles use extremely straight-
 forward key/value pair syntax, while allowing the author to use the full
 extent of TCL's functionality where necessary.
 
-    To get started, refer to doc/exampleport.
+    To get started, refer to doc/exampleport and the portfile(7) man page.
