@@ -64,12 +64,14 @@ cvsweb 412
 portdir devel/cvsweb description {WWW interface for CVS repositories} platforms darwin name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
 viewcvs 551
 portdir devel/viewcvs description {Viewing the content of CVS repositories with a Webbrowser} platforms darwin name viewcvs version 0.9.2 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {ViewCVS was inspired by cvsweb (Zeller's version). ViewCVS can browse directories, change logs, and specific revisions of files. It can display diffs between versions and show selections of files based on tags or branches. In addition, ViewCVS has annotation or blame support, and the beginnings of Bonsai-like query facilities.}
+jakarta-ant 212
+portdir devel/jakarta-ant description {Java opensource build system} platforms {darwin freebsd} variants darwin name jakarta-ant version 1.5.1 categories {java jakarta} revision 0 maintainers sean@fuzzymagic.com
 emacs 198
 portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin devel x11 carbon} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 vim 196
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.174 categories editors maintainers landonf@opendarwin.org
-nano 488
-portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants {stable unstable} name nano categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
+nano 502
+portdir editors/nano description {Nano's ANOther editor, an enhanced free Pico Clone} platforms {darwin freebsd} variants {stable unstable} name nano version 1.0.9 categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
 joe 153
 portdir editors/joe description {Joe's Own Editor} platforms {darwin freebsd} name joe version 2.9.8-pre1 categories editors maintainers noses@noses.com
 nethack 185
@@ -172,8 +174,8 @@ nylon 362
 portdir net/nylon description {A Unix SOCKS 4 and 5 proxy server} platforms darwin name nylon depends_lib lib:libevent:libevent version 1.0 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {nylon is a proxy server which currently supports SOCKS version 4 and 5 as well as a mirror mode which allows nylon to mirror services.}
 libnet 1001
 portdir net/libnet description {A C library for creating IP packets} platforms darwin name libnet version 1.0.2a categories net revision 0 maintainers jpm@opendarwin.org long_description {libnet is a high-level API (toolkit) allowing the application programmer to construct and inject network packets. It provides a portable and simplified interface for low-level network packet shaping, handling and injection. Libnet hides much of the tedium of packet creation from the application programmer such as multiplexing, buffer management, arcane packet header information, byte-ordering, OS-dependent issues, and much more. Libnet features portable packet creation interfaces at the IP layer and link layer, as well as a host of supplementary and complementary functionality. Using libnet, quick and simple packet assembly applications can be whipped up with little effort. With a bit more time, more complex programs can be written (Traceroute and ping were easily rewritten using libnet and libpcap).}
-dsniff 801
-portdir net/dsniff description {collection of tools for network auditing and penetration testing} platforms darwin variants {stable unstable} name dsniff depends_lib {lib:libnet:libnet lib:libnids:libnids} categories net revision 0 maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
+dsniff 813
+portdir net/dsniff description {collection of tools for network auditing and penetration testing} platforms darwin variants {stable unstable} name dsniff depends_lib {lib:libnet:libnet lib:libnids:libnids} version 2.3 categories net revision 0 maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
 libnids 447
 portdir net/libnids description {E-component of Network Intrusion Detection System} platforms darwin name libnids depends_lib lib:libnet:libnet version 1.17rc1 categories net revision 0 maintainers jpm@opendarwin.org long_description {Libnids is an implementation of an E-component of Network Intrusion Detection System. It emulates the IP stack of Linux 2.0.x. Libnids offers IP defragmentation, TCP stream assembly and TCP port scan detection.}
 ncftp 345
@@ -196,8 +198,8 @@ gnupg 173
 portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.0 categories security maintainers eric@opendarwin.org
 krbafs 546
 portdir security/krbafs description {AFS library} platforms darwin variants {nocrypto strongcrypto} name krbafs version 1.1 categories security revision 0 maintainers jpm@opendarwin.org long_description {krbafs provides a set of AFS client utility functions for managing the AFS client and user's tokens for MIT Kerberos and Kerberos for Macintosh, the Kerberos implementation included with Mac OS X 10.1. It also provides afs_string_to_key() and the Kerberos 4 lifetime functions if they are not available in the local Kerberos implementation.}
-john 201
-portdir security/john description {John the Ripper password cracker} platforms darwin variants {stable unstable} name john categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
+john 213
+portdir security/john description {John the Ripper password cracker} platforms darwin variants {stable unstable} name john version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
 skey 182
 portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org
 bochs 199
