@@ -38,6 +38,12 @@ sox 523
 portdir audio/sox description {SOund eXchange - universal sound sample translator} platforms darwin name sox version 12.17.3 categories audio homepage http://sox.sourceforge.net/ revision 0 maintainers jpm@opendarwin.org long_description {SoX (also known as Sound eXchange) translates sound samples between different file formats, and optionally applies various sound effects. SoX is intended as the Swiss Army knife of sound processing tools. It doesn't do anything very well, but sooner or later it comes in very handy.}
 vorbis-tools 844
 portdir audio/vorbis-tools description {The Ogg Vorbis CODEC tools} platforms darwin name vorbis-tools depends_lib {lib:libcurl.2:curl lib:libexpat.0:expat lib:libintl.1:gettext lib:libiconv.2:libiconv lib:libao.2:libao lib:libogg.0:libogg lib:libvorbis.0:libvorbis} version 1.0 categories audio homepage http://www.xiph.org/ogg/vorbis/ revision 0 maintainers jpm@opendarwin.org long_description {Ogg Vorbis is a fully Open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format for mid to high quality (8kHz-48.0kHz, 16+ bit, polyphonic) audio and music at fixed and variable bitrates from 16 to 128 kbps/channel. This places Vorbis in the same competetive class as audio representations such as MPEG-4 (AAC), and similar to, but higher performance than MPEG-1/2 audio layer 3, MPEG-4 audio (TwinVQ), WMA and PAC.}
+dgpsip 1583
+portdir comms/dgpsip description {Differential GPS over IP communication device} platforms {darwin freebsd} name dgpsip version 1.32 categories comms homepage http://www.wsrcc.com/wolfgang/gps/dgps-ip.html maintainers eric@opendarwin.org long_description {On a stationary GPS without a differential correction signal, you should see a 20 m average radius {drunken walk} pattern. On the same receiver with DGPS corrections and a good view of the sky, the error the same receiver with DGPS corrections and a good view of the sky, the error should be reduced to approximately 2 m average radius. If you've always wanted to know exactly where your house is located without that annoying GPS wander, but didn't want to spend the money for a DGPS radio, here is your big chance! I'd like to announce a fun DGPS hack. I've written a small Un*x server and client for redistributing DGPS correction signals over the Net. Basically the server grabs the serial byte stream from my DGPS radio and sends it off over a TCP connection. The client does the same thing but in reverse. The result is that you can receive the local DGPS corrections from absolutely anywhere by using the Internet as the world's largest extension cord. You'll still need to be within 1000 miles or so of San Francisco, California, USA for best results. However chances are better error will still be reduced if you are 2000 to 3000 miles away. Several respondents from 2000 miles away have noted that the remote differential signals have diminished the SA-induced position and velocity errors by approximately 3 times.}
+kermit 567
+portdir comms/kermit platforms {darwin freebsd} description {Serial and network communications package.} variants {darwin freebsd} name kermit version 8.0.206 categories comms homepage http://www.kermit-project.org/ maintainers daved@nostrum.com long_description {C-Kermit is a combined serial and network communication software package offering a consistent, medium-independent, cross-platform approach to connection establishment, terminal sessions, file transfer, character-set translation, numeric and alphanumeric paging, and automation of communication tasks.}
+scud 466
+portdir comms/scud description {Tell your CID capable modem to answer those annoying calls} platforms {darwin freebsd} name scud version 1.4 categories comms homepage http://www.drqware.com/scud/ maintainers eric@opendarwin.org long_description {If you have the caller id service from your phone provider and your modem has caller id capability (accepts AT+VCID=2 or AT#CID=2 commands), This port can cause the modem to answer the call giving the caller an earful.}
 db4 785
 portdir databases/db4 description {The Berkely DB package, revision 4} platforms {darwin freebsd} name db4 version 4.1.24 categories databases homepage http://www.sleepycat.com/update/ maintainers landonf@opendarwin.org long_description {Revision 4 of the Berkeley DB library. This version uses an incompatible underlying database format than revision 1 and a different standard API. Utilities are included in the distribution to convert v1.85 databases to v4 databases, and a backwards compatible API is provided to maintain compatibility with programs using the v1.85 interface. There are minor interface changes in this release which may require that DB applications be modified and recompiled. For a complete discussion of interface changes, see: http://www.sleepycat.com/update/}
 gdbm 461
@@ -46,6 +52,8 @@ gtksql 568
 portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} platforms darwin variants mysql name gtksql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} version 0.3 categories databases homepage http://membres.lycos.fr/bbrox/GtkSQL/ long_description {GtkSQL is a graphical query tool for PostgreSQL/MySQL. It is similar to PostgreSQL's psql, or the Microsoft Query Analyser. It allows the user to work on multiple queries simultaneously and has auto-completion of SQL-Keywords, table names and fields.} maintainers eric@opendarwin.org
 mysql 365
 portdir databases/mysql description {Multithreaded SQL database server} platforms darwin variants server name mysql depends_lib lib:libdl.1:dlcompat version 3.23.52 categories databases homepage http://www.mysql.com/ maintainers eric@opendarwin.org long_description {MySQL is an open-source, multi-threaded SQL database with a command syntax very similar to mSQL.}
+mysqltcl 447
+portdir databases/mysqltcl description {Simple API for Mysql-Database and Tcl scripting language.} platforms darwin name mysqltcl depends_lib {lib:libmysqlclient.10:mysql bin:wish8.4:tk} version 2.0rc15 categories {databases devel} homepage http://www.xdobry.de/mysqltcl/ maintainers kevin@opendarwin.org long_description {MySQLTcl is a collection of Tcl commands and a Tcl global array that provide access to one or more mysql database servers.}
 postgresql 544
 portdir databases/postgresql description {The most advanced open-source database available anywhere} platforms {darwin freebsd} variants {darwin server} name postgresql version 7.2.1 categories databases homepage http://www.postgresql.org/ maintainers eric@opendarwin.org long_description {PostgreSQL is Object-Relational Database Management System. It supports almost all SQL constructs, including transactions, subselects, and user-defined types and functions. Write-ahead logging means increased performance while retaining data integrity.}
 sqlite 597
@@ -129,7 +137,7 @@ portdir editors/joe description {Joe's Own Editor} platforms {darwin freebsd} na
 nano 528
 portdir editors/nano description {Nano's ANOther editor - enhanced free Pico Clone} platforms {darwin freebsd} variants unstable name nano version 1.0.9 categories editors homepage http://www.nano-editor.org/ revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
 vim 316
-portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.314 categories editors homepage http://www.vim.org/ maintainers mij@opendarwin.org long_description {Vim is a virtually compatible, extremely enhanced version of the vi editor.}
+portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.319 categories editors homepage http://www.vim.org/ maintainers mij@opendarwin.org long_description {Vim is a virtually compatible, extremely enhanced version of the vi editor.}
 dopewars 501
 portdir games/dopewars description {Rewrite of a game originally based on {Drug Wars}} platforms darwin variants {gtk1 gtk2} name dopewars depends_lib {lib:libdl.1:dlcompat lib:libintl.1:gettext lib:libesd.0:esound} version 1.5.8 categories games homepage http://dopewars.sourceforge.net/ maintainers mij@opendarwin.org long_description {The idea of dopewars is to deal drugs on the streets of New York, amassing a huge fortune and paying off the loan shark, while avoiding the ever annoying police.}
 fortune 220
@@ -150,6 +158,8 @@ wump 181
 portdir games/wump description {Text-based cave exploring and wumpus hunting game} platforms darwin name wump version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 xboard 551
 variants darwin description {X frontend for Crafty, GNUChess, Internet Chess Servers, or e-mail chess} portdir games/xboard homepage http://www.tim-mann.org/xboard.html platforms darwin depends_lib {lib:libX11.6:XFree86 lib:libfreetype.6:freetype} name xboard long_description {Xboard is a graphical chessboard that can serve as a user interface for Crafty, GNU Chess, for Internet Chess Servers, or for electronic mail correspondence chess. xboard can also be used by itself.} maintainers jpm@opendarwin.org categories games version 4.2.6 revision 0
+xracer 361
+portdir games/xracer description {WipeOut clone for OpenGL and X11} platforms darwin name xracer depends_lib {lib:libdl.1:dlcompat lib:libjpeg.9:jpeg lib:libglut.3:glut lib:libX11.6:XFree86} version 0.96.9 categories {x11 games} long_description {XRacer is a Wipeout clone. At the moment it is incomplete, but work is undergoing} maintainers jkh@opendarwin.org
 xscorch 572
 portdir games/xscorch description {multiplayer tank shoot-em-up game} platforms darwin name xscorch depends_lib {lib:libmikmod.2:libmikmod lib:libgtk.1:gtk} version 0.1.15 categories games homepage http://chaos2.org/xscorch/ maintainers mij@opendarwin.org long_description {XScorch is a clone of the olden-days DOS game Scorch. It is an extremely addictive war game where any mixture of human and computer AIs control separate tanks (teams are possible) and attempt to blow up or arrange to blow up the other tanks on the field. The last tank on the field is the winner.}
 gd 753
@@ -196,6 +206,8 @@ irssi 611
 variants {ipv6 ssl perl} description {modular IRC client} portdir irc/irssi homepage http://irssi.org/ platforms darwin depends_lib {lib:glib:glib lib:libdl:dlcompat} name irssi long_description {Irssi is a modular IRC client that currently has only text mode user interface, but 80-90% of the code isn't text mode specific, so other UIs could be created pretty easily. Also, Irssi isn't really even IRC specific anymore, there's already a working SILC module available. Support for other protocols like ICQ could be created some day too.} maintainers jpm@opendarwin.org categories irc version 0.8.6 revision 2
 thirdeye 488
 portdir irc/thirdeye description {Colorful and effective script for the epic irc client} platforms darwin name thirdeye version 1.72 categories irc maintainers eric@opendarwin.org long_description {Third Eye is a script for the EPIC IRC client (epic4-2000 or later). It includes features such as flood protection, configurable ansi colors and themes, netsplit/rejoin detection, automated login/verifications to eggdrop, nick/chanserv, and undernet cserve bots.} depends_run bin:epic:epic
+tkirc 412
+portdir irc/tkirc description {A Tk-based GUI for the ircII Internet Relay Chat client} platforms darwin name tkirc version 2.46 categories irc maintainers jkh@opendarwin.org long_description {Tkirc is a frontend for unix's ircII (shell-client for the Internet Relay Chat) based on Tcl/Tk. If you know how to use ircII, you should not have any problems using tkirc.} depends_run {bin:ircII:ircii bin:wish8.4:tk}
 xchat 377
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin name xchat depends_lib {lib:libintl.1:gettext lib:libgtk.1:gtk} version 1.8.11 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat is a graphical IRC client based on GTK that has many features and can be scripted with Perl and/or Python.}
 xchat2 378
@@ -208,6 +220,8 @@ nqc 154
 portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories devel maintainers landonf@opendarwin.org
 perl5.8 218
 portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers mike+perlport@gene-hacker.net
+python 190
+portdir lang/python description {An interpreted, object-oriented programming language} platforms darwin variants nothreads name python version 2.2.2 categories lang maintainers pat@ekman.cx
 ruby 190
 portdir lang/ruby description {Powerful and clean object-oriented scripting language} platforms darwin variants devel name ruby version 1.6.8 categories lang maintainers eric@opendarwin.org
 slang 195
@@ -226,6 +240,8 @@ spamprobe 491
 portdir mail/spamprobe description {Spam detector that uses Bayesian analysis} platforms darwin name spamprobe depends_lib lib:libdb:db4 version 0.8b categories mail homepage http://sourceforge.net/projects/spamprobe/ maintainers mij@opendarwin.org long_description {Spamprobe is a fast, intelligent, automatic spam detector using Bayesian analysis of word counts in spam and non-spam email. It is intended for use with procmail to filter inbound mail. No manual rule creation is required.}
 fftw 786
 portdir math/fftw description {Fast C routines to compute the Discrete Fourier Transform} platforms darwin name fftw version 2.1.3 categories math homepage http://www.fftw.org/ revision 0 maintainers jpm@opendarwin.org long_description {FFTW is a C subroutine library for computing the Discrete Fourier Transform (DFT) in one or more dimensions, of both real and complex data, and of arbitrary input size. We believe that FFTW, which is free software, should become the FFT library of choice for most applications. Our benchmarks, performed on a variety of platforms, show that FFTW's performance is typically superior to that of other publicly available FFT software. Moreover, FFTW's performance is portable: the program will perform well on most architectures without modification.}
+gnuplot 563
+portdir math/gnuplot description {A command-driven interactive function plotting program} platforms darwin variants x11 name gnuplot depends_lib {lib:libgd:gd lib:libreadline:readline} version 3.8h.0 categories {math sci} revision 0 maintainers jpm@opendarwin.org long_description {Gnuplot is a command-driven interactive function plotting program. Plots any number of functions, built up of C operators, C library functions, and some things C doesn't have like **, sgn(), etc. Also support for plotting data files, to compare actual data to theoretical curves.}
 arla 500
 portdir net/arla description {free AFS implementation from KTH} platforms darwin variants krbafs name arla version 0.35.11 categories {net security} homepage http://www.stacken.kth.se/projekt/arla/ revision 1 maintainers jpm@opendarwin.org long_description {Arla is a free AFS client implementation. The main goal of the Arla project is to make a fully functional client with all capabilities of commercial AFS. Other planned and implemented things are all the normal management tools and a server.}
 cftp 347
@@ -306,6 +322,8 @@ tin 499
 portdir news/tin platforms darwin description {A threaded NNTP and spool based UseNet newsreader} variants {ipv6 unstable} name tin version 1.4.6 categories news homepage http://www.tin.org maintainers matt@opendarwin.org long_description {tin is a full-screen easy to use Usenet reader. It can read news locally or remotely via a NTTP (Network News Transport Protocol) server. It will automatically utilize NOV (News OVerview) style index files if available locally or via the NNTP XOVER command.}
 a2ps 385
 portdir print/a2ps description {an Any to PostScript filter.} platforms darwin variants darwin name a2ps version 4.13b categories print homepage http://www.gnu.org/software/a2ps/ revision 0 maintainers jpm@opendarwin.org long_description {a2ps is a utilty that allows the user to do PostScript manipulations. It is able to pass on processing to other filters, such as gzip and dvips.}
+freetype 535
+portdir print/freetype description {Free and portable render engine for TrueType fonts} platforms darwin name freetype version 2.1.1 categories print maintainers eric@opendarwin.org long_description {The FreeType engine is a free and portable TrueType font rendering engine. It has been developed to provide TT support to a great variety of platforms and environments. Notice that FreeType is a *library*. It is *not* a font server for your preferred environment, even though it was designed to allow the design of many font servers.}
 ghostscript 188
 portdir print/ghostscript platforms {darwin freebsd} variants {afpl gnu devel thirdparty fonts} name ghostscript version 7.04 categories print revision 0 maintainers digdog@opendarwin.org
 teTeX 474
@@ -326,12 +344,18 @@ krbafs 579
 portdir security/krbafs description {AFS library} platforms darwin variants strongcrypto name krbafs version 1.1 categories security homepage http://web.mit.edu/openafs/krbafs/ revision 0 maintainers jpm@opendarwin.org long_description {krbafs provides a set of AFS client utility functions for managing the AFS client and user's tokens for MIT Kerberos and Kerberos for Macintosh, the Kerberos implementation included with Mac OS X 10.1. It also provides afs_string_to_key() and the Kerberos 4 lifetime functions if they are not available in the local Kerberos implementation.}
 mhash 322
 portdir security/mhash description {provides easy access strong hashes} platforms darwin name mhash version 0.8.17 categories security homepage http://mhash.sourceforge.net/ revision 0 maintainers jpm@opendarwin.org long_description {Libmhash is a library which implements some hash algorithms like crc32, md5 and sha-1.}
+skey 202
+portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org long_description {}
 pdksh 219
 portdir shells/pdksh description {A Public Domain clone of ksh} platforms darwin name pdksh version 5.2.14 categories shells maintainers ryanwilcox@mac.com long_description {The public domain version of the Korn Shell}
 cdrtools 425
 portdir sysutils/cdrtools description {ISO 9660 filesystem and CD creation tools} name cdrtools version 2.0 categories sysutils homepage http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html revision 1 long_description {The cdrtools software includes programs to create and/or extract ISO 9660 filesystems, verify their integrity, and write them to a disc.} maintainers fkr@opendarwin.org
 darwinports 430
 portdir sysutils/darwinports description {The DarwinPorts Infrastructure} platforms {darwin freebsd} name darwinports version 0.5 categories {misc sysutils} homepage http://www.opendarwin.org/projects/darwinports/ maintainers mike+dports@gene-hacker.net long_description {DarwinPorts provides the infrastructure that allows easy installation of freely available software on a Mac OS X 10.2 (or any Darwin 6.0.1 or newer) system.}
+DarwinPortsStartup 219
+portdir sysutils/DarwinPortsStartup description {System startup item to start things installed from darwinports} platforms darwin name DarwinPortsStartup version 1.0 categories sysutils maintainers kevin@opendarwin.org
+dpkg 195
+portdir sysutils/dpkg platforms darwin description {Debian package maintenance system} variants darwin name dpkg version 1.9.21 categories {sysutils archivers} maintainers landonf@opendarwin.org
 pilot-link 244
 portdir sysutils/pilot-link description {palm-pilot libraries and tools} platforms darwin name pilot-link depends_lib {lib:libiconv:libiconv lib:libreadline:readline} version 0.10.99 categories sysutils revision 1 maintainers ranger@befunk.com
 screen 736
@@ -340,6 +364,8 @@ wmcpuload 388
 portdir sysutils/wmcpuload description {An lcd dockapp that displays the current cpuload} platforms {darwin freebsd} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMCPULoad is a program to monitor CPU usage. It is a dockapp that is supported by X window managers such as Window Maker, AfterStep, BlackBox, and Enlightenment.}
 wmmemmon 402
 portdir sysutils/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} platforms {darwin freebsd} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org long_description {WMMemMon is a program to monitor memory/swap usage. It is a dockapp that is supported by X window managers such as WindowMaker, AfterStep, BlackBox, and Enlightenment.}
+xtail 768
+portdir sysutils/xtail description {like 'tail -f' on a bunch of files at once} platforms {darwin freebsd} name xtail version 2.1 categories sysutils maintainers charlie@rubberduck.com long_description {xtail watches the growth of files. It's like running a {tail -f} on a bunch of files at once. My favorite usage is: xtail /var/log/* You can specify both filenames and directories on the command line. If you specify a directory, it watches all the files in that directory. It will notice when new files are created (and start watching them) or when old files are deleted (and stop watching them). The version 2.1 release fixes a Y2K bug, replaces the fixed-length file list with a dynamically allocated one, and implements package configuration with GNU autoconf.}
 antiword 336
 portdir textproc/antiword description {Utility to read Microsoft Word (.doc) files} platforms darwin name antiword version 0.33 categories textproc homepage http://www.winfield.demon.nl/index.html maintainers mij@opendarwin.org long_description {Antiword is a utility that can read binary files from Microsoft Word 6, 7, 97, and 2000.}
 aspell 397
@@ -376,8 +402,12 @@ expat 160
 portdir textproc/expat platforms darwin description {XML 1.0 parser written in C} name expat version 1.95.5 categories textproc maintainers eric@opendarwin.org
 figlet 201
 portdir textproc/figlet description {banner-like program prints strings as ASCII art} platforms {darwin freebsd} name figlet version 2.2 categories {textproc amusements} maintainers jkh@opendarwin.org
+glimpse 192
+portdir textproc/glimpse description {A text search engine. Free for personal use.} name glimpse depends_lib lib:libdl.1:dlcompat version 4.17.1 categories textproc maintainers lomion@mac.com
 htmldoc 489
 portdir textproc/htmldoc description {Converts HTML files to PDF or PostScript} platforms darwin name htmldoc depends_lib {lib:libjpeg.9:jpeg lib:libpng.3:libpng} version 1.8.23 categories textproc homepage http://www.easysw.com/htmldoc/ maintainers mij@opendarwin.org long_description {htmldoc can convert HTML files to PDF or PostScript, generate a table-of-contents for books, and generate indexed HTML files. It also generates files on-the-fly for web applications or for batch jobs.}
+iso8879 286
+portdir textproc/iso8879 description {Character entity sets from ISO 8879:1986 (SGML)} platforms darwin name iso8879 version 1986 categories textproc maintainers mij@opendarwin.org long_description {{Character entity sets from ISO 8879:1986 (SGML)}} depends_run bin:mkcatalog:mkcatalog
 ispell 213
 portdir textproc/ispell platforms {darwin freebsd} description {An interactive spelling checker for multiple languages} name ispell version 3.2.06 categories {textproc spelling} maintainers landonf@opendarwin.org
 jive 155
@@ -390,8 +420,12 @@ libxml2 197
 portdir textproc/libxml2 description {gnome xml library} platforms darwin name libxml2 depends_lib lib:libiconv:libiconv version 2.4.25 categories textproc maintainers mike+libxslt@gene-hacker.net
 libxslt 209
 portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml2 version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
+linuxdoc 279
+portdir textproc/linuxdoc description {Linuxdoc SGML DTD} platforms darwin name linuxdoc version 1.1 categories textproc maintainers mij@opendarwin.org long_description {{Linuxdoc SGML DTD}} depends_run {bin:mkcatalog:mkcatalog bin:/opt/local/share/sgml/iso8879/catalog:iso8879}
 man2html 320
 portdir textproc/man2html description {Convert nroff man pages to HTML} platforms darwin name man2html version 3.0.1 categories textproc homepage http://www.oac.uci.edu/indiv/ehood/man2html.html maintainers mij@opendarwin.org long_description {man2html is a utility to convert UNIX nroff manual pages into HTML format.}
+mkcatalog 243
+portdir textproc/mkcatalog description {Maintenance utility for SGML catalog files} platforms darwin name mkcatalog version 1.1 categories textproc maintainers mij@opendarwin.org long_description {{Maintenance utility for SGML catalog files}}
 mmencode 659
 portdir textproc/mmencode description {Translate to and from mail-oriented encoding formats} platforms darwin name mmencode version 2.7 categories textproc maintainers mij@opendarwin.org long_description {The mimencode program simply converts a byte stream into (or out of) one of the standard mail encoding formats defined by MIME, the proposed standard for internet multimedia mail formats. Such an encoding is necessary because binary data cannot be sent through the mail. The encodings under- stood by mimencode are preferable to the use of the uuencode/uudecode programs, for use in mail, in several respects that were important to the authors of MIME.}
 openjade 356
@@ -472,10 +506,12 @@ kdeutils3 364
 portdir x11/kdeutils3 description {miscellaneous utilities for KDE} platforms darwin name kdeutils3 depends_lib {lib:libDCOP:kdelibs3 lib:libart_lgpl_2:libart_lgpl lib:libdl.1:dlcompat lib:libkdecore.4:kdelibs3 bin:startkde:kdebase3 lib:libpng.3:libpng lib:libqt-mt.3.1:qt3 lib:libX11.6:XFree86} version 3.1 categories x11 revision 1 maintainers ranger@befunk.com
 lesstif 490
 portdir x11/lesstif description {An Open Source implementation of OSF/Motif.} platforms darwin variants {motif12 motif20 xdnd} name lesstif depends_lib lib:libX11:XFree86 version 0.93.36 categories x11 revision 0 maintainers lomion@mac.com long_description {This is an independent implementation of the Motif widget set, originally developed by the Hungry Programmers. It has been somewhat superceded by the openMotif toolkit now that the OSF has open-sourced the original reference bits.}
+openMotif 304
+portdir x11/openMotif description {The Open Motif toolkit for X11} platforms darwin name openMotif depends_lib lib:libX11.6:Xfree86 version 2.2.2 categories x11 revision 0 maintainers jkh@opendarwin.org long_description {This is The Open Group's full version of Motif based on the original OSF sources.}
 pango 372
 portdir x11/pango description {Framework for the layout and rendering of i18n text} platforms darwin name pango depends_lib {lib:libglib.2:glib2 lib:libintl.1:gettext} version 1.0.5 categories x11 maintainers mij@opendarwin.org long_description {The goal of the Pango project is to provide an open-source framework for the layout and rendering of internationalized text.}
-qt3 425
-portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.2:libpng lib:libjpeg.9:jpeg} version 3.1.1 categories x11 revision 1 maintainers {ranger@befunk.com, leimy@opendarwin.org} long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
+qt3 441
+portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql cups puredarwin} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.3:libpng lib:libjpeg.9:jpeg} version 3.1.1 categories x11 revision 2 maintainers {ranger@befunk.com, leimy@opendarwin.org} long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
 rxvt 429
 portdir x11/rxvt description {Low memory usage colour xterm replacement} platforms darwin name rxvt depends_lib {lib:libX11.6:XFree86 lib:libfreetype.6:freetype} version 2.7.8 categories x11 homepage http://www.rxvt.org/ revision 0 maintainers jpm@opendarwin.org long_description {Rxvt is an xterm replacement which uses a little less memory, and is suitable for use on machines with small memories. Tek4010 support is removed.}
 tk 329
