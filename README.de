@@ -42,10 +42,14 @@ INSTALLATION
 		portdbpath - legt fest wo DarwinPorts-spezifische Daten gespeichert werden.
 		prefix - legt das Verzeichniss fest, wo DarwinPorts-Software installiert wird.
 
-	5. /etc/ports/sources.conf editieren
+	5. [optional] /etc/ports/sources.conf editieren
 		In der Datei '/etc/ports/sources.conf' wird angegeben, wo
 		das 'dports/'-Verzeichniss liegt. Dieses muss angepasst werden,
-		damit das DarwinPorts System benutzt werden kann!
+		damit das DarwinPorts System benutzt werden kann! Falls das Argument 
+		--with-dports-dir=DIR beim Aufrufen des ./configure-Skript angegeben wurde,
+		wurde dies Verzeichniss der sources.conf hinzugefuegt, ansonsten wurde
+		das default-Verzeichniss (darwinports/dports innerhalb des Installations 
+		Verzeichnisses) hinzugefuegt.
 
     Die DarwinPorts Infrastruktur wird an folgenden Stellen installiert:
 	[Mac OS X] /System/Library/Tcl/darwinports1.0
