@@ -12,6 +12,8 @@ esound 521
 portdir audio/esound description {Enlightened Sound Daemon} platforms darwin name esound depends_lib lib:audiofile.0:audiofile version 0.2.29 categories audio revision 1 maintainers ranger@befunk.com long_description {EsounD, the Enlightened Sound Daemon, is a server process that mixes several audio streams for playback by a single audio device. For example, if you're listening to music on a CD and you receive a sound-related event from ICQ, the two applications won't have to jockey for the use of your sound card.}
 libmikmod 188
 portdir audio/libmikmod description {portable sound library} platforms darwin name libmikmod depends_lib lib:libesd.0:esound version 3.1.10 categories audio maintainers mij@opendarwin.org
+mpg123 577
+portdir audio/mpg123 description {fast mp3 player for linux and unix systems} platforms darwin name mpg123 depends_lib {lib:libaudiofile.0:audiofile lib:ibesd.0:esound} version pre0.59s categories audio revision 0 maintainers jpm@opendarwin.org long_description {Mpg123 is a fast, free and portable MPEG audio player for Unix. It supports MPEG 1.0/2.0 layers 1, 2 and 3. For full CD quality playback (44 kHz, 16 bit, stereo) a Pentium, SPARCstation10, DEC Alpha or similar CPU is required. Mono and/or reduced quality playback (22 kHz or 11 kHz) is even possible on 486 CPUs.}
 dgpsip 182
 portdir comms/dgpsip description {Differential GPS over IP communication device} platforms {darwin freebsd} name dgpsip version 1.32 categories comms maintainers eric@opendarwin.org
 scud 190
