@@ -1,5 +1,3 @@
-README for the Darwin Port System
-
 WHAT IS THE DARWIN PORTS SYSTEM
 
     Darwin Ports is a software build, install, and packaging infrastructure
@@ -13,7 +11,7 @@ INSTALLING
 
     Summary:
         1. bsdmake
-	2. bsdmake install
+	2. sudo bsdmake install
 
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
