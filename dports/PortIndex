@@ -24,12 +24,14 @@ glib 174
 portdir devel/glib description {Library with data structure functions and other constructs} portname glib categories devel portversion 1.2.10 maintainers eric@opendarwin.org
 gmp 159
 portdir devel/gmp description {GNU multiple precision arithmetic library} portname gmp categories {lib devel} portversion 4.1 maintainers bertrand@caudium.net
-netinet-headers 139
-portdir devel/netinet-headers portname netinet-headers categories devel portversion 1.0.1 maintainers mike+missing-headers@gene-hacker.net
+netinet-headers 213
+portdir devel/netinet-headers description {temporary port providing netinet missing headers for jaguar} portname netinet-headers categories devel portversion 1.0.1 maintainers mike+missing-headers@gene-hacker.net
 perforce 156
 portdir devel/perforce description {Fast source code management system} portname perforce categories devel portversion 02.1 maintainers eric@opendarwin.org
 pkgconfig 176
 portdir devel/pkgconfig description {System for managing library compile and link flags} portname pkgconfig categories devel portversion 0.12.0 maintainers eric@opendarwin.org
+readline 163
+portdir devel/readline description {Library that provides command line editing} portname readline categories devel portversion 4.3 maintainers eric@opendarwin.org
 emacs 157
 portdir editors/emacs description {The GNU Emacs text editor} variants x11 portname emacs categories editors portversion 21.2 maintainers jkh@opendarwin.org
 vim 177
@@ -40,6 +42,8 @@ gimp 249
 portdir graphics/gimp description {GNU Image Manipulation Program} depends_lib {lib:libgtk.1:gtk lib:libintl.2:gettext lib:libjpeg.9:jpeg lib:libpng.3:libpng} portname gimp categories {graphics x11} portversion 1.2.3 maintainers eric@opendarwin.org
 jpeg 154
 portdir graphics/jpeg description {Library for manipulating JPEG images} portname jpeg categories graphics portversion 6b maintainers eric@opendarwin.org
+lcms 183
+portdir graphics/lcms description {Little Color Management System, a color matching method library} portname lcms categories graphics portversion 1.08 maintainers eric@opendarwin.org
 libgd 284
 portdir graphics/libgd description {GD creates PNG and JPEG images, among other formats. (Version 1, Version 2 is a seperate Port)} variants x11 depends_lib {lib:libpng:png lib:libjpeg:jpeg} portname libgd categories graphics portversion 1.8.4 maintainers mike+gdport@gene-hacker.net
 libpng 160
@@ -66,14 +70,16 @@ ethereal 191
 portdir net/ethereal description {Graphical network analyzer and capture tool} depends_lib lib:libgtk.1:gtk portname ethereal categories net portversion 0.9.6 maintainers eric@opendarwin.org
 fetch 190
 portdir net/fetch description {The FreeBSD file fetching utility} depends_lib lib:libfetch.3:libfetch portname fetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
-libfetch 168
-portdir net/libfetch description {The FreeBSD file fetching utility library} portname libfetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
+libfetch 160
+portdir net/libfetch description {The FreeBSD file fetching library} portname libfetch categories net portversion 4.6.2-RELEASE maintainers eric@opendarwin.org
+libpcap 138
+portdir net/libpcap description {Packet Capture library} portname libpcap categories net portversion 0.7.1 maintainers jpm@opendarwin.org
 netcat 156
 portdir net/netcat description {A utility for managing network connections} portname netcat categories net portversion 1.10 maintainers eric@opendarwin.org
 nmap 150
 portdir net/nmap description {Port scanning utility for large networks} portname nmap categories net portversion 3.00 maintainers eric@opendarwin.org
-snort 163
-portdir net/snort description {The Open Source Network Intrusion Detection System} portname snort categories net portversion 1.8.7 maintainers jean_pierre@mac.com
+snort 162
+portdir net/snort description {The Open Source Network Intrusion Detection System} portname snort categories net portversion 1.8.7 maintainers jpm@opendarwin.org
 teTeX 196
 portdir print/teTeX description {TeX and METAFONT} depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} portname teTeX categories print portversion 3.14159 maintainers landonf@opendarwin.org
 gnupg 154
