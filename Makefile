@@ -1,7 +1,3 @@
-all:
-	@(cd base; make $@)
-clean:
-	@(cd base; make $@)
+SUBDIR= base
 
-install:
-	@(cd base; make $@)
+include base/Mk/dports.subdir.mk
