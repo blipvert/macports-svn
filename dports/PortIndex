@@ -232,6 +232,8 @@ xchat2 374
 portdir irc/xchat2 description {IRC client for gtk2} platforms darwin variants xft name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 2.0.1 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
 clisp 654
 portdir lang/clisp platforms darwin description {The Clisp Common Lisp Implementation} name clisp version 2.29 categories lang homepage http://clisp.cons.org/ maintainers gwright@comcast.net long_description {CLISP is a Common Lisp implementation by Bruno Haible, formerly of Karlsruhe University, and Michael Stoll, formerly of Munich University, both in Germany. It mostly supports the Lisp described in the ANSI Common Lisp standard. CLISP includes an interpreter, a compiler, almost all of CLOS, a foreign language interface and a socket interface. An X11 interface is available through CLX and Garnet. Command line editing is provided by readline.}
+cm3 182
+portdir lang/cm3 description {Critical Mass Modula-3 Compiler} platforms darwin variants {{darwin powerpc}} name cm3 version 5.2.0 categories lang maintainers landonf@opendarwin.org
 g77 167
 portdir lang/g77 description {gnu fortran 77 comiler} platforms {darwin freebsd} name g77 version 3.2.2 categories lang revision 2 maintainers michaelm@opendarwin.org
 gawk 387
