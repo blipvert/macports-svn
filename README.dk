@@ -6,8 +6,11 @@ FreeBSD ports har, og stadigt have muligheden for at lave fremtidige
 udvidelser. 
 
     DarwinPorts kan på nuværende tidspunkt bygges og køres på
-MacOS X 10.2 (Darwin 6.0). Systemet er flytbart, skrevet i TCL med et 
-begrænset antal TCL udvidelser skrevet i C.
+MacOS X 10.2 (Darwin 6.0) og MacOS X 10.3. Systemet er flytbart, 
+skrevet i TCL med et begrænset antal TCL udvidelser skrevet i C.
+
+    "DarwinPorts User Guiden" er tilgængelig på:
+    	http://www.opendarwin.org/projects/darwinports/guide/
 
     For i dybdegående dokumentation om det indre af ports systemets
 arkitektur, henvises til base/doc/INTERNALS.
@@ -22,16 +25,22 @@ lokal kopi. Se dokumentation om /etc/ports/sources.conf herunder.
 INSTALLATION
 
     Installations Skridt:
-        1. make
+	1. cd base/
+	   ./configure
+	   	Skift til base biblioteket og kør konfigurations
+		scriptet. Yderlige parametre kan gives til 
+		configure-skriptet (se nedenfor).
+    
+        2. make
 		Eksekver 'make' for at kompilere alt den nødvendige 
 		software.
 		
 
-	2. sudo make install
+	3. sudo make install
 		Eksekver 'sudo make install' for at installere 
 		DarwinPorts på dit system. 
 
-        3. [frivilligt] rediger /etc/ports/ports.conf
+        4. [frivilligt] rediger /etc/ports/ports.conf
 		/etc/ports/ports.conf konfigurationsfilen definere flere
 		konfigurations muligheder for DarwinPorts 
 		infrastrukturen.
@@ -46,7 +55,7 @@ INSTALLATION
 		prefix - Specificerer biblioteket til hvor ports bliver 
 		installeret.
 
-	4. rediger /etc/ports/sources.conf
+	5. rediger /etc/ports/sources.conf
 		/etc/ports/sources.conf filen indeholder en liste over
 		både lokale og fjerne port software hierakier. Husk at
 		tilføje dit lokale ports tree 
@@ -80,13 +89,20 @@ AT BRUGE PORT KOMMANDO'EN
 
     Hvis du ikke allerede har, tilføj /opt/local/bin til din path 
 (eller $PREFIX/bin hvis du har installeret DarwinPorts et andet sted).
-Hvis du er usikker hvordan, tilføj den følgende linie til din ~/.cshrc
-fil.
+
+    Hvis du er usikker hvordan, og bruger Jaguar (OS X 10.2), 
+tilføj den følgende linie til din ~/.cshrc fil. (Dette gælder også
+hvis du bruger tcsh i Panther.)
 
 	set path=($path /opt/local/bin)
 
-    Dine ændringer til ~/.cshrc vil først blive benyttet når du
-åbner en ny shell.
+    Hvis du bruger Panther (OS X 10.3), tilføj den følgende linie
+til din ~/.profile fil. (Dette gælder også hvis du bruger en bourne
+shell i Jaguar.)
+
+	export PATH=$PATH:/opt/local/bin
+
+    Dine ændringer vil først blive benyttet når du åbner en ny shell.
 
     Den følgende kommando vil bygge og installere en ny port:
 
