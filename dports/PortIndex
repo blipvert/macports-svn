@@ -38,6 +38,8 @@ gmp 179
 portdir devel/gmp description {GNU multiple precision arithmetic library} platforms {darwin freebsd} name gmp version 4.1 categories {devel math} maintainers bertrand@caudium.net
 netinet-headers 222
 portdir devel/netinet-headers description {temporary port providing netinet missing headers for jaguar} platforms darwin name netinet-headers version 1.0.1 categories devel maintainers mike+missing-headers@gene-hacker.net
+pth 553
+portdir devel/pth description {GNU Portable Threads} platforms darwin name pth version 1.4.1 categories devel revision 0 maintainers jpm@opendarwin.org long_description {Pth is a very portable POSIX/ANSI-C based library for Unix platforms which provides non-preemptive priority-based scheduling for multiple threads of execution (\"multithreading\") inside server applications. All threads run in the same address space of the server application, but each thread has it's own individual program-counter, run-time stack, signal mask and errno variable.}
 perforce 191
 portdir devel/perforce description {Fast source code management system} platforms {darwin freebsd} variants server name perforce version 02.1 categories devel maintainers eric@opendarwin.org
 pkgconfig 195
@@ -222,6 +224,8 @@ curl 256
 portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} variants ssl name curl depends_lib {lib:libpcap:libpcap lib:libdl:dlcompat} version 7.10.2 categories {net www} revision 1 maintainers jpm@opendarwin.org
 micq 149
 portdir net/micq description {portable text-mode ICQ clone} platforms darwin name micq version 0.4.9.4 categories net maintainers fkr@opendarwin.org
+jabber 231
+portdir net/jabber description XXX platforms darwin name jabber depends_lib {lib:libiconv:libiconv lib:libexpat.0:expat lib:libintl.2:gettext lib:libpth.a:pth} version 1.4.2 categories net revision 0 maintainers jpm@opendarwin.org
 teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
 freetype 182
