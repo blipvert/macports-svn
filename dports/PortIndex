@@ -398,10 +398,6 @@ vtwm 175
 portdir x11/vtwm description {Twm with a virtual desktop and optional Motif-like features} platforms darwin name vtwm version 5.4.6a categories x11 maintainers mdales@mac.com
 wmclock 394
 portdir x11/wmclock description {A dockable clock applet} platforms {darwin freebsd} name wmclock version 1.0.12.2 categories x11 maintainers landonf@opendarwin.org long_description {Wmclock is an applet which displays the date and time in a dockable tile in the same style as the clock from the NEXTSTEP(tm) operating system. Wmclock is specially designed for the WindowMaker window manager.}
-wmcpuload 175
-portdir x11/wmcpuload description {An lcd dockapp that displays the current cpuload} name wmcpuload version 1.0.0 categories {sysutils x11} maintainers landonf@opendarwin.org
-wmmemmon 183
-portdir x11/wmmemmon description {An lcd dockapp that displays the current memory/swap usage} name wmmemmon version 0.7.0 categories {sysutils x11} maintainers landonf@opendarwin.org
 XFree86 247
 portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.2.1.1 categories x11 maintainers eric@opendarwin.org long_description {The XFree86 project's X window system implementation}
 xpm 344
