@@ -264,8 +264,8 @@ radmind 219
 portdir net/radmind description {Remotely administer the file systems of multiple unix machines} platforms darwin name radmind version 0.9.1 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
 snort 589
 portdir net/snort description {The Open Source Network Intrusion Detection System} platforms {darwin freebsd} name snort version 1.9.0 categories net revision 0 maintainers jpm@opendarwin.org long_description {Snort is an open source network intrusion detection system, capable of performing real-time traffic analysis and packet logging on IP networks. It can perform protocol analysis, content searching/matching and can be used to detect a variety of attacks and probes, such as buffer overflows, stealth port scans, CGI attacks, SMB probes, OS fingerprinting attempts, and much more.}
-tcpflow 764
-portdir net/tcpflow description {TCP flow recorder} platforms {darwin freebsd} name tcpflow version 0.20 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {tcpflow is a program that captures data transmitted as part of TCP connections (flows), and stores the data in a way that is convenient for protocol analysis or debugging. A program like tcpdump(4) shows a summary of packets seen on the wire, but usually doesn't store the data that's actually being transmitted. In contrast, tcpflow reconstructs the actual data streams and stores each flow in a separate file for later analysis. tcpflow understands TCP sequence numbers and will correctly reconstruct data streams regardless of retransmissions or out-of-order delivery.}
+tcpflow 796
+portdir net/tcpflow description {TCP flow recorder} platforms {darwin freebsd} name tcpflow depends_lib lib:libpcap:libpcap version 0.20 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {tcpflow is a program that captures data transmitted as part of TCP connections (flows), and stores the data in a way that is convenient for protocol analysis or debugging. A program like tcpdump(4) shows a summary of packets seen on the wire, but usually doesn't store the data that's actually being transmitted. In contrast, tcpflow reconstructs the actual data streams and stores each flow in a separate file for later analysis. tcpflow understands TCP sequence numbers and will correctly reconstruct data streams regardless of retransmissions or out-of-order delivery.}
 tcptrace 220
 portdir net/tcptrace description {A TCP dump file analysis tool} platforms darwin name tcptrace depends_lib lib:libpcap:libpcap version 6.2.0 categories net revision 0 maintainers jpm@opendarwin.org long_description XXX
 wget 447
@@ -274,8 +274,8 @@ pan2 196
 portdir news/pan2 description {News reader for gtk2} platforms darwin name pan2 depends_lib {lib:libgtk.2:gtk2 lib:libxml2.2:libxml2} version 0.13.2 categories news maintainers mij@opendarwin.org
 slrn 232
 portdir news/slrn description {A powerful console-based newsreader} platforms darwin name slrn depends_lib {lib:libslang.a:slang lib:libiconv:libiconv} version 0.9.7.4 categories {news net} revision 1 maintainers olaf@foellinger.de
-tin 173
-portdir news/tin platforms darwin description {tin is a threaded NNTP and spool based UseNet newsreader} name tin version 1.4.6 categories news maintainers ports@syrius.org
+tin 191
+portdir news/tin platforms darwin description {tin is a threaded NNTP and spool based UseNet newsreader} variants unstable name tin version 1.4.6 categories news maintainers ports@syrius.org
 a2ps 162
 portdir print/a2ps description {an Any to PostScript filter.} platforms darwin name a2ps version 4.13b categories print revision 0 maintainers jpm@opendarwin.org
 freetype 182
@@ -400,8 +400,10 @@ urlview 145
 portdir www/urlview description {URL extractor/launcher} platforms darwin name urlview version 0.9 categories www maintainers mij@opendarwin.org
 w3m 159
 portdir www/w3m description {pager/text based browser} platforms darwin variants m17n name w3m version 0.3.1 categories www maintainers charlie@rubberduck.com
-fluxbox 324
-portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} platforms {darwin freebsd} name fluxbox depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} version 0.1.10 categories x11-wm long_description {{Lightweight window manager based on Blackbox 0.61.1}} maintainers landonf@opendarwin.org
+wml 147
+portdir www/wml platforms darwin description {Website META Language} name wml version 2.0.8 categories {www lang} maintainers ports@kruschwitz.biz
+fluxbox 330
+portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} platforms {darwin freebsd} name fluxbox depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} version 0.1.10 categories {x11-wm x11} long_description {{Lightweight window manager based on Blackbox 0.61.1}} maintainers landonf@opendarwin.org
 fvwm 416
 portdir x11/fvwm description {A very simple window manager supporting a pager} platforms darwin name fvwm depends_lib {lib:libX11.6:XFree86 lib:libXpm.4:xpm} version 1.24r categories {x11-wm x11} long_description {One of the earlier paging window managers with what is still considered to be a very elegant and minimal feature set yet highly configurable and expandable via plug-ins.} maintainers jkh@opendarwin.org
 gtk 308
