@@ -66,10 +66,11 @@ INSTALLATION
 
     Tout le code TCL nécessaire sera compilé et installé comme indiqué ci-
     dessous:
-	[MacOS X] /System/Library/Tcl/darwinports1.0
-	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
-	 	  - Librairie TCL permettant d'interagir avec le système
-                    DarwinPorts.
+	[Mac OS X 10.2] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.3] /Library/Tcl/darwinports1.0
+	[FreeBSD]       /usr/local/lib/tcl8.3/darwinports1.0
+	 	        - Librairie TCL permettant d'interagir avec le
+                          système DarwinPorts.
 
 	PREFIX est situé par défaut à /opt/local mais ce choix peut être
 	modifié en changeant le répertoire  pour base/ et en lançeant
@@ -97,12 +98,19 @@ UTILISATION DE LA COMMANDE 'PORT'
     Si vous ne l'avez déjà fait, ajoutez /opt/local/bin à votre variable
     path (ou $PREFIX/bin si vous avez choisi d'installer DarwinPorts dans
     un autre emplacement). Si vous ne savez pas comment faire, ajoutez la
-    ligne suivante dans votre fichier ~/.cshrc.
+    ligne suivante dans votre fichier ~/.cshrc (cela est valable si vous
+    utilisez tcsh sous Panther également).
 
 	set path=($path /opt/local/bin)
 
-    Vos changements dans ~/.cshrc ne seront pris en compte que lorsque
-    vous ouvrirez un nouveau shell.
+    Si vous utilisez Panther (OSX 10.3), ajoutez la ligne suivante à votre
+    fichier ~/.profile (cela est valable si vous utilisez un shell de type
+    Bourne sous Jaguar également).
+
+	export PATH=$PATH:/opt/local/bin
+
+    Vos changements ne seront pris en compte que lorsque vous ouvrirez un
+    nouveau shell.
 
     La commande suivante compilera et installera le port :
 
@@ -135,5 +143,5 @@ CRÉER DE NOUVEAUX PORTS
     d'autoriser à l'auteur l'utilisation complète des fonctionnalités
     offertes par TCL lorsque cela lui est nécessaire.
 
-    Pour commencer reportez-vous au fichier doc/exampleport et la page man
-    de portfile(7).
+    Pour commencer reportez-vous au fichier base/doc/exampleport et la page
+    man de portfile(7).
