@@ -48,6 +48,8 @@ emacs 192
 portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin carbon x11} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 vim 196
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.174 categories editors maintainers landonf@opendarwin.org
+bochs 188
+portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators maintainers jpm@opendarwin.org depends_run bin:wget:wget
 fortune 165
 portdir games/fortune description {Infamous electronic fortune-cookie generator} name fortune version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 nethack 185
