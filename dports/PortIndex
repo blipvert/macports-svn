@@ -564,8 +564,8 @@ hfstar 391
 portdir sysutils/hfstar description {gnutar with HFS+ support} platforms darwin name hfstar version 1.13.19 categories sysutils homepage http://www.metaobject.com/Community.html maintainers waqar@opendarwin.org long_description {A version of gnutar for Mac OS X that supports archiving HFS+ specific information such as resource forks, type and creator codes as well as other finder flags.}
 pilot-link 244
 portdir sysutils/pilot-link description {palm-pilot libraries and tools} platforms darwin name pilot-link depends_lib {lib:libiconv:libiconv lib:libreadline:readline} version 0.10.99 categories sysutils revision 1 maintainers ranger@befunk.com
-portmanager 271
-portdir sysutils/portmanager description {The DarwinPorts Cocoa GUI client} platforms darwin name portmanager depends_lib bin:port:darwinports version 0.0 categories {sysutils aqua} homepage http://www.opendarwin.org/projects/dp-cocoa maintainers michaelm@opendarwin.org
+PortsManager 277
+portdir sysutils/PortsManager description {The DarwinPorts Cocoa GUI client} platforms darwin name PortsManager depends_lib bin:port:darwinports version 0.0 categories {sysutils aqua} homepage http://www.opendarwin.org/projects/PortsManager maintainers michaelm@opendarwin.org
 rpm 248
 portdir sysutils/rpm platforms darwin description {RedHat Package Manager} variants darwin name rpm depends_lib {lib:libbz2.1.0:bzip2 lib:libiconv.2:libiconv} version 4.0.4 categories {sysutils archivers} revision 1 maintainers ssen@opendarwin.org
 screen 788
