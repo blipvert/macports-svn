@@ -95,6 +95,13 @@ a new shell.
     Please refer to the port man page for complete documentation on the port
     command.
 
+    It is also possible to do operations, like building or fetching, for
+    all ports on the system using the portall command.  It takes essentially
+    the same arguments as the port command but operates iteratively on every
+    port in dports/.  When you do a "make clean" from this directory, for
+    example, a "portall clean" is also invoked to completely clean things up.
+
+
 CREATING NEW PORTS
 
     Ports consist of directory containing both a Portfile and associated
