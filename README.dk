@@ -62,7 +62,8 @@ INSTALLATION
 		(sædvanligvis darwinports/dports biblioteket).
 
     Al nødvendig kode og TCL vil blive kompileret og installeret som så:
-	[Mac OS X] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.2] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.3] /Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL bibliotek til kommunikation med DarwinPorts systemet.
 
