@@ -21,13 +21,9 @@ INSTALLATION
     
     1. make
         'make' aufrufen, um die DarwinPorts Infrastruktur zu kompilieren. Um 
-        DarwinPorts auf FreeBSD zu installieren muss die Default-Gruppe beim
-        make-Aufruf mitangegeben werden: 'make DSTGRP=wheel'
 
     2. sudo make install
         'sudo make install' aufrufen, um die in Schritt 1 kompilierte Infrastruktur
-        zu installieren. Im Falle einer Installation auf FreeBSD muss wieder die
-        Default-Gruppe mitangegeben werden: 'sudo make install DSTGRP=wheel'
 
     3. [optional] /etc/ports/ports.conf editieren
         Die Haupt-Konfigurationsdatei fuer DarwinPorts heisst 'ports.conf' und 
@@ -36,7 +32,7 @@ INSTALLATION
         wird und wo DarwinPorts-spezifische Daten gespeichert werden:
     
         portdbpath - legt fest wo DarwinPorts-spezifische Daten gespeichert werden.
-	prefix - legt das Verzeichniss fest, wo DarwinPorts-Software installiert
+	    prefix - legt das Verzeichniss fest, wo DarwinPorts-Software installiert
         wird.
 
     4. /etc/ports/sources.conf editieren
@@ -45,13 +41,13 @@ INSTALLATION
         damit das DarwinPorts System benutzt werden kann!
 
     Die DarwinPorts Infrastruktur wird an folgenden Stellen installiert:
-	[Mac OS X] /System/Library/Tcl/8.3/darwinports1.0
+	[Mac OS X] /System/Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL Bibliothek zum Zugriff auf das DarwinPorts System.
     
-    PREFIX ist per default auf '/opt/local' gesetzt, kann aber beim Aufrufen
-    des make-Kommandos bei der Installation ueberschrieben werden:
-        make PREFIX=/different/path
+    PREFIX ist per default auf '/opt/local' gesetzt, kann aber durch das Wechseln
+    in das base/-Verzeichnis und einem anschliessendem, manuellen Aufruf des ./configure-
+    Skriptes, bei dem das '--prefix'-Argument angegeben wird, veraendert werden.
    
     Folgende Komponenten werden im PREFIX installiert:
      
