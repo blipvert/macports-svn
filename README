@@ -53,7 +53,8 @@ INSTALLATION
 		sources.conf.
 
     All necessary code and TCL will be compiled and installed as follows:
-	[Mac OS X] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.2] /System/Library/Tcl/darwinports1.0
+	[Mac OS X 10.3] /Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
 	    - TCL library for interfacing with the DarwinPorts System
 
