@@ -418,8 +418,8 @@ mmencode 659
 portdir textproc/mmencode description {Translate to and from mail-oriented encoding formats} platforms darwin name mmencode version 2.7 categories textproc maintainers mij@opendarwin.org long_description {The mimencode program simply converts a byte stream into (or out of) one of the standard mail encoding formats defined by MIME, the proposed standard for internet multimedia mail formats. Such an encoding is necessary because binary data cannot be sent through the mail. The encodings under- stood by mimencode are preferable to the use of the uuencode/uudecode programs, for use in mail, in several respects that were important to the authors of MIME.}
 openjade 186
 portdir textproc/openjade platforms {darwin freebsd} description {James Clark's implementation of DSSSL} name openjade version 1.3.1 categories textproc maintainers kevin@opendarwin.org
-rman 150
-portdir textproc/rman description {Man page format converter} platforms darwin name rman version 3.0.9 categories textproc maintainers lomion@mac.com
+rman 418
+portdir textproc/rman description {Man page format converter} platforms darwin name rman version 3.0.9 categories textproc maintainers lomion@mac.com long_description {PolyglotMan takes formatted man pages from most of the popular flavours of UN*X and transforms them into any number of source formats. It can produce ASCII-only, section headers-only, TkMan, {[tn]roff,} Ensemble, SGML, HTML, LaTeX, RTF, Perl 5 POD.}
 rtfreader 486
 portdir textproc/rtfreader description {Utility to read Microsoft RTF files} platforms darwin name rtfreader version 1.0 categories textproc maintainers mij@opendarwin.org long_description {RTF is the Microsoft Rich Text Format, a more portable, mostly ASCII formatting language that is exported by word processors like MS Word. The files generally have the extension .rtf, but occasionally have .doc extensions as well. This parser is from the Microsoft spec, ported to Unix systems.}
 sed 248
