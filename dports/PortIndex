@@ -18,8 +18,8 @@ db4 178
 portdir databases/db4 description {The Berkely DB package, revision 4} platforms {darwin freebsd} name db4 version 4.1.24 categories databases maintainers landonf@opendarwin.org
 gtksql 251
 portdir databases/gtksql description {Graphical query tool for PostgreSQL and/or MySQL} platforms darwin variants mysql name gtksql depends_lib {lib:libpq.2:postgresql lib:libgtk.1:gtk} version 0.3 categories databases maintainers eric@opendarwin.org
-mysql 202
-portdir databases/mysql description {Multithreaded SQL database server} platforms darwin name mysql depends_lib lib:libdl.1:dlcompat version 3.23.52 categories databases maintainers eric@opendarwin.org
+mysql 218
+portdir databases/mysql description {Multithreaded SQL database server} platforms darwin variants server name mysql depends_lib lib:libdl.1:dlcompat version 3.23.52 categories databases maintainers eric@opendarwin.org
 postgresql 236
 portdir databases/postgresql description {The most advanced open-source database available anywhere} platforms {darwin freebsd} variants {darwin server} name postgresql version 7.2.1 categories databases maintainers eric@opendarwin.org
 gdbm 161
@@ -60,6 +60,8 @@ poll-emulator 323
 portdir devel/poll-emulator description {Library to provide poll(2) functionality} platforms {darwin freebsd} name poll-emulator version 1.3 categories devel revision 1 maintainers ranger@befunk.com long_description {This package implements the System V poll(2) system call for Unix-like systems that do not support poll.}
 pcre 184
 portdir devel/pcre description {Perl Compatible Regular Expressions Library} platforms {darwin freebsd} name pcre version 3.9 categories devel revision 1 maintainers ranger@befunk.com
+cvsweb 448
+portdir devel/cvsweb description {WWW interface for CVS repositories} platforms {darwin freebsd} variants {darwin freebsd} name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
 emacs 198
 portdir editors/emacs description {The GNU Emacs text editor} platforms {darwin freebsd} variants {darwin devel x11 carbon} name emacs version 21.2 categories editors maintainers jkh@opendarwin.org
 vim 196
@@ -102,6 +104,8 @@ libungif 207
 portdir graphics/libungif description {Tools and library routines for working with GIF images} platforms darwin variants x11 name libungif version 4.1.0b1 categories graphics maintainers eric@opendarwin.org
 tiff 217
 portdir graphics/tiff description {Library and tools for dealing with Tag Image File Format} platforms darwin name tiff depends_lib lib:libjpeg.9:jpeg version 3.5.7 categories graphics maintainers eric@opendarwin.org
+graphviz 274
+portdir graphics/graphviz description {Graph visualization software from AT&T and Bell Labs} name graphviz depends_lib {lib:libX11.6:XFree86 lib:libjpeg.9:jpeg lib:libpng.3:libpng lib:libfreetype.6:freetype} version 1.8.5 categories graphics maintainers eric@opendarwin.org
 epic 177
 portdir irc/epic description {The (E)nhanced (P)rogrammable (I)RC-II (C)lient} platforms {darwin freebsd} name epic version 1.0.1 categories irc maintainers eric@opendarwin.org
 infobot 176
@@ -114,6 +118,8 @@ xchat 192
 portdir irc/xchat description {IRC client with gtk and text interfaces} variants x11 name xchat depends_lib lib:libintl.2:gettext version 1.8.10 categories irc maintainers eric@opendarwin.org
 irssi 197
 portdir irc/irssi description {modular IRC client} platforms darwin name irssi depends_lib {lib:glib:glib lib:libdl:dlcompat} version 0.8.5 categories irc revision 0 maintainers jpm@opendarwin.org
+thirdeye 189
+portdir irc/thirdeye description {Colorful and effective script for the epic irc client} name thirdeye version 1.72 categories irc maintainers eric@opendarwin.org depends_run bin:epic:epic
 bitchx 238
 portdir irc/bitchx description {BitchX - An IRC Client based on ircII w/ ANSI color and much much more.} platforms darwin name bitchx depends_lib lib:libdl:dlcompat version 1.0c19 categories irc revision 0 maintainers sean@fuzzymagic.com
 perl5.8 184
@@ -124,12 +130,16 @@ slang 178
 portdir lang/slang description {Library that includes a powerful scripting language with a C-like syntax} name slang version 1.4.6 categories lang maintainers olaf@foellinger.de
 g77 137
 portdir lang/g77 description {gnu fortran 77 comiler} name g77 version 3.1-20020420 categories lang maintainers mike+g77@gene-hacker.net
+python 173
+portdir lang/python description {An interpreted, object-oriented programming language} variants nothreads name python version 2.2.2 categories lang maintainers pat@ekman.cx
 mutt 244
 portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl nntp} name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail maintainers eric@opendarwin.org
 ssmtp 192
 portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} platforms {darwin freebsd} name ssmtp version 2.50 categories mail maintainers eric@opendarwin.org
-postfix 242
-portdir mail/postfix description {Fast and robust mail transfer agent} name postfix version 1.1.11 categories mail maintainers eric@opendarwin.org depends_run bin:/Library/StartupItems/DarwinPortsStartup/DarwinPortsStartup:DarwinPortsStartup
+postfix 224
+portdir mail/postfix description {Fast and robust mail transfer agent} name postfix version 1.1.11 categories mail maintainers eric@opendarwin.org depends_run path:/Library/StartupItems/DarwinPortsStartup:DarwinPortsStartup
+abook 154
+portdir mail/abook description {Address book with mutt support} platforms darwin name abook version 0.4.17 categories mail maintainers fkr-ml@grummel.net
 ethereal 200
 portdir net/ethereal description {Graphical network analyzer and capture tool} platforms darwin name ethereal depends_lib lib:libgtk.1:gtk version 0.9.7 categories net maintainers eric@opendarwin.org
 fetch 195
@@ -160,16 +170,22 @@ nylon 362
 portdir net/nylon description {A Unix SOCKS 4 and 5 proxy server} platforms darwin name nylon depends_lib lib:libevent:libevent version 1.0 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {nylon is a proxy server which currently supports SOCKS version 4 and 5 as well as a mirror mode which allows nylon to mirror services.}
 libnet 1001
 portdir net/libnet description {A C library for creating IP packets} platforms darwin name libnet version 1.0.2a categories net revision 0 maintainers jpm@opendarwin.org long_description {libnet is a high-level API (toolkit) allowing the application programmer to construct and inject network packets. It provides a portable and simplified interface for low-level network packet shaping, handling and injection. Libnet hides much of the tedium of packet creation from the application programmer such as multiplexing, buffer management, arcane packet header information, byte-ordering, OS-dependent issues, and much more. Libnet features portable packet creation interfaces at the IP layer and link layer, as well as a host of supplementary and complementary functionality. Using libnet, quick and simple packet assembly applications can be whipped up with little effort. With a bit more time, more complex programs can be written (Traceroute and ping were easily rewritten using libnet and libpcap).}
-dsniff 814
-portdir net/dsniff description {collection of tools for network auditing and penetration testing} platforms darwin variants {stable unstable} name dsniff depends_lib {lib::libpcap lib:libnet:libnet lib:libnids:libnids} categories net revision 0 maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
+dsniff 801
+portdir net/dsniff description {collection of tools for network auditing and penetration testing} platforms darwin variants {stable unstable} name dsniff depends_lib {lib:libnet:libnet lib:libnids:libnids} categories net revision 0 maintainers jpm@opendarwin.org long_description {dsniff is a collection of tools for network auditing and penetration testing. dsniff, filesnarf, mailsnarf, msgsnarf, urlsnarf, and webspy passively monitor a network for interesting data (passwords, e-mail, files, etc.). arpspoof, dnsspoof, and macof facilitate the interception of network traffic normally unavailable to an attacker (e.g, due to layer-2 switching). sshmitm and webmitm implement active monkey-in-the-middle attacks against redirected SSH and HTTPS sessions by exploiting weak bindings in ad-hoc PKI.}
 libnids 447
 portdir net/libnids description {E-component of Network Intrusion Detection System} platforms darwin name libnids depends_lib lib:libnet:libnet version 1.17rc1 categories net revision 0 maintainers jpm@opendarwin.org long_description {Libnids is an implementation of an E-component of Network Intrusion Detection System. It emulates the IP stack of Linux 2.0.x. Libnids offers IP defragmentation, TCP stream assembly and TCP port scan detection.}
-ncftp 324
-portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net maintainers fkr@grummel.net long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. http://www.ncftpd.com/ncftp/ has more informations.}
+ncftp 345
+portdir net/ncftp description {FTP client with an advanced user interface} platforms darwin name ncftp version 3.1.5 categories net revision 1 maintainers fkr@grummel.net long_description {NcFTP is a suite of FTP programms. It includes a FTP client with an advanced user interface. Please see http://www.ncftpd.com/ncftp/ for more information.}
+ngrep 114
+portdir net/ngrep description {Network grep} name ngrep version 1.40.1 categories net maintainers grace@flipt.com
 arla 212
 portdir net/arla description {free AFS implementation from KTH} platforms darwin variants krbafs name arla version 0.35.10 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description XXX
 ettercap 598
 portdir net/ettercap description {multipurpose sniffer/interceptor/logger for switched LAN} platforms darwin name ettercap depends_lib lib:dlcompat:dlcompat version 0.6.7 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {Ettercap is a multi-functional packet sniffer/interceptor/logger that works on switched LANs. It allows the active and passive dissection of numerous protocols, including ciphered ones, such as SSH1, and includes features for network and host analysis. Four modes are available: IP Based, MAC Address Based, ARP Based, and PublicARP Based.}
+tcpflow 764
+portdir net/tcpflow description {TCP flow recorder} platforms {darwin freebsd} name tcpflow version 0.20 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {tcpflow is a program that captures data transmitted as part of TCP connections (flows), and stores the data in a way that is convenient for protocol analysis or debugging. A program like tcpdump(4) shows a summary of packets seen on the wire, but usually doesn't store the data that's actually being transmitted. In contrast, tcpflow reconstructs the actual data streams and stores each flow in a separate file for later analysis. tcpflow understands TCP sequence numbers and will correctly reconstruct data streams regardless of retransmissions or out-of-order delivery.}
+dnstracer 374
+portdir net/dnstracer description {trace a chain of DNS servers to the source} platforms {darwin freebsd} name dnstracer version 1.6 categories net revision 0 maintainers jpm@opendarwin.org long_description {dnstracer determines where a given Domain Name Server (DNS) gets its information from, and follows the chain of DNS servers back to the servers which know the data.}
 teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
 freetype 165
@@ -234,6 +250,8 @@ xpm 344
 portdir x11/xpm description {The X Pixmap Library} platforms darwin name xpm version 3.4k categories {x11 graphics} long_description {XPM (X PixMap) is a format for storing/retrieving X pixmaps to/from files. It is used by a large number of common X applications and has become something of a de-facto standard.} maintainers jkh@opendarwin.org
 fvwm 416
 portdir x11/fvwm description {A very simple window manager supporting a pager} platforms darwin name fvwm depends_lib {lib:libX11.6:XFree86 lib:libXpm.4:xpm} version 1.24r categories {x11-wm x11} long_description {One of the earlier paging window managers with what is still considered to be a very elegant and minimal feature set yet highly configurable and expandable via plug-ins.} maintainers jkh@opendarwin.org
+vtwm 158
+portdir x11/vtwm description {Twm with a virtual desktop and optional Motif-like features} name vtwm version 5.4.6a categories x11 maintainers mdales@mac.com
 fftw 189
 portdir math/fftw description {Fast C routines to compute the Discrete Fourier Transform} platforms darwin name fftw version 2.1.3 categories math revision 0 maintainers jpm@opendarwin.org
 slrn 215
