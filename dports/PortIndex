@@ -82,6 +82,8 @@ libdvdcss 269
 portdir devel/libdvdcss description {portable abstraction library for DVD decryption} platforms darwin name libdvdcss version 1.2.3 categories devel maintainers fkr@opendarwin.org long_description {libdvdread provides a simple foundation for reading DVD-Video images.}
 libevent 574
 portdir devel/libevent description {asynchronous event library} platforms darwin name libevent version 0.6 categories devel revision 0 maintainers jpm@opendarwin.org long_description {The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached.libevent is meant to replace the asynchronous event loop found in event driven network servers. An application just needs to call event_dispatch() and can then add or remove events dynamically without having to change the event loop.}
+libsigc++ 159
+portdir devel/libsigc++ description {callback framework for c++} platforms darwin name libsigc++ version 1.0.4 categories devel maintainers fkr@opendarwin.org
 netinet-headers 222
 portdir devel/netinet-headers description {temporary port providing netinet missing headers for jaguar} platforms darwin name netinet-headers version 1.0.1 categories devel maintainers mike+missing-headers@gene-hacker.net
 orbit 480
@@ -123,7 +125,7 @@ portdir editors/joe description {Joe's Own Editor} platforms {darwin freebsd} na
 nano 491
 portdir editors/nano description {Nano's ANOther editor - enhanced free Pico Clone} platforms {darwin freebsd} variants unstable name nano version 1.0.9 categories editors revision 0 maintainers jpm@opendarwin.org long_description {GNU nano is a small and friendly text editor. Besides basic text editing, nano offers many extra features like an interactive search and replace, goto line number, auto-indentation, feature toggles, internationalization support, and filename tab completion.}
 vim 287
-portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.262 categories editors maintainers mij@opendarwin.org long_description {Vim is a virtually compatible, extremely enhanced version of the vi editor.}
+portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.271 categories editors maintainers mij@opendarwin.org long_description {Vim is a virtually compatible, extremely enhanced version of the vi editor.}
 bochs 488
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org long_description {Bochs is a highly portable open source IA-32 (x86) PC emulator written in C++, that runs on most popular platforms. It includes emulation of the Intel x86 CPU, common I/O devices, and a custom BIOS. Currently, bochs can be compiled to emulate a 386, 486 or Pentium CPU.} depends_run bin:wget:wget
 dopewars 438
@@ -374,8 +376,8 @@ chef 202
 portdir textproc/chef platforms {darwin freebsd} description {trunsletes inpoot text intu sveedeesh} name chef version 19930426 categories {textproc amusements} maintainers rooneg@electricjellyfish.net
 cowsay 199
 portdir textproc/cowsay platforms {darwin freebsd} description {Configurable talking characters in ASCII art} name cowsay version 3.03 categories {textproc amusements} maintainers jkh@opendarwin.org
-dict 197
-portdir textproc/dict description {Dictionary Server Protocol (RFC2229) client} platforms {darwin freebsd} name dict version 1.7.1 categories {textproc spelling} maintainers landonf@opendarwin.org
+dict 515
+portdir textproc/dict description {Dictionary Server Protocol (RFC2229) client} platforms {darwin freebsd} name dict version 1.7.1 categories {textproc spelling} homepage http://www.dict.org/ maintainers landonf@opendarwin.org long_description {The Dictionary Server Protocol (DICT) is a TCP transaction based query/response protocol that allows a client to access dictionary definitions from a set of natural language dictionary databases. dict(1) is a client which can access DICT servers from the command line.}
 docbook-xml 174
 portdir textproc/docbook-xml description {the docbook xml dtds} platforms darwin name docbook-xml version 4.2 categories textproc maintainers mike-docbookxml@gene-hacker.net
 docbook-xsl 140
