@@ -9,6 +9,9 @@ QU'EST-CE QUE DARWINPORTS
         (Darwin 6.0). Le système est portable, est écrit en TCL avec un set
         limité d'extensions TCL en C.
 
+		Le "DarwinPorts User Guide" est disponible à :
+		http://www.opendarwin.org/projects/darwinports/guide/
+
 	Pour une documentation plus appronfondie sur l'architecture interne
         de ce système de ports, reportez-vous au fichier base/docs/
         INTERNALS.
