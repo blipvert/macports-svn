@@ -1,0 +1,108 @@
+QU'EST-CE QUE LES PORTS DARWIN
+
+	Les ports Darwin est une infrastructure permettant de compiler, d'installer et d'empacter un logiciel, similaire en termes de fonctionnalités que l'architecture des ports FreeBSD afin de maintenir l'extensibilité future.
+
+	Les ports Darwin fonctionnent et permettent de compiler sur MacOS X 10.2 (Darwin 6.0). Le système est portable, est écrit en TCL avec un set limité d'extensions TCL en C.
+
+	Pour une documentation plus appronfondie sur l'architectture interne de ce système de ports, reportez-vous au fichier /base/docs/INTERNALS.
+
+	Notez svp que l'architecture des ports darwin est composé de deux parties. "L'infrastructure des ports darwin", qui réside dans le sous-répertoire base/ qui est le seul composant obligatoire du système, et le répertoire "dports" qui contient la description des logiciels supportés. Le dernier composant peut être optionnel et peut être récupéré sur demande par la biais du net ou une copie locale peut également être utilisée. Reportez-vous à la documentation sur /etc/ports/sources.conf ci-dessous.
+
+INSTALLATION
+
+    Étapes de l'installation :
+	1. make
+		Lancez 'make' pour compiler tout ce qui est nécessaire.
+
+	2. sudo make install
+		Lancez 'sudo make install' pour installer les ports darwin sur votre système.
+
+	3. [optionnel] éditez /etc/ports/ports.conf
+		Le fichier de configuration /etc.ports/ports.conf utilise
+		les mêmes directives qu'un fichier Portfile, et peut être
+		utilisé pour outrepasser toutes les options par défaut des
+		ports. Vous pouvez si vous le souhaitez activer les options
+		de "verbosité" et de déboguage dans ce fichier, la liste
+		des options disponibles est la suivante :
+
+		portdbpath - Spécifie l'emplacement où stocker les données spécifiques au système de ports.
+
+		ports_debug - Accepte "yes"[oui] ou "non"[non] comme valeur.
+			    Si utilisée, les messages de déboguage seront affichés.
+
+		port_verbose - Accepte "yes"[oui] ou "non"[non] comme valeur.
+			     Si utilisée, les messages d'informations seront affichés.
+
+	3. [optionnel] éditez /etc/ports/sources.conf
+		Le fichier /etc/ports/sources.conf liste l'emplacement des
+		hiérarchies des ports locale et distante. Par défaut, la
+		recherche s'effectuera dans votre répertoire relatif actuel
+		donc assurez-vous que vous êtes au premier niveau du
+		répertoire (darwinports) ou bien assurez-vous d'ajouter une
+		entrée pour votre hiérarchie locale des ports (normalement
+		le répertoire darwinports/dports)
+
+    Tout le code TCL nécessaire sera compilé et installé comme indiqué ci-
+    dessous:
+	[Mac OS X] /System/Library/Tcl/8.3/darwinports1.0
+	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
+	     - Librairie TCL permettant d'interagir avec le Système de 		       Ports Darwin
+
+	PREFIX est situé par défaut à /opt/local mais ce choix peut être outrepassé via la commande make
+	Ligne affectant l'installant les composants suivants :
+
+	$PREFIX/bin/port
+		- Utilitaire cli pour la construction du port
+	$PREFIX/share/darwinports/
+		- Librairies TCL internes du système de ports
+
+	Les fichiers suivants sont fournis en vue de la personnalisation du
+	système:
+
+	/etc/defaults/ports.conf
+	    - Réglages par défaut des ports pour tout le système
+	/etc/ports/ports.conf
+	    - Réglages personnels des ports pour l'utilisateur
+	/etc/ports/sources.conf
+	    - Liste des sources pour les ports (endroit où récupérer les
+	      données des ports)
+
+
+UTILISATION DE LA COMMANDE PORT
+
+    Si vous ne l'avez déjà fait, ajoutez /opt/local/bin à votre variable path (ou $PREFIX/bin si vous avez choisi d'installer les ports darwin autre-part). Si vous ne savez pas comment faire, ajoutez la ligne suivante dans votre fichier ~/.cshrc.
+
+	set path=($path /opt/local/bin)
+
+    Vos changements dans ~/cshrc ne seront pris en compte que lorsque vous ouvrirez un nouveau shell.
+
+    Pour mettre à jour vos index locaux, lancez la commande :
+
+	port sync
+
+    La commande suivante construira et installera le port :
+
+	port install <nom_du_port>
+
+    Pour rechercher un port spécifique, essayez d'utiliser "port search" :
+
+	port search vi
+
+    Réferrez-vous à la page man de "port" pour une documentation plus
+    complète sur cette commande.
+
+    Il est également possible d'effectuer des opérations, comme construire
+    ou récupérer, tous les ports du système en utilisant la commande
+    "portall". Elle prend les mêmes arguments essentiels que la commande
+    port mais opère de façon interactive sur chaque port dans dports/.
+    Lorsque vous effectuez un "make clean" depuis ce répertoire, par
+    exemple, un "portall clean" est également invoqué pour nettoyer
+    complètement.
+
+CRÉER DE NOUVEAUX PORTS
+
+    Un port consiste en un répertoire contenant un fichier Portfile et ses fichiers associés. Actuellement les seuls fichiers livrés avec un port sont les patchs, et sont au minimum censés être gardés.
+
+    Un fichier Portfile consiste en un code TCL valide, évalué par un interpréteur du Système de Ports Darwin. Les fichiers Portfiles utilisent une syntaxe très stricte composée de paire de type clé/valeur, permettant d'autoriser l'auteur d'utiliser à fond les fonctionnalités offertes par TCL lorsque cela lui est nécessaire.
+
+    Pour commencer reportez-vous au fichier doc/exampleport et la page man de portfile(7).
