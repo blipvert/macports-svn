@@ -64,22 +64,22 @@ ctags 740
 portdir devel/ctags description {Reimplementation of ctags(1)} platforms {darwin freebsd} name ctags version 5.3 categories devel maintainers pogma@opendarwin.org long_description {Exuberant Ctags generates an index (or tag) file of source language objects in source files that allows these items to be quickly and easily located by a text editor or other utility. Alternatively, it can generate a cross reference file which lists, in human-readable form, information about the various objects found in a set of source code files. Supported languages include: Assembler, AWK, ASP, BETA, Bourne/Korn/Zsh Shell, C, C++, COBOL, Eiffel, Fortran, Java, Lisp, Lua, Make, Pascal, Perl, PHP, Python, REXX, Ruby, S-Lang, Scheme, Tcl, Vim and Yacc.}
 cvsweb 412
 portdir devel/cvsweb description {WWW interface for CVS repositories} platforms darwin name cvsweb version 2.0.6 categories {devel www} revision 0 maintainers jpm@opendarwin.org long_description {FreeBSD-CVSweb is a WWW CGI script that allows remote users to browse a CVS repository tree via web. It can display the revision history of a file, as well as diffs between revisions and downloading the whole file.}
-dlcompat 188
-portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} platforms darwin name dlcompat version 20021117 categories devel maintainers eric@opendarwin.org
+dlcompat 310
+portdir devel/dlcompat description {dlopen(3) compatibility library for Mac OS X / Darwin} platforms darwin name dlcompat version 20021117 categories devel maintainers eric@opendarwin.org long_description {dlcompat provides the dlopen() interface for dynamic loading of modules for applications that need it.}
 gettext 537
 portdir devel/gettext description {GNU gettext package} platforms darwin name gettext depends_lib {lib:libiconv.2:libiconv lib:libdl.1:dlcompat} version 0.10.40 categories devel maintainers eric@opendarwin.org long_description {This is the GNU gettext package. It is interesting for authors or maintainers of other packages or programs which they want to see internationalized. As one step the handling of messages in different languages should be implemented. For this task GNU gettext provides the needed tools and library functions.}
-glib 193
-portdir devel/glib description {Library with data structure functions and other constructs} platforms {darwin freebsd} name glib version 1.2.10 categories devel maintainers eric@opendarwin.org
+glib 360
+portdir devel/glib description {Library with data structure functions and other constructs} platforms {darwin freebsd} name glib version 1.2.10 categories devel maintainers eric@opendarwin.org long_description {General-purpose library from the GTK+ team, includes support routines for C such as lists, trees, hashes, memory allocation, and many other things.}
 glib2 331
 portdir devel/glib2 description {Library with data structure functions and other constructs} platforms darwin name glib2 version 2.0.7 categories devel maintainers mij@opendarwin.org long_description {Glib is a library which includes support routines for C, such as lists, trees, hashes, memory allocation, and many other things.}
-gmp 179
-portdir devel/gmp description {GNU multiple precision arithmetic library} platforms {darwin freebsd} name gmp version 4.1 categories {devel math} maintainers bertrand@caudium.net
-jakarta-ant 212
-portdir devel/jakarta-ant description {Java opensource build system} platforms {darwin freebsd} variants darwin name jakarta-ant version 1.5.1 categories {java jakarta} revision 0 maintainers sean@fuzzymagic.com
+gmp 757
+portdir devel/gmp description {GNU multiple precision arithmetic library} platforms {darwin freebsd} name gmp version 4.1 categories {devel math} maintainers bertrand@caudium.net long_description {GNU MP is a library for arbitrary precision arithmetic, operating on signed integers, rational numbers, and floating point numbers. It has a rich set of functions, and the functions have a regular interface. GNU MP is designed to be as fast as possible, both for small operands and for huge operands. The speed is achieved by using fullwords as the basic arithmetic type, by using fast algorithms, by carefully optimized assembly code for the most common inner loops for a lots of CPUs, and by a general emphasis on speed (instead of simplicity or elegance).}
+jakarta-ant 463
+portdir devel/jakarta-ant description {Java opensource build system} platforms {darwin freebsd} variants darwin name jakarta-ant version 1.5.1 categories {java jakarta} revision 0 maintainers sean@fuzzymagic.com long_description {Ant is a Java based build tool. In theory it is kind of like make without make's wrinkles. Ant uses XML build files that defines a set of targets. Each target has dependencies (other targets) and contains a set of tasks to perform.}
 libcompat 192
 portdir devel/libcompat description {Compatibility library with functionality from 4BSD} platforms darwin name libcompat version 4.6.2-RELEASE categories devel maintainers eric@opendarwin.org
-libdvdcss 180
-portdir devel/libdvdcss description {portable abstraction library for DVD decryption} platforms darwin name libdvdcss version 1.2.3 categories devel maintainers fkr@opendarwin.org
+libdvdcss 269
+portdir devel/libdvdcss description {portable abstraction library for DVD decryption} platforms darwin name libdvdcss version 1.2.3 categories devel maintainers fkr@opendarwin.org long_description {libdvdread provides a simple foundation for reading DVD-Video images.}
 libevent 574
 portdir devel/libevent description {asynchronous event library} platforms darwin name libevent version 0.6 categories devel revision 0 maintainers jpm@opendarwin.org long_description {The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached.libevent is meant to replace the asynchronous event loop found in event driven network servers. An application just needs to call event_dispatch() and can then add or remove events dynamically without having to change the event loop.}
 netinet-headers 222
@@ -88,30 +88,30 @@ orbit 480
 portdir devel/orbit description {High-performance CORBA ORB with support for the C language} platforms darwin name orbit depends_lib {lib:glib:glib lib:libintl.1:gettext lib:libdl:dlcompat} version 0.5.17 categories devel revision 0 maintainers jpm@opendarwin.org long_description {ORBit is a high-performance CORBA ORB with support for the C language. It allows programs to send requests and receive replies from other programs, regardless of the locations of the two programs.}
 otest 567
 portdir devel/otest description {Unit testing framework for Objective-C} platforms darwin name otest depends_lib path:/Library/Frameworks/SenTestingKit.framework:sentestingkit version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
-pcre 184
-portdir devel/pcre description {Perl Compatible Regular Expressions Library} platforms {darwin freebsd} name pcre version 3.9 categories devel revision 1 maintainers ranger@befunk.com
-perforce 191
-portdir devel/perforce description {Fast source code management system} platforms {darwin freebsd} variants server name perforce version 02.1 categories devel maintainers eric@opendarwin.org
-pkgconfig 195
-portdir devel/pkgconfig description {System for managing library compile and link flags} platforms {darwin freebsd} name pkgconfig version 0.12.0 categories devel maintainers eric@opendarwin.org
+pcre 488
+portdir devel/pcre description {Perl Compatible Regular Expressions Library} platforms {darwin freebsd} name pcre version 3.9 categories devel revision 1 maintainers ranger@befunk.com long_description {The PCRE library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5, with just a few differences. The current implementation corresponds to Perl 5.005, with some additional features from the Perl development release.}
+perforce 345
+portdir devel/perforce description {Fast source code management system} platforms {darwin freebsd} variants server name perforce version 02.1 categories devel maintainers eric@opendarwin.org long_description {Perforce is a commercial revision control system that can be used gratis for developing free software. (see the WWW page for details).}
+pkgconfig 382
+portdir devel/pkgconfig description {System for managing library compile and link flags} platforms {darwin freebsd} name pkgconfig version 0.12.0 categories devel maintainers eric@opendarwin.org long_description {The pkg-config program is used to retrieve information about installed libraries in the system. It is typically used to compile and link against one or more libraries.}
 poll-emulator 323
 portdir devel/poll-emulator description {Library to provide poll(2) functionality} platforms {darwin freebsd} name poll-emulator version 1.3 categories devel revision 1 maintainers ranger@befunk.com long_description {This package implements the System V poll(2) system call for Unix-like systems that do not support poll.}
-popt 213
-portdir devel/popt description {A getopt(3) like library with a number of enhancements} platforms darwin name popt depends_lib lib:libintl.1:gettext version 1.7 categories devel maintainers landonf@opendarwin.org
+popt 527
+portdir devel/popt description {A getopt(3) like library with a number of enhancements} platforms darwin name popt depends_lib lib:libintl.1:gettext version 1.7 categories devel maintainers landonf@opendarwin.org long_description {popt is a command line parsing library. It contains a number of enhancements over getopt(3), including being fully reentrant, allowing users to alias command line arguments, providing convience functions for parsing strings into argv style arrays and popt can parse arbitrary argv style arrays.}
 pth 553
 portdir devel/pth description {GNU Portable Threads} platforms darwin name pth version 1.4.1 categories devel revision 0 maintainers jpm@opendarwin.org long_description {Pth is a very portable POSIX/ANSI-C based library for Unix platforms which provides non-preemptive priority-based scheduling for multiple threads of execution (\"multithreading\") inside server applications. All threads run in the same address space of the server application, but each thread has it's own individual program-counter, run-time stack, signal mask and errno variable.}
-readline 182
-portdir devel/readline description {Library that provides command line editing} platforms {darwin freebsd} name readline version 4.3 categories devel maintainers eric@opendarwin.org
-ruby-cocoa 185
-portdir devel/ruby-cocoa description {ruby bindings for writing cocoa programs} platforms darwin name ruby-cocoa version 0.3.2 categories devel maintainers rooneg@electricjellyfish.net
+readline 596
+portdir devel/readline description {Library that provides command line editing} platforms {darwin freebsd} name readline version 4.3 categories devel maintainers eric@opendarwin.org long_description {The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in. Both Emacs and vi editing modes are available. The Readline library includes additional functions to maintain a list of previously-entered command lines, to recall and perhaps reedit those lines, and perform csh-like history expansion on previous commands.}
+ruby-cocoa 465
+portdir devel/ruby-cocoa description {ruby bindings for writing cocoa programs} platforms darwin name ruby-cocoa version 0.3.2 categories devel maintainers rooneg@electricjellyfish.net long_description {RubyCocoa is a Ruby library for using Cocoa Objects on Mac OS X in Ruby scripts. You can use RubyCocoa to work with Cocoa objects in Ruby scripts, write Cocoa applications with Ruby and Interface Builder, develop small scale simple Cocoa applications and such.}
 senfoundation 508
 portdir devel/senfoundation description {Unit testing framework for Objective-C} platforms darwin name senfoundation version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
 sentestingkit 583
 portdir devel/sentestingkit description {Unit testing framework for Objective-C} platforms darwin name sentestingkit depends_lib path:/Library/Frameworks/SenFoundation.framework:senfoundation version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
 shikenjo 563
 portdir devel/shikenjo description {Unit testing framework for Objective-C} platforms darwin name shikenjo depends_lib path:/Library/Frameworks/SenTestingKit:sentestingkit version 25 categories devel maintainers michaelm@opendarwin.org long_description {OCUnit is a testing framework for Objective C in the Mac OS X, Mac OS X Server, YellowBox/Cocoa and WebObjects environments. This Objective C testing framework is a based on SUnit, Kent Beck's Smalltalk unit testing framework, also available for Java under the name JUnit, and is distributed as open source.}
-subversion 275
-portdir devel/subversion description {a cvs like version control system, but without the suck} platforms darwin name subversion depends_lib {lib:libexpat.0:expat lib:libneon.23:neon lib:libapr-0.0:apr} version 0.14.5 categories devel maintainers rooneg@electricjellyfish.net
+subversion 434
+portdir devel/subversion description {a cvs like version control system, but without the suck} platforms darwin name subversion depends_lib {lib:libexpat.0:expat lib:libneon.23:neon lib:libapr-0.0:apr} version 0.14.5 categories devel maintainers rooneg@electricjellyfish.net long_description {Subversion is a version control system designed to be as similar to cvs(1) as possible, while fixing many outstanding problems with cvs(1).}
 twisted 792
 portdir devel/twisted description {An event-based Python framework for internet applications} platforms darwin name twisted version 1.0.0 categories {devel net python} revision 0 maintainers jpm@opendarwin.org long_description {Twisted is an event-based framework for internet applications. It includes a web server, a telnet server, a chat server, a news server, a generic client and server for remote object access, and APIs for creating new protocols and services. Twisted supports integration of the Tk, GTK+, Qt or wxPython event loop with its main event loop. The Win32 event loop is also supported, as is basic support for running servers on top of Jython. Twisted works with Python 2.1 and Python 2.2. Twisted even supports the CVS versions of Python, so it is ready for Python 2.3.}
 viewcvs 551
