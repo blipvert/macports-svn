@@ -344,6 +344,8 @@ mhash 322
 portdir security/mhash description {library provides an easy way to access strong hashes such as MD5 and SHA1} platforms darwin name mhash version 0.8.17 categories security revision 0 maintainers jpm@opendarwin.org long_description {Libmhash is a library which implements some hash algorithms like crc32, md5 and sha-1.}
 skey 202
 portdir security/skey description {OpenBSD One Time Passwords (OTP)} platforms {darwin freebsd netbsd} name skey version 1.1.5 categories security maintainers drernie@opendarwin.org long_description {}
+pdksh 221
+portdir shells/pdksh description {A Public Domain clone of ksh} platforms darwin name pdksh version 5.2.14p2 categories shells maintainers ryanwilcox@mac.com long_description {The public domain version of the Korn Shell}
 cdrtools 446
 portdir sysutils/cdrtools description {ISO 9660 filesystem and CD creation tools} platforms darwin name cdrtools version 1.11a40 categories sysutils homepage http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html revision 1 long_description {The cdrtools software includes programs to create and/or extract ISO 9660 filesystems, verify their integrity, and write them to a disc.} maintainers fkr@opendarwin.org
 darwinports 430
