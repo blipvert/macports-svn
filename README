@@ -40,7 +40,7 @@ INSTALLING
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
 	    - TCL library for interfacing with the Darwin Ports System
-	/opt/local/bin/portbuild
+	/opt/local/bin/port
 	    - Command line port building utility
 	/opt/local/share/darwinports/
 	    - TCL libraries internal to the ports system
@@ -48,16 +48,24 @@ INSTALLING
 	    - System-wide port default settings
 
 
-USING PORTBUILD
+USING THE PORT COMMAND
+
+    If you haven't already, add /opt/local/bin to your path. If you're
+unsure how, add the following line to your ~/.cshrc file.
+
+	set path=($path /opt/local/bin)
+
+    Your changes to ~/.cshrc will not take effect until you have opened
+a new shell.
 
     All included port descriptions are currently stored in the software/
 subdirectory of the ports distribution, in the form of:
 
 	software/<category>/<portname>
 
-    To build a port, cd to the port's directory and run 'portbuild'. To install
-a port, run 'portbuild install'. Please refer to the portbuild man page for
-complete documentation on the 'portbuild' command.
+    To build a port, cd to the port's directory and run 'port'. To install
+a port, run 'port install'. Please refer to the port man page for
+complete documentation on the port command.
 
 CREATING NEW PORTS
 
