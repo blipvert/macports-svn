@@ -96,8 +96,6 @@ vim 196
 portdir editors/vim description {Vi workalike with many additional features} platforms {darwin freebsd} variants x11 name vim version 6.1.174 categories editors maintainers landonf@opendarwin.org
 bochs 199
 portdir emulators/bochs description {cross platform ia-32 emulator} platforms darwin name bochs version 1.4.1 categories emulators revision 0 maintainers jpm@opendarwin.org depends_run bin:wget:wget
-exim 211
-portdir exim description {complete replacement for sendmail} platforms darwin name exim depends_lib path:/usr/include/netinet/ip_var.h:netinet-headers version 4.10 categories mail maintainers fkr@opendarwin.org
 fortune 220
 portdir games/fortune description {Infamous electronic fortune-cookie generator} platforms darwin name fortune depends_lib lib:libcompat.1:libcompat version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 larn 164
@@ -200,6 +198,8 @@ ettercap 598
 portdir net/ettercap description {multipurpose sniffer/interceptor/logger for switched LAN} platforms darwin name ettercap depends_lib lib:dlcompat:dlcompat version 0.6.7 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {Ettercap is a multi-functional packet sniffer/interceptor/logger that works on switched LANs. It allows the active and passive dissection of numerous protocols, including ciphered ones, such as SSH1, and includes features for network and host analysis. Four modes are available: IP Based, MAC Address Based, ARP Based, and PublicARP Based.}
 fetch 195
 portdir net/fetch description {FreeBSD file fetching utility} platforms darwin name fetch depends_lib lib:libfetch.3:libfetch version 4.6.2-RELEASE categories net maintainers eric@opendarwin.org
+fping 185
+portdir net/fping platforms darwin description {A scriptable ping program to check if multiple hosts are up} name fping version 2.4b2_to categories net maintainers marius@caos.aamu.edu
 fragroute 550
 portdir net/fragroute description {intercept, modify, and rewrite egress traffic} platforms darwin name fragroute depends_lib {lib:libpcap:libpcap lib:libdnet:libdnet lib:libevent:libevent} version 1.2 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description {fragroute intercepts, modifies, and rewrites egress traffic destined for a specified host, implementing most of the attacks described in the Secure Networks {Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection} paper of January 1998.}
 gaim 186
