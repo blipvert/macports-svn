@@ -50,7 +50,7 @@ INSTALLATION
 
 		prefix - Indique la base dans laquelle installer les ports
 
-	3. éditez /etc/ports/sources.conf
+	4. éditez /etc/ports/sources.conf
 		Le fichier /etc/ports/sources.conf liste l'emplacement des
 		hiérarchies des ports locale et distante. Assurez-vous bien
 		d'ajouter une entrée pour votre hiérarchie locale des ports

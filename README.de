@@ -39,7 +39,7 @@ INSTALLATION
 	prefix - legt das Verzeichniss fest, wo DarwinPorts-Software installiert
         wird.
 
-    3. /etc/ports/sources.conf editieren
+    4. /etc/ports/sources.conf editieren
         In der Datei '/etc/ports/sources.conf' wird angegeben, wo
         das 'dports/'-Verzeichniss liegt. Dieses muss angepasst werden,
         damit das DarwinPorts System benutzt werden kann!

@@ -43,7 +43,7 @@ INSTALLATION
 
 		prefix - Specifies directory in which to install ports
 
-	3. edit /etc/ports/sources.conf
+	4. edit /etc/ports/sources.conf
 		The /etc/ports/sources.conf file lists the location of
 		both local and remote port software hierarchies. Be sure
 		to add an entry for your local ports tree
