@@ -208,6 +208,8 @@ gnuplot 232
 portdir math/gnuplot description XXX platforms darwin variants x11 name gnuplot depends_lib {lib:libgd:gd lib:libreadline:readline} version 3.8h.0 categories {math sci} revision 0 maintainers jpm@opendarwin.org long_description XXX
 arla 212
 portdir net/arla description {free AFS implementation from KTH} platforms darwin variants krbafs name arla version 0.35.10 categories {net security} revision 0 maintainers jpm@opendarwin.org long_description XXX
+cftp 140
+portdir net/cftp description {full-screen ftp client} platforms darwin name cftp version 0.12 categories net maintainers fkr@opendarwin.org
 curl 263
 portdir net/curl description {Tool for transferring files with URL syntax} platforms {darwin freebsd} variants {ssl ipv6} name curl depends_lib {lib:libpcap:libpcap lib:libdl:dlcompat} version 7.10.2 categories {net www} revision 1 maintainers jpm@opendarwin.org
 darkstat 369
