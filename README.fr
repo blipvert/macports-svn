@@ -1,27 +1,28 @@
 QU'EST-CE QUE DARWINPORTS
 
 	DarwinPorts est une infrastructure permettant de compiler,
-        d'installer et d'empacter un logiciel, similaire en termes de
+        d'installer et d'empaqueter un logiciel, similaire en termes de
         fonctionnalités à l'architecture des ports FreeBSD afin de
         maintenir une extensibilité future.
 
 	DarwinPorts fonctionne et permet d'être compilé sur MacOS X 10.2
-        (Darwin 6.0). Le système est portable, est écrit en TCL avec un set
-        limité d'extensions TCL en C.
+        (Darwin 6.0) et MacOS X 10.3 (Darwin 7.0.0). Le système est
+	portable, et est écrit en TCL avec un set limité d'extensions TCL
+	en C.
 
 		Le "DarwinPorts User Guide" est disponible à :
 		http://www.opendarwin.org/projects/darwinports/guide/
 
-	Pour une documentation plus appronfondie sur l'architecture interne
-        de ce système de ports, reportez-vous au fichier base/docs/
-        INTERNALS.
+	Pour une documentation plus appronfondie sur l'architecture
+	interne de ce système de ports, reportez-vous au fichier
+	base/docs/INTERNALS.
 
 	Notez svp que l'architecture de DarwinPorts est composé de deux
         parties. "L'infrastructure de DarwinPorts", qui réside dans le
         sous-répertoire base/ est le seul composant obligatoire du système,
         et le répertoire "dports" qui contient la description des logiciels
         portés. Le dernier composant peut être optionnel et peut être
-        récupéré sur  le net ou une copie locale peut également être
+        récupéré sur le net ou une copie locale peut également être
         utilisée.
         Reportez-vous à la documentation sur /etc/ports/sources.conf
         ci-dessous.
@@ -29,15 +30,22 @@ QU'EST-CE QUE DARWINPORTS
 INSTALLATION
 
     Étapes de l'installation :
-	1. make
+
+	1. cd base/
+	   ./configure
+		Vous place dans le répertoire base/ et lance le script
+		configure. Des paramètres peuvent être passés au script
+		(cf. ci-dessous).
+
+	2. make
                 Lancez 'make' pour compiler tout ce qui est nécessaire.
 
-	2. sudo make install
+	3. sudo make install
 		Lancez 'sudo make install' pour installer DarwinPorts
 		sur votre système.
 
-	3. [optionnel] éditez /etc/ports/ports.conf
-		le fichier de configuration "/etc/ports/ports.conf"
+	4. [optionnel] éditez /etc/ports/ports.conf
+		Le fichier de configuration "/etc/ports/ports.conf"
 		définit la majeure partie des options de configuration de
 		l'infrastructure de DarwinPorts si vous desirez changer les
 		chemins et emplacements ou sonts stockés les données,
@@ -56,14 +64,14 @@ INSTALLATION
 
     Tout le code TCL nécessaire sera compilé et installé comme indiqué ci-
     dessous:
-	[Mac OS X] /System/Library/Tcl/darwinports1.0
+	[MacOS X] /System/Library/Tcl/darwinports1.0
 	[FreeBSD] /usr/local/lib/tcl8.3/darwinports1.0
-	 	- Librairie TCL permettant d'interagir avec le système
-                DarwinPorts
+	 	  - Librairie TCL permettant d'interagir avec le système
+                    DarwinPorts.
 
 	PREFIX est situé par défaut à /opt/local mais ce choix peut être
-	modifié en changeant le répertoire base/répertoire et en lançeant
-        manuellement ./configure avec l'argument --prefix
+	modifié en changeant le répertoire  pour base/ et en lançeant
+	manuellement ./configure avec l'argument --prefix
 
 	$PREFIX/bin/port
 		- Utilitaire en mode texte pour la compilation de port
@@ -76,7 +84,7 @@ INSTALLATION
 	/etc/defaults/ports.conf
 	    - Réglages par défaut des ports pour tout le système
 	/etc/ports/ports.conf
-	    - Réglages personnels des ports pour l'utilisateur
+	    - Réglages personnels des ports pour les utilisateurs
 	/etc/ports/sources.conf
 	    - Liste des sources pour les ports (endroit où récupérer les
 	      données des ports)
