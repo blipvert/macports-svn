@@ -12,10 +12,30 @@ architecture, refer to docs/INTERNALS.
 
 INSTALLING
 
-    Summary:
+    Installation Steps:
         1. make
+		Run 'make' within the darwinports directory to compile
+		all necessary software.
+
 	2. sudo make install
+		Run 'sudo make install' within the darwinports directory
+		to install darwinports on your system.
+
 	3. edit /etc/ports.conf
+		The /etc/ports.conf configuration file takes the same
+		directives as a Portfile, and can be used to override all
+		ports' defaults. There are optional and required directives
+		that you should configure at install time.
+
+		sysportpath - (required) Specifies the path to the software
+			    directory. Used to find and build port
+			    dependencies
+
+		ports_debug - (optional) Takes either a "yes" or "no" value.
+			    If set, debug messages are printed
+
+		ports_verbose - (optional) Takes either a "yes" or "no" value.
+			    If set, informational messages are printed
 
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
@@ -27,17 +47,6 @@ INSTALLING
 	/etc/defaults/ports.conf
 	    - System-wide port default settings
 
-    The /etc/ports.conf configuration file takes the same directives as
-a Portfile, and can be used to override all ports' defaults. There are optional
-and required directives that you should configure at install time.
-
-	sysportpath	- (required) Specifies the path to the software/
-			    directory. Used to find and build port
-			    dependencies
-	ports_debug	- (optional) Takes either a "yes" or "no" value.
-			    If set, debug messages are printed
-	ports_verbose	- (optional) Takes either a "yes" or "no" value.
-			    If set, informational messages are printed
 
 USING PORTBUILD
 
