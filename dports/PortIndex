@@ -330,12 +330,16 @@ htmldoc 449
 portdir textproc/htmldoc description {Converts HTML files to PDF or PostScript} platforms darwin name htmldoc depends_lib {lib:libjpeg.9:jpeg lib:libpng.3:libpng} version 1.8.23 categories textproc maintainers mij@opendarwin.org long_description {htmldoc can convert HTML files to PDF or PostScript, generate a table-of-contents for books, and generate indexed HTML files. It also generates files on-the-fly for web applications or for batch jobs.}
 ispell 213
 portdir textproc/ispell platforms {darwin freebsd} description {An interactive spelling checker for multiple languages} name ispell version 3.2.06 categories {textproc spelling} maintainers landonf@opendarwin.org
+jive 155
+portdir textproc/jive description {Convert English text to Jive} platforms darwin name jive version 1.1 categories textproc maintainers mij@opendarwin.org
 libiconv 321
 portdir textproc/libiconv platforms {darwin freebsd} description {Character set conversion library} name libiconv version 1.8 categories textproc maintainers eric@opendarwin.org long_description {A character-set conversion library which implements the iconv() API for dealing with unicode and other types of conversion.}
 libxml2 197
 portdir textproc/libxml2 description {gnome xml library} platforms darwin name libxml2 depends_lib lib:libiconv:libiconv version 2.4.25 categories textproc maintainers mike+libxslt@gene-hacker.net
 libxslt 209
 portdir textproc/libxslt description {gnome xslt library and xsltproc} platforms darwin name libxslt depends_lib lib:libxml2:libxml2 version 1.0.21 categories textproc maintainers mike+libxslt@gene-hacker.net
+man2html 262
+portdir textproc/man2html description {Convert nroff man pages to HTML} platforms darwin name man2html version 3.0.1 categories textproc maintainers mij@opendarwin.org long_description {man2html is a utility to convert UNIX nroff manual pages into HTML format.}
 mmencode 659
 portdir textproc/mmencode description {Translate to and from mail-oriented encoding formats} platforms darwin name mmencode version 2.7 categories textproc maintainers mij@opendarwin.org long_description {The mimencode program simply converts a byte stream into (or out of) one of the standard mail encoding formats defined by MIME, the proposed standard for internet multimedia mail formats. Such an encoding is necessary because binary data cannot be sent through the mail. The encodings under- stood by mimencode are preferable to the use of the uuencode/uudecode programs, for use in mail, in several respects that were important to the authors of MIME.}
 openjade 186
@@ -350,6 +354,8 @@ tnef2txt 421
 portdir textproc/tnef2txt description {Converts Microsoft TNEF attachments to ASCII text} platforms darwin name tnef2txt version 1.4 categories textproc maintainers mij@opendarwin.org long_description {This is a simple program used to decode Microsoft's Translation Neutral Encapsulation Format (TNEF), which is used by various Microsoft OS products to transfer MAPI information through text only gateways such as SMTP.}
 tth 143
 portdir textproc/tth description {a TeX to HTML transaltor} platforms darwin name tth version 3.13 categories print maintainers digdog@mac.com
+txt2html 496
+portdir textproc/txt2html description {Convert ASCII text to HTML} platforms darwin name txt2html version 1.35 categories textproc maintainers mij@opendarwin.org long_description {txt2html is a Perl program that converts plain text to HTML. It supports headings, lists, simple character markup, hyperlinking, and is highly customizable. It recognizes some of the structure of the source document (whitespace, typographic layout, etc.), and attempts to mark that structure explicitly using HTML.}
 apache 529
 portdir www/apache platforms {darwin freebsd} description {The extremely popular Apache http server} variants {mod_perl mod_perl_expt} name apache version 1.3.27 categories www revision 1.0 maintainers mike+apacheport@gene-hacker.net long_description {Apache is an HTTP server designed as a plug-in replacement for the NCSA server version 1.3 (or 1.4). It fixes numerous bugs in the NCSA server and includes many frequently requested new features, and has an API which allows it to be extended to meet users' needs more easily.}
 libwww 384
@@ -360,6 +366,8 @@ lynx 142
 portdir www/lynx description {Text-based web browser} platforms darwin name lynx version 2.8.4 categories www maintainers eric@opendarwin.org
 neon 466
 portdir www/neon description {An HTTP and WebDAV client library with a C interface} platforms darwin name neon depends_lib lib:libexpat.0.4:expat version 0.23.5 categories www maintainers rooneg@electricjellyfish.net long_description {neon is an HTTP and WebDAV client library with a C language API. It provides a high-level interface to HTTP and WebDAV methods and a low-level interface to HTTP request handling, easily allowing the implementation of new methods.}
+urlview 145
+portdir www/urlview description {URL extractor/launcher} platforms darwin name urlview version 0.9 categories www maintainers mij@opendarwin.org
 w3m 159
 portdir www/w3m description {pager/text based browser} platforms darwin variants m17n name w3m version 0.3.1 categories www maintainers charlie@rubberduck.com
 fluxbox 324
