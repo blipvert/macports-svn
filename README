@@ -75,13 +75,21 @@ INSTALLATION
 USING THE PORT COMMAND
 
     If you haven't already, add /opt/local/bin to your path (or $PREFIX/bin
-if you've elected to install DarwinPorts somewhere else). If you're
-unsure how, add the following line to your ~/.cshrc file.
+if you've elected to install DarwinPorts somewhere else). 
+
+	If you're unsure how, and using Jaguar (OS X 10.2), add the following 
+line to your ~/.cshrc file.  (This also applies if you're using tcsh in 
+Panther.)
 
 	set path=($path /opt/local/bin)
+	
+	If you're using Panther (OS X 10.3), add the following line to your 
+~/.profile file.  (This also applies if you're using a bourne shell in 
+Jaguar.)
+	
+	export PATH=$PATH:/opt/local/bin
 
-    Your changes to ~/.cshrc will not take effect until you have opened
-a new shell.
+    Your changes will not take effect until you have opened a new shell.
 
     The following command will build and install a port:
 
