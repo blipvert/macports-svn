@@ -456,8 +456,8 @@ apache 529
 portdir www/apache platforms {darwin freebsd} description {The extremely popular Apache http server} variants {mod_perl mod_perl_expt} name apache version 1.3.27 categories www revision 1.0 maintainers mike+apacheport@gene-hacker.net long_description {Apache is an HTTP server designed as a plug-in replacement for the NCSA server version 1.3 (or 1.4). It fixes numerous bugs in the NCSA server and includes many frequently requested new features, and has an API which allows it to be extended to meet users' needs more easily.}
 libwww 384
 portdir www/libwww platforms darwin description {The W3C WWW Reference Library} name libwww version 5.4.0 categories www maintainers landonf@opendarwin.org long_description {Libwww is a general-purpose Web API written in C for Unix and Windows (Win32). With a highly extensible and layered API, it can accommodate many different types of applications including clients, robots, etc.}
-links 308
-portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} variants x11 name links version 2.1pre3 categories www long_description {Lynx-like WWW browser that supports tables, menus, and so on for text-only displays.} maintainers landonf@opendarwin.org
+links 329
+portdir www/links description {Lynx-like WWW browser that supports tables, menus, etc} platforms {darwin freebsd} variants x11 name links version 2.1pre7 categories www long_description {Lynx-like WWW browser with text and graphics modes with many features like displaying tables, menus, etc.} maintainers landonf@opendarwin.org
 lynx 360
 portdir www/lynx description {Text-based web browser} platforms darwin name lynx version 2.8.4 categories www maintainers eric@opendarwin.org long_description {lynx is a program which allows a user to access World-Wide Web servers and other information servers. It uses only ascii representation so that it can be used from ascii-terminals and dial-in lines.}
 neon 503
