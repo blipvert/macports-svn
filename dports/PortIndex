@@ -194,6 +194,8 @@ teTeX 205
 portdir print/teTeX description {TeX and METAFONT} platforms darwin name teTeX depends_lib {lib:libpng.3:libpng lib:libwwwcore.0:libwww} version 3.14159 categories print maintainers landonf@opendarwin.org
 freetype 165
 portdir print/freetype description {Free and portable render engine for TrueType fonts} name freetype version 2.1.1 categories print maintainers eric@opendarwin.org
+a2ps 162
+portdir print/a2ps description {an Any to PostScript filter.} platforms darwin name a2ps version 4.13b categories print revision 0 maintainers jpm@opendarwin.org
 gnupg 173
 portdir security/gnupg description {GNU pretty-good-privacy package} platforms {darwin freebsd} name gnupg version 1.2.0 categories security maintainers eric@opendarwin.org
 krbafs 546
