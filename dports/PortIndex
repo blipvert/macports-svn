@@ -422,6 +422,8 @@ freeradius 499
 portdir sysutils/freeradius description {Free Radius Implementation} platforms {darwin freebsd} name freeradius version 0.8.1 categories sysutil homepage http://www.freeradius.org/ maintainers sef@apple.com long_description {The FreeRADIUS Server Project is an attempt to create a high-performance and highly-configurable GPLd free RADIUS server. The server is similar to Livongston's 2.0 server. FreeRADIUS is a variant of the Cistron RADIUS server, but they don't share a lot in common any more.}
 pilot-link 244
 portdir sysutils/pilot-link description {palm-pilot libraries and tools} platforms darwin name pilot-link depends_lib {lib:libiconv:libiconv lib:libreadline:readline} version 0.10.99 categories sysutils revision 1 maintainers ranger@befunk.com
+portmanager 271
+portdir sysutils/portmanager description {The DarwinPorts Cocoa GUI client} platforms darwin name portmanager depends_lib bin:port:darwinports version 0.0 categories {sysutils aqua} homepage http://www.opendarwin.org/projects/dp-cocoa maintainers michaelm@opendarwin.org
 rpm 237
 portdir sysutils/rpm platforms darwin description {RedHat Package Manager} variants darwin name rpm depends_lib {lib:libbz2.1.0:bzip2 lib:libiconv.2:libiconv} version 4.0.4 categories {sysutils archivers} maintainers ssen@opendarwin.org
 screen 736
