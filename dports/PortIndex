@@ -166,8 +166,8 @@ xracer 361
 portdir games/xracer description {WipeOut clone for OpenGL and X11} platforms darwin name xracer depends_lib {lib:libdl.1:dlcompat lib:libjpeg.9:jpeg lib:libglut.3:glut lib:libX11.6:XFree86} version 0.96.9 categories {x11 games} long_description {XRacer is a Wipeout clone. At the moment it is incomplete, but work is undergoing} maintainers jkh@opendarwin.org
 xscorch 572
 portdir games/xscorch description {multiplayer tank shoot-em-up game} platforms darwin name xscorch depends_lib {lib:libmikmod.2:libmikmod lib:libgtk.1:gtk} version 0.1.15 categories games homepage http://chaos2.org/xscorch/ maintainers mij@opendarwin.org long_description {XScorch is a clone of the olden-days DOS game Scorch. It is an extremely addictive war game where any mixture of human and computer AIs control separate tanks (teams are possible) and attempt to blow up or arrange to blow up the other tanks on the field. The last tank on the field is the winner.}
-gd 753
-portdir graphics/gd description {GD creates PNG and JPEG images, among other formats} platforms darwin variants x11 name gd depends_lib {lib:libpng:libpng lib:libjpeg:jpeg} version 1.8.4 categories graphics maintainers mike+gdport@gene-hacker.net long_description {gd is a graphics library. It allows your code to quickly draw images complete with lines, arcs, text, multiple colors, cut and paste from other images, and flood fills, and write out the result as a .PNG file. This is particularly useful in World Wide Web applications, where .PNG is the format used for inline images. gd is not a paint program. If you are looking for a paint program, you are looking in the wrong place. If you are not a programmer, you are looking in the wrong place.}
+gd 760
+portdir graphics/gd description {GD creates PNG and JPEG images, among other formats} platforms darwin variants x11 name gd depends_lib {lib:libpng:libpng lib:libjpeg:jpeg} version 1.8.4 categories graphics revision 1 maintainers michaelm@opendarwin.org long_description {gd is a graphics library. It allows your code to quickly draw images complete with lines, arcs, text, multiple colors, cut and paste from other images, and flood fills, and write out the result as a .PNG file. This is particularly useful in World Wide Web applications, where .PNG is the format used for inline images. gd is not a paint program. If you are looking for a paint program, you are looking in the wrong place. If you are not a programmer, you are looking in the wrong place.}
 gdk-pixbuf 528
 portdir graphics/gdk-pixbuf description {generic image handling library for Gtk+ programs} platforms darwin name gdk-pixbuf version 0.18.0 categories graphics homepage http://www.gnome.org/ depends_build {lib:libtiff.3:tiff lib:libjpeg.9:jpeg lib:libpng.3:libpng lib:libglib.1:glib lib:libgtk.1:gtk lib:libdl.1:dlcompat} maintainers mij@opendarwin.org long_description {The GdkPixBuf library provides a number of features, such as image loading facilities, a cache interface, and rendering of a GdkPixBuf into various formats.}
 gimp 860
@@ -222,14 +222,14 @@ xchat 377
 portdir irc/xchat description {IRC client with gtk and text interfaces} platforms darwin name xchat depends_lib {lib:libintl.1:gettext lib:libgtk.1:gtk} version 1.8.11 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat is a graphical IRC client based on GTK that has many features and can be scripted with Perl and/or Python.}
 xchat2 374
 portdir irc/xchat2 description {IRC client for gtk2} platforms darwin variants xft name xchat2 depends_lib {lib:libintl.1:gettext lib:libgtk.2:gtk2} version 2.0.0 categories irc homepage http://www.xchat.org/ maintainers mij@opendarwin.org long_description {XChat2 is a graphical IRC client based on GTK2 that has many features and can be scripted with Perl and/or Python.}
-g77 153
-portdir lang/g77 description {gnu fortran 77 comiler} platforms darwin name g77 version 3.1-20020420 categories lang maintainers michaelm@opendarwin.org
+g77 167
+portdir lang/g77 description {gnu fortran 77 comiler} platforms {darwin freebsd} name g77 version 3.2.2 categories lang revision 2 maintainers michaelm@opendarwin.org
 gawk 387
 portdir lang/gawk platforms darwin description {The GNU awk utility.} name gawk version 3.1.1 categories lang homepage http://www.gnu.org/software/gawk/gawk.html maintainers marius@caos.aamu.edu long_description {This is GNU Awk. It should be upwardly compatible with the Bell Labs research version of awk. It is almost completely compliant with the 1993 POSIX 1003.2 standard for awk.}
 nqc 153
 portdir lang/nqc description {Not-Quite-C Lego RCX Compiler} platforms darwin name nqc version 2.4.r3 categories lang maintainers landonf@opendarwin.org
-perl5.8 212
-portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 depends_lib lib:libdb:db4 version 5.8.0 categories lang maintainers michaelm@opendarwin.org
+perl5.8 186
+portdir lang/perl5.8 description {Perl 5.8.0} platforms {darwin freebsd} variants {threads freebsd darwin} name perl5.8 version 5.8.0 categories lang maintainers michaelm@opendarwin.org
 python 203
 portdir lang/python description {An interpreted, object-oriented programming language} platforms darwin variants {nothreads puredarwin} name python version 2.2.2 categories lang maintainers pat@ekman.cx
 ruby 190
@@ -242,6 +242,8 @@ abook 406
 portdir mail/abook description {Address book with mutt support} platforms {darwin freebsd} name abook version 0.4.17 categories mail homepage http://abook.sourceforge.net revision 3 long_description {abook uses curses libs and is able to import addressbooks from pine and netscape (ldif). Exports to mutt alias, html, pine, gcrd (GnomeCard), csv, elm alias, and plain text.} maintainers fkr@opendarwin.org
 exim 560
 portdir mail/exim description {complete replacement for sendmail} platforms darwin name exim depends_lib path:/usr/include/netinet/ip_var.h:netinet-headers version 4.12 categories mail homepage http://www.exim.org/ revision 2 long_description {Exim is a mail transfer agent (MTA) developed at the University of Cambridge for use on Unix systems connected to the Internet. It is freely available under the terms of the GNU General Public Licence. In overall style it is similar to Smail 3, but its facilities are more extensive.} maintainers fkr@opendarwin.org
+imap-uw 281
+portdir mail/imap-uw description {University of Washington IMAP daemon} platforms darwin variants ssl_plain name imap-uw version 2002b categories mail homepage http://www.washington.edu/imap/ maintainers mij@opendarwin.org long_description {{University of Washington IMAP daemon}}
 mutt 665
 portdir mail/mutt description {Mongrel of Mail User Agents (part Elm, Pine, Mush, mh, etc)} platforms darwin variants {pop imap ssl nntp} name mutt depends_lib lib:libiconv.2:libiconv version 1.4 categories mail long_description {Mutt -- {The Mongrel of Mail User Agents} (part Elm, part Pine, part mh, part slrn, part everything else) is an interactive screen-oriented mailer program that supersedes Elm, Pine, mail and mailx. Features include color support, message threading, MIME support (including RFC1522 support for encoded headers), customizable key bindings, POP3, Delivery Status Notification (DSN) support, and PGP/MIME.} maintainers eric@opendarwin.org
 newmail 500
@@ -560,8 +562,8 @@ vtwm 175
 portdir x11/vtwm description {Twm with a virtual desktop and optional Motif-like features} platforms darwin name vtwm version 5.4.6a categories x11 maintainers mdales@mac.com
 wmclock 429
 portdir x11/wmclock description {A dockable clock applet} platforms {darwin freebsd} name wmclock version 1.0.12.2 categories x11 depends_build lib:libX11.6:XFree86 maintainers landonf@opendarwin.org long_description {Wmclock is an applet which displays the date and time in a dockable tile in the same style as the clock from the NEXTSTEP(tm) operating system. Wmclock is specially designed for the WindowMaker window manager.}
-XFree86 247
-portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.2.1.1 categories x11 maintainers eric@opendarwin.org long_description {The XFree86 project's X window system implementation}
+XFree86 289
+portdir x11/XFree86 description {X11R6 windowing system} platforms {darwin freebsd} variants devel name XFree86 version 4.3.0 categories x11 homepage http://www.xfree86.org/ revision 2 maintainers eric@opendarwin.org long_description {The XFree86 project's X window system implementation}
 xpm 344
 portdir x11/xpm description {The X Pixmap Library} platforms darwin name xpm version 3.4k categories {x11 graphics} long_description {XPM (X PixMap) is a format for storing/retrieving X pixmaps to/from files. It is used by a large number of common X applications and has become something of a de-facto standard.} maintainers jkh@opendarwin.org
 xsnow 276
