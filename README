@@ -50,21 +50,29 @@ INSTALLATION
     All necessary code and TCL will be compiled and installed as follows:
 	/System/Library/Tcl/8.3/darwinports1.0
 	    - TCL library for interfacing with the Darwin Ports System
-	/opt/local/bin/port
+
+	PREFIX is set to /opt/local but can be overridden on the make command
+	line and affects the installation of the following components:
+
+	$PREFIX/bin/port
 	    - Command line port building utility
-	/opt/local/share/darwinports/
+	$PREFIX/share/darwinports/
 	    - TCL libraries internal to the ports system
+
+	The following files are provided for customization of the system:
+
 	/etc/defaults/ports.conf
 	    - System-wide port default settings
 	/etc/ports/ports.conf
 	    - User customizable port settings
 	/etc/ports/sources.conf
-	    - List of port sources
+	    - List of port sources (places to get ports data from)
 
 
 USING THE PORT COMMAND
 
-    If you haven't already, add /opt/local/bin to your path. If you're
+    If you haven't already, add /opt/local/bin to your path (or $PREFIX/bin
+if you've elected to install darwinports somewhere else). If you're
 unsure how, add the following line to your ~/.cshrc file.
 
 	set path=($path /opt/local/bin)
