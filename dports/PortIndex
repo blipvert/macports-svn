@@ -118,6 +118,8 @@ wump 181
 portdir games/wump description {Text-based cave exploring and wumpus hunting game} platforms darwin name wump version 4.6.2-RELEASE categories games maintainers eric@opendarwin.org
 xscorch 536
 portdir games/xscorch description {multiplayer tank shoot-em-up game} platforms darwin name xscorch depends_lib {lib:libmikmod.2:libmikmod lib:libgtk.1:gtk} version 0.1.15 categories games maintainers mij@opendarwin.org long_description {XScorch is a clone of the olden-days DOS game Scorch. It is an extremely addictive war game where any mixture of human and computer AIs control separate tanks (teams are possible) and attempt to blow up or arrange to blow up the other tanks on the field. The last tank on the field is the winner.}
+filmgimp 292
+portdir graphics/filmgimp description {GNU Image Manipulation Program for Film} platforms darwin name filmgimp depends_lib {lib:libgtk.1:gtk lib:libintl.1:gettext lib:libjpeg.9:jpeg lib:libpng.3:libpng lib:libtiff.3:tiff} version 0.10 categories {graphics x11} maintainers jkh@opendarwin.org
 gd 247
 portdir graphics/gd description {GD creates PNG and JPEG images, among other formats} platforms darwin variants x11 name gd depends_lib {lib:libpng:libpng lib:libjpeg:jpeg} version 1.8.4 categories graphics maintainers mike+gdport@gene-hacker.net
 gdk-pixbuf 190
@@ -174,6 +176,10 @@ python 190
 portdir lang/python description {An interpreted, object-oriented programming language} platforms darwin variants nothreads name python version 2.2.2 categories lang maintainers pat@ekman.cx
 slang 195
 portdir lang/slang description {Library that includes a powerful scripting language with a C-like syntax} platforms darwin name slang version 1.4.6 categories lang maintainers olaf@foellinger.de
+SmartEiffel 156
+portdir lang/smarteiffel description {The GNU Eiffel compiler} platforms darwin name SmartEiffel version 1.0 categories lang maintainers jkh@opendarwin.org
+tcl 140
+portdir lang/tcl description {Tool Command Language} platforms darwin name tcl version 8.4.1 categories lang maintainers jkh@opendarwin.org
 abook 154
 portdir mail/abook description {Address book with mutt support} platforms darwin name abook version 0.4.17 categories mail maintainers fkr@opendarwin.org
 exim 216
@@ -376,6 +382,8 @@ pango 228
 portdir x11/pango description {Framework for the layout and rendering of i18n text} platforms darwin name pango depends_lib {lib:libglib.2:glib2 lib:libintl.1:gettext} version 1.0.5 categories x11 maintainers mij@opendarwin.org
 qt3 401
 portdir x11/qt3 description {Qt Tool Kit} platforms darwin variants {mysql psql} name qt3 depends_lib {lib:libdl.1:dlcompat lib:libGL.1:XFree86 lib:libX11.6:Xfree86 lib:libfreetype.6:XFree86 lib:libpng.2:libpng lib:libjpeg.9:jpeg} version 3.0.5 categories x11 revision 1 maintainers ranger@befunk.com long_description {This is Qt, TrollTech's C++ toolkit for writing cross-platform GUI applications.}
+tk 127
+portdir x11/tk description {Tcl Tool Kit} platforms darwin name tk version 8.4.1 categories x11 maintainers jkh@opendarwin.org
 vtwm 175
 portdir x11/vtwm description {Twm with a virtual desktop and optional Motif-like features} platforms darwin name vtwm version 5.4.6a categories x11 maintainers mdales@mac.com
 wmclock 394
