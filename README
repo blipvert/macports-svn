@@ -1,1 +1,1 @@
-cd Install && sudo make
+bsdmake && sudo bsdmake install
