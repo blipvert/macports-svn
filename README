@@ -1,1 +1,48 @@
-bsdmake && sudo bsdmake install
+README for the Darwin Port System
+
+WHAT IS THE DARWIN PORTS SYSTEM
+
+    Darwin Ports is a software build, install, and packaging infrastructure
+designed to meet the same functionality requirements as the FreeBSD ports
+architecture while maintaining extensibility for future enhancement.
+
+    Darwin Ports currently builds and runs on MacOS X 10.2 (Darwin 6.0). The
+system is portable, written in TCL with a limited set of TCL extensions in C.
+
+INSTALLING
+
+    Summary:
+        1. bsdmake
+	2. bsdmake install
+
+    All necessary code and TCL will be compiled and installed as follows:
+	/System/Library/Tcl/8.3/darwinports1.0
+	    - TCL library for interfacing with the Darwin Ports System
+	/usr/local/bin/portbuild
+	    - Command line port building utility
+	/usr/local/share/darwinports/
+	    - TCL libraries internal to the ports system
+
+USING PORTBUILD
+
+    All included port descriptions are currently stored in the software/
+subdirectory of the ports distribution, in the form of:
+
+	software/<category>/<portname>
+
+    To build a port, cd to the port's directory and run 'portbuild'. To install
+a port, run 'portbuild -t install'. Please refer to the portbuild man page for
+complete documentation on the 'portbuild' command.
+
+CREATING NEW PORTS
+
+    Ports consist of directory containing both a Portfile and associated
+files. Currently the only bundled files are patch files, and these are likely
+to be kept to a minimum.
+
+    A Portfile consists of valid TCL, evaluated by a TCL interpreter
+instantiated by the Darwin Ports System. Portfiles use extremely straight-
+forward key/value pair syntax, while allowing the author to use the full
+extent of TCL's functionality where necessary.
+
+    To get started, refer to software/example/exampleport.
