@@ -140,6 +140,8 @@ netris 158
 portdir games/netris description {networked tetris on the console} platforms darwin name netris version 0.5 categories games maintainers kevin@opendarwin.org
 othello 168
 portdir games/othello description {Clone of Othello played in the terminal} platforms darwin name othello version 0.03 categories games maintainers zizban@adelphia.net
+qthello 531
+portdir games/qthello description {Othello program written in Qt} platforms darwin name qthello depends_lib {lib:libqt-mt.3:qt3 lib:libX11.6:XFree86} version 1.0 categories {games x11} homepage http://qthello.sourceforge.net/ maintainers landonf@opendarwin.org long_description {QtHello is an Othello program written in Qt. It's design makes it easy to extend both the computer player and human player interface. It currently has 6 different computer players ranging from completely random to tree search with Alpha-Beta pruning.}
 wtf 179
 portdir games/wtf description {translates common Internet acronyms} platforms {darwin freebsd} name wtf version 20021005 categories games maintainers rooneg@electricjellyfish.net
 wump 181
@@ -450,8 +452,8 @@ fluxbox 330
 portdir x11/fluxbox description {Lightweight window manager based on Blackbox 0.61.1} platforms {darwin freebsd} name fluxbox depends_lib {lib:libX11.6:XFree86 lib:libXext.6:XFree86} version 0.1.10 categories {x11-wm x11} long_description {{Lightweight window manager based on Blackbox 0.61.1}} maintainers landonf@opendarwin.org
 fvwm 416
 portdir x11/fvwm description {A very simple window manager supporting a pager} platforms darwin name fvwm depends_lib {lib:libX11.6:XFree86 lib:libXpm.4:xpm} version 1.24r categories {x11-wm x11} long_description {One of the earlier paging window managers with what is still considered to be a very elegant and minimal feature set yet highly configurable and expandable via plug-ins.} maintainers jkh@opendarwin.org
-gtk 308
-portdir x11/gtk description {Gimp Tool Kit} platforms {darwin freebsd} name gtk version 1.2.10 categories x11 maintainers eric@opendarwin.org long_description {This is GTK+ version 1.2.10. GTK+, which stands for the Gimp ToolKit, is a library for creating graphical user interfaces for the X Window System.}
+gtk 384
+portdir x11/gtk description {Gimp Tool Kit} platforms {darwin freebsd} name gtk depends_lib {lib:libintl.1:gettext lib:libglib.1:glib lib:libX11.6:XFree86} version 1.2.10 categories x11 maintainers eric@opendarwin.org long_description {This is GTK+ version 1.2.10. GTK+, which stands for the Gimp ToolKit, is a library for creating graphical user interfaces for the X Window System.}
 gtk-engines 345
 portdir x11/gtk-engines description {Theme engine for GTK+} platforms darwin name gtk-engines depends_lib lib:libImlib.1:imlib version 0.12 categories x11 maintainers mij@opendarwin.org long_description {gtk-engines is a theme engine for GTK+. It provides the ability to change the way widgets, buttons, etc. look when using GTK+ applications.}
 gtk-engines2 350
