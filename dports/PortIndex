@@ -222,8 +222,8 @@ pine 254
 portdir mail/pine description {Text based tool for reading, sending, and managing emails.} variants ssl name pine version 4.44 categories mail maintainers {{[Fink]} Jeffrey Whitaker <jsw@cdc.noaa.gov> / {[DarwinPorts]} Sean Brandt <sean@fuzzymagic.com>}
 postfix 241
 portdir mail/postfix description {Fast and robust mail transfer agent} platforms darwin name postfix version 1.1.11 categories mail maintainers eric@opendarwin.org depends_run path:/Library/StartupItems/DarwinPortsStartup:DarwinPortsStartup
-spamprobe 439
-portdir mail/spamprobe description {Spam detector that uses Bayesian analysis} platforms darwin name spamprobe depends_lib lib:libdb:db4 version 0.7g categories mail maintainers mij@opendarwin.org long_description {Spamprobe is a fast, intelligent, automatic spam detector using Bayesian analysis of word counts in spam and non-spam email. It is intended for use with procmail to filter inbound mail. No manual rule creation is required.}
+spamprobe 438
+portdir mail/spamprobe description {Spam detector that uses Bayesian analysis} platforms darwin name spamprobe depends_lib lib:libdb:db4 version 0.8 categories mail maintainers mij@opendarwin.org long_description {Spamprobe is a fast, intelligent, automatic spam detector using Bayesian analysis of word counts in spam and non-spam email. It is intended for use with procmail to filter inbound mail. No manual rule creation is required.}
 ssmtp 192
 portdir mail/ssmtp description {Sendmail alternative for small routers (outgoing mail only)} platforms {darwin freebsd} name ssmtp version 2.50 categories mail maintainers eric@opendarwin.org
 fftw 756
