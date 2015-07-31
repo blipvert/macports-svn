@@ -10,7 +10,7 @@ PortGroup       texlive 1.0
 PortGroup       muniversal 1.0
 
 name            texlive-bin
-version         2015
+version         2015blip1
 
 categories      tex
 maintainers     dports
@@ -80,8 +80,10 @@ patchfiles-append  patch-texk_chktex_Makefile.in.diff \
                    patch-texk_tex4htk_Makefile.in.diff \
                    patch-texk_texlive_linked_scripts_Makefile.in.diff \
                    patch-texk_texlive_tl_scripts_Makefile.in.diff \
-                   patch-texk_xdvik_xdvi-sh.in.diff
-                   
+                   patch-texk_xdvik_xdvi-sh.in.diff \
+                   patch-texk_web2c_mf.web_tension.diff \
+                   patch-texk_web2c_mplibdir_mp.w_tension.diff
+
 # patches to luajit/luajittex's config scripts to correctly detect
 # architecture in universal builds
 patchfiles-append  patch-libs_luajit_configure.diff \

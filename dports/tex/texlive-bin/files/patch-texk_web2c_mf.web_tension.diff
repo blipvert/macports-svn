@@ -1,0 +1,15 @@
+--- texk/web2c/mf.web.orig	2015-07-31 15:13:45.000000000 -0400
++++ texk/web2c/mf.web	2015-07-31 15:13:55.000000000 -0400
+@@ -17617,10 +17617,10 @@
+ @ @d min_tension==three_quarter_unit
+ 
+ @<Make sure that the current expression is a valid tension setting@>=
+-if (cur_type<>known)or(cur_exp<min_tension) then
++if (cur_type<>known) then
+   begin exp_err("Improper tension has been set to 1");
+ @.Improper tension@>
+-  help1("The expression above should have been a number >=3/4.");
++  help1("The expression above should have been a number.");
+   put_get_flush_error(unity);
+   end
+ 
