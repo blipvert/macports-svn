@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        glfw glfw cf10e318d6356729133843dde014e528c4937574
-version             20150701
-checksums           rmd160 daed2552e158d2613d23012772ef4ff04dc890df \
-                    sha256 a1e8140e564883242f11fb31e18aadc4877f5afb6ed4dc384ad5f0998df0c3ab
+github.setup        glfw glfw 460e5d792dac0d2de16ba0a38a1181a1e4340f2c
+version             20150721
+checksums           rmd160 79fe619a0f145a8c0730ed9f8f70ea61d09806db \
+                    sha256 e87f84485878daa75d5cb7b5b5f40e229efcd6034417786527c98c50058263c6
 
 categories          graphics
 maintainers         michaelld openmaintainer

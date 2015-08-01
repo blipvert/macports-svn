@@ -367,7 +367,6 @@ proc command_string {command} {
         }
     }
 
-    ui_debug "Assembled command: '$cmdstring'"
     return $cmdstring
 }
 
@@ -450,7 +449,6 @@ proc command_exec {command args} {
     array set env [array get ${varprefix}.env_array]
     # Call the command.
     set fullcmdstring "$command_prefix $cmdstring $command_suffix"
-    ui_debug "Executing command line: $fullcmdstring"
     set code [catch {system {*}$notty {*}$nice $fullcmdstring} result]
     # Save variables in order to re-throw the same error code.
     set errcode $::errorCode
@@ -2126,8 +2124,8 @@ proc check_variants {target} {
 
         array set oldvariations {}
         if {[check_statefile_variants variations oldvariations $state_fd]} {
-            ui_error "Requested variants \"[canonicalize_variants [array get variations]]\" do not match original selection \"[canonicalize_variants [array get oldvariations]]\"."
-            ui_error "Please use the same variants again, perform 'port clean [option subport]' or specify the force option (-f)."
+            ui_error "Requested variants \"[canonicalize_variants [array get variations]]\" do not match those the build was started with: \"[canonicalize_variants [array get oldvariations]]\"."
+            ui_error "Please use the same variants again, or run 'port clean [option subport]' first to remove the existing partially completed build."
             set result 1
         } elseif {![tbool ports_dryrun]} {
             # Write variations out to the statefile

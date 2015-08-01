@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                stunnel
-version             5.20
+version             5.22
 set major           [lindex [split ${version} .] 0]
 categories          security net
 platforms           darwin
@@ -25,8 +25,8 @@ master_sites        http://mirrors.zerg.biz/stunnel/ \
                     http://mirrors.zerg.biz/stunnel/archive/${major}.x/ \
                     ftp://ftp.stunnel.org/stunnel/
 
-checksums           rmd160  c38ba51fd06d23257c8edf1686cab5954a0cd5e8 \
-                    sha256  4a36a3729a7287d9d82c4b38bf72c4d3496346cb969b86129c5deac22b20292b
+checksums           rmd160  5b684407b7db985cfba3f6bbb10c03883e56c07a \
+                    sha256  8ad628a6948153cdb2044283f6988384a30585ea7e14778c2ee616a6678cb83f
 
 depends_lib         port:openssl
 

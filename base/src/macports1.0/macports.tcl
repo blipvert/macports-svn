@@ -41,7 +41,7 @@ package require reclaim 1.0
 package require Tclx
 
 namespace eval macports {
-    namespace export bootstrap_options user_options portinterp_options open_mports ui_priorities port_phases
+    namespace export bootstrap_options user_options portinterp_options open_mports ui_priorities
     variable bootstrap_options "\
         portdbpath binpath auto_path extra_env sources_conf prefix portdbformat \
         portarchivetype portautoclean \
@@ -74,7 +74,6 @@ namespace eval macports {
     variable open_mports {}
 
     variable ui_priorities "error warn msg notice info debug any"
-    variable port_phases "any fetch checksum"
     variable current_phase main
 
     variable ui_prefix "---> "
@@ -138,10 +137,6 @@ proc macports::init_logging {mport} {
     if {[catch {macports::ch_logging $mport} err]} {
         ui_debug "Logging disabled, error opening log file: $err"
         return 1
-    }
-    # Add our log-channel to all already initialized channels
-    foreach key [array names channels] {
-        set macports::channels($key) [concat $macports::channels($key) debuglog]
     }
     return 0
 }
@@ -214,7 +209,7 @@ proc set_phase {phase} {
     }
 }
 
-proc ui_message {priority prefix phase args} {
+proc ui_message {priority prefix args} {
     global macports::channels ::debuglog macports::current_phase
 
     # 
@@ -224,38 +219,40 @@ proc ui_message {priority prefix phase args} {
        0 - 1 {}
        2 {
            if {[lindex $args 0] ne "-nonewline"} {
-               set hint "error: when 5 arguments are given, 2nd last must be \"-newnewline\""
-               error "$hint\nusage: ui_message priority prefix phase ?-nonewline? string"
+               set hint "error: when 4 arguments are given, 3rd must be \"-nonewline\""
+               error "$hint\nusage: ui_message priority prefix ?-nonewline? string"
            }
        }
        default {
            set hint "error: too many arguments specified"
-           error "$hint\nusage: ui_message priority prefix phase ?-nonewline? string"
+           error "$hint\nusage: ui_message priority prefix ?-nonewline? string"
        }
     } 
 
     foreach chan $macports::channels($priority) {
-        if {[info exists ::debuglog] && ($chan eq "debuglog")} {
-            set chan $::debuglog
-            if {[info exists macports::current_phase]} {
-                set phase $macports::current_phase
-            }
-            set strprefix ":${priority}:$phase "
-            if {[lindex $args 0] eq "-nonewline"} {
-                puts -nonewline $chan $strprefix[lindex $args 1]
-            } else {
-                puts $chan $strprefix[lindex $args 0]
-            }
-
+        if {[lindex $args 0] eq "-nonewline"} {
+            puts -nonewline $chan $prefix[lindex $args 1]
         } else {
-            if {[lindex $args 0] eq "-nonewline"} {
-                puts -nonewline $chan $prefix[lindex $args 1]
-            } else {
-                puts $chan $prefix[lindex $args 0]
+            puts $chan $prefix[lindex $args 0]
+        }
+    }
+
+    if {[info exists ::debuglog]} {
+        set chan $::debuglog
+        if {[info exists macports::current_phase]} {
+            set phase $macports::current_phase
+        }
+        set strprefix ":${priority}:$phase "
+        if {[lindex $args 0] eq "-nonewline"} {
+            puts -nonewline $chan $strprefix[lindex $args 1]
+        } else {
+            foreach str [split [lindex $args 0] "\n"] {
+                puts $chan $strprefix$str
             }
         }
     }
 }
+
 proc macports::ui_init {priority args} {
     global macports::channels ::debuglog
     set default_channel [macports::ui_channels_default $priority]
@@ -266,24 +263,16 @@ proc macports::ui_init {priority args} {
         set channels($priority) $default_channel
     }
 
-    # if some priority initialized after log file is being created
-    if {[info exists ::debuglog]} {
-        set channels($priority) [concat $channels($priority) debuglog]
-    }
     # Simplify ui_$priority.
     try {
         set prefix [ui_prefix $priority]
     } catch * {
         set prefix [ui_prefix_default $priority]
     }
-    set phases {fetch checksum}
     try {
         ::ui_init $priority $prefix $channels($priority) {*}$args
     } catch * {
-        interp alias {} ui_$priority {} ui_message $priority $prefix {}
-        foreach phase $phases {
-            interp alias {} ui_${priority}_$phase {} ui_message $priority $prefix $phase
-        }
+        interp alias {} ui_$priority {} ui_message $priority $prefix
     }
 }
 
@@ -1303,9 +1292,6 @@ proc macports::worker_init {workername portpath porturl portbuildpath options va
     # instantiate the UI call-backs
     foreach priority $macports::ui_priorities {
         $workername alias ui_$priority ui_$priority
-        foreach phase $macports::port_phases {
-            $workername alias ui_${priority}_$phase ui_${priority}_$phase
-        }
     }
     # add the UI progress call-back
     if {[info exists macports::ui_options(progress_download)]} {

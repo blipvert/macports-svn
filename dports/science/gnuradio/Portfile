@@ -92,11 +92,11 @@ subport gnuradio-devel {
     name                gnuradio-devel
     conflicts           gnuradio-legacy gnuradio gnuradio-next
 
-    github.setup        gnuradio gnuradio 55d8f482f5acf33b8f629556a4fa5019908bb4be
-    version             20150710
+    github.setup        gnuradio gnuradio cf3f6a9b6dc51e20823990fb43d6fb4ec98691a5
+    version             20150724
     checksums \
-        rmd160 9e17aad95ed72beb1fee6012b232cdc65514c82e \
-        sha256 c7db4306eebb56b600d8582fc9856679699618a7b5204c26b4990bc11ed34921
+        rmd160 6ace95b419f48fc913303d62f8e190a877d8f71a \
+        sha256 2d2493d49aefc9df7bb96a30400f2d0570012a56b931afd4f5f1d813dcbf4392
 
 }
 
@@ -108,11 +108,11 @@ subport gnuradio-next {
     name                gnuradio-next
     conflicts           gnuradio-legacy gnuradio gnuradio-devel
 
-    github.setup        gnuradio gnuradio 85d46c7a5aa0a25462014922a3e0706cdf92db76
-    version             20150710
+    github.setup        gnuradio gnuradio 593e261d6ad4dbd1a45996a6e2f5df22df21091f
+    version             20150724
     checksums \
-        rmd160 4f521f824fdc0ad01111ddd244deb602df794643 \
-        sha256 c9966524adf78688699ed6bbc8de7629002ff417a0378b2891c8e59704f8c6c8
+        rmd160 e1c8d95eebd5b4351b7b869d2ae777945da9e8e2 \
+        sha256 cc7d17b5f866b803659defb4325dccf0f3155051b2859162a3c0ce7cb81282c3
 
     # overload the github livecheck URL with the correct branch
 
