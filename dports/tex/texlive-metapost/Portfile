@@ -6,7 +6,7 @@ PortGroup           texlive 1.0
 
 name                texlive-metapost
 version             37366
-revision            0
+revision            0blip_1
 
 categories          tex
 maintainers         dports
@@ -23,6 +23,8 @@ checksums           texlive-metapost-37366-run.tar.xz \
                     texlive-metapost-37366-src.tar.xz \
                     rmd160  f090827dbddf0ebc762b8970817f922bb4628544 \
                     sha256  6eace7459646700b11f1ec75e131030c7404a0be17894312ddcd563f5264ff2e
+
+patchfiles-append  patch-mf2pt1-hack1.diff
 
 depends_lib         port:texlive-basic
 

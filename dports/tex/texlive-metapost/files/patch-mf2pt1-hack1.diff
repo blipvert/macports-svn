@@ -1,0 +1,598 @@
+Index: runfiles/texmf-dist/metapost/base/mfplain.mp
+===================================================================
+--- runfiles/texmf-dist/metapost/base/mfplain.mp.orig
++++ runfiles/texmf-dist/metapost/base/mfplain.mp
+@@ -1,6 +1,3 @@
+-% $Id: mfplain.mp,v 1.9 2005/04/28 06:45:21 taco Exp $
+-% Public domain.
+-
+ % This is the plain MetaPost base that looks like what's described
+ % in The METAFONTbook.
+ string base_name, base_version; base_name="mfplain"; base_version="0.99";
+@@ -18,18 +15,20 @@ def -- = {curl 1}..{curl 1} enddef;
+ def --- = .. tension infinity .. enddef;
+ def ... = .. tension atleast 1 .. enddef;
+ 
+-newinternal smoothing, autorounding, turningcheck, granularity;
+-warningcheck:=1;
+-tracinglostchars:=1;
+-smoothing:=1; autorounding:=2;  % These are ignored by MetaPost
+-turningcheck:=1; granularity:=1;
+-
+ def gobble primary g = enddef; def killtext text t = enddef;
+ primarydef g gobbled gg = enddef;
+ def hide(text t) = exitif numeric begingroup t;endgroup; enddef;
+ def ??? = hide(interim showstopping:=1; showdependencies) enddef;
+ def stop expr s = message s; gobble readstring enddef;
+ 
++newinternal smoothing, autorounding, turningcheck, granularity;
++warningcheck:=1;
++tracinglostchars:=1;
++
++smoothing:=1; autorounding:=2;  % These are ignored by MetaPost
++turningcheck:=2;                % this will warn about a "strange path"
++granularity:=1;                 % this says that pixels are pixels
++
+ def interact = % sets up to make "show" commands stop
+  hide(showstopping:=1; tracingonline:=1) enddef;
+ 
+@@ -87,11 +86,12 @@ blue = (0,0,1);
+ 
+ % picture constants
+ picture blankpicture,unitpixel;
+-blankpicture=nullpicture;
++blankpicture=nullpicture; % `display blankpicture...'
+ unitpixel=nullpicture; addto unitpixel contour unitsquare;
+ 
+ % string constants
+ string ditto; ditto = char 34; % ASCII double-quote mark
++string EOF; EOF = char 0;    % end-of-file for readfrom and write..to
+ 
+ % pen constants
+ def capsule_def(suffix s) primary u = def s = u enddef enddef;
+@@ -106,9 +106,13 @@ vardef whatever = save ?; ? enddef;
+ % unary operators
+ let abs = length;
+ 
+-vardef round primary u = u enddef;
+-vardef hround primary x = x enddef;
+-vardef vround primary y = y enddef;
++vardef round primary u =
++ if numeric u: floor(u+.5)
++ elseif pair u: (hround xpart u, vround ypart u)
++ else: u fi enddef;
++
++vardef hround primary x = floor(x+.5) enddef;
++vardef vround primary y = floor(y+.5) enddef;
+ 
+ vardef ceiling primary x = -floor(-x) enddef;
+ 
+@@ -123,7 +127,12 @@ vardef inverse primary T =
+  transform T_; T_ transformed T = identity; T_ enddef;
+ 
+ vardef counterclockwise primary c =
+- if turningnumber c <= 0: reverse fi c enddef;
++  (if is_clockwise c: (reverse c) else: c fi)
++enddef;
++
++vardef clockwise primary c =
++  (if is_clockwise c: c else: (reverse c) fi)
++enddef;
+ 
+ vardef tensepath expr r =
+  for k=0 upto length r - 1: point k of r --- endfor
+@@ -238,16 +247,32 @@ cm#=28.45276;     pc#=12;       cc#=12.8
+ newinternal hppp, vppp;
+ hppp:=pt;   vppp:=pt;
+ 
++def bpppix expr x =
++  bpppix_ := x;
++  mm := 2.83464 / bpppix_;
++  pt := 0.99626 / bpppix_;
++  dd := 1.06601 / bpppix_;
++  bp := 1 / bpppix_;
++  cm := 28.34645 / bpppix_;
++  pc := 11.95517 / bpppix_;
++  cc := 12.79213 / bpppix_;
++  in := 72 / bpppix_;
++  hppp := pt;
++  vppp := pt;
++enddef;
++
+ newinternal blacker, o_correction; % device-oriented corrections
+ 
+ def define_pixels(text t) =
+  forsuffixes $=t: $:=$.#*pt; endfor enddef;
++def define_whole_pixels(text t) =
++ forsuffixes $=t: $:=hround($.#*pt); endfor enddef;
++let define_whole_vertical_pixels = define_whole_pixels;
+ def define_blacker_pixels(text t) =
+  forsuffixes $=t: $:=$.#*pt+blacker; endfor enddef;
+ def define_corrected_pixels(text t) =
+  forsuffixes $=t: $:=$.#*pt*o_correction; endfor enddef;
+ 
+-def define_whole_pixels = define_pixels enddef;
+ def define_whole_vertical_pixels = define_pixels enddef;
+ def define_good_x_pixels = define_pixels enddef;
+ def define_good_y_pixels = define_pixels enddef;
+@@ -259,8 +284,6 @@ def lowres_fix(text t) expr ratio = endd
+ 
+ message " macros and tables for various modes of operation,";
+ 
+-transform currenttransform;
+-def t_ = transformed currenttransform enddef;
+ let o_=\; let _o_=\;
+ 
+ def mode_setup =
+@@ -271,7 +294,9 @@ def mode_setup =
+  if unknown aspect_ratio: aspect_ratio=1; fi
+  bp_per_pixel:=bpppix_*mag;
+  scantokens extra_setup; % the user's special last-minute adjustments
+- if unknown currenttransform: currenttransform=identity; fi
++ currenttransform:=
++  if unknown currenttransform: identity else: currenttransform fi
++   yscaled aspect_ratio;
+  clearit;
+  pickup pencircle scaled (.4pt+blacker);
+  enddef;
+@@ -342,38 +367,170 @@ linecap:=rounded;
+ miterlimit:=10;
+ 
+ pen currentpen;
++path currentpen_path;
+ picture currentpicture;
++transform currenttransform;
++def t_ = transformed currenttransform enddef;
++
++def fill expr c =
++  addto currentpicture contour counterclockwise c t_ pc_ enddef;
+ 
+-def fill expr c = addto currentpicture contour c t_ pc_ enddef;
+ def draw expr p =
+   addto currentpicture
+   if picture p:
+     also p
++  elseif is_cyclic p:
++    doublepath counterclockwise p t_ withpen currentpen
+   else:
+-    doublepath p t_ withpen currentpen
++    if is_clockwise (p--cycle):
++      doublepath (reverse p) t_ withpen currentpen
++    else:
++      doublepath p t_ withpen currentpen
++    fi
+   fi
+   pc_
+ enddef;
+-def filldraw expr c =
+-  addto currentpicture contour c t_ withpen currentpen
+-  pc_ enddef;
++
++def pathoutset_setup(expr n,p) =
++ save x,y,t,i;
++ save za,zu,zv,zb,ta,tb,q; pair za,zu,zv,zb; path q;
++ forsuffixes $=a,da,db: z$0=z$[length p]; z$[-1] = z$[length p-1]; endfor
++ for i = 0 upto length p-1:
++  za := point i of p; zu := postcontrol i of p;
++  zb := point i+1 of p; zv := precontrol i+1 of p;
++  q := za{zu-za}..{zb-zv}zb;
++  ta := length(postcontrol 0 of q - point 0 of q);
++  tb := length(point 1 of q - precontrol 1 of q);
++  if (length(zu-za) > 0):
++   z.da[i] = zu-za;
++   t.a[i] = min(infinity,ta/length(zu-za))
++  else:
++   z.da[i] = z.db[i-1];
++   t.a[i] = infinity
++  fi;
++  if (length(zb-zv) > 0):
++   z.db[i] = zb-zv;
++   t.b[i] = min(infinity,tb/length(zb-zv))
++  else:
++   z.db[i] = z.da[i+1];
++   t.b[i] = infinity
++  fi;
++ endfor
++ for i = 0 upto length p-1:
++  z.a[i] = (point i of p) + ((0,n) rotated angle z.da[i]);
++  z.b[i] = (point i+1 of p) + ((0,n) rotated angle z.db[i]); 
++  z.c[i] = z.a[i+1];
++  z.dc[i] = z.da[i+1];
++ endfor
++enddef;
++
++pathoutset_tension = 1;
++pathoutset_tension.bbox = infinity;
++
++vardef do_pathoutset(expr n,p) suffix $ =
++ pathoutset_setup(n,p);
++ for i = 0 upto length p-1:
++  z.a[i]{z.da[i]} .. tension t.a[i] and t.b[i] .. {z.db[i]}z.b[i]
++   if not (z.b[i] = z.c[i]):
++   .. tension pathoutset_tension$ .. {z.dc[i]}z.c[i] fi &
++ endfor cycle enddef;
++
++vardef pathoutset(expr n,p) =
++ if n > 0:
++  save pp, cpath, rpath; path pp, cpath, rpath;
++  pp = reverse p;
++  cpath = do_pathoutset(n,p) bbox;
++  rpath = do_pathoutset(n,pp) bbox;
++  if length(urcorner rpath - llcorner rpath) >
++   length(urcorner cpath - llcorner cpath):
++    reverse do_pathoutset(n,pp) else: do_pathoutset(n,p) fi
++ else: p fi enddef;
++
++vardef penoutset expr p =
++ pathoutset(top 0,p) enddef;
++
++def mfplain_filldraw expr c = fill penoutset(c) enddef;
++
++let filldraw=mfplain_filldraw;
++
+ def drawdot expr z =
+-  addto currentpicture contour makepath currentpen shifted z
+-  t_ pc_ enddef;
++  if using_pencircle:
++    begingroup
++      path cpath;
++      numeric clength;
++      cpath = makepath currentpen;
++      clength = length cpath;
++      fill ((point 0 of cpath)
++        ..(point clength/4 of cpath)
++        ..(point clength/2 of cpath)
++        ..(point 3*clength/4 of cpath)
++        ..cycle) shifted z t_
++    endgroup
++  else:
++    addto currentpicture contour makepath currentpen shifted z
++    t_ pc_
++  fi
++enddef;
++
++def unfill expr c =
++  addto currentpicture contour clockwise c t_ pc_ withcolor background enddef;
++
++def undraw expr p =
++  addto currentpicture
++  if picture p:
++    also p
++  elseif is_cyclic p:
++    doublepath clockwise p t_ withpen currentpen
++  else:
++    if is_clockwise (p--cycle):
++      doublepath p t_ withpen currentpen
++    else:
++      doublepath (reverse p) t_ withpen currentpen
++    fi
++  fi
++  pc_ withcolor background
++enddef;
+ 
+-def unfill expr c = fill c withcolor background enddef;
+-def undraw expr p = draw p withcolor background enddef;
+-def unfilldraw expr c = filldraw c withcolor background enddef;
+-def undrawdot expr z = drawdot z withcolor background enddef;
+-def erase text t =
+-  def _e_ = withcolor background hide(def _e_=enddef;) enddef;
+-  t _e_
++def unfilldraw expr c = unfill c enddef;
++
++def undrawdot expr z =
++  if using_pencircle:
++    begingroup
++      path cpath;
++      numeric clength;
++      cpath = makepath currentpen;
++      clength = length cpath;
++      unfill ((point 0 of cpath)
++        ..(point clength/4 of cpath)
++        ..(point clength/2 of cpath)
++        ..(point 3*clength/4 of cpath)
++        ..cycle) shifted z t_
++    endgroup
++  else:
++    unfill makepath currentpen shifted z t_
++  fi
++enddef;
++
++def mfplain_erase text t =
++ def _e_ = withcolor background hide(def _e_=enddef;) enddef;
++ t _e_
+ enddef;
+ def _e_= enddef;
+ 
++def null_erase text t = enddef;
++let erase = null_erase;
++
+ def cutdraw text t =
+   begingroup interim linecap:=butt; draw t _e_; endgroup enddef;
+ 
++vardef image(text t) =
++  save currentpicture;
++  picture currentpicture;
++  currentpicture := nullpicture;
++  t;
++  currentpicture
++enddef;
++
+ def pickup secondary q =
+  if numeric q: numeric_pickup_ else: pen_pickup_ fi q enddef;
+ def numeric_pickup_ primary q =
+@@ -416,12 +573,16 @@ vardef lft primary x = x + if pair x: (p
+ vardef rt primary x = x + if pair x: (pen_rt,0) else: pen_rt fi enddef;
+ vardef top primary y = y + if pair y: (0,pen_top) else: pen_top fi enddef;
+ vardef bot primary y = y + if pair y: (0,pen_bot) else: pen_bot fi enddef;
+-vardef good.x primary x = x enddef;
+-vardef good.y primary y = y enddef;
+-vardef good.lft primary z = z enddef;
+-vardef good.rt primary z = z enddef;
+-vardef good.top primary z = z enddef;
+-vardef good.bot primary z = z enddef;
++vardef good.x primary x = hround(x+pen_lft)-pen_lft enddef;
++vardef good.y primary y = vround(y+pen_top)-pen_top enddef;
++vardef good.lft primary z = save z_; pair z_;
++  (z_+(pen_lft,0))t_=round((z+(pen_lft,0))t_); z_ enddef;
++vardef good.rt primary z = save z_; pair z_;
++  (z_+(pen_rt,0))t_=round((z+(pen_rt,0))t_); z_ enddef;
++vardef good.top primary z = save z_; pair z_;
++  (z_+(0,pen_top))t_=round((z+(0,pen_top))t_); z_ enddef;
++vardef good.bot primary z = save z_; pair z_;
++  (z_+(0,pen_bot))t_=round((z+(0,pen_bot))t_); z_ enddef;
+ 
+ vardef penpos@#(expr b,d) =
+  (x@#r-x@#l,y@#r-y@#l)=(b,0) rotated d;
+@@ -537,7 +698,7 @@ def maketicks(text r) =
+  enddef;
+ 
+ def font_size expr x = designsize:=x enddef;
+-def font_slant expr x = fontdimen 1: x enddef;
++def font_slant expr x = font_slant_:=x; fontdimen 1: x enddef;
+ def font_normal_space expr x = fontdimen 2: x enddef;
+ def font_normal_stretch expr x = fontdimen 3: x enddef;
+ def font_normal_shrink expr x = fontdimen 4: x enddef;
+@@ -550,6 +711,22 @@ def font_coding_scheme expr x = font_cod
+ string font_identifier_, font_coding_scheme_;
+ font_identifier_=font_coding_scheme_="UNSPECIFIED";
+ 
++font_slant_ := 0;
++boolean font_fixed_pitch_;
++font_fixed_pitch_ := false;
++def font_fixed_pitch expr x = font_fixed_pitch_ := x enddef;
++
++forsuffixes fvar = font_version, font_comment, font_family, font_weight,
++                   font_name, font_unique_id:
++  scantokens ("string " & str fvar & "_;");
++  scantokens ("def " & str fvar & " expr x = " & str fvar & "_ := x enddef;");
++endfor;
++
++forsuffixes fvar = font_underline_position, font_underline_thickness:
++  scantokens ("numeric " & str fvar & "_;");
++  scantokens ("def " & str fvar & " expr x = " & str fvar & "_ := x enddef;");
++endfor;
++
+ message "and a few last-minute items.";
+ 
+ vardef z@#=(x@#,y@#) enddef;
+@@ -574,7 +751,8 @@ def screenstrokes = enddef;
+ def imagerules = enddef;
+ def gfcorners = enddef;
+ def nodisplays = enddef;
+-def notransforms = let t_ = \ enddef;
++def notransforms =    % currenttransform should not be used
++ let t_ = \ enddef;
+ 
+ let bye = end; outer end,bye;
+ 
+@@ -582,3 +760,210 @@ clear_pen_memory;     % initialize the `
+ mode_setup;           % establish proof mode as the default
+ numeric mode,mag;     % but leave mode and mag undefined
+ 
++%% \begin{explaincode}
++%%   We'd like to be able to use calligraphic pens.  Normally, MetaPost's
++%%   output routine does all the work for us of converting these to filled
++%%   PostScript paths.  The only exception occurs for paths drawn using a
++%%   pen that was transformed from  \mfcomment
++%    |pencircle|.  MetaPost outputs these paths as stroked PostScript
++%%   paths.  The following code tricks MetaPost into using a filled path
++%%   for  \mfcomment
++%    |pencircle| by replacing the primitive |pencircle| pen with a
++%%   non-primitive approximation.  Note that we use a 20-gon for our circle
++%%   instead of a diamond, so we get better results from  \mfcomment
++%    |draw|.
++%% \end{explaincode}
++
++pen fakepencircle, mfplain_pencircle;
++mfplain_pencircle := pencircle;
++fakepencircle := makepen (for deg=0 step 360/20 until 359:
++    (0.5 cosd deg, 0.5 sind deg)--
++  endfor cycle);
++save pencircle;
++pen pencircle;
++pencircle := fakepencircle;
++
++%% \begin{explaincode}
++%%   Return  \mfcomment
++%    |true| if |currentpen| looks like a |pencircle|.
++%% \end{explaincode}
++
++def using_nullpen =
++ (top origin = bot origin) and (lft origin = rt origin) enddef;
++
++def using_pencircle =
++ if using_nullpen:
++  true
++ else:
++  begingroup
++    path qpath, circlepath;
++    qpath = makepath currentpen;
++    numeric circlediv;
++    circlepath = makepath pencircle;
++    circlediv = xpart (lrcorner circlepath);
++
++    (length qpath = length circlepath) and (pen_rt <> 0) and (pen_top <> 0)
++    for pp = 0 upto (length qpath)-1:
++      and ((xpart (point pp of qpath) / pen_rt,
++            ypart (point pp of qpath) / pen_top) =
++           point pp of circlepath / circlediv)
++    endfor
++  endgroup fi
++enddef;
++
++%% \begin{explaincode}
++%%   Return  \mfcomment
++%    |true| if a path is cyclic, |false| otherwise.
++%% \end{explaincode}
++
++def is_cyclic expr cpath =
++  (point 0 of cpath = point (length cpath) of cpath)
++enddef;
++
++%% \begin{explaincode}
++%%   Determine the direction of a path which doesn't intersect
++%%   itself. \mfcomment
++%    Returns |true| if the curve is clockwise, |false| if
++%%   counterclockwise.  For non-cyclic paths the result is not
++%%   predictable.
++%%   \bigskip
++%%
++%%   The \mfcomment
++%    |crossproduct|, |makeline|, and |is_clockwise| functions were
++%%   provided by Werner Lemberg.
++%%   \bigskip
++%%
++%%   The algorithm used is quite simple:
++%%
++%%   \begin{itemize}
++%%     \item Find a point~$P$ on the path which has a non-zero direction,
++%%     and which is on a not-too-short path element.
++%%
++%%     \item Construct a ray of ``infinite'' length, starting in the
++%%     vicinity of~$P$ which intersects the path at this point.
++%%
++%%     \item Use \mfcomment
++%      |intersectiontimes| to find the intersection.  If the direction of
++%%     the path at this point is (near) zero, or if we have a grazing
++%%     intersection or even a tangent, get a new ray.
++%%
++%%     \item Shorten the ray so that it starts right after the
++%%     intersection.  Repeat the previous step until no intersection is
++%%     found.  Then go back to the last intersection and compare the path's
++%%     direction with the direction of the ray.  According to the
++%%     \emph{nonzero winding number} rule we have found a clockwise
++%%     oriented path if it crosses the ray from left to right.
++%%   \end{itemize}
++%%
++%%   This method completely avoids any problems with the geometry of
++%%   B\'{e}zier curves.  If problems arise, a different ray is tried.
++%%   Since it isn't necessary to analyze the whole path it runs quite fast
++%%   in spite of using \mfcomment
++%    |intersectiontimes| which is a slow MetaPost command.
++%% \end{explaincode}
++
++vardef crossproduct (expr u, v) =
++  save u_, v_;
++  pair u_, v_;
++
++  u_ := unitvector u;
++  v_ := unitvector v;
++
++  abs (xpart u_ * ypart v_ - ypart u_ * xpart v_)
++enddef;
++
++vardef makeline primary p =
++  save start, bad_n, loop, distance, d, i, n;
++  pair start, d;
++
++  n := 0;
++  loop := 0;
++  bad_n := -1;
++  for i := 0 step 1 until length p - 1:
++    distance := length (point i of p - point (i + 1) of p);
++    if distance <> 0:
++      if distance < 1:
++        % In case we don't find something better.
++        bad_n := i;
++      else:
++        n := i;
++        loop := 1;
++      fi;
++    fi;
++    exitif loop = 1;
++  endfor;
++
++  if loop = 0:
++    if bad_n <> -1:
++      n := bad_n;
++      loop = 1;
++    fi;
++  fi;
++
++  % Add some randomness to get different lines for each function call.
++  n := n + uniformdeviate 0.8 + 0.1;
++  start := point n of p;
++
++  if loop = 0:
++    % Construct a line which misses the degenerated path.
++    start + (1, 0)
++    -- start + (1, 1)
++  else:
++    d := direction n of p;
++
++    % Again, some added randomness.
++    n := uniformdeviate 150 + 15;
++    d := unitvector (d rotated n);
++
++    % Construct a line which intersects the path at least once.
++    start - eps * d
++    -- infinity * d
++  fi
++enddef;
++
++vardef is_clockwise primary p =
++  save line, cut, cut_new, res, line_dir, tangent_dir;
++  path line;
++  pair cut, cut_new, line_dir, tangent_dir;
++
++  line := makeline p;
++  line_dir := direction 0 of line;
++
++  % Find the outermost intersection.
++  cut := (0, 0);
++  forever:
++    cut_new := line intersectiontimes p;
++    exitif cut_new = (-1, -1);
++
++    % Compute a new line if we have a strange intersection.
++    tangent_dir := direction (ypart cut_new) of p;
++    if abs tangent_dir < eps:
++      % The vector is zero or too small.
++      line := makeline p;
++      line_dir := direction 0 of line;
++
++    elseif abs (ypart cut_new - floor (ypart cut_new + 0.5)) < eps:
++      % Avoid possible tangent touching in a corner or cusp.
++      line := makeline p;
++      line_dir := direction 0 of line;
++
++    elseif crossproduct (tangent_dir, line_dir) < 0.2:
++      % Grazing intersection (arcsin 0.2 ~= 11.5 degrees).
++      line := makeline p;
++      line_dir := direction 0 of line;
++
++    else:
++      % Go ahead.
++      cut := cut_new;
++      line := subpath (xpart cut + eps, infinity) of line;
++    fi;
++  endfor;
++
++  tangent_dir := direction (ypart cut) of p;
++  if tangent_dir <> (0, 0):
++    res := (angle tangent_dir - angle line_dir + 180) mod 360 - 180;
++    res < 0
++  else:
++    false
++  fi
++enddef;
