@@ -3960,6 +3960,10 @@ proc action_portcmds { action portlist opts } {
                 work {
                     # output the path to the port's work directory
                     set workpath [macports::getportworkpath_from_portdir $portdir $portname]
+                    if {[geteuid] != 0} {
+                        set altprefix [file join $macports::user_home .macports]
+                        set workpath [file join $altprefix/$workpath]
+                    }
                     if {[file exists $workpath]} {
                         puts $workpath
                     }
