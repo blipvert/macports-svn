@@ -6,7 +6,7 @@ PortGroup           texlive 1.0
 
 name                texlive-fontutils
 version             37381
-revision            0
+revision            0_blip1
 
 categories          tex
 maintainers         dports

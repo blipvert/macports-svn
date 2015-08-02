@@ -1,0 +1,891 @@
+Index: runfiles/texmf-dist/metapost/mf2pt1/mf2pt1.mp
+===================================================================
+--- runfiles/texmf-dist/metapost/mf2pt1/mf2pt1.mp.orig
++++ runfiles/texmf-dist/metapost/mf2pt1/mf2pt1.mp
+@@ -39,6 +39,9 @@ newinternal ps_output;
+ ps_output := 1;
+ 
+ 
++outputformat := "mps";
++outputtemplate := "%j-%03c.%{outputformat}";
++
+ %% \begin{explaincode}
+ %%   The following was taken right out of \texttt{mfplain.mp}.  The \mfcomment
+ %    |def| and the |special|s at the end
+@@ -53,443 +56,63 @@ ps_output := 1;
+ 
+ def beginchar(expr c,w_sharp,h_sharp,d_sharp) =
+   begingroup
++    if string c: emit_debug("glyph_name " & char(34) & c & char(34)) fi;
++    emit_debug("mag " & decimal mag);
++    emit_debug("bpppix " & decimal bpppix_);
++    if known em: emit_debug("em " & decimal em); fi
++    emit_debug("pt " & decimal pt);
++    emit_debug("bp " & decimal bp);
+     charcode:=if known c: byte c else: 0 fi;
+     charwd:=w_sharp;      charht:=h_sharp;       chardp:=d_sharp;
++    numeric orig_charwd; orig_charwd:=charwd;
+     w:=charwd*pt; h:=charht*pt; d:=chardp*pt;
+     charic:=0; clearxy; clearit; clearpen; scantokens extra_beginchar;
+-
+-    def to_bp (expr num) = decimal (round (num*bp_per_pixel)) enddef;
+-    special "% MF2PT1: glyph_dimensions 0 " & to_bp (-d) & " " & to_bp(w) & " " & to_bp(h);
+-    special "% MF2PT1: font_size " & decimal designsize;
+-    special "% MF2PT1: font_slant " & decimal font_slant_;
+-    special "% MF2PT1: charwd " & decimal charwd;   % Must come after the |font_size| |special|
+-    for fvar = "font_identifier", "font_coding_scheme", "font_version",
+-      "font_comment", "font_family", "font_weight", "font_unique_id",
+-      "font_name":
+-      if known scantokens (fvar & "_"):
+-        special "% MF2PT1: " & fvar & " " & scantokens (fvar & "_");
+-      fi;
+-    endfor;
+-    for fvar = "font_underline_position", "font_underline_thickness":
+-      if known scantokens (fvar & "_"):
+-        special "% MF2PT1: " & fvar & " " &
+-          scantokens ("decimal " & fvar & "_");
+-      fi;
+-    endfor;
+-    special "% MF2PT1: font_fixed_pitch " &
+-            (if font_fixed_pitch_: "1" else: "0" fi);
+ enddef;
+ 
++def endchar =
++ scantokens extra_endchar;
++ emit_metrics;
++ if known orig_charwd: if orig_charwd <> charwd: emit_debug("charwd changed from " & to_bp(orig_charwd*hppp) & " to " & to_bp(charwd*hppp)) fi fi;
++ if proofing>0: makebox(proofrule); fi
++ chardx:=w;     % desired width of the character in pixels
++ shipit;
++ endgroup enddef;
++
++def emit_metrics =
++  if known em_size: emit_font_parameter("em_size", em_size) fi;
++  emit_font_parameter("size", designsize);
++  emit_font_parameter("slant", font_slant_);
++  for fvar = "identifier", "coding_scheme", "version", "comment",
++   "family", "weight", "unique_id", "name", "underline_position",
++    "underline_thickness", "fixed_pitch":
++    if known scantokens ("font_" & fvar & "_"):
++    emit_font_parameter(fvar, scantokens ("font_" & fvar & "_"));
++   fi
++  endfor
++  emit_glyph_parameter("charwd", charwd);   % Must come after the |font_size| |special|
++  emit_glyph_parameter("dimensions", "0 " & to_bp (-d) & " " & to_bp(charwd*hppp) & " " & to_bp(h));
++enddef;
++
++def emit_comment (expr s) =
++  if known outputformat and (outputformat <> "svg"): special "% " & s fi enddef;
++
++def emit_debug (expr s) = emit_comment("DEBUG: "&s) enddef;
++def emit_parameter (expr p,v) = emit_comment("MF2PT1: "&p&" "&stringify(v)) enddef;
++def emit_font_parameter (expr p,v) = emit_parameter("font_"&p,v) enddef;
++def emit_glyph_parameter (expr p,v) = emit_parameter("glyph_"&p,v) enddef;
++
++vardef stringify(expr e) =
++ if numeric(e): decimal(e)
++ elseif boolean(e): if e: "1" else: "0" fi
++ else: e fi enddef;
++
++def to_bp (expr num) = decimal (round (num*bp_per_pixel)) enddef;
+ 
+ %% \begin{explaincode}
+ %%   Enable a character to specify explicitly the PostScript glyph
+ %%   name associated with it.
+ %% \end{explaincode}
+ def glyph_name expr name =
+-  special "% MF2PT1: glyph_name " & name;
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Store the value of \mfcomment
+-%    |font_slant_|, so we can recall it at each |beginchar|.
+-%% \end{explaincode}
+-
+-font_slant_ := 0;
+-
+-def font_slant expr x =
+-  font_slant_ := x;
+-  fontdimen 1: x
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Redefine \mfcomment
+-%    |bpppix_|, the number of ``big'' points per pixel. \mfcomment
+-%    This in turn redefines |mm|, |in|, |pt|, and other derived units.
+-%% \end{explaincode}
+-
+-def bpppix expr x =
+-  bpppix_ := x;
+-  mm := 2.83464 / bpppix_;
+-  pt := 0.99626 / bpppix_;
+-  dd := 1.06601 / bpppix_;
+-  bp := 1 / bpppix_;
+-  cm := 28.34645 / bpppix_;
+-  pc := 11.95517 / bpppix_;
+-  cc := 12.79213 / bpppix_;
+-  in := 72 / bpppix_;
+-  hppp := pt;
+-  vppp := pt;
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Define a bunch of PostScript font parameters to be used by
+-%%   \texttt{mf2pt1.pl}.  Default values are specified in
+-%%   \texttt{mf2pt1.pl}, not here.
+-%% \end{explaincode}
+-
+-forsuffixes fvar = font_version, font_comment, font_family, font_weight,
+-                   font_name, font_unique_id:
+-  scantokens ("string " & str fvar & "_;");
+-  scantokens ("def " & str fvar & " expr x = " & str fvar & "_ := x enddef;");
+-endfor;
+-
+-forsuffixes fvar = font_underline_position, font_underline_thickness:
+-  scantokens ("numeric " & str fvar & "_;");
+-  scantokens ("def " & str fvar & " expr x = " & str fvar & "_ := x enddef;");
+-endfor;
+-
+-boolean font_fixed_pitch_;
+-font_fixed_pitch_ := false;
+-def font_fixed_pitch expr x = font_fixed_pitch_ := x enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   We'd like to be able to use calligraphic pens.  Normally, MetaPost's
+-%%   output routine does all the work for us of converting these to filled
+-%%   PostScript paths.  The only exception occurs for paths drawn using a
+-%%   pen that was transformed from  \mfcomment
+-%    |pencircle|.  MetaPost outputs these paths as stroked PostScript
+-%%   paths.  The following code tricks MetaPost into using a filled path
+-%%   for  \mfcomment
+-%    |pencircle| by replacing the primitive |pencircle| pen with a
+-%%   non-primitive approximation.  Note that we use a 20-gon for our circle
+-%%   instead of a diamond, so we get better results from  \mfcomment
+-%    |draw|.
+-%% \end{explaincode}
+-
+-pen fakepencircle, mfplain_pencircle;
+-mfplain_pencircle := pencircle;
+-fakepencircle := makepen (for deg=0 step 360/20 until 359:
+-    (0.5 cosd deg, 0.5 sind deg)--
+-  endfor cycle);
+-save pencircle;
+-pen pencircle;
+-pencircle := fakepencircle;
+-
+-
+-%% \begin{explaincode}
+-%%   Return  \mfcomment
+-%    |true| if a path is cyclic, |false| otherwise.
+-%% \end{explaincode}
+-
+-def is_cyclic expr cpath =
+-  (point 0 of cpath = point (length cpath) of cpath)
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Determine the direction of a path which doesn't intersect
+-%%   itself. \mfcomment
+-%    Returns |true| if the curve is clockwise, |false| if
+-%%   counterclockwise.  For non-cyclic paths the result is not
+-%%   predictable.
+-%%   \bigskip
+-%%
+-%%   The \mfcomment
+-%    |crossproduct|, |makeline|, and |is_clockwise| functions were
+-%%   provided by Werner Lemberg.
+-%%   \bigskip
+-%%
+-%%   The algorithm used is quite simple:
+-%%
+-%%   \begin{itemize}
+-%%     \item Find a point~$P$ on the path which has a non-zero direction,
+-%%     and which is on a not-too-short path element.
+-%%
+-%%     \item Construct a ray of ``infinite'' length, starting in the
+-%%     vicinity of~$P$ which intersects the path at this point.
+-%%
+-%%     \item Use \mfcomment
+-%      |intersectiontimes| to find the intersection.  If the direction of
+-%%     the path at this point is (near) zero, or if we have a grazing
+-%%     intersection or even a tangent, get a new ray.
+-%%
+-%%     \item Shorten the ray so that it starts right after the
+-%%     intersection.  Repeat the previous step until no intersection is
+-%%     found.  Then go back to the last intersection and compare the path's
+-%%     direction with the direction of the ray.  According to the
+-%%     \emph{nonzero winding number} rule we have found a clockwise
+-%%     oriented path if it crosses the ray from left to right.
+-%%   \end{itemize}
+-%%
+-%%   This method completely avoids any problems with the geometry of
+-%%   B\'{e}zier curves.  If problems arise, a different ray is tried.
+-%%   Since it isn't necessary to analyze the whole path it runs quite fast
+-%%   in spite of using \mfcomment
+-%    |intersectiontimes| which is a slow MetaPost command.
+-%% \end{explaincode}
+-
+-vardef crossproduct (expr u, v) =
+-  save u_, v_;
+-  pair u_, v_;
+-
+-  u_ := unitvector u;
+-  v_ := unitvector v;
+-
+-  abs (xpart u_ * ypart v_ - ypart u_ * xpart v_)
+-enddef;
+-
+-vardef makeline primary p =
+-  save start, bad_n, loop, distance, d, i, n;
+-  pair start, d;
+-
+-  loop := 0;
+-  bad_n := -1;
+-  for i := 0 step 1 until length p - 1:
+-    distance := length (point i of p - point (i + 1) of p);
+-    if distance <> 0:
+-      if distance < 1:
+-        % In case we don't find something better.
+-        bad_n := i;
+-      else:
+-        n := i;
+-        loop := 1;
+-      fi;
+-    fi;
+-    exitif loop = 1;
+-  endfor;
+-
+-  if loop = 0:
+-    if bad_n <> -1:
+-      n := bad_n;
+-      loop = 1;
+-    fi;
+-  fi;
+-
+-  % Add some randomness to get different lines for each function call.
+-  n := n + uniformdeviate 0.8 + 0.1;
+-  start := point n of p;
+-
+-  if loop = 0:
+-    % Construct a line which misses the degenerated path.
+-    start + (1, 0)
+-    -- start + (1, 1)
+-  else:
+-    d := direction n of p;
+-
+-    % Again, some added randomness.
+-    n := uniformdeviate 150 + 15;
+-    d := unitvector (d rotated n);
+-
+-    % Construct a line which intersects the path at least once.
+-    start - eps * d
+-    -- infinity * d
+-  fi
+-enddef;
+-
+-vardef is_clockwise primary p =
+-  save line, cut, cut_new, res, line_dir, tangent_dir;
+-  path line;
+-  pair cut, cut_new, line_dir, tangent_dir;
+-
+-  line := makeline p;
+-  line_dir := direction 0 of line;
+-
+-  % Find the outermost intersection.
+-  cut := (0, 0);
+-  forever:
+-    cut_new := line intersectiontimes p;
+-    exitif cut_new = (-1, -1);
+-
+-    % Compute a new line if we have a strange intersection.
+-    tangent_dir := direction (ypart cut_new) of p;
+-    if abs tangent_dir < eps:
+-      % The vector is zero or too small.
+-      line := makeline p;
+-      line_dir := direction 0 of line;
+-
+-    elseif abs (ypart cut_new - floor (ypart cut_new + 0.5)) < eps:
+-      % Avoid possible tangent touching in a corner or cusp.
+-      line := makeline p;
+-      line_dir := direction 0 of line;
+-
+-    elseif crossproduct (tangent_dir, line_dir) < 0.2:
+-      % Grazing intersection (arcsin 0.2 ~= 11.5 degrees).
+-      line := makeline p;
+-      line_dir := direction 0 of line;
+-
+-    else:
+-      % Go ahead.
+-      cut := cut_new;
+-      line := subpath (xpart cut + eps, infinity) of line;
+-    fi;
+-  endfor;
+-
+-  tangent_dir := direction (ypart cut) of p;
+-  if tangent_dir <> (0, 0):
+-    res := (angle tangent_dir - angle line_dir + 180) mod 360 - 180;
+-    res < 0
+-  else:
+-    false
+-  fi
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Make a given path run clockwise or counterclockwise.  \mfcomment
+-%    (|counterclockwise| is defined by \texttt{mfplain} but we override
+-%%   it here.)
+-%% \end{explaincode}
+-
+-vardef counterclockwise primary c =
+-  (if is_clockwise c: (reverse c) else: c fi)
+-enddef;
+-
+-vardef clockwise primary c =
+-  (if is_clockwise c: c else: (reverse c) fi)
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Redefine  \mfcomment
+-%    |fill| and |unfill| to ensure that filled paths run
+-%%   counterclockwise and unfilled paths run clockwise, as is required
+-%%   by PostScript Type~1 fonts.
+-%% \end{explaincode}
+-
+-def fill expr c =
+-  addto currentpicture contour counterclockwise c t_ pc_
+-enddef;
+-
+-def unfill expr c =
+-  addto currentpicture contour clockwise c t_ pc_ withcolor background
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Convert  \mfcomment
+-%    |filldraw| and |unfilldraw| to |fill| and |unfill|.
+-%% \end{explaincode}
+-
+-let mfplain_filldraw := filldraw;
+-def filldraw expr c =
+-  begingroup
+-    message "! Warning: Replacing filldraw with fill.";
+-    fill c
+-  endgroup
+-enddef;
+-
+-let mfplain_unfilldraw := unfilldraw;
+-def unfilldraw expr c =
+-  begingroup
+-    message "! Warning: Replacing unfilldraw with unfill.";
+-    unfill c
+-  endgroup
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Return  \mfcomment
+-%    |true| if |currentpen| looks like a |pencircle|.
+-%% \end{explaincode}
+-
+-def using_pencircle =
+-  begingroup
+-    path qpath, circlepath;
+-    qpath = makepath currentpen;
+-    numeric circlediv;
+-    circlepath = makepath pencircle;
+-    circlediv = xpart (lrcorner circlepath);
+-
+-    (length qpath = length circlepath) and (pen_rt <> 0) and (pen_top <> 0)
+-    for pp = 0 upto (length qpath)-1:
+-      and ((xpart (point pp of qpath) / pen_rt,
+-            ypart (point pp of qpath) / pen_top) =
+-           point pp of circlepath / circlediv)
+-    endfor
+-  endgroup
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   If the pen looks like a circular pen, draw a nice circle.  Otherwise,
+-%%   draw the pen as is.
+-%% \end{explaincode}
+-
+-def drawdot expr z =
+-  if using_pencircle:
+-    begingroup
+-      path cpath;
+-      numeric clength;
+-      cpath = makepath currentpen;
+-      clength = length cpath;
+-      fill ((point 0 of cpath)
+-        ..(point clength/4 of cpath)
+-        ..(point clength/2 of cpath)
+-        ..(point 3*clength/4 of cpath)
+-        ..cycle) shifted z t_
+-    endgroup
+-  else:
+-    addto currentpicture contour makepath currentpen shifted z
+-    t_ pc_
+-  fi
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   Do the same as the above, but unfill the current pen.
+-%% \end{explaincode}
+-
+-def undrawdot expr z =
+-  if using_pencircle:
+-    begingroup
+-      path cpath;
+-      numeric clength;
+-      cpath = makepath currentpen;
+-      clength = length cpath;
+-      unfill ((point 0 of cpath)
+-        ..(point clength/4 of cpath)
+-        ..(point clength/2 of cpath)
+-        ..(point 3*clength/4 of cpath)
+-        ..cycle) shifted z t_
+-    endgroup
+-  else:
+-    unfill makepath currentpen shifted z t_
+-  fi
+-enddef;
+-
+-
+-%% \begin{explaincode}
+-%%   MetaPost renders \mfcomment
+-%    |draw| with a filled curve.
+-%%   Hence, we need to ensure the orientation is correct (i.e.,
+-%%   counterclockwise).  Unfortunately, we have no way to check for
+-%%   overlap, and it's fairly common for MetaPost to output
+-%%   self-overlapping curve outlines, even if the curve itself has no
+-%%   overlap.
+-%% \end{explaincode}
+-
+-def draw expr p =
+-  addto currentpicture
+-  if picture p:
+-    also p
+-  elseif is_cyclic p:
+-    doublepath counterclockwise p t_ withpen currentpen
+-  else:
+-    if is_clockwise (p--cycle):
+-      doublepath (reverse p) t_ withpen currentpen
+-    else:
+-      doublepath p t_ withpen currentpen
+-    fi
+-  fi
+-  pc_
++ emit_glyph_parameter("name", name)
+ enddef;
+ 
+-def undraw expr p =
+-  addto currentpicture
+-  if picture p:
+-    also p
+-  elseif is_cyclic p:
+-    doublepath clockwise p t_ withpen currentpen
+-  else:
+-    if is_clockwise (p--cycle):
+-      doublepath p t_ withpen currentpen
+-    else:
+-      doublepath (reverse p) t_ withpen currentpen
+-    fi
+-  fi
+-  pc_ withcolor background
+-enddef;
+Index: runfiles/texmf-dist/scripts/mf2pt1/mf2pt1.pl
+===================================================================
+--- runfiles/texmf-dist/scripts/mf2pt1/mf2pt1.pl.orig
++++ runfiles/texmf-dist/scripts/mf2pt1/mf2pt1.pl
+@@ -26,6 +26,7 @@ require 5.6.1;            # I haven't te
+ 
+ use File::Basename;
+ use File::Spec;
++use File::Path qw(make_path remove_tree);
+ use Getopt::Long;
+ use Pod::Usage;
+ use Math::Trig;
+@@ -67,7 +68,7 @@ my @isolatin1encoding =
+          backslash bracketright asciicircum underscore quoteleft a b c
+          d e f g h i j k l m n o p q r s t u v w x y z braceleft bar
+          braceright asciitilde),
+-     (map {"_a$_"} (128..143)),
++     (map {"_a$_"} (127..143)),
+      qw (dotlessi grave acute circumflex tilde macron breve dotaccent
+          dieresis _a153 ring cedilla _a156 hungarumlaut ogonek
+          caron space exclamdown cent sterling currency yen brokenbar
+@@ -142,10 +143,11 @@ my $underlinethick;
+ my $fontname;
+ my $uniqueID;
+ my $designsize;
+-my ($mffile, $pt1file, $pfbfile, $ffscript);
++my ($mffile, $pt1file);
+ my $encoding;
+ my $rounding;
+ my $bpppix;
++my $emsize = 1000;		# Number of pixels per EM.
+ 
+ # Define all of our other global variables.
+ my $progname = basename $0, ".pl";
+@@ -158,6 +160,8 @@ my @charfiles;
+ my $filebase;
+ my $filedir;
+ my $filenoext;
++my $tempdir;
++my $psdir;
+ my $versionmsg = "mf2pt1 version $VERSION
+ 
+ Copyright (C) 2012 Scott Pakin
+@@ -174,7 +178,6 @@ and version 1.3c or later is part of all
+ version 2006/05/20 or later.
+ ";
+ 
+-
+ ######################################################################
+ 
+ # The routines to compute the fractional approximation of a real number
+@@ -363,7 +366,6 @@ sub execute_command ($@)
+     return !$result;
+ }
+ 
+-
+ # Output the font header.
+ sub output_header ()
+ {
+@@ -407,7 +409,7 @@ ENDHEADER
+     print OUTFILE <<"ENDHEADER";
+ /PaintType 0 def
+ /FontType 1 def
+-/FontMatrix [0.001 0 0 0.001 0 0] readonly def
++/FontMatrix [1 $emsize div 0 0 1 $emsize div 0 0] readonly def
+ /UniqueID $uniqueID def
+ /FontBBox{@fontbbox}readonly def
+ currentdict end
+@@ -419,29 +421,40 @@ dup /Private 5 dict dup begin
+ ENDHEADER
+ }
+ 
++my $psfile_rx = '-(\d+)\.[^-]*$';
+ 
+ # Use MetaPost to generate one PostScript file per character.  We
+ # calculate the font bounding box from these characters and store them
+ # in @fontbbox.  If the input parameter is 1, set other font
+ # parameters, too.
+-sub get_bboxes ($)
++sub run_metapost ($)
+ {
++    my $pass = shift;
++    $psdir = $tempdir . '/' . $pass;
++    make_path($psdir);
++    opendir (PSDIR, $psdir) || die "${progname}: $! ($psdir)\n";
++    my @oldcharfiles = map { $psdir.'/'.$_ } grep /\.mps$/,readdir(PSDIR);
++    closedir(PSDIR);
++    unlink @oldcharfiles;
+     execute_command 1, ("mpost", "-mem=mf2pt1", "-progname=mpost",
+-                        "\\mode:=localfont; mag:=$mag; bpppix $bpppix; nonstopmode; input $mffile");
+-    opendir (CURDIR, ".") || die "${progname}: $! ($filedir)\n";
++                        "\\mode:=localfont; mag:=$mag; bpppix $bpppix; nonstopmode; outputtemplate:=\"$psdir/\" & outputtemplate; input $mffile");
++    opendir (PSDIR, $psdir) || die "${progname}: $! ($psdir)\n";
+     @charfiles = sort
+-                   { ($a=~ /\.(\d+)$/)[0] <=> ($b=~ /\.(\d+)$/)[0] }
+-                   grep /^$filebase.*\.\d+$/, readdir(CURDIR);
+-    close CURDIR;
++                   { ($a=~ /$psfile_rx/)[0] <=> ($b=~ /$psfile_rx/)[0] }
++                   grep /^$filebase-\d+\.mps$/, readdir(PSDIR);
++    close PSDIR;
+     @fontbbox = (1000000, 1000000, -1000000, -1000000);
+     foreach my $psfile (@charfiles) {
+         # Read the character number from the output file's extension.
+-        $psfile =~ /\.(\d+)$/;
+-        my $charnum = $1;
++	unless ($psfile =~ /$psfile_rx/) {
++	    warn "${progname}: couldn't find char number in $psfile\n";
++	    next;
++	}
++	my $charnum = $1;
+ 
+         # Process in turn each line of the current PostScript file.
+         my $havebbox = 0;
+-        open (PSFILE, "<$psfile") || die "${progname}: $! ($psfile)\n";
++        open (PSFILE, "<$psdir/$psfile") || die "${progname}: $! ($psdir/$psfile)\n";
+         while (<PSFILE>) {
+             my @tokens = split " ";
+             if ($tokens[0] eq "%%BoundingBox:") {
+@@ -468,7 +481,7 @@ sub get_bboxes ($)
+                 };
+ 
+                 # If all we want is the bounding box, exit the loop now.
+-                last MF2PT1_CMD if !$_[0];
++                last MF2PT1_CMD unless $pass == 1;
+ 
+                 # glyph_name name -- glyph name
+                 $tokens[2] eq "glyph_name" && do {
+@@ -477,7 +490,7 @@ sub get_bboxes ($)
+                 };
+ 
+                 # charwd wd -- character width as in TFM
+-                $tokens[2] eq "charwd" && do {
++                $tokens[2] eq "glyph_charwd" && do {
+                     $charwd[$charnum] = $tokens[3];
+                     last MF2PT1_CMD;
+                 };
+@@ -539,7 +552,7 @@ sub get_bboxes ($)
+                 # font_underline_position number -- vertical underline position
+                 $tokens[2] eq "font_underline_position" && do {
+                     # We store $underlinepos in points and later
+-                    # scale it by 1000/$designsize.
++                    # scale it by $emsize/$designsize.
+                     $underlinepos = $tokens[3];
+                     last MF2PT1_CMD;
+                 };
+@@ -547,7 +560,7 @@ sub get_bboxes ($)
+                 # font_underline_thickness number -- thickness of underline
+                 $tokens[2] eq "font_underline_thickness" && do {
+                     # We store $underlinethick in points and later
+-                    # scale it by 1000/$designsize.
++                    # scale it by $emsize/$designsize.
+                     $underlinethick = $tokens[3];
+                     last MF2PT1_CMD;
+                 };
+@@ -563,6 +576,11 @@ sub get_bboxes ($)
+                     $uniqueID = 0+$tokens[3];
+                     last MF2PT1_CMD;
+                 };
++
++		$tokens[2] eq "font_em_size" && do {
++		    $emsize = $tokens[3];
++		    last MF2PT1_CMD;
++		};
+             }
+         }
+         close PSFILE;
+@@ -582,7 +600,10 @@ sub output_font_programs ()
+     print "Converting PostScript graphics to Type 1 font programs...\n";
+     foreach my $psfile (@charfiles) {
+         # Initialize the font program.
+-        $psfile =~ /\.(\d+)$/;
++	unless ($psfile =~ /$psfile_rx/) {
++	    warn "${progname}: couldn't find char number in $psfile\n";
++	    next;
++	}
+         my $charnum = $1;
+         my $gname = $glyphname[$charnum] || $encoding->[$charnum];
+         my @fontprog;
+@@ -594,7 +615,7 @@ sub output_font_programs ()
+             ($charbbox[$charnum]->[0], 0);  # Current point (PostScript)
+ 
+         # Iterate over every line in the current file.
+-        open (PSFILE, "<$psfile") || die "${progname}: $! ($psfile)\n";
++        open (PSFILE, "<$psdir/$psfile") || die "${progname}: $! ($psdir/$psfile)\n";
+         while (my $oneline=<PSFILE>) {
+             next if $oneline=~/^\%/;
+             next if $oneline=~/set/;   # Fortunately, "set" never occurs on "good" lines.
+@@ -760,7 +781,10 @@ GetOptions (\%opthash,
+             "encoding=s",          # font_coding_scheme (*)
+             "rounding=f",
+             "bpppix=f",
++	    "emsize=i",		   # emsize in pixesls
+             "ffscript=s",
++	    "o|output=s",
++            "k|keep",
+             "h|help",
+             "V|version") || pod2usage(2);
+ if (defined $opthash{"h"}) {
+@@ -779,14 +803,22 @@ my @fileparts = fileparse $mffile, ".mf"
+ $filebase = $fileparts[0];
+ $filedir = $fileparts[1];
+ $filenoext = File::Spec->catfile ($filedir, $filebase);
+-$pt1file = $filebase . ".pt1";
+-$pfbfile = $filebase . ".pfb";
++if (defined $opthash{'o'}) {
++    $pt1file = $opthash{'o'};
++} else {
++    $pt1file = $filebase . ".pt1";
++}
++my $cleanup = !defined $opthash{'k'};
++
++$tempdir = "${filebase}-mftmp";
++make_path($tempdir);
+ 
+ assign_default $bpppix, $opthash{bpppix}, 0.02;
++assign_default $emsize, $opthash{emsize}, 1000;
+ 
+ # Make our first pass through the input, to set values for various options.
+ $mag = 100;           # Get a more precise bounding box.
+-get_bboxes(1);        # This might set $designsize.
++run_metapost(1);        # This might set $designsize.
+ 
+ # Sanity-check the specified precision.
+ assign_default $rounding, $opthash{rounding}, 1;
+@@ -805,9 +837,9 @@ assign_default $designsize, $opthash{des
+ die "${progname}: a design size must be specified in $mffile or on the command line\n" if !defined $designsize;
+ die "${progname}: the design size must be a positive number\n" if $designsize<=0.0;
+ assign_default $underlinepos, $opthash{underpos}, -1;
+-$underlinepos = round(1000*$underlinepos/$designsize);
++$underlinepos = round($emsize*$underlinepos/$designsize);
+ assign_default $underlinethick, $opthash{underthick}, 0.5;
+-$underlinethick = round(1000*$underlinethick/$designsize);
++$underlinethick = round($emsize*$underlinethick/$designsize);
+ assign_default $fullname, $opthash{fullname}, $filebase;
+ assign_default $familyname, $opthash{family}, $fullname;
+ assign_default $italicangle, $opthash{italicangle}, 0;
+@@ -842,7 +874,6 @@ ENCODING:
+ }
+ assign_default $fixedpitch, $opthash{fixedpitch}, 0;
+ $fixedpitch = $fixedpitch ? "true" : "false";
+-assign_default $ffscript, $opthash{ffscript};
+ 
+ # Output the final values of all of our parameters.
+ print "\n";
+@@ -864,10 +895,11 @@ mf2pt1 is using the following font param
+ PARAMVALUES
+     ;
+ print "\n";
++#unlink @charfiles unless defined $opthash{"k"};
+ 
+-# Scale by a factor of 1000/design size.
+-$mag = 1000.0 / $designsize;
+-get_bboxes(0);
++# Scale by a factor of $emsize/design size.
++$mag = $emsize / $designsize;
++run_metapost(2);
+ print "\n";
+ 
+ # Output the font in disassembled format.
+@@ -878,51 +910,13 @@ printf OUTFILE "2 index /CharStrings %d 
+ output_font_programs();
+ output_trailer();
+ close OUTFILE;
+-unlink @charfiles;
+ print "\n";
+ 
+-# Convert from the disassembled font format to Type 1 binary format.
+-if (!execute_command 0, ("t1asm", $pt1file, $pfbfile)) {
+-    die "${progname}: You'll need either to install t1utils and rerun $progname or find another way to convert $pt1file to $pfbfile\n";
+-    exit 1;
+-}
+-print "\n";
+-unlink $pt1file;
++# Finish up.
++print "*** Successfully generated $pt1file! ***\n";
+ 
+-# Use FontForge to autohint the result.
+-my $user_script = 0;   # 1=script file was provided by the user; 0=created here
+-if (defined $ffscript) {
+-    # The user provided his own script.
+-    $user_script = 1;
+-}
+-else {
+-    # Create a FontForge script file.
+-    $ffscript = $filebase . ".pe";
+-    open (FFSCRIPT, ">$ffscript") || die "${progname}: $! ($ffscript)\n";
+-    print FFSCRIPT <<'AUTOHINT';
+-Open($1);
+-SelectAll();
+-RemoveOverlap();
+-AddExtrema();
+-Simplify(0, 2);
+-CorrectDirection();
+-Simplify(0, 2);
+-RoundToInt();
+-AutoHint();
+-Generate($1);
+-Quit(0);
+-AUTOHINT
+-    ;
+-    close FFSCRIPT;
+-}
+-if (!execute_command 0, ("fontforge", "-script", $ffscript, $pfbfile)) {
+-    warn "${progname}: You'll need to install FontForge if you want $pfbfile autohinted (not required, but strongly recommended)\n";
+-}
+-unlink $ffscript if !$user_script;
+-print "\n";
++remove_tree($tempdir) unless defined $opthash{"k"};
+ 
+-# Finish up.
+-print "*** Successfully generated $pfbfile! ***\n";
+ exit 0;
+ 
+ ######################################################################
+@@ -939,6 +933,7 @@ mf2pt1 - produce a PostScript Type 1 fon
+ mf2pt1
+ [B<--help>]
+ [B<--version>]
++[B<--keep>]
+ [B<--comment>=I<string>]
+ [B<--designsize>=I<number>]
+ [B<--encoding>=I<encoding>]
+@@ -954,7 +949,7 @@ mf2pt1
+ [B<--weight>=I<weight>]
+ [B<--rounding>=I<number>]
+ [B<--bpppix>=I<number>]
+-[B<--ffscript>=I<file.pe>]
++[B<--emsize>=I<number>]
+ I<infile>.mf
+ 
+ 
+@@ -996,6 +991,10 @@ Provide help on B<mf2pt1>'s command-line
+ 
+ Output the B<mf2pt1> version number, copyright, and license.
+ 
++=item B<--keep>
++
++Keep generated files.
++
+ =item B<--comment>=I<string>
+ 
+ Include a font comment, usually a copyright notice.
+@@ -1062,9 +1061,9 @@ to round coordinate values [default: 1.0
+ 
+ Redefine the number of big points per pixel from 0.02 to I<number>.
+ 
+-=item B<--ffscript>=I<file.pe>
++=item B<--emsize>=I<number>
+ 
+-Name a script to pass to FontForge.
++Redefine the number of units per em from 1000 to I<number>.
+ 
+ =back
+ 
+Index: docfiles/texmf-dist/doc/support/mf2pt1/mf2pt1.texi
+===================================================================
+--- docfiles/texmf-dist/doc/support/mf2pt1/mf2pt1.texi.orig
++++ docfiles/texmf-dist/doc/support/mf2pt1/mf2pt1.texi
+@@ -99,10 +99,10 @@ This file documents @command{mf2pt1} ver
+ 
+ @insertcopying
+ 
+-@contents
+-
+ @end titlepage
+ 
++@contents
++
+ @ifnottex
+ @node Top, Introduction, (dir), (dir)
+ @top mf2pt1
+@@ -762,6 +762,15 @@ of @samp{bpppix}.  For example, specifyi
+ a tenfold increase in maximum glyph size (with a corresponding
+ decrease in precision).
+ 
++The convention for PostScript fonts is to use an em-size of 1000
++units.  However, this is not a requirement; any positive integer less
++than 32767 is acceptable.  The @copt{emsize} option allows you to
++change this from the default of 1000 to any number you wish.
++
++@command{mf2pt1} normally deletes its intermediate files after it is
++finished with them, but you can override this behavior with the
++@copt{keep} option.
++
+ After generating a @w{Type 1} font, @command{mf2pt1} runs it through
+ FontForge to add hinting information, remove overlaps, and otherwise
+ clean up the generated font.  The @copt{ffscript} option specifies
