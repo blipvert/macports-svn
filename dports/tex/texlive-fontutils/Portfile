@@ -6,7 +6,7 @@ PortGroup           texlive 1.0
 
 name                texlive-fontutils
 version             37381
-revision            0_blip1
+revision            0_blip2
 
 categories          tex
 maintainers         dports
@@ -23,6 +23,8 @@ checksums           texlive-fontutils-37381-run.tar.xz \
                     texlive-fontutils-37381-src.tar.xz \
                     rmd160  36c565a9b701b37c739c717b908ca682e461570e \
                     sha256  45a1c1dc50d73b95f89141863cc2285f2c60beb12fea7ea12dc308bffbb92ba4
+
+patchfiles-append  patch-mf2pt1-hack1.diff
 
 depends_lib         port:texlive-basic
 
