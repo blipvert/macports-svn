@@ -1,0 +1,18 @@
+--- runfiles/texmf-dist/fonts/source/public/cm/cmbase.mf.orig	2015-08-10 13:01:44.000000000 -0300
++++ runfiles/texmf-dist/fonts/source/public/cm/cmbase.mf	2015-08-10 13:02:04.000000000 -0300
+@@ -667,13 +667,13 @@
+  z${x$$-x$,0}...(.75[x$,x$$],.25[y$,y$$]){z$$-z$}...{0,y$$-y$}z$$ enddef;
+ 
+ vardef penpos@#(expr b,d) =
+- if known b: if b<=0: errmessage "bad penpos"; fi fi
++ if unknown ps_output: if known b: if b<=0: errmessage "bad penpos"; fi fi fi
+  (x@#r-x@#l,y@#r-y@#l)=(b,0) rotated d;
+  x@#=.5(x@#l+x@#r); y@#=.5(y@#l+y@#r) enddef;
+ 
+ newinternal currentbreadth;
+ vardef pos@#(expr b,d) =
+- if known b: if b<=currentbreadth: errmessage "bad pos"; fi fi
++ if unknown ps_output: if known b: if b<=currentbreadth: errmessage "bad pos"; fi fi fi
+  (x@#r-x@#l,y@#r-y@#l)=(b-currentbreadth,0) rotated d;
+  x@#=.5(x@#l+x@#r); y@#=.5(y@#l+y@#r) enddef;
+ def numeric_pickup_ primary q =
