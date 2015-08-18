@@ -15,6 +15,8 @@ install: all
 	  echo "${SRCS} automatically configured"; \
         fi
 
+selfupdate:: install index
+
 index::
 	@(cd dports && portindex -o ${HOME}/.macports${CURDIR}/dports)
 	@for f in PortIndex PortIndex.quick; do \
