@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                ZendFramework2
-version             2.4.5
+version             2.4.7
 categories          www lang
 license             BSD
 maintainers         snc openmaintainer
@@ -24,8 +24,8 @@ if {$subport eq $name} {
     master_sites        https://packages.zendframework.com/releases/ZendFramework-${version}/
     extract.suffix      .tgz
 
-    checksums           rmd160  42d94517bef7a5edf76da8ff40e2b3aae5ca070c \
-    		        sha256  9345cfa6ce45bf7faa8a4354ea6d175bcb3a05164e8b75415a3c1a0bebbaf3f2
+    checksums           rmd160  b136d9580a27d1daccf1459bf7356934b4c200cb \
+                        sha256  33f8c7dbe25cceabfeab91dcf981606b2952dffa59f84ca04fb85282ed9f20ce
 
     livecheck.regex     {Zend Framework (2\.\d+\.\d+) Full}
 }
@@ -33,15 +33,14 @@ if {$subport eq $name} {
 subport ZendFramework1 {
     conflicts ZendFramework2
 
-    version             1.12.13
+    version             1.12.15
     revision            0
 
     distname            ZendFramework-${version}
     master_sites        https://packages.zendframework.com/releases/ZendFramework-${version}/
 
-    checksums           rmd160  994d2ff96a4a6f297fdb67ce2d501ad67a46dd1b \
-                        sha256  5b127f08393b2c378297529b5a779656939da88de841ecc55edec75652ef453b
-
+    checksums           rmd160  b5df4d3696f4cd9bd54fb7edd92658a40b13967c \
+                        sha256  734f1f8e659a8bf24178fac83e656717712f0114eb685c0081c4f6f90f61f93c
 
     livecheck.regex     {Zend Framework (1\.\d+\.\d+) Full}
 }

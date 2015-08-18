@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           muniversal 1.0
 
-github.setup        xianyi OpenBLAS eff43d32893a
+github.setup        xianyi OpenBLAS bb6e050509dc
 
 name                ${github.project}-devel
-version             20150531
+version             20150807
 conflicts           OpenBLAS
 categories          math science
 license             BSD
@@ -140,6 +140,10 @@ pre-build {
             puts $makeINC "NO_LAPACK = 1"
         }
         if {![variant_isset clang]} {
+            if { ![catch {sysctl hw.optional.avx1_0} has_avx] && $has_avx == 1 } {
+                ui_msg "Warning: the chosen compiler cannot handle advanced optimisation instructions."
+                ui_msg "         AVX instructions are disabled."
+            }
             puts $makeINC "NO_AVX = 1"
         }
         close $makeINC
