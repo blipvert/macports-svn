@@ -14,6 +14,12 @@ install: all
 	  echo "${SRCS} automatically configured"; \
         fi
 
+index::
+	@(cd dports && portindex -o ${HOME}/.macports${CURDIR}/dports)
+	@for f in PortIndex PortIndex.quick; do \
+		[ -f dports/$$f ] || \
+		ln -sf ${HOME}/.macports${CURDIR}/dports/$$f dports/$$f; done
+
 clean:
 	@(cd base && ([ ! -f Makefile ] || ${MAKE} clean))
 
