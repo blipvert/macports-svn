@@ -11,7 +11,7 @@ PortGroup       muniversal 1.0
 
 name            texlive-bin
 version         2015
-revision        1_blip1
+revision        1_blip3
 
 categories      tex
 maintainers     dports
@@ -219,6 +219,18 @@ post-destroot   {
     # Not sure why this gets installed into the wrong location, but
     # fix it here.
     move ${destroot}${prefix}/lib/kpathsea/c-auto.h ${destroot}${prefix}/include/kpathsea/c-auto.h
+
+    # Install libmplib.a and its header files
+    xinstall -d ${destroot}${prefix}/include/mplib
+    foreach f [glob ${worksrcpath}/texk/web2c/mp*.h] {
+        copy ${f} ${destroot}${prefix}/include/mplib
+    }
+    foreach f [glob ${worksrcpath}/texk/web2c/mplibdir/*.h] {
+        copy ${f} ${destroot}${prefix}/include/mplib
+    }
+    foreach f [glob ${worksrcpath}/texk/web2c/libmp*.a] {
+        copy ${f} ${destroot}${prefix}/lib
+    }
     
     # Anything that gets installed into texmf-dist will be installed
     # by one of the texmf ports
