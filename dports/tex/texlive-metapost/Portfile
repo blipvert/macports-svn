@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           texlive 1.0
 
 name                texlive-metapost
-version             37366blip1
-revision            0
+version             37366
+revision            0.1
 
 categories          tex
 maintainers         dports

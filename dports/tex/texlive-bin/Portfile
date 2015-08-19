@@ -10,8 +10,8 @@ PortGroup       texlive 1.0
 PortGroup       muniversal 1.0
 
 name            texlive-bin
-version         2015blip3
-revision        2
+version         2015
+revision        2.3
 
 categories      tex
 maintainers     dports

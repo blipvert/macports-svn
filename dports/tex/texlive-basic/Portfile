@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           texlive 1.0
 
 name                texlive-basic
-version             37485blip1
-revision            0
+version             37485
+revision            0.1
 
 categories          tex
 maintainers         dports
