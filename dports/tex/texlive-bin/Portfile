@@ -11,7 +11,7 @@ PortGroup       muniversal 1.0
 
 name            texlive-bin
 version         2015
-revision        2.3
+revision        2.4
 
 categories      tex
 maintainers     dports
@@ -231,6 +231,7 @@ post-destroot   {
     foreach f [glob ${worksrcpath}/texk/web2c/libmp*.a] {
         copy ${f} ${destroot}${prefix}/lib
     }
+    copy ${worksrcpath}/texk/web2c/web2c/web2c ${destroot}${prefix}/libexec/texlive/binaries
     
     # Anything that gets installed into texmf-dist will be installed
     # by one of the texmf ports
