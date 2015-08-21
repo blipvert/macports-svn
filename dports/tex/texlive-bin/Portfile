@@ -4,6 +4,7 @@
 PortSystem      1.0
 PortGroup       compiler_blacklist_versions 1.0
 PortGroup       texlive 1.0
+PortGroup       blip 1.0
 
 # luajittex requires muniversal (and some patches to configure
 # scripts) to build universal
@@ -11,7 +12,8 @@ PortGroup       muniversal 1.0
 
 name            texlive-bin
 version         2015
-revision        2.4
+revision        2
+blip.revision   7
 
 categories      tex
 maintainers     dports
@@ -82,8 +84,6 @@ patchfiles-append  patch-texk_chktex_Makefile.in.diff \
                    patch-texk_texlive_linked_scripts_Makefile.in.diff \
                    patch-texk_texlive_tl_scripts_Makefile.in.diff \
                    patch-texk_xdvik_xdvi-sh.in.diff \
-                   patch-texk_web2c_mf.web_tension.diff \
-                   patch-texk_web2c_mplibdir_mp.w_tension.diff
 
 # patches to luajit/luajittex's config scripts to correctly detect
 # architecture in universal builds
@@ -231,7 +231,6 @@ post-destroot   {
     foreach f [glob ${worksrcpath}/texk/web2c/libmp*.a] {
         copy ${f} ${destroot}${prefix}/lib
     }
-    copy ${worksrcpath}/texk/web2c/web2c/web2c ${destroot}${prefix}/libexec/texlive/binaries
     
     # Anything that gets installed into texmf-dist will be installed
     # by one of the texmf ports
@@ -285,6 +284,56 @@ variant motif requires x11 description {Use Motif to build xdvi} {
     configure.args-delete --with-xdvi-x-toolkit=xaw
     depends_lib-append lib:libXm:openmotif
     configure.args-append --with-xdvi-x-toolkit=motif
+}
+
+variant blip {
+    patchfiles-append \
+        patch-texk_web2c_mf.web_tension.diff \
+        patch-texk_web2c_mplibdir_mp.w_tension.diff \
+        patch-texk_web2c_lib_texmfmp.c_progname.diff
+
+    post-destroot {
+        set web2c_src ${worksrcpath}/texk/web2c
+        set web2c_dest ${destroot}${prefix}/libexec/web2c
+
+        xinstall -d ${web2c_dest}
+        xinstall -d ${web2c_dest}/bin
+
+        copy ${web2c_src}/web2c/convert ${web2c_dest}/bin
+        copy ${web2c_src}/web2c/fixwrites ${web2c_dest}/bin
+        copy ${web2c_src}/web2c/makecpool ${web2c_dest}/bin
+        copy ${web2c_src}/web2c/splitup ${web2c_dest}/bin
+        copy ${web2c_src}/web2c/web2c ${web2c_dest}/bin
+
+        xinstall -d ${web2c_dest}/lib
+        copy ${web2c_src}/lib/lib.a ${web2c_dest}/lib/libwebcrt.a
+        copy ${web2c_src}/window/libwindow.a ${web2c_dest}/lib
+
+        xinstall -d ${web2c_dest}/include
+        copy ${web2c_src}/cpascal.h ${web2c_dest}/include
+        copy ${web2c_src}/help.h ${web2c_dest}/include
+        copy ${web2c_src}/texmfmem.h ${web2c_dest}/include
+        copy ${web2c_src}/texmfmp.h ${web2c_dest}/include
+        copy ${web2c_src}/texmfmp-help.h ${web2c_dest}/include
+        
+        xinstall -d ${web2c_dest}/include/lib
+        copy ${web2c_src}/lib/lib.h ${web2c_dest}/include/lib
+        copy ${web2c_src}/lib/texmfmp.c ${web2c_dest}/include/lib
+        
+        xinstall -d ${web2c_dest}/include/window
+        copy ${web2c_src}/window/mfdisplay.h ${web2c_dest}/include/window
+
+        xinstall -d ${web2c_dest}/include/w2c
+        copy ${web2c_src}/w2c/config.h ${web2c_dest}/include/w2c
+        copy ${web2c_src}/w2c/c-auto.h ${web2c_dest}/include/w2c
+
+        xinstall -d ${web2c_dest}/share
+        copy ${web2c_src}/web2c/common.defines ${web2c_dest}/share
+        copy ${web2c_src}/web2c/texmf.defines ${web2c_dest}/share
+        copy ${web2c_src}/web2c/mfmp.defines ${web2c_dest}/share
+        copy ${web2c_src}/ptexdir/ptex.defines ${web2c_dest}/share
+        copy ${web2c_src}/uptexdir/uptex.defines ${web2c_dest}/share
+    }
 }
 
 default_variants    +x11
