@@ -1,0 +1,11 @@
+--- texk/web2c/lib/texmfmp.c.orig	2015-08-19 13:35:47.000000000 -0400
++++ texk/web2c/lib/texmfmp.c	2015-08-21 16:13:31.000000000 -0400
+@@ -725,7 +725,7 @@
+ #endif
+ 
+   /* If the program name is "mf-nowin", then reset the name as "mf". */
+-  if (strncasecmp (kpse_invocation_name, "mf-nowin", 8) == 0)
++  if (strncasecmp (kpse_program_name, "mf-nowin", 8) == 0)
+     kpse_reset_program_name ("mf");
+ 
+   /* FIXME: gather engine names in a single spot. */
