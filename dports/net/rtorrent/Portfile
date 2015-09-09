@@ -7,9 +7,10 @@ name                rtorrent
 conflicts           rtorrent-devel
 set real_name       rtorrent
 version             0.9.2
+revision            1
 categories          net
 platforms           darwin
-maintainers         nomaintainer
+maintainers         gmail.com:stuartwesterman openmaintainer
 license             {GPL-2+ OpenSSLException}
 
 description         console-based BitTorrent client

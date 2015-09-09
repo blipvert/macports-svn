@@ -88,7 +88,7 @@ global qt_docs_dir
 if {${qt_dir} ne ${prefix}} {
     set qt_docs_dir         ${qt_share_dir}/doc
 } else {
-    set qt_docs_dir         ${qt_share_dir}/share/doc/${qt_name}
+    set qt_docs_dir         ${qt_share_dir}/doc/${qt_name}
 }
 
 # standard Qt plugins directory
@@ -116,11 +116,12 @@ if {${qt_dir} ne ${prefix}} {
 }
 
 # standard Qt data directory
+# Don't append /data. Here be dragons.
 global qt_data_dir
 if {${qt_dir} ne ${prefix}} {
-    set qt_data_dir         ${qt_share_dir}/data
+    set qt_data_dir         ${qt_share_dir}
 } else {
-    set qt_data_dir         ${qt_share_dir}/${qt_name}/data
+    set qt_data_dir         ${qt_share_dir}/${qt_name}
 }
 
 # standard Qt translations directory

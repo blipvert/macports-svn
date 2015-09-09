@@ -5,28 +5,28 @@ PortSystem          1.0
 PortGroup           select 1.0
 
 name                ipython_select
-version             0.3
-revision            1
+version             0.4
+revision            0
 categories          python
-license             BSD
-maintainers         nomaintainer
-description         common files for selecting default ipython version
-long_description \
-   This port installs files that allow 'port select' to be used to \
-   create links to the preferred default version of ipython.
-
 platforms           darwin
+license             BSD
 supported_archs     noarch
+
+maintainers         nomaintainer
+
+description         Common files for selecting default IPython version
+long_description    This port installs files that allow 'port select' \
+                    to create links to the preferred default version \
+                    of IPython.
 
 homepage            http://www.macports.org/
 
 distfiles
-
 use_configure       no
-build               {}
-destroot {
-    select::install ipython ${filespath}/base
-    select::install ipython ${filespath}/none
-}
+build {}
+destroot {}
+
+select.entries      {ipython base} \
+                    {ipython none}
 
 livecheck.type      none

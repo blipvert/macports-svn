@@ -22,16 +22,21 @@ if {${subport} eq ${name}} {
     long_description ${description}: \
 Provides the release version, which is typically updated every month or so.
 
-    set base_version 3.8.5
+    set base_version 3.9.0
     github.setup    EttusResearch uhd 00[join [split ${base_version} "."] "_00"] release_
     version         ${base_version}
     conflicts       uhd-devel
-    checksums       rmd160 b571195eefc2a45fda31b1c466498ff146a76d62 \
-                    sha256 1b50adf39dab2a829998168f272319c4581ea1803dcb06bf462e70ba60e4abd1
+    checksums       rmd160 c71e795a7e60bd6de0167b6e703e8386eda43383 \
+                    sha256 794cb9240b406a7862282d2202467c98140e017d0ea9d8aa8e0544e95821bbe4
 
     # set the version override string
 
     set UHD_VERSION_INFO "Release"
+
+    # temporary patch telling the user about detecting a bad USB state
+    # on startup & resetting it. Remove in 3.9.1.
+
+    patchfiles-append patch-b200_fixes.release.diff
 
     # overload the github livecheck regex to look for versions that
     # are just numbers and '_', no letters (e.g., "3.7.3_rc2").
@@ -47,10 +52,10 @@ Provides the UHD GIT maint or master branch, depending on which is more advanced
 
     name            uhd-devel
     conflicts       uhd
-    github.setup    EttusResearch uhd 5c9fbf9d60677ed9fb5705e71bf845b727184efe
-    version         20150813
-    checksums       rmd160 1c09588d9b4cb6f6c40f1daf4985f6a17f3335c2 \
-                    sha256 3dd63c85d1d1d098454b7668b8dee9b564587d08dbe856d603d3dd77f9444bde
+    github.setup    EttusResearch uhd 8a6c4056921bdcb9c27c2b61f60102d5943230f5
+    version         20150903
+    checksums       rmd160 e602cadbf7eed9a172d2dd889ba6584b3c81852b \
+                    sha256 e790e6802cdc1f7b249666c9e0ba204a74195ba038e4b093ce8b51b6da5e513c
 
     # overload the github livecheck URL with the maint branch,
     # when it is more advanced; comment out for master.
@@ -116,69 +121,36 @@ configure.args-append \
 
 default_variants +docs +examples +libusb +manual +test +manpages
 
-set PythonVersionNoDot ""
+# select Python to use; default to 2.7
 
-if {${subport} eq "uhd"} {
+variant python27 conflicts python34 description {Build using Python 2.7} {}
+variant python34 conflicts python27 description {Build using Python 3.4} {}
 
-    # for release until 3.8.5+:
-    #
-    # 1) keep +orc around. it has been
-    # deprecated and removed as of 2015-07-01, commit 41812aa2.
-
-    default_variants +orc
-
-    variant orc description {enable ORC support} {
-        depends_lib-append port:orc
-        configure.args-append -DENABLE_ORC=ON
-    }
-
-    if {![variant_isset orc]} {
-        configure.args-append -DENABLE_ORC=OFF
-    }
-
-    # 2) use Python 2.7 only, and cheetah for templates
-
-    set PythonVersionNoDot "27"
-    depends_lib-append \
-        port:py27-cheetah
-
-} else {
-
-    # as of 2015-07-14, commit 4b1034b2: uhd-devel uses mako for
-    # templates, which means it can use Python 2.7 or 3.4.
-
-    variant python27 conflicts python34 description {Build using Python 2.7} {}
-    variant python34 conflicts python27 description {Build using Python 3.4} {}
-
-    if {![variant_isset python27] && ![variant_isset python34]} {
-        default_variants +python27
-    }
-
-    if {![variant_isset python27] && ![variant_isset python34]} {
-        ui_error "\n\nYou must select either the +python27 or +python34 variant.\n"
-        return -code error "Invalid variant selection"
-    }
-
-    if {[variant_isset python27]} {
-        set PythonVersionNoDot "27"
-    } else {
-        set PythonVersionNoDot "34"
-    }
-
-    depends_lib-append \
-        port:py${PythonVersionNoDot}-mako
-
+if {![variant_isset python27] && ![variant_isset python34]} {
+    default_variants +python27
 }
 
+if {![variant_isset python27] && ![variant_isset python34]} {
+    ui_error "\n\nYou must select either the +python27 or +python34 variant.\n"
+    return -code error "Invalid variant selection"
+}
+
+set PythonVersionNoDot ""
+if {[variant_isset python27]} {
+    set PythonVersionNoDot "27"
+} else {
+    set PythonVersionNoDot "34"
+}
 set PythonVersionWithDot [join [split ${PythonVersionNoDot} ""] "."]
 
 # required Python
 
 depends_lib-append \
     port:python${PythonVersionNoDot} \
-    port:py${PythonVersionNoDot}-requests
+    port:py${PythonVersionNoDot}-requests \
+    port:py${PythonVersionNoDot}-mako
 
-# specify that Python version to use
+# specify the Python version to use
 
 set PythonExe "${prefix}/bin/python${PythonVersionWithDot}"
 

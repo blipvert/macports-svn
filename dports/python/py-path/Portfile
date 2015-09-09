@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-path
-version             7.6
-revision            0
+version             8.0
+revision            1
 categories-append   devel
 platforms           darwin
 license             MIT
@@ -24,10 +24,16 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}.
 
 distname            ${python.rootname}.py-${version}
 
-checksums           rmd160  59e7e7f1f1b3acc6ffc260c48721e02ad6daf5f5 \
-                    sha256  5cdf60f359f1add18f8556c9a1855cbd1d517f0780e3d386c256515f698ba0e0
+checksums           rmd160  3208b2f9220b49b0e9366fa9bea0154c37b280f0 \
+                    sha256  ac78a7f9c65c6c0abd9a8586e5c5a06b3a2f99e7812c928101d048d18037a1b6
 
 if {${name} ne ${subport}} {
+    depends_build-append \
+                        port:py${python.version}-setuptools \
+                        port:py${python.version}-setuptools_scm
+
+    patchfiles-append   patch-path.py.diff
+
     livecheck.type      none
 } else {
     livecheck.type      pypi

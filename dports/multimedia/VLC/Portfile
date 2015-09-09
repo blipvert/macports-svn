@@ -6,7 +6,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                VLC
 version             2.1.5
-revision            5
+revision            6
 categories          multimedia
 
 maintainers         gmail.com:rjvbertin openmaintainer
@@ -188,6 +188,7 @@ depends_lib-append  \
                     port:libmad \
                     port:libopus \
                     port:libpng \
+                    port:libvpx \
                     port:schroedinger \
                     port:libtheora \
                     port:twolame \

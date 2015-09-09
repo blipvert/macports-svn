@@ -26,7 +26,6 @@
     <b><?php print $portsdb_info['num_ports']; ?></b> ports</a> in our tree, distributed among <?php print $portsdb_info['num_categories']; ?>
     different categories, and more are being added on a regular basis.</p>
     
-    
     <h3 class="subhdr">Getting started</h3>
 
     <p>For information on installing MacPorts please see the <a href="install.php">installation</a> section of this site and

@@ -97,29 +97,30 @@ switch ${subport_branch} {
     }
     5.5 {
         epoch           2
-        version         5.5.28
+        version         5.5.29
         use_xz          yes
-        checksums       rmd160  3373c16149241ba29a582a4f8c548157edfdc5da \
-                        sha256  d060455c804c622cda9f3f5f084b10c6ceba73ee76c1720897e17137a0f75ecd
+        checksums       rmd160  17dca3a6ba6285eb383b6c4dd65d0689ab490064 \
+                        sha256  22c72d1b88c8d9a8ab9ca565e9ca5844287c006134098805d9a373a862bbbcad
     }
     5.6 {
         epoch           2
-        version         5.6.12
+        version         5.6.13
         use_xz          yes
-        checksums       rmd160  7912a2098f1d7de400cfac94f09c040550a8d83d \
-                        sha256  f8a8446866c0dc3f33319aa196ce87b64d71cab3dd96e39c8816adccc7e8ef33
+        checksums       rmd160  182a405c89187b02aaa5fa3210ca05b71b7f85dd \
+                        sha256  c1f0837df20cd3bed149033924770deca3e7e2d18e2e7e81395096576f153fdc
     }
     7.0 {
         # When this becomes a stable version, remove the overrides for homepage,
         # master_sites and livecheck, and update php.latest_stable_branch in the
         # php-1.1 portgroup.
-        version         7.0.0beta3
+        epoch           1
+        version         7.0.0RC2
         homepage        http://qa.php.net/
         master_sites    http://downloads.php.net/~ab/
         use_xz          yes
-        checksums       md5     92b10b1694161d00ac38401da4537ed3 \
-                        rmd160  6b86f785a9b891a64dc61676103657ead1e2cc08 \
-                        sha256  f3cf545dcf74f4727f378dcfa206d7b3c78aafca3ccf68109d7302733fb957b4
+        checksums       md5     d2b5cabd9dbd79e1dfe72253b7da5517 \
+                        rmd160  f3998b29b5f10b675c6fe9da573b986d553320bc \
+                        sha256  d03809c06fd509238613b41f4d27e716a102c091ae5363bc7c25c4a39dcbf0b2
         livecheck.url   ${homepage}
         livecheck.regex php-([strsed ${subport_branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*(?:(?:alpha|beta|RC)\\d+|-latest))\\.tar
     }
@@ -277,7 +278,11 @@ subport ${php} {
     PortGroup               select 1.0
     
     if {[vercmp ${branch} 5.2] == 0} {
-        revision            10
+        revision            11
+    } elseif {[vercmp ${branch} 5.3] == 0} {
+        revision            1
+    } elseif {[vercmp ${branch} 5.4] == 0} {
+        revision            1
     }
     
     depends_run             port:php_select
@@ -322,11 +327,11 @@ subport ${php} {
     # On the other hand we want libedit to be the default because its license
     # is compatible with PHP's which means PHP can be distributable.
     variant libedit conflicts readline description {Build readline extension using libedit library} {
-        depends_lib-append      port:libedit
+        depends_lib-append      port:libedit port:ncurses
         configure.args-append   --with-libedit=${prefix}
     }
     variant readline conflicts libedit description {Build readline extension using readline library} {
-        depends_lib-append      port:readline
+        depends_lib-append      port:ncurses port:readline
         configure.args-append   --with-readline=${prefix}
     }
     if {![variant_isset readline]} {

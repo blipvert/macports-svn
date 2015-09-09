@@ -6,7 +6,7 @@ PortGroup muniversal 1.0
 
 name            emacs22
 version         22.3
-revision        7
+revision        8
 
 categories      editors
 license         GPL-3+
@@ -93,7 +93,7 @@ variant x11 description {Builds emacs as a X11 program with Lucid widgets} {
                             lib:libpng:libpng
 }
 
-platform darwin 11 {
+if {${os.platform} eq "darwin" && ${os.major} >= 11} {
     configure.ldflags-append -Wl,-no_pie
 }
 
