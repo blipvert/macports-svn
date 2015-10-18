@@ -15,9 +15,9 @@ maintainers     nomaintainer
 description     Qt Tool Kit
 long_description \
                 Qt 3 is a multiplatform C++ application development framework.
-homepage        http://qt.nokia.com/
 platforms       darwin
-master_sites    trolltech::qt3 \
+homepage        http://www.qt.io/
+master_sites    https://download.qt.io/archive/qt/3/:qt3 \
                 http://ranger.befunk.com/fink/:fink
 distname        qt-x11-free-${version}
 distfiles       ${distname}.tar.bz2:qt3 \
@@ -42,7 +42,7 @@ post-extract {
 }
 
 patchfiles      qt3-tiger.patch dp01.patch macports-x11.patch \
-                patch-src_kernel_qpngio.cpp.diff patch-freetype-2.5.1.diff
+                patch-src_kernel_qpngio.cpp.diff
 
 patch {
     foreach p ${patchfiles} {
@@ -123,7 +123,7 @@ post-patch {
 
 conflicts_build qt3-mac
 
-configure.args  -buildkey qt3-jaguar \
+configure.args  -v -buildkey qt3-jaguar \
                 -platform darwin-g++ -xplatform darwin-g++ \
                 -prefix '${prefix}/lib/qt3' -docdir '${prefix}/share/doc/qt3' \
                 -headerdir '${prefix}/include/qt3' -libdir '${prefix}/lib' \

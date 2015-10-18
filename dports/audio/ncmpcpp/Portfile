@@ -4,8 +4,7 @@
 PortSystem          1.0
 
 name                ncmpcpp
-version             0.6.5
-revision            1
+version             0.6.7
 categories          audio
 maintainers         rmstonecipher openmaintainer
 description         an ncurses mpd client inspired by ncmpc
@@ -18,8 +17,8 @@ license             GPL-2+
 platforms           darwin
 master_sites        http://ncmpcpp.rybczak.net/stable/
 use_bzip2           yes
-checksums           rmd160  2bfa72e3a7fa8d2c15368f39f2e284bb80bcd0a4 \
-                    sha256  51128f6835c592c8d4367a66b08e06a9419a86c9d5c6e91d0f1dc73af56cd1fd
+checksums           rmd160  8b78327b2063a04f6da16d6db389278a73ab2cc9 \
+                    sha256  08807dc515b4e093154a6e91cdd17ba64ebedcfcd7aa34d0d6eb4d4cc28a217b
 
 depends_build       port:pkgconfig
 

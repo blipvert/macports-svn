@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                gnome-panel
-version             3.16.1
+version             3.18.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  93ee4ce50411d40b7173ea992ec9f3e5e03757c4 \
-                    sha256  b51997a5db70773606cd72be735902923ae73bd3f2c762ade65695751d4bd162
+checksums           rmd160  9dd6a35544e457d686720d0cf1768cf03d28c5eb \
+                    sha256  c62518031fe86cd36a2385686363a7e5eb0a94f2fc6a8a48cf56d94654540377
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -54,6 +54,8 @@ depends_run         port:gnome-settings-daemon \
                     port:yelp
 
 gobject_introspection yes
+
+patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 

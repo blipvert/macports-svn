@@ -2,6 +2,7 @@
 # $Id$
 
 PortSystem 1.0
+PortGroup		compiler_blacklist_versions 1.0
 
 name            g95
 version         0.93
@@ -93,9 +94,8 @@ post-patch {
     }
 }
 
-if {${os.major} == 11 || ${os.major} == 12} {
-    compiler.blacklist-append   *clang*
-}
+compiler.blacklist-append   {clang < 500}
+
 configure.cflags-append -std=gnu89
 pre-configure {
     file mkdir ${workpath}/gcc-${version_gcc}/${name}
@@ -178,3 +178,7 @@ variant gcc40 description {build against gcc-4.0.x} {
     patchfiles-delete   patch-lang.opt.diff patch-darwin.h.diff
     patchfiles-append   patch-host-darwin.c.diff patch-darwin-fallback.c.diff
 }
+
+livecheck.type      regex
+livecheck.url       http://g95.org/downloads.shtml
+livecheck.regex     Stable version (\[0-9.\]+)

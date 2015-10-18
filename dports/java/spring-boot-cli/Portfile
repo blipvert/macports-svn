@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name            spring-boot-cli
-version         1.2.5
+version         1.2.7
 
 categories      java
 platforms       darwin
@@ -29,8 +29,8 @@ master_sites    http://repo.spring.io/release/org/springframework/boot/${name}/$
 
 distname        ${name}-${version}.RELEASE-bin
 
-checksums       rmd160  7905205c03ad09f8ae5de70f2e8b2cef6d8e3315 \
-                sha256  a11a2e457a81e9976f6dc98882ccf45919edef961e70c2135fdd5543b093892a
+checksums       rmd160  147c2bbeb0fa737ac6cfdeede97e275a01b15d76 \
+                sha256  11304d73f0aade1d60d8be8653f9d557c8d05a04031b148addf3b64ba5077f78
 
 worksrcdir      spring-${version}.RELEASE
 
@@ -66,3 +66,7 @@ variant bash_completion {
              ${destroot}${prefix}/etc/bash_completion.d/spring
     }
 }
+
+livecheck.type  regex
+livecheck.url   http://repo.spring.io/release/org/springframework/boot/${name}/
+livecheck.regex (\[0-9.\]+).RELEASE

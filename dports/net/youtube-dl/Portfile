@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                youtube-dl
-version             2015.09.03
+version             2015.10.13
 categories          net
 platforms           darwin
 maintainers         ryandesign openmaintainer
@@ -18,8 +18,8 @@ long_description    ${name} is a small ${description}.
 homepage            http://rg3.github.com/youtube-dl/
 master_sites        http://youtube-dl.org/downloads/${version}
 
-checksums           rmd160  ad105d73fe60421743a39b3e0fe599f99c8b65b3 \
-                    sha256  dfa0efc89412eb58d1cdf641a7747ad95dcd31d8d08b006334a2e603325eb273
+checksums           rmd160  75237bc7281193b68ce4b32d8e521ca6a72cdd7b \
+                    sha256  4588f98ecd082ac4d1574c6bbc386eaf625fe1b2b321f4f84a2eb6bea45b41f9
 
 depends_build       bin:zip:zip
 
@@ -63,19 +63,24 @@ variant ffmpeg description {Add ffmpeg dependency, used to extract audio} {
 
 default_variants    +ffmpeg
 
-variant python27 conflicts python34 description {Use Python 2.7} {
+variant python27 conflicts python34 python35 description {Use Python 2.7} {
     depends_run-append  port:python27
     configure.python    ${prefix}/bin/python2.7
 }
 
 variant python33 requires python34 description {Legacy compatibility variant} {}
 
-variant python34 conflicts python27 description {Use Python 3.4} {
+variant python34 conflicts python27 python35 description {Use Python 3.4} {
     depends_run-append  port:python34
     configure.python    ${prefix}/bin/python3.4
 }
 
-if {![variant_isset python27] && ![variant_isset python34]} {
+variant python35 conflicts python27 python34 description {Use Python 3.5} {
+    depends_run-append  port:python35
+    configure.python    ${prefix}/bin/python3.5
+}
+
+if {![variant_isset python27] && ![variant_isset python34] && ![variant_isset python35]} {
     default_variants +python27
 }
 

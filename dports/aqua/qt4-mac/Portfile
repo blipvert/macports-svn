@@ -16,7 +16,7 @@ name                qt4-mac
 #conflicts           qt3 qt3-mac qt4-mac-devel
 conflicts           qt3 qt3-mac qt5-mac
 version             4.8.7
-revision            1
+revision            2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 
 categories          aqua
@@ -238,15 +238,48 @@ platform darwin {
 patchfiles-append   \
     patch-tools_macdeployqt_shared_shared.cpp.diff
 
-# error out if trying to build on a new OSX version (> 10.10).
+# (23) remove ColorSync usage from qpaintengine.
+
+# This patch allows for building using the 10.11 SDK, and is also
+# backward compatible with prior OS versions since it just removes API
+# usage but does not otherwise add any. This patch does roughly the
+# same thing as that from Qt5 commit b06304e16:
+# http://code.qt.io/cgit/qt/qtbase.git/commit/?id=b06304e164ba47351fa292662c1e6383c081b5ca
+
+patchfiles-append   \
+    patch-src_gui_painting_qpaintengine_mac.diff
+
+# (24) fix qcursor_mac; already committed upstream; see also:
+# https://trac.macports.org/ticket/48516
+# http://code.qt.io/cgit/qt/qtbase.git/commit/src/plugins/platforms/cocoa/qcocoacursor.mm?id=02ea0235216beef390e9868ff770c7a54d70db83
+# https://developer.apple.com/library/prerelease/mac/documentation/Carbon/Reference/QuartzEventServicesRef/#//apple_ref/c/func/CGEventCreateMouseEvent
+
+patchfiles-append   \
+    patch-src_gui_kernel_qcursor_mac.mm.diff
+
+# (25) avoid zombie processes; see also:
+# https://trac.macports.org/ticket/46608
+# https://codereview.qt-project.org/#/c/61294/
+# approved but abandoned.
+
+patchfiles-append   \
+    patch-src_corelib_io_qprocess_unix.cpp.diff
+
+# (26) fix build on Leopard; see also:
+# https://trac.macports.org/ticket/43746
+
+patchfiles-append   \
+    patch-src_gui_dialogs_qfiledialog_mac.mm.diff
+
+# error out if trying to build on a new OSX version (> 10.11).
 
 platform darwin {
-    if {${MINOR} > 10} {
+    if {${MINOR} > 11} {
         # This project needs to be updated to build with clang++ against libc++
         depends_lib
         depends_run
         pre-fetch {
-            ui_error "$name does not currently build on OSX later than 10.10 'Yosemite'."
+            ui_error "$name does not currently build on OSX later than 10.11 'El Capitan'."
             error "unsupported platform"
         }
     }
@@ -407,8 +440,7 @@ post-patch {
 #
 
 compiler.blacklist-append { clang <= 318.0.61 } \
-    gcc-3.3 *gcc-4.0 macports-gcc* \
-    macports-clang-2.9 macports-clang-3.0
+    gcc-3.3 *gcc-4.0 macports-gcc*
 
 # --prefix is not recognized
 

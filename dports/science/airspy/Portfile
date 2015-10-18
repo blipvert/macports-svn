@@ -7,10 +7,10 @@ PortGroup           github 1.0
 
 name                airspy
 
-github.setup        airspy host 98fbab435cc24521d870c9dfa66950b416631a6f
-version             20150713
-checksums           rmd160 798cb831596398ebbb7083527cd54687ad704870 \
-                    sha256 a0bf5a0d29ae1c73d95733f6d9f3e8523da07506c5d0433d7ab012f7078f67df
+github.setup        airspy host 5c17bbc14bb548871bb26ffec9509f8f158077fd
+version             20151008
+checksums           rmd160 519a08106685bcffc0ec5202ee528ad766544fa9 \
+                    sha256 231baedc077a9ee8ecc8c6e5ce596e99d58cbbc7cde7399fa9d12801c4457992
 
 homepage            http://www.airspy.com/
 

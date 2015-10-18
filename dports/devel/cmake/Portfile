@@ -29,9 +29,10 @@ if {${subport} eq ${name}} {
 
     # release
 
-    version         ${branch}.1
-    checksums       rmd160 39f63aef3c9ba9711f736fd8e51972429ceca527 \
-                    sha256 cd65022c6a0707f1c7112f99e9c981677fdd5518f7ddfa0f778d4cee7113e3d6
+    version         ${branch}.2
+    revision        1
+    checksums       rmd160 c7d3b8895e2e143b7e1019477764370535917dca \
+                    sha256 e75a178d6ebf182b048ebfe6e0657c49f0dc109779170bad7ffcb17463f2fc22
 
     long_description ${base_long_description} \
         The ${subport} release port is updated roughly every few months.
@@ -40,6 +41,13 @@ if {${subport} eq ${name}} {
 
     master_sites    http://www.cmake.org/files/v${branch}/
 
+    patchfiles-append patch-Modules-noArchCheck.release.diff
+
+    # temporary patch to find Boost 1.59;
+    # remove when updating to next release
+
+    patchfiles-append patch-Modules-FindBoost.cmake.diff
+
     livecheck.type  regex
     livecheck.regex ${name}-(\[0-9.\]+)${extract.suffix}
     livecheck.url   [lindex $master_sites 0]
@@ -47,12 +55,12 @@ if {${subport} eq ${name}} {
 } else {
 
     # devel
-    version         20150831
-    set dist_branch 3.3
-    set dist_date   20150831
-    set dist_hash   gb53ba
-    checksums       rmd160 015fc264e7ecb8a1d573d13e950d9491928bbf3b \
-                    sha256 7777b857d9468df9fe0a106a9f82bbc5064e297258da07070b3d2085a620b8f7
+    version         20151012
+    set dist_branch 3.4
+    set dist_date   20151010
+    set dist_hash   gf4172
+    checksums       rmd160 1dcfb79ca59ea048f213e94c4c5f0b4f189d357d \
+                    sha256 b9be2905c6706a49235d76f5789efc0ec4ba48862d99ff1602da34f6cb9b813b
 
     master_sites    http://www.cmake.org/files/dev/
     distname        ${name}-${dist_branch}.${dist_date}-${dist_hash}
@@ -60,6 +68,8 @@ if {${subport} eq ${name}} {
 
     long_description ${base_long_description} \
         The ${subport} port is updated roughly every week.
+
+    patchfiles-append patch-Modules-noArchCheck.devel.diff
 
     livecheck.type  regex
     livecheck.regex (${name}-\[0-9a-g.-\]+)${extract.suffix}
@@ -78,12 +88,11 @@ depends_lib-append  port:curl \
 # jsoncpp 1.0+ requires CMake for building. catch 22. So, have CMake
 # use its internal jsoncpp until a better solution comes about.
 
-patchfiles          patch-CMakeFindFrameworks.cmake.diff \
+patchfiles-append   patch-CMakeFindFrameworks.cmake.diff \
                     patch-Modules-FindFreetype.cmake.diff \
                     patch-Modules-FindQt4.cmake.diff \
                     patch-Modules-Platform-Darwin.cmake.diff \
-                    patch-Modules-Platform-Darwin-Initialize.cmake.diff \
-                    patch-Modules-noArchCheck.diff
+                    patch-Modules-Platform-Darwin-Initialize.cmake.diff
 
 configure.env-append \
                     CMAKE_PREFIX_PATH=${prefix} \

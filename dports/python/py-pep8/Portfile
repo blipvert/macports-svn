@@ -5,8 +5,10 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           select 1.0
 
-name                py-pep8
 set realname        pep8
+
+name                py-pep8
+
 version             1.6.2
 categories-append   devel
 platforms           darwin
@@ -29,6 +31,8 @@ checksums           rmd160  8f6d30def6a2e04386c4c8c310443966d7f63de2 \
 python.versions     26 27 33 34
 
 if {${name} ne ${subport}} {
+    conflicts               py${python.version}-pep8-157
+
     depends_lib-append      port:py${python.version}-setuptools
     depends_run-append      port:${realname}_select
     select.group            ${realname}

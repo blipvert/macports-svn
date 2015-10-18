@@ -6,7 +6,7 @@ PortGroup           gobject_introspection 1.0
 
 name                clutter-gst3
 set gname           clutter-gst
-version             3.0.10
+version             3.0.14
 license             LGPL-2.1+
 set branch          [string range $version 0 [expr [string last "." $version] - 1]]
 categories          graphics
@@ -23,8 +23,8 @@ use_xz              yes
 
 distname            ${gname}-${version}
 
-checksums           rmd160  e10dffa923564ad08ceafd24b18978a1a390c7ef \
-                    sha256  2dbdbc3292e92684bbdbf1694c61f6b781f5810e4d79a415dfdee2f7ee42148c
+checksums           rmd160  edb320d7bf5a4cf01ac0822392eea1ddf55b9e6c \
+                    sha256  f7c8a7dc479759cad5ff7483cb5a1abbe3efd0b4f83ed0e443dc602430a82de2
 
 depends_build       port:pkgconfig
 

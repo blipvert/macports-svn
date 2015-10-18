@@ -20,9 +20,9 @@ long_description    Rust is a curly-brace, block-structured expression \
                     language. It visually resembles the C language \
                     family, but differs significantly in syntactic and \
                     semantic details. Its design is oriented toward \
-                    concerns of “programming in the large”, that is, of \
-                    creating and maintaining boundaries — both abstract \
-                    and operational — that preserve large-system \
+                    concerns of \"programming in the large\", that is, of \
+                    creating and maintaining boundaries -- both abstract \
+                    and operational -- that preserve large-system \
                     integrity, availability and concurrency.
 homepage            http://www.rust-lang.org/
 
@@ -79,8 +79,7 @@ switch ${configure.build_arch} {
 # (https://github.com/rust-lang/rust#building-from-source).
 compiler.blacklist  {clang < 211} \
                     *dragonegg* \
-                    gcc-3.3 {*gcc-4.[0-6]} \
-                    macports-clang-2.9
+                    gcc-3.3 {*gcc-4.[0-6]}
 
 # Building the bundled LLVM requires Python 2.4-2.7. All supported
 # OS X releases have 2.6. (Using MacPorts' LLVM ports fails either

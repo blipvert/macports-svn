@@ -7,11 +7,11 @@ PortGroup       mpi 1.0
 
 name            boost
 version         1.59.0
-revision        1
+revision        2
 license         Boost-1
 categories      devel
 platforms       darwin
-maintainers     ryandesign openmaintainer
+maintainers     ryandesign michaelld openmaintainer
 
 description     Collection of portable C++ source libraries
 
@@ -46,6 +46,7 @@ post-extract {
 patchfiles      patch-tools-build-src-engine-build.sh.diff \
                 patch-tools-build-src-engine-build.jam.diff \
                 patch-apple-clang-no-libcxx.diff \
+                patch-libs-context-src-asm-make_ppc32_sysv_macho_gas.S.diff \
                 patch-log-setup-link.diff
                 # patch-apple-clang-no-libcxx.diff fixes a clang configuration
                 # error that occurs on OS X 10.7 and 10.8 due to the assumption
@@ -58,6 +59,15 @@ patchfiles      patch-tools-build-src-engine-build.sh.diff \
                 # are only available in libc++.  Fixes build of libcdr on these
                 # OS versions without affecting build on 10.6 and less (where clang is not
                 # the default compiler) or 10.9 and up (where libc++ is the default).
+
+# temporary patch to fix: explicit template instanciations in
+# boost::serialization don't get exported with all compilers; this fix
+# is already in the boost repo & will be part of the next release. See
+# also the following tickets:
+# https://trac.macports.org/ticket/48717
+# https://svn.boost.org/trac/boost/ticket/11671
+
+patchfiles-append patch-export_serialization_explicit_template_instantiations.diff
 
 post-patch {
     reinplace "s|%%CONFIGURE.CC%%|${configure.cc}|g" ${worksrcpath}/tools/build/src/engine/build.jam \
@@ -74,7 +84,7 @@ proc write_jam s {
 # clang++ produces broken boost libraries (https://trac.macports.org/ticket/31525)
 # If Apple's clang is used on 32-bit systems, it seems to silently ignore the '-march=i386' flag.
 # (https://trac.macports.org/ticket/38157)
-compiler.blacklist {clang < 421} macports-clang-2.9 macports-clang-3.0 *llvm-gcc-4.2 *gcc-4.0 gcc-3.3
+compiler.blacklist {clang < 421} *llvm-gcc-4.2 *gcc-4.0 gcc-3.3
 
 compilers.choose   cc cxx
 mpi.setup          -gcc -dragonegg
@@ -165,7 +175,7 @@ variant python25 description {Legacy variant} requires python27 {}
 variant python31 description {Legacy variant} requires python34 {}
 variant python32 description {Legacy variant} requires python34 {}
 
-set pythons_suffixes {26 27 33 34}
+set pythons_suffixes {26 27 33 34 35}
 
 set pythons_ports {}
 foreach s ${pythons_suffixes} {

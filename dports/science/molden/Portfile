@@ -10,7 +10,7 @@ PortGroup xcodeversion 1.0
 PortGroup compilers 1.0
 
 name                molden
-version             5.4-20150904130600
+version             5.4-20150923182500
 set version_number  [lindex [split ${version} -] 0]
 set branch          [join [lrange [split ${version_number} .] 0 1] .]
 categories          science graphics chemistry
@@ -22,8 +22,8 @@ worksrcdir          ${name}${branch}
 dist_subdir         ${name}/${version}
 master_sites        ftp://ftp.cmbi.ru.nl/pub/molgraph/molden/
 
-checksums           rmd160  23755c501e1f0796822553eaf57d9bc23a82feb7 \
-                    sha256  a07f4fc753b998f30a923d0ee9da30ef84a5e9dc54b1b3290538f3e7b5409196
+checksums           rmd160  18a81d67432465ea33df480efb5d236b98c94da7 \
+                    sha256  f4e2b9a88a98f04ad23947676f0dd42abc4b5de805e5fdbbb2d2a82abbf29f8b
 
 description         Molecular graphics visualisation tool
 long_description    Molden is a package for displaying Molecular Density from \

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-setuptools
-version             18.2
+version             18.3.2
 categories-append   devel
 license             {PSF ZPL}
 maintainers         jmr openmaintainer
@@ -22,11 +22,11 @@ homepage            https://pypi.python.org/pypi/setuptools/
 master_sites        https://pypi.python.org/packages/source/s/setuptools/
 distname            setuptools-${version}
 
-checksums           md5    52b4e48939ef311d7204f8fe940764f4 \
-                    rmd160 ef34e3e130f97146be9062ed1b686fc6b0fcf324 \
-                    sha256 0994a58df27ea5dc523782a601357a2198b7493dcc99a30d51827a23585b5b1d
+checksums           md5    d30c969065bd384266e411c446a86623 \
+                    rmd160 7b3d1baafa445784820f7bae00cb619bc41997e3 \
+                    sha256 8c4ab0c4f227730519dc1e020f875b3ef97e643c8f43a98a4fa0c46fbad12450
 
-python.versions     26 27 33 34
+python.versions     26 27 33 34 35
 python.link_binaries no
 
 if {$subport ne $name} {

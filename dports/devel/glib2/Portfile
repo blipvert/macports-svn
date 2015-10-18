@@ -10,8 +10,7 @@ PortGroup                   conflicts_build 1.0
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.44.1
-revision                    1
+version                     2.46.1
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -31,8 +30,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums                   rmd160  40db36e25c4baf5bdcdde34379d4968e9b35557c \
-                            sha256  8811deacaf8a503d0a9b701777ea079ca6a4277be10e3d730d2112735d5eca07
+checksums                   rmd160  348594880f1795b8a82176513c3d74ae71b0d6d4 \
+                            sha256  5a1f03b952ebc3a7e9f612b8724f70898183e31503db329b4f15d07163c8fdfb
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -46,8 +45,10 @@ patchfiles                  patch-configure.diff \
                             patch-get-launchd-dbus-session-address.diff \
                             patch-gmodule-gmodule-dl.c.diff
 
-# Don't link with "-flat_namespace -undefined suppress" on Yosemite and later.
-patchfiles-append           yosemite-libtool.patch
+if {[vercmp ${macosx_deployment_target} 10.9] < 0} {
+    # gcocoanotificationbackend requires OS X 10.9 or later.
+    patchfiles-append       remove-gcocoanotificationbackend.patch
+}
 
 depends_build               bin:xmllint:libxml2
 
@@ -103,7 +104,7 @@ test.run                    yes
 test.target                 check
 
 post-destroot {
-    file delete ${destroot}${prefix}/lib/charset.alias
+    delete ${destroot}${prefix}/lib/charset.alias
 
     set docdir ${prefix}/share/doc/${my_name}
     xinstall -d ${destroot}${docdir}

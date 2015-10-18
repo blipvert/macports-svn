@@ -36,11 +36,11 @@ provides the release version, which is typically updated every month or so.
 
 subport volk-devel {
 
-    github.setup    gnuradio volk 078d078d6c5af25e9901e91dac9bd7865791f226
-    version         20150824
+    github.setup    gnuradio volk f0b722392950bf7ede7b32f5ff60019bce7a8592
+    version         20151007
     checksums       \
-        rmd160 b73b0b12769af9130965648dfb99cc640e3fb8e4 \
-        sha256 42358e339ceed1e189f8e92d0453cb8c07559b7015e6d78b9faf07c998bfbade
+        rmd160 04d7cd2dcc0b024e800d27acefbe32cc2617ed84 \
+        sha256 711476600679dc71cc44b6953de9a5fff9c11a5efd1dbd1c6af7bdeea30184cc
     conflicts       volk
     long_description ${long_description} ${subport} \
 provides the Volk GIT maint or master branch, depending on which is more advanced, and is typically updated every few days to week.

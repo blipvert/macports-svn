@@ -10,15 +10,12 @@ PortGroup           active_variants 1.1
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.16.6
+version             3.18.2
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
 maintainers         cal devans openmaintainer
 platforms           darwin
-
-checksums           rmd160  225edcba11f04afbe4bfd3437f7d334937e09b9d \
-                    sha256  4d12726d0856a968b41802ae5c5971d7e9bac532717e309d3f81b9989da5ffbe
 
 description         GTK+ widget toolkit
 
@@ -33,6 +30,9 @@ distname            ${real_name}-${version}
 use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
+
+checksums           rmd160  d1763ca8c59066367397e15304e6b0b484d240dd \
+                    sha256  5dbec561c4a00070073bf9cf4cfdd61fab4a14c8ff5b15d700bd378f8185e152
 
 minimum_xcodeversions {9 3.1}
 depends_build       port:pkgconfig
@@ -60,7 +60,6 @@ archcheck.files \
 
 configure.args      --enable-static \
                     --disable-glibtest \
-                    --disable-libcanberra \
                     --enable-introspection \
                     --disable-cloudprint \
                     --disable-mir-backend \

@@ -6,8 +6,7 @@ PortGroup               python 1.0
 PortGroup               github 1.0
 PortGroup               compilers 1.0
 
-github.setup            numpy numpy 1.9.2 v
-revision                2
+github.setup            numpy numpy 1.10.1 v
 name                    py-numpy
 categories-append       math
 license                 BSD
@@ -16,17 +15,17 @@ maintainers             dh michaelld openmaintainer
 description             The core utilities for the scientific library scipy for Python
 long_description        ${description}
 
-checksums               rmd160  43b83224b2c0b67662773bad3cfb03138b86013e \
-                        sha256  5587182f8a749702aff0d55187d1c6685b5484f299166b2ef66b80be14d162bc
+checksums               rmd160 8635b0d5e9e1744dd444927cbcfc7be29ffeaad7 \
+                        sha256 53425e0f53900f9206f0f71f7209524011c0e5140cfda0ce6b2147272f395723
 
-python.versions         26 27 33 34
+python.versions         26 27 33 34 35
 
 # TODO: Fix the +universal variant.  This port is a fairly deep dependency and needs to be able to support +universal.
 # https://trac.macports.org/ticket/48263
 universal_variant no
 
 if {${name} ne ${subport}} {
-    compilers.setup         -clang -dragonegg -gcc44 -gcc45 -gcc46 -g95
+    compilers.setup         -dragonegg -gcc44 -gcc45 -gcc46 -g95
 
     patchfiles              patch-f2py_setup.py.diff \
                             patch-fcompiler_g95.diff \
@@ -124,8 +123,7 @@ are compiled with the same one."
                             ATLAS=None
         # force LDFLAGS for correct linking of the modules
         # for non-Apple GCC compilers
-        patchfiles-append   patch-numpy_linalg_setup.py.diff \
-                            patch-numpy_core_setup.py.openblas.diff
+        patchfiles-append   patch-numpy_linalg_setup.py.diff
 
     } else {
         # use Accelerate BLAS

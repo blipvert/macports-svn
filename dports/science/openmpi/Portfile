@@ -46,16 +46,16 @@ if {[string first "-devel" $subport] > 0} {
     # openmpi switched to git and reset their revision number;
     # remove this when for next release
     set base            32546
-    set tag             gfe351f6
-    set newrev          2472
+    set tag             g13def2a
+    set newrev          2571
     revision            [expr {$base + $newrev + 2}]
     distname            openmpi-dev-${newrev}-${tag}
 
     master_sites        http://www.open-mpi.org/nightly/master \
                         http://www.open-mpi.de/nightly/master
 
-    checksums           rmd160  2c5edf18fc9c10f6cb81bc7d48367f075252ccc4 \
-                        sha256  992e40135f22346e9bb5ab218fc07e3217eac17dcc21bf95c5d10341354cb40b
+    checksums           rmd160  49c80b2e76f1719d13f9f196b52c0d782279f45d \
+                        sha256  c00c433225bc1eb4eb85399a5f44bb07f98b2a7114116488e19442b5359505aa
 
     livecheck.version   ${newrev}-${tag}
     livecheck.url       [lindex ${master_sites} 0]
@@ -130,7 +130,6 @@ if {${subport} != ${name}} {
     # be different for a user's machine
     archive_sites
 
-    conflicts-append            lammpi
     depends_lib-append          port:hwloc
     depends_run                 port:mpi_select port:mpi-doc
     select.group                mpi
@@ -207,7 +206,7 @@ if {${subport} != ${name}} {
         default_variants-append     +fortran
     } else {
         set gcc_versions {4.3 4.4 4.5 4.6 4.7 4.8 4.9 5 6}
-        set default_fortran_variant +gcc49
+        set default_fortran_variant +gcc5
         set g95_conflicts {}
 
         foreach ver ${gcc_versions} {

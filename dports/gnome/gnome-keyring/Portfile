@@ -6,7 +6,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                gnome-keyring
 epoch               1
-version             3.16.0
+version             3.18.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -23,8 +23,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  a88558a07672ca1256140633ebee465bea430e48 \
-                    sha256  15a3bb8c53855a4ff0dbbdfbe4ec3df206c32048f50bdc76a51f8e3e14ece1f5
+checksums           rmd160  2415f9f073faac67bc68b8ce521ea4d460330919 \
+                    sha256  abc31ab5790bd3bc4e2263a2a2d6b1c6c4d44db79d476e81ca98a278ee3b3444
 
 depends_build       port:pkgconfig \
                     port:intltool \

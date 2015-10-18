@@ -48,13 +48,13 @@ variant emacs description {Build with emacs bindings} {
 }
 
 subport mu-devel {
-    github.setup    djcb mu 7981845daad7
+    github.setup    djcb mu 1c988358155b
     name            mu-devel
     version         0.9.12.99
-    revision        2
+    revision        4
 
-    checksums       rmd160  c99be86cedcaaa8909ae17d846fef893fbd9371d \
-                    sha256  c30c83da3fc83773921a8c65ed583f7d44e37abe095a8088168656a1102833a8
+    checksums       rmd160  cbf2361c631b2b2b7bb4dbb423ecddd350da9a69 \
+                    sha256  bab8509b742ba57903a24f3cad86ab4ac75540a1bcf6d78034b120315aff8ea5
 }
 
 post-extract    {

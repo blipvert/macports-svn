@@ -7,9 +7,9 @@ PortGroup select 1.0
 name                    python35
 
 # Remember to keep py35-tkinter and py35-gdbm's versions sync'd with this
-version                 3.5.0rc3
+version                 3.5.0
 
-epoch                   20150908
+epoch                   20150913
 
 set major               [lindex [split $version .] 0]
 set branch              [join [lrange [split ${version} .] 0 1] .]
@@ -30,8 +30,8 @@ distname                Python-${version}
 
 use_xz					yes
 
-checksums           rmd160  9cb99776dbce694aec6bb67dfae7f4e427312e64 \
-                    sha256  5a0693a58b89436d704373d2868e6fa609023041869cf09b811ed29f49b7064b
+checksums           rmd160  3f9c287549eacd4aa95a03cc03954ef35546a3a3 \
+                    sha256  d6d7aa1634a5eeeca6ed4fca266982a04f84bd8f3945a9179e20b24ad2e2be91
 
 patchfiles              patch-setup.py.diff \
                         patch-Lib-cgi.py.diff \
@@ -139,6 +139,12 @@ platform darwin {
    }
 }
 
+variant readline description {Use readline instead of libedit} {
+    patchfiles-delete       patch-libedit.diff
+    depends_lib-append      port:readline
+    depends_lib-delete      port:libedit
+}
+
 variant universal {
     post-patch {
         set universal_arch_flags {}
@@ -177,6 +183,6 @@ variant universal {
 livecheck.type          regex
 #livecheck.url           ${homepage}download/releases/
 livecheck.url           ${homepage}downloads/source/
-#livecheck.regex         Python (${branch}(?:\\.\\d+)*)
+livecheck.regex         Python (${branch}(?:\\.\\d+)*)
 #regex below just for test releases, proper above
-livecheck.regex         Python\[ 	\]+(3.5.0\[abrc\]+\[0-9\])
+#livecheck.regex         Python\[ 	\]+(3.5.0\[abrc\]+\[0-9\])

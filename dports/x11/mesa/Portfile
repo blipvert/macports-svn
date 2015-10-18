@@ -6,7 +6,7 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                mesa
 epoch               1
-version             10.5.4
+version             11.0.2
 categories          x11 graphics
 maintainers         jeremyhu openmaintainer
 license             MIT
@@ -18,9 +18,11 @@ homepage            http://mesa3d.sourceforge.net/
 platforms           macosx darwin
 use_xz              yes
 master_sites        ftp://ftp.freedesktop.org/pub/mesa/${version}/
-checksums           sha1    3ccd3bab83032d225d9e28522358c8c231d33a0b \
-                    rmd160  74b0ff9ef6824ae8e0657b70aba61beceb9fbbb1 \
-                    sha256  b51e723f3a20d842c88a92d809435b229fc4744ca0dbec0317d9d4a3ac4c6803
+fetch.use_epsv      no
+
+checksums           sha1    df7105b74cebbcffe46ab50ccd4fbc1868961f6f \
+                    rmd160  55b306504198187a7bab258394cf464c65289e5b \
+                    sha256  fce11fb27eb87adf1e620a76455d635c6136dfa49ae58c53b34ef8d0c7b7eae4
 
 depends_build       port:pkgconfig \
                     port:flex \
@@ -39,9 +41,7 @@ depends_lib         port:xorg-glproto \
 
 patch.pre_args      -p1
 patchfiles \
-    0001-glext.h-Add-missing-include-of-stddef.h-for-ptrdiff_.patch \
-    1001-darwin-Fix-install-name-of-libOSMesa.patch \
-    5001-swrast-Build-fix-for-darwin.patch \
+    5001-glext.h-Add-missing-include-of-stddef.h-for-ptrdiff_.patch \
     5002-darwin-Suppress-type-conversion-warnings-for-GLhandl.patch \
     5003-applegl-Provide-requirements-of-_SET_DrawBuffers.patch
 
@@ -58,7 +58,6 @@ configure.args \
     --disable-silent-rules \
     --disable-egl \
     --disable-osmesa \
-    --disable-openvg \
     --with-gallium-drivers=
 
 configure.env-append \

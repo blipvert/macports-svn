@@ -5,19 +5,43 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        glfw glfw f6f077177091acb7e6270dcab166e0975ec14822
-version             20150901
-checksums           rmd160 c7d88313f89abbfeb8b175fd48dc0899718d1d08 \
-                    sha256 140fdbcab8322806e73d6093a0a00500a627bbe32770e243091d21501234fc7a
-
+name                glfw
 categories          graphics
 maintainers         michaelld openmaintainer
 description         GLFW is a free, open-source, portable library for OpenGL and OpenGL ES application development
 license             zlib
 platforms           darwin macosx
 
-long_description ${description}: \
+subport glfw-devel {}
+
+if {${subport} eq ${name}} {
+
+    # release
+
+    github.setup    glfw glfw 3.1.2
+    # bump the epoch because I moved the version from 20151012 to 3.1.2
+    epoch           1
+    checksums       rmd160 f0a34fda090c5d5e7aef2c916d6160faf777842f \
+                    sha256 a956537ed306746cf0bfe3e4a71758bff6d2a9e25f51fe718516f5b49ad9bfc5
+
+    conflicts       glfw-devel
+    long_description ${description}: \
+        This port follows the release version of GLFW, which is typically updated every 6 months. If for some reason this port does not build or function as desired, try the ${name}-devel port.
+
+} else {
+
+    # devel
+
+    github.setup    glfw glfw a7b75792ec0ce49525a5690f0db0f141a966a178
+    version         20151015
+    checksums       rmd160 9372b2ce8c29c954cc566e2242845517c8c7cf22 \
+                    sha256 dbf3cb1b9f125fd6a9dfbfca4516b8c0f6f7990d4e1a2addad902ccea8103fc5
+
+    conflicts       glfw
+    long_description ${description}: \
     This port follows the GIT master version of GLFW, which is typically updated every few days to weeks.
+
+}
 
 # use the real home page, not github's
 
@@ -54,12 +78,14 @@ post-destroot {
     # move cmake Modules to an appropriate location
 
     xinstall -m 755 -d ${destroot}${prefix}/share/cmake
-    move ${destroot}${prefix}/lib/cmake/glfw ${destroot}${prefix}/share/cmake
+    move ${destroot}${prefix}/lib/cmake/glfw \
+        ${destroot}${prefix}/share/cmake
 
     # copy html docs if requested
 
     if {[variant_isset docs]} {
         xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}
-        copy ${cmake.build_dir}/docs/html ${destroot}${prefix}/share/doc/${name}
+        copy ${cmake.build_dir}/docs/html \
+            ${destroot}${prefix}/share/doc/${name}
     }
 }

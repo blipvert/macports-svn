@@ -5,13 +5,13 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-logbook
-version             0.10.1
+version             0.11.2
 revision            0
 categories-append   devel
 platforms           darwin
 license             BSD
 
-python.versions     27 34
+python.versions     27 34 35
 
 maintainers         stromnov openmaintainer
 
@@ -19,12 +19,12 @@ description         Python logging replacement module.
 long_description    ${description}
 
 homepage            http://packages.python.org/Logbook/
-master_sites        https://pypi.python.org/packages/source/L/Logbook/
+master_sites        pypi:L/Logbook
 
 distname            Logbook-${version}
 
-checksums           rmd160  fb7c205ecb6037a8eb85b1f7d6cc1a69d71caa71 \
-                    sha256  57f5001d0cd3e285246d22919e6f545ad2136b40c3fd9b78c4e87128f96a7ab9
+checksums           rmd160  c5835b5822d47bed5b7b72ccf2179ae247b07476 \
+                    sha256  608cecf265f90e87e63480749e1c64e3bc1b91b218b57e9cffd14d25959e95ba
 
 if {${name} ne ${subport}} {
     depends_build-append \

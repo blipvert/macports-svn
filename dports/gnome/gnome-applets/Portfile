@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-applets
-version             3.16.1
+version             3.18.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GNOME panel applets.
 long_description    This package contains applets for use with the \
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  691304ffa63ed5cc21596dba62933cf1dd52ff8e \
-                    sha256  c656ecfc0a3af898e80f9c6971400f25e6cc8fe743fa0fd2b6a1a77a40005206
+checksums           rmd160  7b6d6e48ad3b6fd7f4453ef34e269da66e359f0b \
+                    sha256  e09eb18f55be851da4c75c7d97df40130625ea548b2aa8d9db21e17bb06eefd5
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -34,19 +34,19 @@ depends_lib         port:adwaita-icon-theme \
                     port:gtk3 \
                     port:gnome-panel \
                     port:libgtop \
-                    port:libxklavier \
                     port:libwnck3 \
                     port:libnotify \
-                    port:upower \
                     port:dbus \
                     port:dbus-glib \
+                    port:policykit \
+                    port:upower \
+                    port:gucharmap \
                     port:libxml2 \
                     port:libgweather \
-                    port:gucharmap \
-                    port:policykit \
                     port:py34-gobject3
 
-patchfiles          patch-configure.ac.diff
+patchfiles          patch-m4-ax_compiler_flags_ldflags.m4.diff \
+                    patch-configure.ac.diff
 
 post-patch {
     reinplace "s|/usr/bin/python3|${configure.python}|" \

@@ -8,10 +8,11 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           active_variants 1.1
 PortGroup           github 1.0
 
-github.setup        FFmpeg FFmpeg fec0485c43
+github.setup        FFmpeg FFmpeg a860adb49c
 name                ffmpeg-devel
 conflicts           ffmpeg
-version             20150720
+version             20150916
+revision            2
 license             LGPL-2.1+
 categories          multimedia
 maintainers         devans jeremyhu openmaintainer
@@ -50,8 +51,8 @@ long_description    FFmpeg is a complete solution to record, convert and \
 platforms           darwin
 homepage            http://www.ffmpeg.org/
 
-checksums           rmd160  c75899481a6bedc6d4a266bc83c5857ab0f78569 \
-                    sha256  22322c07988def3186def951a4b91fc61622f22b5c348b3905b4f5184e5b7986
+checksums           rmd160  72a7ec257b704e73631e36ad9f2863d3dba20277 \
+                    sha256  03375268ead8c31ca23fe0eb7ec7e1e7b6c61787e27c0a2ff1751b1bf6d4269e
 
 depends_build       port:pkgconfig \
                     port:gmake \
@@ -92,7 +93,7 @@ minimum_xcodeversions {9 3.1}
 if {[lsearch [get_canonical_archs] i386] != -1} {
     # clang-3.1 hits https://trac.macports.org/ticket/30137 (<rdar://problem/11542429>)
     # clang-139 hits https://trac.macports.org/ticket/38141
-    compiler.blacklist-append {clang < 422.1.7} macports-clang-3.1
+    compiler.blacklist-append {clang < 422.1.7}
 }
 
 # The old ffmpeg port was GPL-2+ as base and had a no_gpl variant, so this keeps us consistent
@@ -125,6 +126,7 @@ configure.args      --enable-swscale \
                     --disable-indev=jack \
                     --disable-outdev=xv \
                     --disable-vda \
+                    --disable-videotoolbox \
                     --mandir=${prefix}/share/man \
                     --enable-shared --enable-pthreads \
                     --cc=${configure.cc}
@@ -140,10 +142,25 @@ platform darwin {
         configure.args-append --disable-asm
     }
 
-    # VDA (video hardware acceleration, mostly H264) is only supported on 10.6.3+
+    # VDA (video hardware acceleration, mostly H264) is only supported on 10.6.3+ up to (excluding) 10.11.
+    #if {(${os.major} > 10 || (${os.major} == 10 && ${os.minor} >= 3)) && (${os.major} < 15)}
+    # Due to a bug in ffmpeg(?), we have to enable VDA on 10.11 as well, even though it shouldn't be supported.
+    # More information: https://github.com/mpv-player/mpv/issues/2299
     if {${os.major} > 10 || (${os.major} == 10 && ${os.minor} >= 3)} {
         configure.args-delete --disable-vda
         configure.args-append --enable-vda
+    }
+
+    # VideotoolBox, a new hardware acceleration framework, is supported on 10.8+ and "here to stay".
+    # It provides support for H264, H263, MPEG1, MPEG2 and MPEG4.
+    if {${os.major} > 11} {
+        configure.args-delete --disable-videotoolbox
+        configure.args-append --enable-videotoolbox
+    }
+
+    # Apple GCC has problems with SIMD intrinsics and -Werror=no-missing-prototypes.
+    if {${os.major} < 11} {
+        patchfiles-append patch-configure-no-error-on-missing-prototypes.diff
     }
 
     # kCVPixelFormatType_OneComponent8 used in avfoundation indev is only available on 10.8+

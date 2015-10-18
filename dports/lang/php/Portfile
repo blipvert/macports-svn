@@ -90,37 +90,37 @@ switch ${subport_branch} {
     }
     5.4 {
         epoch           1
-        version         5.4.43
+        version         5.4.45
         use_bzip2       yes
-        checksums       rmd160  87ab07db18d04f50972ea4197c6580882e5760a9 \
-                        sha256  25d7724fb00ad1b520f5bad2173717031153d0a8e3de2c75e7a084c76f8ecd6b
+        checksums       rmd160  352a0ea8fb75a447301c1434609ac0e4b96acc0c \
+                        sha256  4e0d28b1554c95cfaea6fa2b64aac85433f158ce72bb571bcd5574f98f4c6582
     }
     5.5 {
         epoch           2
-        version         5.5.29
+        version         5.5.30
         use_xz          yes
-        checksums       rmd160  17dca3a6ba6285eb383b6c4dd65d0689ab490064 \
-                        sha256  22c72d1b88c8d9a8ab9ca565e9ca5844287c006134098805d9a373a862bbbcad
+        checksums       rmd160  4da82b68d8f5a3e6abe0fe60bb8314c402170083 \
+                        sha256  d00dc06fa5e0f3de048fb0cf940b3cc59b43b3f8cad825d4fffb35503cf2e8f2
     }
     5.6 {
         epoch           2
-        version         5.6.13
+        version         5.6.14
         use_xz          yes
-        checksums       rmd160  182a405c89187b02aaa5fa3210ca05b71b7f85dd \
-                        sha256  c1f0837df20cd3bed149033924770deca3e7e2d18e2e7e81395096576f153fdc
+        checksums       rmd160  29e033b73673a819fa7eb558ceee3c1a4496d6d2 \
+                        sha256  c8edf6b05fd8a69ebd88d90c5c0975ee168502204622ad5cfcd550bc222632d9
     }
     7.0 {
         # When this becomes a stable version, remove the overrides for homepage,
         # master_sites and livecheck, and update php.latest_stable_branch in the
         # php-1.1 portgroup.
         epoch           1
-        version         7.0.0RC2
+        version         7.0.0RC5
         homepage        http://qa.php.net/
         master_sites    http://downloads.php.net/~ab/
         use_xz          yes
-        checksums       md5     d2b5cabd9dbd79e1dfe72253b7da5517 \
-                        rmd160  f3998b29b5f10b675c6fe9da573b986d553320bc \
-                        sha256  d03809c06fd509238613b41f4d27e716a102c091ae5363bc7c25c4a39dcbf0b2
+        checksums       md5     a490f25243a19dc6f577dcbc539b97ff \
+                        rmd160  629861c7a85a76c1d55cc52869d776a8ae3839e2 \
+                        sha256  4625237fc6927df5792f1ebf2c267cebf6c1855fe4c37db4a6dcbad7a5d14be4
         livecheck.url   ${homepage}
         livecheck.regex php-([strsed ${subport_branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*(?:(?:alpha|beta|RC)\\d+|-latest))\\.tar
     }
@@ -172,7 +172,7 @@ if {[is_sapi_subport]} {
     # https://trac.macports.org/ticket/31590
     # Tested all subports (except oracle) and they built with clang-425.  The reported failure was with Xcode 4.2.
     # Xcode 4.3 may work, but leaving it blacklisted due to lack of testing
-    compiler.blacklist  {clang < 400} macports-clang-2.9 macports-clang-3.0 macports-clang-3.1
+    compiler.blacklist  {clang < 400}
     
     set phpinidir       ${prefix}/etc/${php}
     set extraphpinidir  ${prefix}/var/db/${php}
@@ -277,12 +277,9 @@ if {[is_sapi_subport]} {
 subport ${php} {
     PortGroup               select 1.0
     
-    if {[vercmp ${branch} 5.2] == 0} {
-        revision            11
-    } elseif {[vercmp ${branch} 5.3] == 0} {
-        revision            1
-    } elseif {[vercmp ${branch} 5.4] == 0} {
-        revision            1
+    switch -- ${version} {
+        5.2.17              {revision 11}
+        5.3.29              {revision 1}
     }
     
     depends_run             port:php_select
@@ -389,7 +386,7 @@ ${phpinidir}/php.ini-recommended.
     }
     
     # Enable livecheck for the two most recent stable PHP branches and the development branch.
-    if {[vercmp ${branch} [lindex ${php.branches} end-2]] >= 0} {
+    if {[vercmp ${branch} [lindex ${php.branches} end-3]] >= 0} {
         livecheck.type      regex
         default livecheck.url   ${homepage}downloads.php
         default livecheck.regex {get/php-([strsed ${branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*)\\.tar}
@@ -704,8 +701,8 @@ subport ${php}-imap {
 
 if {[vercmp ${branch} 5.3] >= 0} {
 subport ${php}-intl {
-    if {[vercmp ${branch} 5.3] == 0} {
-        revision            2
+    switch -- ${version} {
+        5.3.29              {revision 2}
     }
     
     categories-append       devel
@@ -1212,8 +1209,10 @@ subport ${php}-sqlite {
 }
 
 subport ${php}-tidy {
-    if {[vercmp ${branch} 5.3] <= 0} {
-        revision            1
+    switch -- ${version} {
+        5.2.17              {revision 2}
+        5.3.29              {revision 2}
+        5.4.45              {revision 1}
     }
     
     categories-append       www
@@ -1224,6 +1223,10 @@ subport ${php}-tidy {
     long_description        ${description}
     
     depends_lib-append      port:tidy
+    
+    if {[vercmp ${branch} 7.0] <= 0} {
+        patchfiles-append   patch-${php}-ext-tidy-tidy.c.diff
+    }
     
     configure.args-append   --with-tidy=${prefix}
 }

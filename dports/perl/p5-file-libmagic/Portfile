@@ -5,14 +5,14 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
-perl5.setup         File-LibMagic 1.13
+perl5.setup         File-LibMagic 1.15 ../by-authors/id/D/DR/DROLSKY
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl wrapper for libmagic
 long_description    ${description}
 
-checksums           rmd160  d4c22be7f59483bebacc3f204e63d216eb186802 \
-                    sha256  61f92c3137a3b86d63e61313b51aa2673991110d655eee792ea11c68bf2c0092
+checksums           rmd160  405f93b616b39ca5bb1f350761fb8d4dad174083 \
+                    sha256  2c7fb54912caf2c22d06b02d6a88edad970e0f8b017634dc30eec46e53763e84
 
 platforms           darwin
 

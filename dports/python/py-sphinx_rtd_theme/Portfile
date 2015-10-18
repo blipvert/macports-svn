@@ -3,9 +3,11 @@
 
 PortSystem          1.0
 PortGroup           python 1.0
+PortGroup           github 1.0
 
+github.setup        snide sphinx_rtd_theme 0.1.9
+revision            1
 name                py-sphinx_rtd_theme
-version             0.1.7
 platforms           darwin
 supported_archs     noarch
 license             MIT BSD
@@ -14,20 +16,19 @@ maintainers         nomaintainer
 description         ReadTheDocs.org theme for Sphinx 2013 version
 long_description    ${description}
 
-homepage            https://github.com/snide/sphinx_rtd_theme/
+# do not download file from github since the one from pypi is significantly smaller
 master_sites        https://pypi.python.org/packages/source/s/sphinx_rtd_theme
-distname            sphinx_rtd_theme-${version}
 
-checksums           rmd160 0a85204eaeabc7547d99962faf0303087ee89650 \
-                    sha256 9a490c861f6cf96a0050c29a92d5d1e01eda02ae6f50760ad5c96a327cdf14e8
+checksums           rmd160  4fd81f7ac50fcf507b6c1996c7194d9b769e30dd \
+                    sha256  273846f8aacac32bf9542365a593b495b68d8035c2e382c9ccedcac387c9a0a1
 
-python.versions     26 27 33 34
+# version 0.1.9 used to fetch from github, whose file has different checksums as current file from pypi
+dist_subdir          ${name}/${version}_1
+
+python.versions     26 27 33 34 35
 
 if {$subport ne $name} {
     depends_build   port:py${python.version}-setuptools
 
     livecheck.type      none
-} else {
-    livecheck.type      regex
-    livecheck.url       ${master_sites}
 }

@@ -20,14 +20,14 @@ long_description \
 homepage        http://www.riverbankcomputing.co.uk/software/pyqt/intro
 
 version         4.11.4
-revision        3
+revision        4
 
 set branch      [join [lrange [split ${version} .] 0 1] .]
 set patch       [lindex [split ${version} .] 2]
 
 # pre-declare provided subports
 
-python.versions 27 34
+python.versions 27 34 35
 python.default_version 27
 
 foreach py_ver ${python.versions} {
