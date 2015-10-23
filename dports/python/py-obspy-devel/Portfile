@@ -6,14 +6,13 @@ PortGroup           python 1.0
 PortGroup           github 1.0
 
 github.setup        obspy obspy 05f32b4ee6
-version             0.10.2-1434-g${github.version}
-#0.10.3rc1.dev0+474.g
+version             0.10.3rc1-474-g${github.version}
 
 set _name           ${github.project}
 set _n              [string index ${_name} 0]
 
-name                py-${_name}
-conflicts           ${name}-devel
+name                py-${_name}-devel
+conflicts           ${name}
 
 categories-append   science
 platforms           darwin

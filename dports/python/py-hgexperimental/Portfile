@@ -6,8 +6,8 @@ PortGroup           python 1.0
 PortGroup           bitbucket 1.0
 
 set realname        hgexperimental
-bitbucket.setup     facebook hg-experimental fbf23b3f96ba
-version             0.0.20150806
+bitbucket.setup     facebook hg-experimental 7baef54cd36d
+version             0.0.20151015
 name                py-${realname}
 categories-append   devel
 platforms           darwin
@@ -20,8 +20,8 @@ description         This is a collection of proof-of-concept Mercurial \
                     backups, and fbamend.
 long_description    ${description}
 
-checksums           rmd160  ef1351ea2a51976c0c7d69afd99fbad9928bc0ec \
-                    sha256  9c5a0abf2fc42d0e98f93944ad16b0bfe1e2e937462117146f689b07df46e0e5
+checksums           rmd160  be091c6a1220ac34a7634014462e7423a2949b7a \
+                    sha256  7d7870d609bbd47720e94a2d8c2b425a53026f037911d10da09245e15be0596e
 
 python.versions     27
 

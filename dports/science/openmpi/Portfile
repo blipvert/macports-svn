@@ -4,6 +4,7 @@
 PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 PortGroup           select 1.0
+PortGroup           compilers 1.0
 
 name                openmpi
 version             1.10.0
@@ -46,16 +47,16 @@ if {[string first "-devel" $subport] > 0} {
     # openmpi switched to git and reset their revision number;
     # remove this when for next release
     set base            32546
-    set tag             g13def2a
-    set newrev          2571
+    set tag             g7dac5d3
+    set newrev          2808
     revision            [expr {$base + $newrev + 2}]
     distname            openmpi-dev-${newrev}-${tag}
 
     master_sites        http://www.open-mpi.org/nightly/master \
                         http://www.open-mpi.de/nightly/master
 
-    checksums           rmd160  49c80b2e76f1719d13f9f196b52c0d782279f45d \
-                        sha256  c00c433225bc1eb4eb85399a5f44bb07f98b2a7114116488e19442b5359505aa
+    checksums           rmd160  1e0cb13c2f12347e4ba789c0cccd5e087b82e3a8 \
+                        sha256  25c51d9a7edc20a8d62df3afe628a78c92978ca38bd27faf48079fea0d920101
 
     livecheck.version   ${newrev}-${tag}
     livecheck.url       [lindex ${master_sites} 0]
@@ -189,6 +190,7 @@ if {${subport} != ${name}} {
     }
 
     if { [string first gcc $cname] == 0 } {
+        append long_description " AND FORTRAN COMPILERS"
         configure.args-delete   --disable-mpi-fortran
         configure.args-append   --enable-mpi-fortran
         select.file             ${filespath}/${name}-${cname}-fortran
@@ -205,8 +207,10 @@ if {${subport} != ${name}} {
         } {}
         default_variants-append     +fortran
     } else {
+        append long_description " (AND THE FORTRAN COMPILER SELECTED BY THE VARIANT, IF ANY)"
+
         set gcc_versions {4.3 4.4 4.5 4.6 4.7 4.8 4.9 5 6}
-        set default_fortran_variant +gcc5
+        set default_fortran_variant +${compilers.gcc_default}
         set g95_conflicts {}
 
         foreach ver ${gcc_versions} {

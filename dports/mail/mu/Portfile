@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           elisp 1.0
 
-github.setup        djcb mu 0.9.12 v
-revision            1
+github.setup        djcb mu 0.9.13 v
+revision            0
 license             GPL-3
 categories          mail
 maintainers         sean openmaintainer
@@ -22,8 +22,8 @@ platforms           darwin
 
 homepage            http://www.djcbsoftware.nl/code/mu/
 
-checksums           rmd160  dd0fb51b3351396295c96e1a72b853446b31a2ac \
-                    sha256  7044d776b7a7ff7b8a4e5b4e00c8c853a15119f0b7db4835bcfec551062a46f8
+checksums           rmd160  15c8a9c1b5db698e22e134ba5c4d979a6c58d97a \
+                    sha256  e010e63e35e15e9f371573db121075241e31ad9620e890a348f34fb644c98b6a
 
 depends_build       port:pkgconfig
 depends_lib         port:gmime port:xapian-core port:guile
@@ -48,23 +48,19 @@ variant emacs description {Build with emacs bindings} {
 }
 
 subport mu-devel {
-    github.setup    djcb mu 1c988358155b
+    github.setup    djcb mu 105809cd8e21
     name            mu-devel
-    version         0.9.12.99
-    revision        4
+    version         0.9.13.99
+    revision        0
 
-    checksums       rmd160  cbf2361c631b2b2b7bb4dbb423ecddd350da9a69 \
-                    sha256  bab8509b742ba57903a24f3cad86ab4ac75540a1bcf6d78034b120315aff8ea5
-}
+    checksums       rmd160  92e0a6726b8674866992abad2d3c6216be656a5b \
+                    sha256  3f8d0ed76cfb918fde8bbfee0b3ef5efda80562fbabff004da47b7c15fba0b3d
 
-post-extract    {
-    # set the displayed version to a 6-character string since most releases are
-    # of the form 0.9.XX
-    set over        0.9.11
-    set dver        [string range $version 0 5]
-    if {$subport eq "mu-devel"} {
-        set over    0.9.12
-        set dver    [string range $version 0 5]-[string range ${github.version} 0 6]
+    post-extract    {
+        # set the displayed version to a 6-character string since most releases
+        # are of the form 0.9.XX
+        set over    [string range $version 0 5]
+        set dver    $over-[string range ${github.version} 0 6]
+        reinplace   "s,$over,$dver,g" ${worksrcpath}/configure.ac
     }
-    reinplace   "s,$over,$dver,g" ${worksrcpath}/configure.ac
 }
