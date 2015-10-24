@@ -73,7 +73,7 @@ post-patch {
 }
 
 variant blip description {Blipvertical changes} {
-    patchfiles.append \
+    patchfiles-append \
         patch-cmbase.mf-mpost_workaround.diff
 }
 
