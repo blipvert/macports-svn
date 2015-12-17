@@ -5,8 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           bitbucket 1.0
 
-bitbucket.setup     seanfarley mercurial b57e5bfaad7c
-version             3.5.99
+bitbucket.setup     seanfarley mercurial 3.6.2
 categories          devel python
 license             GPL-2+
 maintainers         sean openmaintainer
@@ -27,8 +26,8 @@ long_description    Mercurial is a fast, lightweight Source Control Management \
 
 homepage            http://www.selenic.com/mercurial/
 platforms           darwin
-checksums           rmd160  fa6ab311b986e347526dd5fbe87eafe1512a0d17 \
-                    sha256  e7dbdf1c1d8ab709d0e444022115950239f797ba5d0b1ccb595c7e7e4acd36e2
+checksums           rmd160  d306aac031e327de232b425ec3dcbc06707f1a75 \
+                    sha256  fdaf37555cfea34d4ebcdfa55776ade51357e9e93a35d8f8de4404a6ff61bafd
 
 depends_build       port:py27-docutils
 
@@ -44,15 +43,14 @@ build.cmd           make
 build.target        all PYTHON=${python.bin}
 
 subport mercurial-devel {
-    bitbucket.setup     seanfarley mercurial b57e5bfaad7c
+    bitbucket.setup     seanfarley mercurial 7e8a883da171
     name                mercurial-devel
-    version             3.5.99
-    revision            3
+    version             3.6.99
+    revision            2
 
     conflicts           mercurial
-
-    checksums           rmd160  fa6ab311b986e347526dd5fbe87eafe1512a0d17 \
-                        sha256  e7dbdf1c1d8ab709d0e444022115950239f797ba5d0b1ccb595c7e7e4acd36e2
+    checksums           rmd160  cb7696735dc71830d8fc3d24a784ce9d2b807698 \
+                        sha256  e4b2d01c3ba4172e508e7e16f32d6ef84925e7112d04d73ff7bba77e6e2d342d
 }
 
 post-destroot {
@@ -116,5 +114,3 @@ variant bash_completion {
 variant zsh_completion description {Install mercurial zsh completion file} {
     depends_run-append path:${prefix}/bin/zsh:zsh
 }
-
-python.link_binaries_suffix

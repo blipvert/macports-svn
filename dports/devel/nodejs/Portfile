@@ -3,9 +3,13 @@
 
 PortSystem              1.0
 PortGroup               compiler_blacklist_versions 1.0
+PortGroup               conflicts_build 1.0
+
+# see https://github.com/nodejs/node/issues/2637
+conflicts_build         c-ares v8
 
 name                    nodejs
-version                 0.12.7
+version                 4.2.3
 
 categories              devel net
 platforms               darwin
@@ -24,8 +28,8 @@ conflicts               nodejs-devel iojs
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  947daa1eac347a0c42fb67c5e316f85a12d8bd26 \
-                        sha256  b23d64df051c9c969b0c583f802d5d71de342e53067127a5061415be7e12f39d
+checksums               rmd160  9cddb070f32db2a31ef6d8d1dc7aad7435517b5d \
+                        sha256  5008ade5feb4b089f59163f66bffddc113f27de5d78edf203e39435c2c5d554f
 
 distname                node-v${version}
 
@@ -52,9 +56,10 @@ post-patch {
                    [rec_glob ${worksrcpath} *.py]] {
         reinplace "s|/usr/bin/env python|${configure.python}|" ${f}
     }
-    foreach gypfile [rec_glob ${worksrcpath} *.gyp] {
+    foreach gypfile [rec_glob ${worksrcpath} *.gyp*] {
         reinplace "s|'python'|'${configure.python}'|" ${gypfile}
     }
+    reinplace "s|python|${configure.python}|" ${worksrcpath}/deps/v8/build/toolchain.gypi
     reinplace "s|/usr/bin/env node|${prefix}/bin/node|" ${worksrcpath}/tools/doc/node_modules/marked/bin/marked
 }
 
@@ -177,9 +182,6 @@ destroot {
         src/node_watchdog.h \
         src/node_wrap.h \
         src/pipe_wrap.h \
-        src/queue.h \
-        src/req_wrap.h \
-        src/smalloc.h \
         src/spawn_sync.h \
         src/stream_wrap.h \
         src/string_bytes.h \
@@ -222,7 +224,10 @@ destroot {
 # install docs
     xinstall -m 644 -W ${worksrcpath} \
         AUTHORS \
-        ChangeLog \
+        CHANGELOG.md \
+        COLLABORATOR_GUIDE.md \
+        CONTRIBUTING.md \
+        GOVERNANCE.md \
         LICENSE \
         README.md \
         ${docdir}
@@ -239,4 +244,4 @@ if {${os.major} < 10} {
 
 livecheck.url       ${homepage}dist/
 livecheck.type      regex
-livecheck.regex     {v(\d+\.\d*[02468]\.\d+)}
+livecheck.regex     {v(4\.\d+\.\d+)}

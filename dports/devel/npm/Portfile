@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                npm
-version             2.14.3
+version             2.14.14
 
 categories          devel
 platforms           darwin
@@ -18,14 +18,16 @@ long_description    npm is a package manager for node. \
                     You can use it to install and publish your node programs. \
 		            It manages dependencies and does other cool stuff.
 
+conflicts           npm-devel
+
 homepage            http://www.npmjs.org/
 
 master_sites        http://registry.npmjs.org/npm/-/
 
 extract.suffix      .tgz
 
-checksums           rmd160  49a1488dedf0b68b150a2448f348fe7796078318 \
-                    sha256  19755e14283977f713bb5115aea17d383cb0ca3f90db7c9f15146aad15f24c9b
+checksums           rmd160  fcb37d1ed55613e1e6529f0b3e7e3054e12ddd0f \
+                    sha256  5ae5c17caf7f4ae965ce1b5b44d04fe9794b659aeb0a3475f7697faedb6daf09
 
 worksrcdir          "package"
 
@@ -88,4 +90,4 @@ ${prefix}/lib/node_modules/ until you manually delete them.
 
 livecheck.type      regex
 livecheck.url       http://registry.npmjs.org/npm
-livecheck.regex     {"latest":"(.*?)"}
+livecheck.regex     {"latest-2":"(.*?)"}

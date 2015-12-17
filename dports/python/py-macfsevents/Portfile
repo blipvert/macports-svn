@@ -5,12 +5,12 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-macfsevents
-version             0.4
+version             0.6
 revision            0
 platforms           darwin
 license             BSD
 
-python.versions     27 33 34
+python.versions     27 33 34 35
 
 maintainers         stromnov openmaintainer
 
@@ -21,12 +21,12 @@ long_description    MacFSEvents is a Python library that provides thread-safe \
                     the Mac OS X FSEvents API in a C-extension.
 
 homepage            https://github.com/malthe/macfsevents
-master_sites        https://pypi.python.org/packages/source/M/MacFSEvents/
+master_sites        pypi:M/MacFSEvents
 
 distname            MacFSEvents-${version}
 
-checksums           rmd160  d4e0717614e3f656aefacd1369ce6b06df47ddb1 \
-                    sha256  5d492cf3181a782380fce3b704412aa9cfa4f4602dfcf07c071cd8da18685057
+checksums           rmd160  612230bfce38e3f487cd46bbe89ba556d63ebe9c \
+                    sha256  f96c03ee143e2551c2fb802403470e614be9860a867caf6d7d3fbffedee31cdd
 
 if {${name} ne ${subport}} {
     depends_build-append \
@@ -40,8 +40,7 @@ if {${name} ne ${subport}} {
 
     livecheck.type      none
 } else {
-    livecheck.type      regex
-    livecheck.url       https://pypi.python.org/pypi/macfsevents/json
-    livecheck.regex     {MacFSEvents-(\d+(?:\.\d+)*)\.[tz]}
+    livecheck.name      MacFSEvents
+    livecheck.type      pypi
 }
 

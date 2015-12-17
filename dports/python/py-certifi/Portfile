@@ -5,14 +5,14 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-certifi
-version             2015.9.6.2
+version             2015.11.20.1
 revision            0
 categories-append   devel net
 platforms           darwin
 license             {MPL-1.1 GPL-2+ LGPL-2.1+}
 supported_archs     noarch
 
-python.versions     27 33 34
+python.versions     27 33 34 35
 
 maintainers         stromnov openmaintainer
 
@@ -20,12 +20,12 @@ description         Python package for providing Mozilla's CA Bundle.
 long_description    ${description}
 
 homepage            http://pypi.python.org/pypi/certifi
-master_sites        https://pypi.python.org/packages/source/c/certifi/
+master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
-distname            certifi-${version}
+distname            ${python.rootname}-${version}
 
-checksums           rmd160  f66b7d3c1d217317ffe36ccff311c976752a1428 \
-                    sha256  dc3a2b2d9d1033dbf27586366ae61b9d7c44d8c3a6f29694ffcbb0618ea7aea6
+checksums           rmd160  be5bdc04b35e9bcbdfc8a33a063c55dcdb245b2a \
+                    sha256  30b0a7354a1b32caa8b4705d3f5fb2dadefac7ba4bf8af8a2176869f93e38f16
 
 if {${name} ne ${subport}} {
     depends_build-append \
@@ -33,7 +33,5 @@ if {${name} ne ${subport}} {
 
     livecheck.type      none
 } else {
-    livecheck.type      regex
-    livecheck.url       https://pypi.python.org/pypi/certifi/json
-    livecheck.regex     {certifi-(\d+(?:\.\d+)*)\.[tz]}
+    livecheck.type      pypi
 }

@@ -205,7 +205,6 @@ set portfetch::mirror_sites::sites(gnu) {
     ftp://ftp.informatik.hu-berlin.de/pub/gnu/gnu/
     ftp://ftp.lip6.fr/pub/gnu/
     http://mirror.internode.on.net/pub/gnu/
-    http://mirror.aarnet.edu.au/pub/gnu/
     ftp://ftp.unicamp.br/pub/gnu/
     ftp://ftp.gnu.org/gnu/
     http://ftp.gnu.org/gnu/
@@ -529,10 +528,8 @@ set portfetch::mirror_sites::sites(trolltech) {
 }
 
 set portfetch::mirror_sites::sites(xcontrib) {
-    ftp://ftp.net.ohio-state.edu/pub/X11/contrib/
-    http://www.mirrorservice.org/sites/ftp.x.org/contrib/
+    http://ftp.x.org/contrib/
     ftp://ftp.gwdg.de/pub/x11/x.org/contrib/
-    http://mirror.aarnet.edu.au/pub/X11/contrib/
     ftp://ftp2.x.org/contrib/
     ftp://ftp.x.org/contrib/
 }

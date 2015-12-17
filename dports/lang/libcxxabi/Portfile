@@ -4,7 +4,7 @@ PortSystem              1.0
 PortGroup               compiler_blacklist_versions 1.0
 
 name                    libcxxabi
-version                 3.6.0
+version                 3.7.0
 revision                1
 epoch                   1
 categories              lang
@@ -27,16 +27,16 @@ dist_subdir             llvm
 use_xz                  yes
 distname                ${name}-${version}.src
 
-checksums               rmd160  bdbc09554b5427fedcc66f72058da3d3618a7692 \
-                        sha256  f78bcfdb8015272f28d70f5546a544b5bdae5d92862711e8ecb9b24387d994f5
+checksums               rmd160  d06ebae3fc873f47588c544e5e516b695c8c0809 \
+                        sha256  48b074fd334958b2d8bab893c897a0c8258328782cdec2d229c7bce432b49beb
 
 set roots_path ${prefix}/var/system_roots/
 set root_name  ${name}-${version}-${revision}
 
 patch.pre_args          -p1
 patchfiles \
-    0001-Revert-Make-libc-abi-use-the-implementation-of-__num.patch \
-    PR-23238.patch 
+    0001-Update-buildit-script-to-read-EXTRA_LDFLAGS-from-the.patch \
+    0002-Revert-Make-libc-abi-use-the-implementation-of-__num.patch
 
 variant universal {}
 use_configure no
@@ -59,8 +59,14 @@ platform darwin {
 variant replacemnt_libcxx description {EXPERTS ONLY: Build a replacement libcxxabi and libcxx even if it is already part of the base OS.} {}
 
 if {${os.major} < 11 || [variant_isset replacemnt_libcxx]} {
-    # 3.5 and 3.6 are blacklisted to prevent dependency cycles
-    compiler.blacklist *gcc* {clang < 100} macports-clang-3.5 macports-clang-3.6
+    compiler.blacklist *gcc* {clang < 300}
+
+    # clang 3.5 and newer are blacklisted to prevent dependency cycles
+    foreach ver {3.5 3.6 3.7 3.8} {
+        if {![file exists ${prefix}/bin/clang-mp-${ver}]} {
+            compiler.blacklist-append macports-clang-${ver}
+        }
+    }
 
     supported_archs i386 x86_64 ppc
 
@@ -70,9 +76,6 @@ if {${os.major} < 11 || [variant_isset replacemnt_libcxx]} {
     }
 
     if {${os.major} < 10} {
-        patchfiles-append \
-            leopard.patch
-
         depends_build-append \
             port:libunwind \
             port:libmacho
@@ -111,6 +114,7 @@ if {${os.major} < 11 || [variant_isset replacemnt_libcxx]} {
         xinstall -m 755 ${worksrcpath}/lib/libc++abi.dylib ${destroot}${roots_path}/${root_name}/usr/lib
 
         xinstall -m 755 -d ${destroot}${roots_path}/${root_name}/usr/include
+        xinstall -m 644 ${worksrcpath}/include/__cxxabi_config.h ${destroot}${roots_path}/${root_name}/usr/include
         xinstall -m 644 ${worksrcpath}/include/cxxabi.h ${destroot}${roots_path}/${root_name}/usr/include
 
         system "cd ${destroot}${roots_path}/${root_name} && tar czf ../${root_name}.tgz ."

@@ -5,14 +5,14 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-markdown
-version             2.6.2
+version             2.6.5
 revision            0
 categories-append   textproc
 platforms           darwin
 license             BSD
 supported_archs     noarch
 
-python.versions     27 34
+python.versions     27 34 35
 
 maintainers         stromnov openmaintainer
 
@@ -24,17 +24,16 @@ long_description    This is a Python implementation of John Gruber’s \
                     few very minor differences.
 
 homepage            http://packages.python.org/Markdown/
-master_sites        https://pypi.python.org/packages/source/M/Markdown/
+master_sites        pypi:M/Markdown
 
 distname            Markdown-${version}
 
-checksums           rmd160  5466f322ac0694d942d49588d12cc980f83e5dcf \
-                    sha256  ee17d0d7dc091e645dd48302a2e21301cc68f188505c2069d8635f94554170bf
+checksums           rmd160  6efcbe767df85e970d911c61f8b4b3e5e2b90dc1 \
+                    sha256  8d94cf6273606f76753fcb1324623792b3738c7612c2b180c85cc5e88642e560
 
 if {${name} ne ${subport}} {
     livecheck.type      none
 } else {
-    livecheck.type      regex
-    livecheck.url       https://pypi.python.org/pypi/Markdown/json
-    livecheck.regex     {Markdown-(\d+(?:\.\d+)*)\.[tz]}
+    livecheck.name      Markdown
+    livecheck.type      pypi
 }

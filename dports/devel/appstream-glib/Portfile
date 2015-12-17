@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           gobject_introspection 1.0
 
-github.setup        hughsie appstream-glib 0_5_1 appstream_glib_
+github.setup        hughsie appstream-glib 0_5_4 appstream_glib_
 version             [string map {_ .} ${version}]
 license             LGPL-2+
 categories          devel
@@ -18,12 +18,11 @@ description         This library provides objects and helper methods to help \
 
 long_description    ${description}
 
-checksums           rmd160  2e165660e166c7d8743a80a4dfa6a5eb6236be55 \
-                    sha256  6b1585470face32a9fc8ab6a19035d3cbd28d86f870ea7ef70358772607b593b
+checksums           rmd160  e94acfc604a02a7209a6983e32bfaecd3a552177 \
+                    sha256  9cf7a3e0eba9359cd4e10f757065e5b37c2d078fd0842b7b735040c8b2c1bc53
 
 depends_build       port:pkgconfig \
                     port:intltool \
-                    port:gcab \
                     port:gtk-doc \
                     port:autoconf \
                     port:automake \
@@ -33,6 +32,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:libarchive \
                     port:libsoup \
                     port:libyaml \
+                    port:gcab \
                     port:gtk3 \
                     port:gdk-pixbuf2 \
                     port:sqlite3 \
@@ -44,6 +44,12 @@ patchfiles          patch-configure.ac.diff \
 gobject_introspection yes
 
 configure.cmd       ./autogen.sh
+
+# configure to use system libuuid
+
+configure.env-append \
+                    UUID_CFLAGS=-I/usr/include/uuid \
+                    UUID_LIBS=' '
 
 configure.args      --with-xml-catalog=${prefix}/etc/xml/catalog \
                     --disable-ostree \

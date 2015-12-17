@@ -27,7 +27,7 @@ depends_build       port:py${python.version}-distutils-extra \
                     port:intltool
 depends_lib-append  port:py${python.version}-pygtk \
                     port:py${python.version}-sqlalchemy \
-                    path:${python.pkgd}/PIL/__init__.py:py${python.version}-pil \
+                    path:${python.pkgd}/PIL/__init__.py:py${python.version}-Pillow \
                     port:py${python.version}-elib.intl \
                     port:py${python.version}-reportlab \
                     port:py${python.version}-poppler \
@@ -36,5 +36,3 @@ depends_lib-append  port:py${python.version}-pygtk \
                     port:gstreamer010-gst-plugins-good \
                     port:py${python.version}-beautifulsoup \
                     port:py${python.version}-ipython
-
-python.link_binaries_suffix

@@ -4,7 +4,7 @@
 PortSystem              1.0
 PortGroup               github 1.0
 
-github.setup            github git-lfs 1.0.0 v
+github.setup            github git-lfs 1.1.0 v
 maintainers             raimue \
                         openmaintainer
 platforms               darwin
@@ -15,8 +15,8 @@ description             Git Large File Storage
 long_description        ${description} is an extension for versioning large files
 license                 MIT
 
-checksums               rmd160  8bed76b09e0d4ff9a99d36af08f39c5d26b809bc  \
-                        sha256  d0b9e0539e9f6dfb9fb97ef746a01ca1d3ea333e26ae82852dc7649a4bb33f5b
+checksums               rmd160  a2567f583cbb999caad2084a11b21c05ae7153c3 \
+                        sha256  a9295e6225beadd6f7a9a5f8665685748a5ab15eb7269d948486468927166eae
 
 patchfiles              patch-ronn.diff
 

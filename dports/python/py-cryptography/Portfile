@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-cryptography
-version             1.0.2
+version             1.1.2
 revision            0
 categories-append   devel
 platforms           darwin
@@ -23,8 +23,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  c9c83e7c845d88901a8c49a16bd24a93815e780d \
-                    sha256  d64cd491e91ddf642c643bea16532c2a2da2da054cca6df756edadd55a8bacca
+checksums           rmd160  5abf2c9ffcc4ec9b144c90704e59487b43bb745c \
+                    sha256  7f51459f84d670444275e615839f4542c93547a12e938a0a4906dafe5f7de153
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-setuptools \

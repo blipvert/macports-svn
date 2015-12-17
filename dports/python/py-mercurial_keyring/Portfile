@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           bitbucket 1.0
 
-bitbucket.setup     Mekk mercurial_keyring 0.7.1
+bitbucket.setup     Mekk mercurial_keyring 1.0.1
 name                py-mercurial_keyring
 
 categories-append   devel
@@ -20,14 +20,15 @@ long_description \
 
 platforms           darwin
 
-checksums           rmd160  8762e44bbf5734bc10fbd07085b6fbbd54857d39 \
-                    sha256  e5ba7dd74c411876e2fe4087ace0e97df7b43cc436b7b7755090291a337f0efe
+checksums           rmd160  362287395d641b9caa218501d052b0c727124cc1 \
+                    sha256  374d73c62d7af1529db43e76c58ee88a186f3564078eec79d9f1375e470bb916
 
 #not supporting 3x because py-keyring is broken on python 3.x
 python.versions     27
 
 if {${name} ne ${subport}} {
     depends_run         port:py${python.version}-keyring \
+                        port:py${python.version}-mercurial_extension_utils \
                         bin:hg:mercurial
 
     depends_build       port:py${python.version}-setuptools

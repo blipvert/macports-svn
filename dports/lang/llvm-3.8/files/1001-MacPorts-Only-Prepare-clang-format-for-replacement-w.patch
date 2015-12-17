@@ -1,7 +1,7 @@
-From 35e08e31bd8edfa85cf54aa63271f5777e8ac200 Mon Sep 17 00:00:00 2001
+From 7dbc94035eaddc6140e9d868bca254288e101078 Mon Sep 17 00:00:00 2001
 From: Jeremy Huddleston Sequoia <jeremyhu@apple.com>
 Date: Sat, 17 Jan 2015 17:50:24 -0800
-Subject: [PATCH 1001/1008] MacPorts Only: Prepare clang-format for replacement
+Subject: [PATCH 1001/1007] MacPorts Only: Prepare clang-format for replacement
  with absolute path
 
 Signed-off-by: Jeremy Huddleston Sequoia <jeremyhu@apple.com>
@@ -27,7 +27,7 @@ index fa88fe9..eb09448 100644
  tell application "BBEdit"
  	-- "set contents of text document 1 to newContents" scrolls to the bottom while
 diff --git llvm_master/tools/clang/tools/clang-format/clang-format-diff.py macports_master/tools/clang/tools/clang-format/clang-format-diff.py
-index 64efb83..4371e38 100755
+index 9e02bb0..b62bef3 100755
 --- llvm_master/tools/clang/tools/clang-format/clang-format-diff.py
 +++ macports_master/tools/clang/tools/clang-format/clang-format-diff.py
 @@ -32,7 +32,7 @@ import sys
@@ -80,5 +80,5 @@ index 5cb41fc..e8a5904 100644
    binary = vim.eval('g:clang_format_path')
  
 -- 
-2.5.0
+2.6.2
 

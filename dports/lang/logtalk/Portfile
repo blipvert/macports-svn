@@ -4,7 +4,7 @@ PortSystem          1.0
 
 name                logtalk
 conflicts           logtalk-devel
-version             3.01.2
+version             3.02.1
 
 categories          lang
 maintainers         logtalk.org:pmoura
@@ -32,8 +32,8 @@ homepage            http://logtalk.org/
 master_sites        ${homepage}files/
 
 checksums           \
-    sha256          b73ef6932e48072f01c2d6db60f370a1a85ee59ecbf99cdd1e8030d5d655552a  \
-    rmd160          4c45ce68789918ffef81860ed6700175a106b0a5
+    sha256          acc38fd1037888875bd323137b5afd123eae7513bfc54bb221b83732d34916f1  \
+    rmd160          b2dd43eaec0f6f419e93f9dd6c2f72dc22ebc2b6
 
 use_bzip2           yes
 
@@ -71,8 +71,8 @@ post-activate {
     ui_msg "* CxProlog (version 0.97.7 or later):      cxlgt"
     ui_msg "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
     ui_msg "* GNU Prolog (version 1.4.2 or later):     gplgt"
-    ui_msg "* JIProlog (version 4.0.18 or later):      jiplgt      (first run may require sudo)"
-    ui_msg "* Lean Prolog (version 3.8.8 or later):    lplgt       (experimental)"
+    ui_msg "* JIProlog (version 4.1.2.8 or later):     jiplgt      (first run may require sudo)"
+    ui_msg "* Lean Prolog (version 4.5.7 or later):    lplgt       (experimental)"
     ui_msg "* Qu-Prolog (version 9.0 or later):        qplgt"
     ui_msg "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"
     ui_msg "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"

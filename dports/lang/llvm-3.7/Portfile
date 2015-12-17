@@ -8,7 +8,7 @@ PortGroup active_variants 1.1
 set llvm_version        3.7
 set llvm_version_no_dot 37
 name                    llvm-${llvm_version}
-subport                 clang-${llvm_version} {}
+subport                 clang-${llvm_version} { revision 2 }
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/llvm-${llvm_version}
 dist_subdir             llvm
@@ -128,16 +128,18 @@ if {${subport} eq "clang-${llvm_version}"} {
         1001-MacPorts-Only-Prepare-clang-format-for-replacement-w.patch \
         1002-MacPorts-Only-Fall-back-on-xcodebuild-sdk-when-xcrun.patch \
         1003-MacPorts-Only-Fix-name-of-scan-view-executable-insid.patch \
-        1004-MacPorts-Only-Fix-libclang_rt-dylib-ids.patch \
-        1005-MacPorts-Only-Relocate-clang-resources-using-llvm-ve.patch \
-        1006-Default-to-ppc7400-for-OSX-10.5.patch \
-        1007-Only-call-setpriority-PRIO_DARWIN_THREAD-0-PRIO_DARW.patch \
-        1008-Default-to-fragile-ObjC-runtime-when-targeting-darwi.patch \
+        1004-MacPorts-Only-Relocate-clang-resources-using-llvm-ve.patch \
+        1005-Default-to-ppc7400-for-OSX-10.5.patch \
+        1006-Only-call-setpriority-PRIO_DARWIN_THREAD-0-PRIO_DARW.patch \
+        1007-Default-to-fragile-ObjC-runtime-when-targeting-darwi.patch \
         2001-MacPorts-Only-Comment-out-SL-cctools-workaround.patch \
         2002-Update-CheckArches-to-fallback-on-Intel-ppc-if-ld-v-.patch \
         2003-Fall-back-on-xcodebuild-sdk-when-xcrun-sdk-is-not-su.patch \
         2004-On-darwin-build-ppc-slices-of-the-compiler-runtime-i.patch \
         2005-MacPorts-Only-Don-t-build-x86_64h-slice-of-compiler-.patch \
+        2006-Set-abort_on_error-to-true-by-default.patch \
+        2007-cherry-pick-RemoveANSIEscapeSequencesFromString-from.patch \
+        2008-Save-the-ASan-report-in-the-OS-X-crash-log.patch \
         3001-buildit-build-fix-for-Leopard.patch \
         3002-buildit-Set-compatibility-version-to-RC_ProjectSourc.patch \
         3003-Fix-local-and-iterator-when-building-with-Lion-and-n.patch \
@@ -361,7 +363,7 @@ if {${subport} eq "llvm-${llvm_version}"} {
         # Need to match llvm +-assertions
         require_active_variants port:llvm-${llvm_version} {} assertions
     }
-    
+
     variant analyzer description {Install clang static analyzer} {
         depends_run-append port:perl5
 

@@ -6,7 +6,7 @@ PortSystem          1.0
 name                inkscape
 conflicts           inkscape-devel
 version             0.91
-revision            8
+revision            10
 license             GPL-2 LGPL-2.1
 maintainers         devans
 categories          graphics gnome
@@ -56,6 +56,10 @@ post-patch {
     reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
     reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
 }
+
+# py27-numpy is currently not universal (#48263).
+
+universal_variant no
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
     depends_lib-delete \

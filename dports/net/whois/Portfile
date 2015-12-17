@@ -11,10 +11,11 @@
 
 PortSystem                  1.0
 PortGroup                   compiler_blacklist_versions 1.0
+PortGroup                   perl5 1.0
 
 name                        whois
 conflicts                   bahamut expect ripe-whois
-version                     5.2.10
+version                     5.2.11
 categories                  net
 maintainers                 ryandesign
 license                     GPL-2+
@@ -30,14 +31,14 @@ long_description            whois is an improved whois client that follows the \
 master_sites                http://ftp.debian.org/debian/pool/main/w/${name}/
 use_xz                      yes
 
-checksums                   rmd160  68434ae6e7921f25ccf5eebc1e8d0661b82ebd0b \
-                            sha256  8acb42bc693f73f3141b413f7df11b5582b9b738d9bf0d60e9017a8af4cb53b9
+checksums                   rmd160  05663bf87451a14ef08bba3a0434d048ff5685db \
+                            sha256  32f7d6be853aa6a6a8ac6dd672bd60ae4f10bc0bedcaa944363ffbef6e57cef7
 
 distfiles                   ${name}_${version}${extract.suffix}
 
-set perl_version            5.16
+set perl5.branches          5.22
 
-depends_build               port:perl${perl_version}
+depends_build               port:perl${perl5.major}
 
 depends_lib                 port:gettext \
                             port:libidn \
@@ -84,7 +85,7 @@ build.env                   CC="${configure.cc} [get_canonical_archflags]" \
 build.args                  prefix=${prefix} \
                             INCLUDES="${configure.cflags} ${configure.cppflags}" \
                             LIBS="${configure.ldflags}" \
-                            PERL=${prefix}/bin/perl${perl_version}
+                            PERL=${perl5.bin}
 
 destroot.target-append      install-pos
 destroot.args               prefix=${destroot}${prefix}

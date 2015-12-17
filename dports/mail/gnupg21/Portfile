@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnupg21
-version             2.1.8
+version             2.1.10
 categories          mail security
 maintainers         jann ionic openmaintainer
 license             GPL-3+
@@ -23,16 +23,15 @@ master_sites        gnupg:gnupg
 
 use_bzip2           yes
 
-checksums           rmd160  ed38a905580249d41e60276220190754c7dc2c7d \
-                    sha256  a3b8d01e4690715d42e8f289493c85413766f3fa935e4fe7e5ff5b0f6e2781a3 \
-                    sha1    61f5bc656dd7fddd4ab67b720d47ef0651bfb727
+checksums           rmd160  b29e086cb65bbe40b3a6021b3c4eb0083cd0a344 \
+                    sha256  93bd58d81771a4fa488566e5d2e13b1fd7afc86789401eb41731882abfd26cf9 \
+                    sha1    4aa2594d2d364fe7708a9739ae7cebd251e536c4
 
 notes               "GPG 2.1 uses a new format for its key files. Therefore you cannot\
                     use it together with any earlier version of GPG. Neither can you easily go\
                     back to an older version as the old version cannot read the new format."
 
-# Prevent opportunistic linking
-configure.args      --without-adns
+configure.args      --with-adns
 
 platform darwin {
     if {![variant_isset pinentry] && ![variant_isset pinentry_mac]} {
@@ -65,7 +64,8 @@ depends_lib         port:libiconv           \
                     port:readline           \
                     port:curl               \
                     port:libusb-compat      \
-                    port:npth
+                    port:npth               \
+                    port:adns
                     
 variant pinentry conflicts pinentry_mac description {Handle user input via pinentry.} {
     depends_lib-append      port:pinentry

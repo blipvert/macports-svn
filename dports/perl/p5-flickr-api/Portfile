@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
-perl5.setup         Flickr-API 1.19
+perl5.setup         Flickr-API 1.27
 platforms           darwin
 maintainers         nomaintainer
 license             Artistic-2
@@ -14,18 +14,17 @@ supported_archs     noarch
 description         Perl interface to the Flickr API
 long_description    ${description}
 
-checksums           rmd160  ada3df1c04b3d00cea2e24adfe63985b67018da4 \
-                    sha256  6e62ce5a8a9ae945b32fd7df60c0458076b3f90656c7f22d18ae6fd75d596835
+checksums           rmd160  01d0dda2a362380b21757d6404c956eac58fe7e4 \
+                    sha256  f99bdf6c637ec78a751fd04b8afc35180cdd936e52365d9bc99602abc7f0cb0a
 
 if {${perl5.major} != ""} {
-    depends_build-append \
-                    port:p${perl5.major}-test-script
-
     depends_lib-append \
+                    port:p${perl5.major}-getopt-long \
                     port:p${perl5.major}-http-message \
                     port:p${perl5.major}-libwww-perl \
                     port:p${perl5.major}-net-oauth \
+                    port:p${perl5.major}-test-script \
                     port:p${perl5.major}-uri \
-                    port:p${perl5.major}-xml-parser-lite-tree \
-                    port:p${perl5.major}-xml-libxml-simple
+                    port:p${perl5.major}-xml-libxml-simple \
+                    port:p${perl5.major}-xml-parser-lite-tree
 }

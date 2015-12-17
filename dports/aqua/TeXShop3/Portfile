@@ -7,7 +7,7 @@ PortGroup       xcode 1.0
 
 name            TeXShop3
 conflicts	TeXShop
-version         3.56
+version         3.58
 
 set major       [lindex [split ${version} .] 0]
 categories      aqua editors
@@ -25,12 +25,11 @@ master_sites    ${homepage}/texshop-64
 use_zip         yes
 distname        texshopsource[strsed ${version} {/\.//}]
 dist_subdir     TeXShop/
-#worksrcdir      texshopsource${version}
 worksrcdir      texshopsource[strsed ${version} {/\.//}]
 set propername	TeXShop
 
-checksums           rmd160  9bcc17e81994a8f4946a9eb330cbb080edef1340 \
-                    sha256  8150a90b1d32d8edff65ed0ef2e7af4c0af9d370e0cc82a8aebe104a18006008
+checksums           rmd160  046bbce1f96789ad9ef97da6757555b8de47efac \
+                    sha256  ef370b65d7903deed3b26197797b0b98d332b073849c80a1f0a51e2989405345
 
 pre-fetch {
     platform darwin {
@@ -41,24 +40,29 @@ pre-fetch {
     }
 }
 
-platform darwin 12 {
-    patchfiles-append	patch-MyPDFKitView.m.diff patch-TSAppDelegate.m.diff
-}
+# all patchfiles should be unnecessary after 3.58
+#platform darwin 12 {
+#    patchfiles-append	patch-MyPDFKitView.m.diff patch-TSAppDelegate.m.diff \
+#	patch-MyPDFKitView-Magnification.m.diff
+#}
+#
+#platform darwin 13 {
+#    patchfiles-append	patch-MyPDFKitView.m.diff patch-TSAppDelegate.m.diff \
+#	patch-MyPDFKitView-Magnification.m.diff
+#}
+#
+#platform darwin 14 {
+#    patchfiles-append	patch-TSAppDelegate.m.diff \
+#	patch-MyPDFKitView-Magnification.m.diff
+#}
 
-platform darwin 13 {
-    patchfiles-append	patch-MyPDFKitView.m.diff patch-TSAppDelegate.m.diff
-}
-
-platform darwin 14 {
-    patchfiles-append	patch-TSAppDelegate.m.diff
-}
+# error: -fobjc-arc is not supported on platforms using the legacy runtime
+supported_archs x86_64
 
 post-extract    {
     set ogrekit "OgreKit.framework/Versions/A/OgreKit"
-    if {![variant_isset universal]} {
-        # thin the bundled frameworks
-        system "cd ${worksrcpath} && lipo -thin ${configure.build_arch} $ogrekit -output $ogrekit"
-    }
+    # thin the bundled frameworks
+    system -W ${worksrcpath} "lipo -thin ${configure.build_arch} ${ogrekit} -output ${ogrekit}"
 }
 
 macosx_deployment_target     10.7

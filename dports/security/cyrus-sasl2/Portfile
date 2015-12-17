@@ -6,12 +6,12 @@ PortGroup               muniversal 1.0
 
 name                    cyrus-sasl2
 version                 2.1.26
-revision                4
+revision                5
 categories              security net
 platforms               darwin
 # license is BSD plus a fourth (almost redundant) acknowledgement clause
 license                 Permissive
-maintainers             landonf openmaintainer
+maintainers             nomaintainer
 
 description             SASL is an authentication library.
 
@@ -56,7 +56,8 @@ configure.args          --mandir=${prefix}/share/man \
                         --enable-srp-setpass \
                         --enable-login \
                         --enable-ntlm \
-                        --with-rc4=openssl
+                        --with-rc4=openssl \
+                        ac_cv_prog_AWK=/usr/bin/awk
 
 use_parallel_build      no
 
@@ -92,6 +93,7 @@ post-destroot {
         ${destroot}${prefix}/var/pwcheck
     
     file copy ${worksrcpath}/doc ${destroot}${prefix}/share/doc/${name}
+    eval delete [glob ${destroot}${prefix}/share/doc/${name}/*Makefile*]
 }
 
 variant kerberos description "Enable Kerberos support" {

@@ -6,16 +6,17 @@ PortGroup           python 1.0
 
 name                py-pymca
 version             4.4.1p1
-revision            0
 platforms           darwin
-maintainers         me.com:Tom.Schoonjans
+maintainers         nomaintainer
+license             GPL-2+
+
 description         Mapping and X-Ray Fluorescence Analysis
 
-long_description    Stand-alone application and Python tools \
-                    for interactive and/or batch processing analysis \
-                    of X-Ray Fluorescence Spectra. \
-                    Graphical user interface (GUI) and \
-                    batch processing capabilities provided
+long_description    \
+    Stand-alone application and Python tools for interactive and/or batch \
+    processing analysis of X-Ray Fluorescence Spectra. Graphical user \
+    interface (GUI) and batch processing capabilities provided.
+
 homepage            http://pymca.sourceforge.net
 master_sites        sourceforge:pymca
 distfiles           pymca${version}-src.tgz
@@ -24,22 +25,26 @@ checksums           md5     92d77e55975c27c8693356a567e95d28 \
                     sha1    c0d08e0e2904c1db1bb23ba828c977c1b8b8b295 \
                     rmd160  9d24861f5c95b8721858ffa0e5bca107b9c3f97c
 
-python.versions     26
+python.versions     27
 
 if {$subport ne $name} {
-    build.cmd-delete    --no-user-cfg
-    build.env-append    SPECFILE_USE_GNU_SOURCE=1
-    build.cmd           echo yes | ${python.bin} setup.py
+    depends_lib-append  port:py${python.version}-h5py \
+                        port:py${python.version}-matplotlib \
+                        port:py${python.version}-mdp-toolkit \
+                        port:py${python.version}-numpy \
+                        port:py${python.version}-opengl \
+                        port:py${python.version}-pyqwt
+
+    universal_variant   no
+
     worksrcdir          PyMca${version}
 
-    destroot.cmd        echo yes | ${python.bin} setup.py
-    destroot.post_args  --install-scripts ${destroot}${prefix}/bin
+    build.env-append    SPECFILE_USE_GNU_SOURCE=1
+    build.cmd           echo yes | ${python.bin} setup.py
 
-    depends_lib-append  port:py${python.version}-numpy port:py${python.version}-pyqwt port:py${python.version}-mdp-toolkit \
-                        port:py${python.version}-opengl port:py${python.version}-matplotlib port:py${python.version}-h5py
+    destroot.cmd        echo yes | ${python.bin} setup.py
 
     post-destroot {
-                        system "chmod -R a+r ${destroot}${prefix}"
+        system "chmod -R a+r ${destroot}${prefix}"
     }
-    universal_variant   no
 }

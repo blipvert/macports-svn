@@ -3,7 +3,7 @@
 PortSystem    1.0
 
 name          gstlal-calibration
-version       0.5.3
+version       0.5.9
 categories    science
 platforms     darwin
 maintainers   ram
@@ -17,8 +17,8 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/gstlal.html
 master_sites  http://software.ligo.org/lscsoft/source/
 
-checksums     rmd160 79114bbfff8be1b2905a79faae4d776faf97bf20 \
-              sha256 f124feb21a58ad369ac40a33407e1cc9fdac85bfd40f77fe7627f80e836e4cf5
+checksums     rmd160 1e072a43fed26a9885a6b2993760ab7fe83e9aa8 \
+              sha256 ec358a06c53c6ed4ab651f140caeb4a82e2837cd14a1ea6e123f6fcfbdf57c96
 
 depends_build port:pkgconfig
 

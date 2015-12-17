@@ -3,9 +3,13 @@
 
 PortSystem              1.0
 PortGroup               compiler_blacklist_versions 1.0
+PortGroup               conflicts_build 1.0
+
+# see https://github.com/nodejs/node/issues/2637
+conflicts_build         c-ares v8
 
 name                    nodejs-devel
-version                 4.1.2
+version                 5.2.0
 
 categories              devel net
 platforms               darwin
@@ -24,8 +28,8 @@ conflicts               nodejs iojs
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  dabf019219165cec8dc6a87aa835feb95d3d461d \
-                        sha256  febec3703a3fea9b64c46100a7b6a4408250027aa8259a2a815fd2275d502c49
+checksums               rmd160  113253e89a004091f5069fb8558a7ed7a0758e63 \
+                        sha256  5df5682f9fdd8e747f652e0b09fed46478a1e3df159797852787a074b8787664
 
 distname                node-v${version}
 
@@ -52,9 +56,10 @@ post-patch {
                    [rec_glob ${worksrcpath} *.py]] {
         reinplace "s|/usr/bin/env python|${configure.python}|" ${f}
     }
-    foreach gypfile [rec_glob ${worksrcpath} *.gyp] {
+    foreach gypfile [rec_glob ${worksrcpath} *.gyp*] {
         reinplace "s|'python'|'${configure.python}'|" ${gypfile}
     }
+    reinplace "s|python|${configure.python}|" ${worksrcpath}/deps/v8/build/toolchain.gypi
     reinplace "s|/usr/bin/env node|${prefix}/bin/node|" ${worksrcpath}/tools/doc/node_modules/marked/bin/marked
 }
 
@@ -216,7 +221,7 @@ destroot {
 # install docs
     xinstall -m 644 -W ${worksrcpath} \
         AUTHORS \
-        ChangeLog.md \
+        CHANGELOG.md \
         COLLABORATOR_GUIDE.md \
         CONTRIBUTING.md \
         GOVERNANCE.md \

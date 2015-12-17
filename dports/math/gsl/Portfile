@@ -5,8 +5,7 @@ PortSystem          1.0
 PortGroup           compilers 1.0
 
 name                gsl
-version             1.16
-revision            3
+version             2.1
 categories          math science
 maintainers         dtakahashi openmaintainer
 license             GPL-3+
@@ -21,8 +20,8 @@ long_description    The GNU Scientific Library (GSL) is a numerical library  \
                     least-squares fitting. There are over 1000 functions in total.
 
 master_sites        gnu
-checksums           rmd160  45e707ad8b5abd77f760827ee49ece9277a36a80 \
-                    sha256  73bc2f51b90d2a780e6d266d43e487b3dbd78945dd0b04b14ca5980fe28d2f53
+checksums           rmd160  4ccf5425d54c2b0ef76db97f5960563a4bf0e311 \
+                    sha256  59ad06837397617f698975c494fe7b2b698739a59e2fcf830b776428938a0c66
 
 platforms           darwin
 
@@ -42,18 +41,20 @@ compilers.setup     -dragonegg
 
 variant doc description "Install PDF and HTML documentation" {
     depends_build   port:ghostscript bin:latex:texlive
+    post-build      {
+        system -W ${worksrcpath}     "make dvi"
+        system -W ${worksrcpath}/doc "dvipdf gsl-ref.dvi gsl-ref.pdf"
+        system -W ${worksrcpath}/doc "latex fftalgorithms"
+        system -W ${worksrcpath}/doc "bibtex fftalgorithms"
+        system -W ${worksrcpath}/doc "latex fftalgorithms"
+        system -W ${worksrcpath}/doc "latex fftalgorithms"
+        system -W ${worksrcpath}/doc "dvipdf fftalgorithms.dvi fftalgorithms.pdf"
+        system -W ${worksrcpath}     "make html"
+    }
     post-destroot   {
-        system "cd ${worksrcpath} && make dvi"
-        system "cd ${worksrcpath}/doc && dvipdf gsl-ref.dvi gsl-ref.pdf"
         xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}
         xinstall -c -m 644 ${worksrcpath}/doc/gsl-ref.pdf ${destroot}${prefix}/share/doc/${name}
-        system "cd ${worksrcpath}/doc && latex fftalgorithms"
-        system "cd ${worksrcpath}/doc && bibtex fftalgorithms"
-        system "cd ${worksrcpath}/doc && latex fftalgorithms"
-        system "cd ${worksrcpath}/doc && latex fftalgorithms"
-        system "cd ${worksrcpath}/doc && dvipdf fftalgorithms.dvi fftalgorithms.pdf"
         xinstall -c -m 644 ${worksrcpath}/doc/fftalgorithms.pdf ${destroot}${prefix}/share/doc/${name}
-        system "cd ${worksrcpath} && make html"
         xinstall -d -m 755 ${destroot}${prefix}/share/doc/${name}/html
         eval xinstall -c -m 644 [glob ${worksrcpath}/doc/gsl-ref.html/*] ${destroot}${prefix}/share/doc/${name}/html
     }

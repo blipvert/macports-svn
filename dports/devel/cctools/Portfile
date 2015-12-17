@@ -3,13 +3,10 @@
 PortSystem              1.0
 
 name                    cctools
-# Xcode 6.3
-version                 870
-
-# https://trac.macports.org/ticket/49020
-dist_subdir             cctools/870_stealth
-
-set ld64_version        242
+# Xcode 7.0
+version                 877.5
+revision                1
+set ld64_version        253.3
 categories              devel
 platforms               darwin
 maintainers             jeremyhu openmaintainer
@@ -26,16 +23,22 @@ master_sites            http://opensource.apple.com/tarballs/${name} \
 
 distfiles               ld64-${ld64_version}.tar.gz ${name}-${version}.tar.gz
 
-checksums               ld64-242.tar.gz \
-                        rmd160  3fc096f0843e2ac949ea5b417eeb6595e8913b8f \
-                        sha256  bec1a5e20b599d108be0017736833c1f6212ea26c67f20d8437abc5d23433c36 \
-                        cctools-870.tar.gz \
-                        rmd160  1e3a2c0b8227ed1462e8097d8f99fb1af803d834 \
-                        sha256  81a12e325255ea683447aff5f4d93f53e2498edcfdd4bb43996a21ef7f00b267
+checksums               ld64-253.3.tar.gz \
+                        rmd160  05a334fa636bf05a36eac3e745101f8f2dcab70b \
+                        sha256  76c02f6f297c251b66504e1115946bda6e1618640bc6cf03d0ad99b17bd8a5d6 \
+                        cctools-877.5.tar.gz \
+                        rmd160  a4cc2423f491cd09316d4ff63919d850d05f09a5 \
+                        sha256  5e7525c86581d9dead8a8508a9e824101765d05a3e14d612de1aa38def9adde9
 
 depends_build           port:libunwind-headers
 
-patchfiles              cctools-829-lto.patch PR-37520.patch cctools-839-static-dis_info.patch PR-12400897.patch cctools-862-prunetrie.patch cctools-862-unifdef__DARWIN_UNIX03-arm.patch
+patchfiles \
+    cctools-829-lto.patch \
+    PR-37520.patch \
+    cctools-839-static-dis_info.patch \
+    PR-12400897.patch \
+    cctools-862-prunetrie.patch \
+    not-clang.patch
 
 variant universal {}
 
@@ -43,7 +46,7 @@ if {${os.major} < 11} {
     patchfiles-append snowleopard-strnlen.patch
 }
 
-if {![variant_isset llvm33] && ![variant_isset llvm34] && ![variant_isset llvm35] && ![variant_isset llvm36] && ![variant_isset llvm37]} {
+if {![variant_isset llvm33] && ![variant_isset llvm34] && ![variant_isset llvm35] && ![variant_isset llvm36] && ![variant_isset llvm37] && ![variant_isset llvm38]} {
     if {${os.major} >= 13} {
         default_variants +llvm37
     } elseif {${os.major} >= 10} {
@@ -54,28 +57,33 @@ if {![variant_isset llvm33] && ![variant_isset llvm34] && ![variant_isset llvm35
 }
 
 set llvm_version {}
-variant llvm33 conflicts llvm34 llvm35 llvm36 llvm37 description {Use llvm-3.3 for libLTO and llvm-mc} {
+variant llvm33 conflicts llvm34 llvm35 llvm36 llvm37 llvm38 description {Use llvm-3.3 for libLTO and llvm-mc} {
     set llvm_version        3.3
     depends_lib-append      port:llvm-${llvm_version}
 }
 
-variant llvm34 conflicts llvm33 llvm35 llvm36 llvm37 description {Use llvm-3.4 for libLTO and llvm-mc} {
+variant llvm34 conflicts llvm33 llvm35 llvm36 llvm37 llvm38 description {Use llvm-3.4 for libLTO and llvm-mc} {
     set llvm_version        3.4
     depends_lib-append      port:llvm-${llvm_version}
 }
 
-variant llvm35 conflicts llvm33 llvm34 llvm36 llvm37 description {Use llvm-3.5 for libLTO and llvm-mc} {
+variant llvm35 conflicts llvm33 llvm34 llvm36 llvm37 llvm38 description {Use llvm-3.5 for libLTO and llvm-mc} {
     set llvm_version        3.5
     depends_lib-append      port:llvm-${llvm_version}
 }
 
-variant llvm36 conflicts llvm33 llvm34 llvm35 llvm37 description {Use llvm-3.6 for libLTO and llvm-mc} {
+variant llvm36 conflicts llvm33 llvm34 llvm35 llvm37 llvm38 description {Use llvm-3.6 for libLTO and llvm-mc} {
     set llvm_version        3.6
     depends_lib-append      port:llvm-${llvm_version}
 }
 
-variant llvm37 conflicts llvm33 llvm34 llvm35 llvm36 description {Use llvm-3.7 for libLTO and llvm-mc} {
+variant llvm37 conflicts llvm33 llvm34 llvm35 llvm36 llvm38 description {Use llvm-3.7 for libLTO and llvm-mc} {
     set llvm_version        3.7
+    depends_lib-append      port:llvm-${llvm_version}
+}
+
+variant llvm38 conflicts llvm33 llvm34 llvm35 llvm36 llvm37 description {Use llvm-3.8 for libLTO and llvm-mc} {
+    set llvm_version        3.8
     depends_lib-append      port:llvm-${llvm_version}
 }
 

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           bitbucket 1.0
 PortGroup           mpi 1.0
 
-bitbucket.setup     petsc petsc 3.6.2 v
+bitbucket.setup     petsc petsc 3.6.3 v
 categories          math science
 maintainers         sean
 license             BSD
@@ -18,8 +18,8 @@ long_description    PETSc, pronounced PET-see (the S is silent), is a suite \
 platforms           darwin
 universal_variant   no
 
-checksums           rmd160  d41e81a25c1f235ecf68bac54b00ec1cc6a2580f \
-                    sha256  02abb91e92cca7009336bb9b66a9a42c33757a561e46e0acacba6f181810bdde
+checksums           rmd160  474b5c0cfb17657cdeb8a1b68590efee509b99c5 \
+                    sha256  007f24c7ec8ef4656248253b17e8c5bde5831f888c3a18059a7c7b044ee9e203
 
 mpi.setup
 
@@ -64,14 +64,13 @@ pre-configure {
 }
 
 subport petsc-devel {
-    bitbucket.setup     petsc petsc 7394153abf4f
+    bitbucket.setup     petsc petsc a9d30d4a3b22
     bitbucket.livecheck master
     version             3.6.99
-    revision            3
+    revision            9
     name                petsc-devel
-
-    checksums           rmd160  b62b963a5616210fabb7235383c2234bf61b84a3 \
-                        sha256  8d317a9cd14529c47ca0e4b056ccb036380f8de577df99582bb1fa49008da63d
+    checksums           rmd160  431fabea198a68adcfee36e2b80eb0e4d1f36ce5 \
+                        sha256  bef3c2ba801b2c666aaabf12127690cee0f0f4f061fbe3441213efd2f84ef1b5
 }
 
 notes               "Add the following line to your .bash_profile if you plan to use\

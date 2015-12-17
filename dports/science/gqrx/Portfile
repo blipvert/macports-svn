@@ -20,10 +20,10 @@ if {${subport} eq ${name}} {
     long_description    ${description}  \
         This port is kept up with the Gqrx GIT 'master' branch, is typically updated weekly to monthly, and provides compatibility with the GNU Radio release 3.7 API: the gnuradio and gnuradio-devel ports.  ${description_common}
 
-    github.setup        csete gqrx f9a33e12695c96d7f06c6fc4e7597a624cad42aa
-    version             20151017
-    checksums           rmd160 533c42d729b23c43b230a49fb437d5fd243b92a1 \
-                        sha256 630f89e88b05ccecd1efb3483dfc7e667d3e00b4464209d9b119865a25bb12b9
+    github.setup        csete gqrx 9e4716b9952a415cf19488811640fc582bcfaf22
+    version             20151212
+    checksums           rmd160 1ede04f493dba719c4f144dcf6470083d0287c11 \
+                        sha256 809dd4623d2e3e0d46f90611d78d82839f15ef2af602d3f4f0bf0f7b3565faf1
 
     conflicts           gqrx-legacy
 
@@ -53,28 +53,6 @@ if {${subport} eq ${name}} {
     variant portaudio description "Legacy variant" {}
 }
 
-subport gqrx-devel {
-
-    # This port can be removed on December 4, 2015.
-
-    replaced_by         gqrx
-    PortGroup           obsolete 1.0
-
-    name                gqrx-devel
-
-    github.setup        csete gqrx 9648a148e04d0e5fc15b26151f44f8b10e8180e9
-    version             20141127
-
-    depends_lib
-    depends_build
-    depends_run
-
-    patchfiles
-
-    conflicts           gqrx-legacy
-
-}
-
 subport gqrx-legacy {
 
     long_description    ${description}  \
@@ -92,7 +70,7 @@ subport gqrx-legacy {
     checksums           rmd160 eba005dfad221997a7d80a8d8cd132cfea209667 \
                         sha256 83403f9d2c05d10a8d8df76a4282c41b9d3547ceccaebecc92c1d3f0835a6f59
 
-    conflicts           gqrx gqrx-devel
+    conflicts           gqrx
 
     # gqrx-legacy works with *-legacy only
 
@@ -102,8 +80,7 @@ subport gqrx-legacy {
     patchfiles-append   patch-gqrx.pro-legacy.diff
 
     # patch to fix usage of real and imag to be compatible with both
-    # libstdc++ and libc++ runtimes; this patch is included with the
-    # release and devel from upstream.
+    # libstdc++ and libc++ runtimes; this patch is included upstream.
 
     patchfiles-append   patch-fix-real-imag.diff
 
@@ -117,86 +94,84 @@ subport gqrx-legacy {
 
 homepage            http://gqrx.dk/
 
-if {${subport} ne "gqrx-devel"} {
-    if {${subport} eq "gqrx"} {
+if {${subport} eq "gqrx"} {
 
-        variant qt4 conflicts qt5 description {Build ${subport} using Qt4} {
-            PortGroup qmake 1.0
-        }
-
-        variant qt5 conflicts qt4 description {Build ${subport} using Qt5} {
-
-            PortGroup qmake5 1.0
-            PortGroup active_variants 1.1
-
-            # make sure gnuradio* is installed with -qtgui, because we
-            # can't have Qt4 and Qt5 installed at the same time (yet),
-            # and gnuradio* does not (yet) support Qt5.
-
-            require_active_variants path:lib/libgnuradio-audio.dylib:gnuradio "" qtgui
-
-        }
-
-        # default to +qt4
-
-        if {![variant_isset qt4] && ![variant_isset qt5]} {
-            default_variants +qt4
-        }
-
-        # make sure -qt4 is not used alone
-
-        if {![variant_isset qt4] && ![variant_isset qt5]} {
-
-            ui_error "\n\nYou must select either the +qt4 or +qt5 variant.\n"
-            return -code error "Invalid variant selection"
-
-        }
-    } else {
-
-        # gqrx-legacy uses Qt4 only
+    variant qt4 conflicts qt5 description {Build ${subport} using Qt4} {
         PortGroup qmake 1.0
+    }
+
+    variant qt5 conflicts qt4 description {Build ${subport} using Qt5} {
+
+        PortGroup qmake5 1.0
+        PortGroup active_variants 1.1
+
+        # make sure gnuradio* is installed with -qtgui, because we
+        # can't have Qt4 and Qt5 installed at the same time (yet),
+        # and gnuradio* does not (yet) support Qt5.
+
+        require_active_variants path:lib/libgnuradio-audio.dylib:gnuradio "" qtgui
 
     }
 
-    post-patch {
+    # default to +qt4
 
-        # set install location
-
-        reinplace "s|@APPSDIR@|${qt_apps_dir}|g" ${worksrcpath}/gqrx.pro
-
-        # set version
-
-        reinplace "s|@VERSION@|${version}|g" ${worksrcpath}/gqrx.pro
-
-        # set arch type(s)
-
-        reinplace "s|@ARCHES@|${qt_arch_types}|g" ${worksrcpath}/gqrx.pro
-
+    if {![variant_isset qt4] && ![variant_isset qt5]} {
+        default_variants +qt4
     }
 
-    configure.post_args gqrx.pro
+    # make sure -qt4 is not used alone
 
-    post-configure {
+    if {![variant_isset qt4] && ![variant_isset qt5]} {
 
-        # remove indirect dependency on Volk added by pkgconfig
-
-        reinplace "s|-lvolk ||g" ${worksrcpath}/Makefile
+        ui_error "\n\nYou must select either the +qt4 or +qt5 variant.\n"
+        return -code error "Invalid variant selection"
 
     }
+} else {
 
-    post-destroot {
+    # gqrx-legacy uses Qt4 only
+    PortGroup qmake 1.0
 
-        # link the executable back to $qt_bins_dir, and, if $qt_dir is
-        # not $prefix, back to $prefix/bin too.
+}
 
-        xinstall -m 755 -d ${destroot}${qt_bins_dir}
+post-patch {
+
+    # set install location
+
+    reinplace "s|@APPSDIR@|${qt_apps_dir}|g" ${worksrcpath}/gqrx.pro
+
+    # set version
+
+    reinplace "s|@VERSION@|${version}|g" ${worksrcpath}/gqrx.pro
+
+    # set arch type(s)
+
+    reinplace "s|@ARCHES@|${qt_arch_types}|g" ${worksrcpath}/gqrx.pro
+
+}
+
+configure.post_args gqrx.pro
+
+post-configure {
+
+    # remove indirect dependency on Volk added by pkgconfig
+
+    reinplace "s|-lvolk ||g" ${worksrcpath}/Makefile
+
+}
+
+post-destroot {
+
+    # link the executable back to $qt_bins_dir, and, if $qt_dir is
+    # not $prefix, back to $prefix/bin too.
+
+    xinstall -m 755 -d ${destroot}${qt_bins_dir}
+    ln -s ${qt_apps_dir}/Gqrx.app/Contents/MacOS/Gqrx \
+        ${destroot}${qt_bins_dir}
+
+    if {${qt_dir} ne ${prefix}} {
+        xinstall -m 755 -d ${destroot}${prefix}/bin
         ln -s ${qt_apps_dir}/Gqrx.app/Contents/MacOS/Gqrx \
-            ${destroot}${qt_bins_dir}
-
-        if {${qt_dir} ne ${prefix}} {
-            xinstall -m 755 -d ${destroot}${prefix}/bin
-            ln -s ${qt_apps_dir}/Gqrx.app/Contents/MacOS/Gqrx \
-                ${destroot}${prefix}/bin
-        }
+            ${destroot}${prefix}/bin
     }
 }

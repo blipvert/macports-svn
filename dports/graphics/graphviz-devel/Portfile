@@ -2,14 +2,13 @@
 # $Id$
 
 PortSystem                      1.0
-PortGroup                       conflicts_build 1.0
 PortGroup                       xcodeversion 1.0
 
 # Please keep the graphviz and graphviz-devel ports as similar as possible.
 
 name                            graphviz-devel
 set my_name                     graphviz
-version                         2.39.20151021.1911
+version                         2.39.20151214.2045
 set thisbranch                  [strsed ${name} "g/^${my_name}//"]
 set otherbranch                 [expr {${thisbranch} eq {} ? {-devel} : {}}]
 categories                      graphics
@@ -32,8 +31,8 @@ long_description                Graphviz is ${description}. Graph visualization 
                                 simple text language, and produce output in a \
                                 variety of visual and text formats.
 
-checksums                       rmd160  e328c171c3924cff945ccd22f90d04424589e32e \
-                                sha256  d4066bc6315bef08ab7a28907a6a599345a645837ad4ff1b2d1ae14fb3c5ce83
+checksums                       rmd160  10562018d958ee06b619671187774d78570647aa \
+                                sha256  bbf8beefab12cbecb28fe49aa572cb2ccf24a0faa169149eb891e3a00c4fd747
 
 # graphviz needs Xcode 3.1+ to avoid the libGL error when building the smyrna variant
 # graphviz-gui needs Xcode 3.1.2+; see #18811
@@ -59,9 +58,6 @@ depends_lib                     port:jpeg \
                                 port:gettext
 
 depends_run                     port:urw-fonts
-
-# nawk: illegal jump type 339
-conflicts_build                 nawk
 
 configure.args                  --disable-silent-rules \
                                 --with-codegens \
@@ -104,7 +100,8 @@ configure.args                  --disable-silent-rules \
                                 --disable-python25 \
                                 --disable-r \
                                 --disable-ruby \
-                                --disable-tcl
+                                --disable-tcl \
+                                ac_cv_prog_AWK=/usr/bin/awk
 
 # Teach glibtool about -stdlib=libc++
 use_autoreconf  yes
@@ -120,6 +117,7 @@ platform macosx {
             reinplace "s:-lstdc\+\+:-lc++:" \
                 ${worksrcpath}/configure.ac \
                 ${worksrcpath}/cmd/dot/Makefile.am \
+                ${worksrcpath}/cmd/edgepaint/Makefile.am \
                 ${worksrcpath}/cmd/mingle/Makefile.am \
                 ${worksrcpath}/plugin/gdiplus/Makefile.am
         }
@@ -360,11 +358,9 @@ subport gvedit${thisbranch} {
     
     patchfiles                  patch-cmd-gvedit-Makefile.in.diff
     
-    # nawk: illegal jump type 339
-    conflicts_build             nawk
-    
     configure.args              --disable-silent-rules \
-                                --with-qt
+                                --with-qt \
+                                ac_cv_prog_AWK=/usr/bin/awk
     
     build.dir                   ${worksrcpath}/cmd/gvedit
     

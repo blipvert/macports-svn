@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-pytest
-version             2.8.2
+version             2.8.4
 revision            0
 categories-append   devel
 platforms           darwin
@@ -26,8 +26,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  1da55bf79a045235e0294d27363fedfbe8d90212 \
-                    sha256  da2fc57320dd11f621d166634c52b989aa2291af1296c32a27a11777aa4128b9
+checksums           rmd160  3623212b347e2695c08a60de9ae470aebcd3ecea \
+                    sha256  ca8afa5e216acfba6df7f26f2ef8a45baedf6a952e6b2f033ab55ec7e0a679eb
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-setuptools \

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           compilers 1.0
 
 name                gildas
-version             201508b
+version             201512a
 set my_version      [string tolower [clock format [clock scan 2000-[string range ${version} 4 5]-10] -format %b]][string range ${version} 2 3][string range ${version} 6 end]
 categories          science
 platforms           darwin
@@ -28,12 +28,11 @@ homepage            http://www.iram.fr/IRAMFR/GILDAS/gildas.html
 master_sites        http://www.iram.fr/~gildas/dist/
 distname            ${name}-src-${my_version}
 
-checksums           rmd160  60fd6c21d03177a400f37b6810016e4b6f0ddfb7 \
-                    sha256  5cb460afb14a67738b4b2528089ca1bff16b03f263e496407367c5a68d9fde03
+checksums           rmd160  33f158d3419170e4e6cd065b32649054bcd7eec7 \
+                    sha256  c67acfe4f5ef0f14976f7e05eb7b2bcfd6011dd07f3958306e24eed3a13361f4
 
 patch.pre_args      -p1
 patchfiles          patch-admin-Makefile.def.diff \
-                    patch-admin-Makefile.stdcxxlib.diff \
                     patch-admin-Makefile.python.diff \
                     patch-admin-gildas-env.sh.diff \
                     patch-admin-define-system.sh.diff \

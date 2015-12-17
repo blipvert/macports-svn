@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-bcolz
-version             0.11.4
+version             0.12.1
 revision            0
 categories-append   devel
 platforms           darwin
@@ -31,8 +31,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  0a1ec23e52ab3948246e2c6ac26ad51ea3f6eafc \
-                    sha256  8b2297d53f4ceece41cd88700c3ec7f23e3388fbb14cb9adb6bea4c1d66f7e23
+checksums           rmd160  b0171e77c19e78eb9adf5a98ee3e7ed49da90d87 \
+                    sha256  a8dafa42cd4f3ca130ecb81f7e778204a12c2180c18fd570ef753de58ee7ddbd
 
 if {${name} ne ${subport}} {
     # Fix permissions

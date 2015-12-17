@@ -6,6 +6,7 @@ PortGroup           mpi 1.0
 
 name                octopus
 version             5.0.0
+revision            1
 categories          science
 platforms           darwin
 license             GPL-2+
@@ -31,12 +32,14 @@ compiler.blacklist  macports-clang-3.8
 # clang versions are unnecessary
 # dragonegg34-gcc46 segfaults on varia.c
 mpi.setup           require_fortran -dragonegg34 -gcc5 -gcc6 -clang
+
+# this incorrectly passes if libxc +gcc5, octopus +mpich, mpich-default +gcc49
 compilers.enforce_fortran libxc
+compilers.enforce_some_fortran fftw-3
 
 depends_lib         port:libxc port:fftw-3 port:gsl
-# openblas or accelerate/veclibfort instead of atlas?
 
-configure.args      --with-libxc-prefix=${prefix} \
+configure.args      --with-libxc-prefix=${prefix} --with-fft-lib="-L${prefix}/lib -lfftw3" \
                     --disable-gdlib --without-sparskit --with-netcdf-prefix=no \
                     --with-etsf-io-prefix=no --with-berkeleygw-prefix=no \
                     --with-arpack=no --with-parpack=no --with-feast=no \
@@ -61,20 +64,13 @@ if {![variant_isset accelerate] && ![variant_isset openblas]} {
 patchfiles          patch-configure.diff \
     patch-testsuite-linear_response-05-polarizability.test.diff
 
-pre-fetch {
-    if {[fortran_active_variant_name fftw-3] eq ""} {
-        ui_error "Install fftw-3 with a Fortran variant."
-        return -code error "fftw-3 not installed with a Fortran variant."
-    }
-}
-
 if {[mpi_variant_isset]} {
     configure.args-delete  --disable-mpi
     configure.args-append  --enable-mpi
 }
 
 # More options that could be added:
-# variants: berkeleygw, openmp, threads (for fftw, atlas?), (p)arpack, maxdim4, metis, parmetis
+# variants: openmp, threads (for fftw, atlas?), maxdim4
 # no way to turn off PAPI, but there is no port for this anyway.
 
 # libxc does not have universal variant, so octopus cannot either
@@ -126,6 +122,7 @@ variant etsf_io requires netcdf description {Build with support for ETSF_IO outp
 
 variant sparskit description {Build with support for SPARSKIT propagators} {
     configure.args-delete   --without-sparskit
+    configure.args-append   --with-sparskit=${prefix}/lib/libskit.a
     depends_lib-append      port:sparskit
 }
 
@@ -134,10 +131,10 @@ variant gdlib description {Build with support for definition of domain by 2D ima
     depends_lib-append      port:gd2
 }
 
-variant scalapack description {Build with ScaLAPACK} {
+variant scalapack description {Build with ScaLAPACK for parallel linear algebra} {
     configure.args-delete   --with-blacs=no
     configure.args-delete   --with-scalapack=no
-    configure.args-append   --with-blacs=-lscalapack
+    configure.args-append   --with-blacs=${prefix}/lib/libscalapack.dylib
     depends_lib-append      port:scalapack
 
     if {![mpi_variant_isset]} {
@@ -170,6 +167,69 @@ variant openblas conflicts accelerate atlas description {Build with linear algeb
     depends_lib-append      path:lib/libopenblas.dylib:OpenBLAS
     require_active_variants path:lib/libopenblas.dylib:OpenBLAS lapack
     configure.args-append   --with-blas=-lopenblas
+}
+
+variant pfft description {Build with PFFT} {
+    depends_lib-append      port:pfft
+    configure.args-delete   --with-pfft-prefix=no
+    configure.args-append   --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
+
+    if {![mpi_variant_isset]} {
+        ui_error "+pfft requires an MPI variant. Choose +mpich, +mpich_devel, +openmpi, or +openmpi_devel."
+        return -code error "+pfft requires an MPI variant."
+    }
+    mpi.enforce_variant     pfft
+}
+
+variant arpack description {Build with ARPACK for complex-scaling calculations} {
+    depends_lib-append      port:arpack
+    configure.args-delete   --with-arpack=no
+    configure.args-append   --with-arpack=${prefix}/lib/libarpack.dylib
+}
+
+variant parpack requires arpack description {Build with PARPACK for complex-scaling calculations} {
+    configure.args-delete   --with-parpack=no
+    configure.args-append   --with-parpack=${prefix}/lib/libparpack.dylib
+
+    if {![mpi_variant_isset]} {
+        ui_error "+parpack requires an MPI variant. Choose +mpich, +mpich_devel, +openmpi, or +openmpi_devel."
+        return -code error "+parpack requires an MPI variant."
+    }
+    mpi.enforce_variant     parpack
+}
+
+# there is not much value in having a stand-alone metis variant, since it is a built-in library in octopus
+variant parmetis description {Build with ParMETIS for parallel domain decomposition calculation} {
+    depends_lib-append      port:parmetis
+    require_active_variants metis single
+    configure.args-delete   --with-metis-prefix=no
+    configure.args-delete   --with-parmetis-prefix=no
+    configure.args-append   --with-metis-prefix=${prefix} --with-parmetis-prefix=${prefix}
+
+    if {![mpi_variant_isset]} {
+        ui_error "+parmetis requires an MPI variant. Choose +mpich, +mpich_devel, +openmpi, or +openmpi_devel."
+        return -code error "+parmetis requires an MPI variant."
+    }
+    mpi.enforce_variant     parmetis
+}
+
+variant berkeleygw description {Build with BerkeleyGW output support} {
+    depends_lib-append      port:berkeleygw
+    configure.args-delete   --with-berkeleygw-prefix=no
+    configure.args-append   --with-berkeleygw-prefix=${prefix}
+    compilers.enforce_fortran berkeleygw
+    # FIXME: actually, it is ok if berkeleygw does not have MPI and Octopus does
+    mpi.enforce_variant     berkeleygw
+}
+
+variant everything_serial requires arpack etsf_io netcdf sparskit gdlib berkeleygw \
+    description {Build with all available serial optional dependencies} { }
+
+variant everything requires everything_serial parpack scalapack parmetis pfft \
+    description {Build with all available optional dependencies} { }
+
+variant maxdim4 description {Build with support for 4D calculations} {
+    configure.args-append  --with-max-dim=4
 }
 
 livecheck.type      regex

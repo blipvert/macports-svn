@@ -7,7 +7,7 @@ cmake.out_of_source yes
 
 name                flann
 version             1.8.4
-revision            9
+revision            10
 categories          science devel
 maintainers         mmoll
 description         Fast Library for Approximate Nearest Neighbors
@@ -37,7 +37,7 @@ if {[ mpi_variant_isset ]} {
     configure.args-append       -DUSE_MPI=ON
 }
 
-set pythons_suffixes {27 34}
+set pythons_suffixes {27 34 35}
 
 set pythons_ports {}
 foreach s ${pythons_suffixes} {

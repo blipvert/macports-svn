@@ -5,15 +5,14 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-openpyxl
-set realname        openpyxl
-version             2.2.6
+version             2.3.1
 revision            0
 categories-append   textproc
 platforms           darwin
 license             MIT/Expat
 supported_archs     noarch
 
-python.versions     27 34
+python.versions     27 34 35
 
 maintainers         stromnov openmaintainer
 
@@ -23,12 +22,12 @@ long_description    openpyxl is a pure python reader and writer of Excel \
                     OpenXML files. It is ported from the PHPExcel project.
 
 homepage            http://openpyxl.readthedocs.org
-master_sites        https://pypi.python.org/packages/source/o/${realname}/
+master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
-distname            ${realname}-${version}
+distname            ${python.rootname}-${version}
 
-checksums           rmd160  6c05f1d1b3de3f6d5f36f659b3135913298a885f \
-                    sha256  0e580133106976da044b5861231283fb4e1b2d439787e0f668f28eb2dfd7468e
+checksums           rmd160  4a546097294254bf9d460985f3e9809290ed56c3 \
+                    sha256  a011136406b5fa11eb25160b5a5b1bf2c3551a2a3c1ba2123649c0f79a8505c2
 
 if {${name} ne ${subport}} {
     depends_build-append \
@@ -38,7 +37,5 @@ if {${name} ne ${subport}} {
 
     livecheck.type      none
 } else {
-    livecheck.type      regex
-    livecheck.url       https://pypi.python.org/pypi/openpyxl/json
-    livecheck.regex     {openpyxl-(\d+(?:\.\d+)*)\.[tz]}
+    livecheck.type      pypi
 }

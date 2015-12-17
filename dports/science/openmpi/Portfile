@@ -7,8 +7,7 @@ PortGroup           select 1.0
 PortGroup           compilers 1.0
 
 name                openmpi
-version             1.10.0
-revision            0
+version             1.10.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          science parallel net
 platforms           darwin
@@ -33,8 +32,8 @@ master_sites        http://www.open-mpi.org/software/${subdir} \
                     http://www.open-mpi.de/software/${subdir} \
                     http://icl.cs.utk.edu/open-mpi/${subdir}
 
-checksums           rmd160  9c4b2b3f5b72968c24243b80cf597af87d4d9ef3 \
-                    sha256  26b432ce8dcbad250a9787402f2c999ecb6c25695b00c9c6ee05a306c78b6490
+checksums           rmd160  70de0da1f31793333b51eda328a18c01c4ffa3c0 \
+                    sha256  7919ecde15962bab2e26d01d5f5f4ead6696bbcacb504b8560f2e3a152bfe492
 use_bzip2           yes
 
 livecheck.type      regex
@@ -47,16 +46,16 @@ if {[string first "-devel" $subport] > 0} {
     # openmpi switched to git and reset their revision number;
     # remove this when for next release
     set base            32546
-    set tag             g7dac5d3
-    set newrev          2808
+    set tag             g7977fa3
+    set newrev          3182
     revision            [expr {$base + $newrev + 2}]
     distname            openmpi-dev-${newrev}-${tag}
 
     master_sites        http://www.open-mpi.org/nightly/master \
                         http://www.open-mpi.de/nightly/master
 
-    checksums           rmd160  1e0cb13c2f12347e4ba789c0cccd5e087b82e3a8 \
-                        sha256  25c51d9a7edc20a8d62df3afe628a78c92978ca38bd27faf48079fea0d920101
+    checksums           rmd160  16fce5d235f368b082bbd1947661899094ff1a57 \
+                        sha256  ffc41f3b828e092f4a5e61937645dc93b06d2f3d29e48b9d7d957af1974ce11c
 
     livecheck.version   ${newrev}-${tag}
     livecheck.url       [lindex ${master_sites} 0]

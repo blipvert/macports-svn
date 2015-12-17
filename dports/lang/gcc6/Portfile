@@ -9,7 +9,7 @@ name                gcc6
 subport             libgcc-devel {}
 
 epoch               1
-version             6-20151018
+version             6-20151213
 platforms           darwin
 categories          lang
 maintainers         mww openmaintainer
@@ -31,8 +31,8 @@ master_sites        http://gcc.petsads.us/snapshots/${version} \
 distname            gcc-${version}
 use_bzip2           yes
 
-checksums           rmd160  5400ba71cd9d87de0df66a90f56332b7d900d74c \
-                    sha256  f0fbad47bf766a30610a79333e0be77c8e6a4ea32e7808dbeb1628b4da3e1d9f
+checksums           rmd160  ea89eeaa31bb84b500090c4a48a3273a7ef9ff77 \
+                    sha256  0640a03cc29ed6cd4ba21c703bad60edd88e6cc853fee66718da290230f58bcc
 
 depends_lib         port:cctools \
                     port:gmp \

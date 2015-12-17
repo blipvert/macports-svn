@@ -3,7 +3,7 @@
 PortSystem    1.0
 
 name          gstlal-inspiral
-version       0.6.4
+version       0.8.0
 categories    science
 platforms     darwin
 maintainers   ram
@@ -20,8 +20,8 @@ long_description \
 homepage      https://www.lsc-group.phys.uwm.edu/daswg/projects/gstlal.html
 master_sites  http://software.ligo.org/lscsoft/source/
 
-checksums     rmd160 2eb7ac90643c9bf440f768acd78d4cf3970d8657 \
-              sha256 6bdb1d94ecd3778411b9c156d5b8f62115666e799edbec5a6d2773354b294e1e
+checksums     rmd160 4e6a85cd11cc5bea4341b182ec927748c6aa6b88 \
+              sha256 1738edc1cde2d11f3f8831e34106d86c837381f55a42e5e213ee0827c984b16b
 
 depends_build port:pkgconfig
 
@@ -52,7 +52,7 @@ configure.python ${prefix}/bin/python2.7
 use_parallel_build yes
 
 # needs an openmp enabled compiler
-configure.compiler macports-gcc-4.8
+configure.compiler macports-gcc-5
 
 configure.args --without-doxygen
 

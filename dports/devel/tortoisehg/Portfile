@@ -6,7 +6,7 @@ PortGroup           python 1.0
 PortGroup           app 1.0
 PortGroup           bitbucket 1.0
 
-bitbucket.setup     tortoisehg thg 3.5.2
+bitbucket.setup     tortoisehg thg 3.6.2
 name                tortoisehg
 categories          devel python
 platforms           darwin
@@ -19,8 +19,8 @@ description         A set of graphical tools for Mercurial
 long_description    A set of graphical tools for the Mercurial distributed \
                     source control management system.
 
-checksums           rmd160  16a653dee3bc0360f436277981e239b6cdee99d4 \
-                    sha256  fa452bfaf103bf7459a937b86368cc7ed00869e289091cefb500aba0437ed879
+checksums           rmd160  8e1cf2792b5d06d31c8d66ce995eb17bd5cc0b1f \
+                    sha256  b235ce86b1a1c41ebb2f1dd4552e55d3da41b5f29b3190b3a0e3171c6e99294e
 
 python.default_version 27
 
@@ -50,8 +50,6 @@ post-patch {
         reinplace "s,#! */usr/bin/env python,#!${python.bin}," $f
     }
 }
-
-python.link_binaries_suffix
 
 post-destroot {
     system -W ${worksrcpath}/doc "make SPHINXBUILD=sphinx-build-${python.branch} html"

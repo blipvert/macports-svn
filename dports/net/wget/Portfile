@@ -2,12 +2,10 @@
 # $Id$
 
 PortSystem              1.0
-PortGroup               conflicts_build 1.0
 PortGroup               muniversal 1.0
 
 name                    wget
-version                 1.16.3
-revision                1
+version                 1.17.1
 categories              net www
 maintainers             ryandesign openmaintainer
 license                 GPL-3+
@@ -26,11 +24,8 @@ long_description \
     non-interactive commandline tool, so it may easily be called from \
     scripts, cron jobs, terminals without Xsupport, etc.
 
-checksums               rmd160  23ffad97b5a92dff2596925e7a95731ee46b1b68 \
-                        sha256  67f7b7b0f5c14db633e3b18f53172786c001e153d545cfc85d82759c5c2ffb37
-
-# nawk: syntax error at source line 1 source file
-conflicts_build         nawk
+checksums               rmd160  8ad5e9936c66ced9ad4ffc5012484a38f4a15cee \
+                        sha256  fe559b61eb9cc01635ac6206a14e02cb51591838c35fa83c7a4aacae0bdd97c9
 
 configure.args \
     --without-ssl
@@ -44,6 +39,9 @@ depends_lib \
     port:gettext \
     port:nettle \
     port:pcre
+
+patchfiles              nawk.patch \
+                        prefix.patch
 
 # Ensure libuuid doesn't get used even if the ossp-uuid port is installed.
 configure.args-append       ac_cv_header_uuid_uuid_h=no
@@ -68,8 +66,6 @@ variant ssl description {Build with SSL support using GnuTLS} {
 }
 
 default_variants        +ssl
-
-patchfiles              patch-prefix.diff
 
 post-patch {
     reinplace "s|@PREFIX@|${prefix}|g" \

@@ -3,15 +3,13 @@
 
 PortSystem                  1.0
 PortGroup                   compiler_blacklist_versions 1.0
-PortGroup                   conflicts_build 1.0
 
 # Please keep the glib2 and glib2-devel ports as similar as possible.
 
 name                        glib2
 conflicts                   glib2-devel
 set my_name                 glib
-version                     2.46.1
-revision                    1
+version                     2.46.2
 set branch                  [join [lrange [split ${version} .] 0 1] .]
 categories                  devel
 maintainers                 ryandesign openmaintainer
@@ -31,8 +29,8 @@ long_description            Glib is a library which includes support routines \
 
 master_sites                gnome:sources/${my_name}/${branch}/
 
-checksums                   rmd160  348594880f1795b8a82176513c3d74ae71b0d6d4 \
-                            sha256  5a1f03b952ebc3a7e9f612b8724f70898183e31503db329b4f15d07163c8fdfb
+checksums                   rmd160  f15f528a2e5b76b48b9fcbb8c8cbf00b01512cbc \
+                            sha256  5031722e37036719c1a09163cc6cf7c326e4c4f1f1e074b433c156862bd733db
 
 # ${prefix}/include/glib-2.0/glib/gi18n.h requires -I${prefix}/include to find libintl.h
 # See https://trac.macports.org/changeset/27148
@@ -49,6 +47,9 @@ patchfiles                  patch-configure.diff \
 if {[vercmp ${macosx_deployment_target} 10.9] < 0} {
     # gcocoanotificationbackend requires OS X 10.9 or later.
     patchfiles-append       remove-gcocoanotificationbackend.patch
+} else {
+    # gcocoanotificationbackend.c:115:52: error: array subscript is not an integer
+    compiler.blacklist-append {clang < 600}
 }
 
 depends_build               bin:xmllint:libxml2
@@ -73,7 +74,8 @@ configure.cflags-append     -fstrict-aliasing
 
 configure.args              --enable-static --disable-libelf \
                             --disable-compile-warnings \
-                            --with-pcre=system
+                            --with-pcre=system \
+                            ac_cv_prog_AWK=/usr/bin/awk
 
 configure.perl              /usr/bin/perl
 configure.python            /usr/bin/python

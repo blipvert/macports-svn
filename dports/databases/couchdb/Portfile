@@ -13,8 +13,8 @@ categories              databases
 platforms               darwin
 
 description             CouchDB is a document database server
-maintainers             jsnider.net:jeff \
-                        openmaintainer
+maintainers             ciserlohn
+
 long_description        ${description} with a restful HTTP API, capable of \
                         storing arbitrary JSON documents, building powerful data views, \
                         defined in JavaScript, and processed in parallel using Map/Reduce. \
@@ -43,7 +43,9 @@ universal_variant       no
 
 patchfiles              patch-etc-launchd-org.apache.couchdb.plist.tpl.in.diff \
                         patch-support-dual-spidermonkey.diff \
-                        patch-src-couchdb-priv-Makefile.in.diff
+                        patch-src-couchdb-priv-Makefile.in.diff \
+                        patch-configure.ac.diff \
+                        patch-configure.diff
 
 require_active_variants erlang ssl
 

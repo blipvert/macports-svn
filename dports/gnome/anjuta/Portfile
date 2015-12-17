@@ -6,7 +6,8 @@ PortGroup           gobject_introspection 1.0
 PortGroup           muniversal 1.0
 
 name                anjuta
-version             3.18.0
+version             3.18.2
+revision            1
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A GNOME/GTK IDE
@@ -19,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  12d9cef7746eca3e3f9d3071a647de2cf7a975eb \
-                    sha256  6a3fec0963f04bc62a9dfb951e577a3276d39c3414083ef73163c3fea8e741ba
+checksums           rmd160  0c8289d057d2b1543032b34543668c539c461e47 \
+                    sha256  be864f2f1807e1b870697f646294e997d221d5984a135245543b719e501cef8e
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -43,14 +44,15 @@ depends_lib         port:desktop-file-utils \
                     port:libxml2 \
                     port:vte
 
-depends_run         port:gnome-settings-daemon \
+depends_run         port:gnome-themes-standard \
                     port:epiphany \
                     port:yelp \
                     port:xdg-utils
 
 patchfiles          patch-configure.ac.diff \
-                    patch-ltmain.sh.diff \
-                    python-ldflags.patch
+                    patch-python-cflags.diff \
+                    python-ldflags.patch \
+                    patch-ltmain.sh.diff
 
 gobject_introspection yes
 
@@ -59,9 +61,11 @@ gobject_introspection yes
 configure.cmd       ./autogen.sh
 
 configure.cflags-append \
-                    -std=gnu89 -Wno-format-nonliteral
+                    -std=gnu89
 
 configure.args      --enable-static \
+                    --enable-compile-warnings=minimum \
+                    --disable-maintainer-mode \
                     --disable-schemas-compile \
                     --disable-silent-rules \
                     --disable-packagekit \
@@ -97,7 +101,7 @@ variant vala description {Enable vala support} {
     depends_lib-append      port:vala
 }
 
-variant python27 conflicts python32 python33 description {Use Python 2.7} {
+variant python27 conflicts python34 description {Use Python 2.7} {
     configure.python        ${prefix}/bin/python2.7
     depends_lib-append      port:py27-gobject3
 }

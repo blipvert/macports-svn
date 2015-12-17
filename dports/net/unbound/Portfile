@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                unbound
-version             1.5.5
+version             1.5.7
 categories          net
 license             BSD
 maintainers         snc
@@ -30,11 +30,12 @@ long_description    Unbound is a validating, recursive, and caching DNS \
 
 master_sites        http://unbound.net/downloads/
 
-checksums           rmd160  e5e2223814345b31501f9613e20cff96554444a1 \
-                    sha256  f3bd7d3bc9519e8717abdc35c26cb2d84c3c3a3e2cd657604307e6860b37da5e
+checksums           rmd160  f5cdda4b439f9b16cf1da62ca796c664cd53998b \
+                    sha256  4b2088e5aa81a2d48f6337c30c1cf7e99b2e2dc4f92e463b3bee626eee731ca8
 
 configure.args-append   --with-pidfile=${prefix}/var/run/${name}/${name}.pid \
-                        --with-rootkey-file=${prefix}/var/run/${name}/root.key
+                        --with-ssl=${prefix} \
+                        --with-rootkey-file=${prefix}/etc/${name}/root.key
 
 if {${os.major} == 10} {
 	configure.compiler  macports-clang-3.4
@@ -51,19 +52,21 @@ add_users ${unbounduser} group=${unboundgroup} home=/dev/null realname=Unbound\ 
 post-destroot {
     xinstall -o ${unbounduser} -g ${unboundgroup} -m 755 -d ${destroot}${prefix}/var/run/${name}
     move ${destroot}${prefix}/etc/${name}/${name}.conf ${destroot}${prefix}/etc/${name}/${name}.conf-dist
+    reinplace -W ${destroot}${prefix}/etc/${name} "s/# auto-trust-anchor-file:/auto-trust-anchor-file:/g" ${name}.conf-dist
     touch ${destroot}${prefix}/var/run/${name}/${name}.pid
     file attributes ${destroot}${prefix}/var/run/${name}/${name}.pid -owner ${unbounduser} -group ${unboundgroup}
+    file attributes ${destroot}${prefix}/etc/${name} -group ${unboundgroup} -permissions 0775
 }
 
 post-activate {
-    system "${prefix}/sbin/unbound-anchor -a \"${prefix}/var/run/${name}/root.key\" || :"
-    file attributes ${prefix}/var/run/${name}/root.key -owner ${unbounduser} -group ${unboundgroup}
+    system "${prefix}/sbin/unbound-anchor -a \"${prefix}/etc/${name}/root.key\" || :"
+    file attributes ${prefix}/etc/${name}/root.key -owner ${unbounduser} -group ${unboundgroup}
 }
 
 # Make it run on boot
 startupitem.create  yes
 startupitem.name    unbound
-startupitem.start   "${prefix}/sbin/unbound-anchor -a ${prefix}/var/run/${name}/root.key || : && chown ${unbounduser}:${unboundgroup} ${prefix}/var/run/${name}/root.key && ${prefix}/sbin/unbound"
+startupitem.start   "${prefix}/sbin/unbound-anchor -a ${prefix}/etc/${name}/root.key || : && chown ${unbounduser}:${unboundgroup} ${prefix}/etc/${name}/root.key && ${prefix}/sbin/unbound"
 startupitem.stop    "/bin/kill \$(cat ${prefix}/var/run/${name}/unbound.pid)"
 
 livecheck.type      regex

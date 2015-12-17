@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                inkscape-devel
 conflicts           inkscape
-set bzr_rev         14419
+set bzr_rev         14530
 version             0.91.99.${bzr_rev}
 epoch               1
 license             GPL-2 LGPL-2.1
@@ -47,6 +47,7 @@ depends_lib         port:desktop-file-utils \
                     port:libvisio-0.1 \
                     port:libwpg-0.3 \
                     port:gtkspell2 \
+                    port:potrace \
                     port:py27-lxml \
                     port:py27-numpy
 
@@ -59,6 +60,10 @@ post-patch {
     reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.h
     reinplace "s|^#include \"Object.h\"|#include \"${prefix}/include/poppler/Object.h\"|" ${worksrcpath}/src/extension/internal/pdfinput/pdf-parser.cpp
 }
+
+# py27-numpy is currently not universal (#48263).
+
+universal_variant no
 
 variant gtk3 description {Enable experimental GTK+ 3 build} {
     depends_lib-delete \

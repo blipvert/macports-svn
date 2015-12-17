@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-decorator
-version             4.0.4
+version             4.0.6
 revision            0
 categories-append   devel
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            decorator-${version}
 
-checksums           rmd160  a3626e1ca4d9e03fef940fd8415443a6ba98fabb \
-                    sha256  5ad0c10fad31648cffa15ee0640eee04bbb1b843a02de26ad3700740768cc3e1
+checksums           rmd160  9e6f4716333d7c29aa4b2048cd728938a298ec6b \
+                    sha256  1c6254597777fd003da2e8fb503c3dbf3d9e8f8d55f054709c0e65be3467209c
 
 if {${name} ne ${subport}} {
     depends_build-append port:py${python.version}-setuptools

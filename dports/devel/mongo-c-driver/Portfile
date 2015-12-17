@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        mongodb mongo-c-driver 1.2.0
+github.setup        mongodb mongo-c-driver 1.2.3
 categories          devel databases
 platforms           darwin
 maintainers         ryandesign openmaintainer
@@ -16,8 +16,8 @@ long_description    ${name} is a ${description}.
 
 github.tarball_from releases
 
-checksums           rmd160  82f736718415f7e0b373ef8632cba159b0b50c83 \
-                    sha256  bd438848267aa1a598341c925c5d6d98388ba478ee77a20080c77011b73f95eb
+checksums           rmd160  07f51e5ccf36f98fa35c1d30361b6d0f113e457e \
+                    sha256  2108633b6e9395a96f7c0b9ce4cbe7d91b042e2740813e2205d57f53c1389af6
 
 depends_build       port:pkgconfig
 

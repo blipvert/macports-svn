@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 #
-# Copyright (c) 2014 The MacPorts Project
+# Copyright (c) 2014-2015 The MacPorts Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,11 +35,31 @@
 # Usage:
 #
 #   PortGroup               mpi 1.0
+#
+# Available procedures:
+# proc mpi_active_variant_name {depspec}
+#   Returns the name of the active MPI variant of a dependency.
+# proc mpi_variant_name {}
+#   Returns the name of the active MPI variant of this port.
+# proc mpi.enforce_variant {args}
+#   Raise an error if the dependency does not have the same MPI variant
+#   as this port. Also enforces that the dependency has the same C variant.
+# proc mpi_variant_isset {}
+#   Whether an MPI variant has been set.
+# proc mpi.setup {args}
+#   Creates MPI variants.
+#   Available arguments: "require" means an MPI variant must be set.
+#   All of the arguments for compilers.setup are available too and will be passed to that procedure.
+#   "default" means an MPI variant (mpich) will be set as a default variant.
+#   You can either list which MPI's can be used (e.g. mpich mpich-devel),
+#   which cannot be used (e.g. -mpich -openmpi-devel).
+#   There are four MPI variants: mpich, mpich-devel, openmpi, openmpi-devel.
 
 PortGroup compilers 1.0
 
 default mpi.variants {}
 default mpi.require 0
+default mpi.default 0
 default mpi.required_variants {}
 
 set mpi.cc   mpicc
@@ -142,6 +162,8 @@ proc mpi_active_variant_name {depspec} {
             if {$result} {
                 return $m
             }
+        } else {
+            ui_warn "mpi_active_variant_name: \[active_variants $depspec $m \"\"\] fails."
         }
     }
 
@@ -168,6 +190,7 @@ proc mpi.enforce_variant {args} {
 
 proc mpi.action_enforce_variants {args} {
     global name
+    ui_debug "mpi.enforce_variant list: ${args}"
     foreach portname $args {
         if {![catch {set result [active_variants $portname "" ""]}]} {
             set otmpi  [mpi_active_variant_name $portname]
@@ -185,19 +208,45 @@ proc mpi.action_enforce_variants {args} {
             }
 
             eval compilers.action_enforce_c $portname
+        } else {
+            ui_error "Internal error: '$portname' is not an installed port."
         }
     }
 }
 
 # only run this if mpi is chosen
 pre-fetch {
-    if {${compilers.require_fortran} && [mpi_variant_isset]} {
-        set mpif [fortran_active_variant_name ${mpi.name}]
-        set myf  [fortran_variant_name]
+    if {[fortran_variant_isset] && [mpi_variant_isset]} {
+        set gcc_name ""
+        regexp (gcc\[0-9\]*) ${mpi.name} gcc_name 
+        if {$gcc_name ne ""} {
+            if {[active_variants ${mpi.name} "fortran" ""]} {
+                set mpif $gcc_name
+            } else {
+                set mpif ""
+            }
+        } else {
+            # this is a default, clang, or llvm subport
+            set mpif [fortran_active_variant_name ${mpi.name}]
+            
+        }
+        # mpif will definitely have a real compiler name, not gfortran.
+        set myf [fortran_compiler_name [fortran_variant_name]]
 
-        if {$myf eq "g95" && $myf ne $mpif} {
-            ui_error "${mpi.name} has a different fortran variant ($mpif) than the selected $myf"
-            return -code error "${mpi.name} needs the $myf variant"
+        if {$myf ne $mpif} {
+            if {$mpif eq "" && $gcc_name ne ""} {
+                ui_error "${mpi.name} was built without Fortran support."
+                set need "fortran"
+            } else {
+                if {[fortran_variant_name] eq "gfortran"} {
+                    set selectedf " (via +gfortran)"
+                } else {
+                    set selectedf " "
+                }
+                ui_error "${mpi.name} has a different Fortran variant ($mpif) than the one selected, $myf$selectedf."
+                set need $myf
+            }
+            return -code error "Install ${mpi.name} +$need"
         }
     }
 }
@@ -207,7 +256,7 @@ proc mpi_variant_isset {} {
 }
 
 proc mpi.setup {args} {
-    global cdb mpidb mpi.variants mpi.require compilers.variants name
+    global cdb mpidb mpi.variants mpi.require mpi.default compilers.variants name
 
     set add_list {}
     set remove_list ${mpi.variants}
@@ -231,6 +280,10 @@ proc mpi.setup {args} {
         switch -exact $v {
             require {
                 set mpi.require 1
+                set mpi.default 1
+            }
+            "default" {
+                set mpi.default 1
             }
             require_fortran {
                 set cl [add_from_list $cl "require_fortran"]
@@ -288,10 +341,9 @@ proc mpi.setup {args} {
         require_active_variants $mpi $cv $cl
     }
 
-    if {${mpi.require} && ![mpi_variant_isset]} {
+    if {${mpi.default} && ![mpi_variant_isset]} {
         default_variants-append +mpich
     }
-
 }
 
 pre-fetch {

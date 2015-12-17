@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                cvs-fast-export
-version             1.30
+version             1.35
+revision            1
 categories          devel
 license             GPL-2
 platforms           darwin
@@ -25,8 +26,8 @@ long_description    This program analyzes a collection of RCS files in a CVS \
 homepage            http://www.catb.org/~esr/cvs-fast-export/
 master_sites        ${homepage}
 
-checksums           rmd160  56dd5ccc0e0c9b08d469b496fe2dd817e205d2ac \
-                    sha256  9957ecf0486b2d83e37cb47a8d4af1ffbf3d5e59d8ab978e5ca197ad49bd01f7
+checksums           rmd160  3eccf13c8aecf970c2ec4ea09b0531c4893868ed \
+                    sha256  4605a0c7f5ebbbdedc312eb384c1ece64db42565cabacd169ad01b5e699c817c
 
 depends_build       port:flex \
                     port:bison \

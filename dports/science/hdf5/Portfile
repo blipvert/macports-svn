@@ -7,8 +7,8 @@ PortGroup           muniversal 1.0
 PortGroup           mpi 1.0
 
 name                hdf5
-version             1.8.15-patch1
-revision            0
+version             1.8.16
+revision            1
 categories          science
 maintainers         mmoll openmaintainer
 
@@ -28,8 +28,8 @@ master_sites \
     http://www.hdfgroup.org/ftp/HDF5/current/src \
     ftp://ftp.hdfgroup.org/HDF5/current/src/ \
     ftp://ftp.hdfgroup.org/HDF5/prev-releases/hdf5-${version}/src/
-checksums           rmd160  74e9d6d6f247259f72a78bcda03f91e72adb14c3 \
-                    sha256  a5afc630c4443547fff15e9637b5b10404adbed4c00206d89517d32d6668fb32
+checksums           rmd160  f72c7029b08dfae4562b9aa23f03aa43bd02617e \
+                    sha256  13aaae5ba10b70749ee1718816a4b4bfead897c2fcb72c24176e759aec4598c6
 mpi.setup           -gcc44 -gcc45
 
 use_bzip2           yes
@@ -48,16 +48,16 @@ patchfiles          yosemite-libtool.patch
 compiler.blacklist  llvm-gcc-4.2
 
 # Use lib/hdf5 rather than hdf5/lib plugin directory
-configure.args      --with-zlib=yes --enable-filters=all \
+configure.args      --with-zlib=yes \
                     --enable-production --disable-fortran \
-                    --disable-cxx --enable-shared --enable-static \
+                    --disable-cxx --disable-hl --enable-shared --enable-static \
                     --disable-parallel --disable-threadsafe \
                     --with-default-plugindir=${prefix}/lib/hdf5
 
 # http://mail.hdfgroup.org/pipermail/hdf-forum_hdfgroup.org/2010-March/002682.html
 license             NCSA
 
-default_variants    +cxx
+default_variants    +cxx +hl
 
 post-configure {
     if {[variant_isset universal]} {
@@ -101,6 +101,14 @@ variant szip description {Enable szip support. (Noncommercial license)} {
     license                     Noncommercial
 }
 
+variant hl description {
+    Enable High Level interface.
+  +hl is EXPERIMENTAL with +threadsafe
+} {
+    configure.args-delete       --disable-hl
+    configure.args-append       --enable-hl
+}
+
 variant cxx description {
     Enable c++ interfance.
   +cxx is EXPERIMENTAL with +threadsafe or any mpi variant
@@ -139,6 +147,7 @@ variant threadsafe description {
 }
 
 if {[ variant_isset threadsafe ] && ([ variant_isset cxx ] ||
+                                     [ variant_isset hl ] ||
                                      [ variant_isset fortran ]) ||
     ([ mpi_variant_isset ])  &&
     ([ variant_isset cxx ]   || [ variant_isset threadsafe ])  } {

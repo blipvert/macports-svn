@@ -40,7 +40,6 @@ checksums           md5     7a77c6b96143e6758c38fed0775d2b16 \
 python.versions     27 34
 
 if {${name} ne ${subport}} {
-    # Note: setuptools required only for developers
     depends_build-append    port:py${python.version}-numpy
 
     depends_lib-append      port:py${python.version}-future \
@@ -50,9 +49,6 @@ if {${name} ne ${subport}} {
                             port:py${python.version}-scipy \
                             port:py${python.version}-setuptools \
                             port:py${python.version}-sqlalchemy
-
-    # Note: Required for post-installation testing only
-    depends_run-append      port:py${python.version}-flake8
 
     # py-numpy & py-scipy are not universal
     universal_variant       no

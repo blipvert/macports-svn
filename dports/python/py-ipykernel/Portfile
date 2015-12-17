@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-ipykernel
-version             4.1.1
+version             4.2.1
 revision            0
 categories-append   devel
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  4e645cf1436a15fc255b4cd01b43d6ddfaff5eed \
-                    sha256  d8c5555386d0f18f1336dea9800f9f0fe96dcecc9757c0f980e11fdfadb661ff
+checksums           rmd160  15fb41c878203bb7ab305948b763988143ebe497 \
+                    sha256  081a5d4db33db58697be2d682b92f79b2c239493445f13dd457c15bc3e52c874
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-ipython \

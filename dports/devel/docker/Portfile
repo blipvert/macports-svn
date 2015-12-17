@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        docker docker 1.8.3 v
+github.setup        docker docker 1.9.1 v
 categories          devel
 platforms           darwin
 license             Apache-2
@@ -15,8 +15,8 @@ long_description    Docker is an open source project to pack, ship \
 
 depends_build       port:go
 
-checksums           rmd160  bba8746a54b49d9168a97293f37229d2f45c0eb1 \
-                    sha256  c588b7072adc81728636a4120ae016f7f58d549bfe0b45b054b45105ae0a7d99
+checksums           rmd160  cebe86f8b1c19652a785feba2093366dfbe5dfd2 \
+                    sha256  dc0a67b3a6bd5a7d9059ab7754037a8696d1cccd8de56fd4a8f067539988b00d
 
 use_configure       no
 

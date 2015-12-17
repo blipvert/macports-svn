@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                lilypond-devel
 set my_name         lilypond
-version             2.19.28
+version             2.19.33
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          textproc
 maintainers         snc openmaintainer
@@ -22,8 +22,8 @@ conflicts           lilypond
 platforms           darwin
 master_sites        http://download.linuxaudio.org/lilypond/sources/v${branch}/
 distname            ${my_name}-${version}
-checksums           rmd160  2616b5b75043d6cf3b8f95cd6406ae16fef0e47c \
-                    sha256  362d29e8ac8a1ee0a48fb98cabe7ae3ae6b289079261fc5bf4b2a309ec6de600
+checksums           rmd160  11ae0c1f5a210468e4bde838d93beaf44514a2e3 \
+                    sha256  b08394edc286040195ca17f9f39514ddb34a55b396d64954239877e2dd5a9b68
 
 depends_build       port:t1utils \
                     port:bison \
@@ -61,6 +61,9 @@ post-patch {
     # Use guile18 header files
     reinplace s|libguile\.h|libguile18.h|g ${worksrcpath}/configure \
         ${worksrcpath}/lily/include/lily-guile.hh
+
+    # help fontforge date calculation
+    reinplace s|20110222|2011-02-22|g ${worksrcpath}/configure
 }
 
 configure.args-append  --with-texgyre-dir=${prefix}/share/texmf-texlive/fonts/opentype/public/tex-gyre \

@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        docker machine 0.4.1 v
+github.setup        docker machine 0.5.3 v
 name                docker-machine
 categories          devel
 platforms           darwin
@@ -16,26 +16,37 @@ long_description    Machine lets you create Docker hosts on your computer, \
                     creates servers, installs Docker on them, then configures \
                     the Docker client to talk to them.
 
-depends_build       port:godep
-depends_lib         port:docker
+depends_lib         port:go port:docker
 
-checksums           rmd160  27834c815ed01d58d45020b6a28f0cdde6fb9910 \
-                    sha256  6dedf0c3d0a76551cb40a3edb5492870452ffbef4939c7c033ed6e58b43a5cb4
+checksums           rmd160  5ca2a7b5c5e3c0bc91ed51c7737a591d23840c1d \
+                    sha256  7358e8895b39f829bcbd23349e9171a6def3844436c1566430841e61ff923efa
 
 use_configure       no
-build.cmd           godep
-build.target        go build -o ${name}
-build.env           GOPATH=${worksrcpath}
+build.target        build
+build.env           GOPATH=${workpath}/go
+build.dir           ${workpath}/go/src/github.com/docker/machine
 
 # what kind of tool does this?
 post-extract {
+    file mkdir ${workpath}/go/src/github.com/docker
+    ln -sf ${worksrcpath} ${workpath}/go/src/github.com/docker/machine
     file mkdir ${worksrcpath}/src/github.com/docker
     ln -sf ${worksrcpath} ${worksrcpath}/src/github.com/docker/machine
 }
 
 destroot {
     xinstall -d ${destroot}${prefix}/bin
-    xinstall -m 755 ${worksrcpath}/${name} ${destroot}${prefix}/bin/
+    xinstall -m 755 {*}[glob ${worksrcpath}/bin/*] ${destroot}${prefix}/bin/
+
+    if {[variant_isset bash_completion]} {
+        set completions_path ${prefix}/share/bash-completion/completions
+        xinstall -d ${destroot}${completions_path}
+        xinstall -m 644 {*}[glob ${worksrcpath}/contrib/completion/bash/*.bash] ${destroot}${completions_path}/
+    }
+}
+
+variant bash_completion {
+    depends_run-append path:etc/bash_completion:bash-completion
 }
 
 livecheck.regex     archive/[join ${github.tag_prefix} ""](\[^"r-\]+)${extract.suffix}

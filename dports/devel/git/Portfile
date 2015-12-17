@@ -5,7 +5,8 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 name                git
-version             2.6.2
+version             2.6.4
+revision            1
 description         A fast version control system
 long_description    Git is a fast, scalable, distributed open source version \
                     control system focusing on speed and efficiency.
@@ -20,11 +21,11 @@ distfiles           git-${version}${extract.suffix} \
                     git-manpages-${version}${extract.suffix}
 
 checksums           git-${version}${extract.suffix} \
-                    rmd160  9653a167d0c59d05418d407da0976e54ee52103b \
-                    sha256  34dfc06b44880df91940dc318a2d3c83b79e67b6f05319c7c71e94d30893636d \
+                    rmd160  541b168bbd857d2b8be40cb1dbff51559277e718 \
+                    sha256  1a0290fcef03c7baae3e9661509421965187dc8f8f6e31672709b66c9c7686ca \
                     git-manpages-${version}${extract.suffix} \
-                    rmd160  d8ac77d27353f1974f16e49125cede476d0f1752 \
-                    sha256  e996207cd8b9909296140bb8f6d9209e58052082e98edfe947cd5b3d927d41db \
+                    rmd160  93d26ca98cdcf8d4600beb8c6138f95120af537a \
+                    sha256  c1bf13ca4b68be062b9043d9e82e25065a2a011f7ca584f5d02cf9a9ba6a516d \
 
 perl5.require_variant   yes
 perl5.conflict_variants yes
@@ -42,6 +43,7 @@ depends_run-append  port:p${perl5.major}-authen-sasl \
                     port:p${perl5.major}-error \
                     port:p${perl5.major}-net-smtp-ssl \
                     port:p${perl5.major}-term-readkey \
+                    port:p${perl5.major}-cgi \
                     port:rsync
 
 patchfiles          patch-Makefile.diff git-subtree.1.diff
@@ -150,8 +152,8 @@ variant pcre {
 variant doc description {Install HTML and plaintext documentation} {
     distfiles-append        git-htmldocs-${version}${extract.suffix}
     checksums-append        git-htmldocs-${version}${extract.suffix} \
-                            rmd160  6f11526fd6929a9cff8792e982ab8b5e8c338144 \
-                            sha256  97cd75890981fca91efcc558a0901c91b38674efc81e3882542aa3c60b1897cf
+                            rmd160  915695c1e906a22c7f00eedf0a428d938a3dc443 \
+                            sha256  c2f474bf9113190aa4bed0d301fb86e0bceb1a2c6d80601db58f16845a451a62
 
     patchfiles-append       git-subtree.html.diff
 
@@ -180,6 +182,8 @@ variant doc description {Install HTML and plaintext documentation} {
 }
 
 variant gitweb description {Install gitweb.cgi} {
+    depends_run-append  port:lighttpd
+
     build.target-append gitweb
 
     post-destroot {
