@@ -1,0 +1,36 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-mathutils
+version             2.76
+categories-append   devel
+license             MIT
+platforms           darwin
+supported_archs     noarch
+maintainers         nomaintainer
+description         A general math utilities library for Python.
+
+long_description \
+    A general math utilities library providing Matrix, Vector, \
+    Quaternion, Euler and Color classes, written in C for speed.
+
+homepage            https://pypi.python.org/pypi/mathutils
+master_sites        https://pypi.python.org/packages/source/m/mathutils
+distname            mathutils-${version}
+
+checksums           rmd160  c1e4837d1534cdb9191cef8847b593108bd7e5d3 \
+                    sha256  34c6c0ddb28d4f6004942aa0a128d88229a5c71208ec500f6a4e3d53ec750cd8
+
+python.versions     26 27 33 34
+
+if {${name} ne ${subport}} {
+    livecheck.type  none
+
+} else {
+    livecheck.type  regex
+    livecheck.url   ${master_sites}
+    livecheck.regex "mathutils-(\\d+(?:\\.\\d+)*)${extract.suffix}"
+}
