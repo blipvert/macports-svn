@@ -7,7 +7,7 @@ PortGroup           compilers 1.0
 name                SuiteSparse
 epoch               20120107
 version             4.2.1
-revision            3
+revision            4
 categories          math science
 platforms           darwin
 maintainers         michaelld openmaintainer
@@ -73,7 +73,7 @@ configure {
 
     # select BLAS and LAPACK
 
-    set BLAS "-framework Accelerate"
+    set BLAS "${prefix}/lib/vecLibFort.dylib"
     if {[variant_isset atlas]} {
         # Threaded lib gets priority over non-threaded (ppc)
         if {[file exists ${prefix}/lib/libtatlas.dylib]} {
@@ -82,6 +82,8 @@ configure {
         } else {
             set BLAS "${prefix}/lib/libsatlas.dylib"
         }
+    } elseif {[variant_isset openblas]} {
+        set BLAS "${prefix}/lib/libopenblas.dylib"
     }
     reinplace "s|@BLAS_LAPACK@|${BLAS}|g" ${makefile}
 
@@ -126,13 +128,15 @@ post-destroot {
         }
     }
 
-    set atlas "-framework Accelerate"
+    set atlas "-lvecLibFort"
     if {[variant_isset atlas]} {
         if {[file exists ${prefix}/lib/libtatlas.dylib]} {
             set atlas "-ltatlas"
         } else {
             set atlas "-lsatlas"
         }
+    } elseif {[variant_isset openblas]} {
+        set atlas "-lopenblas"
     }
 
     set major [join [lrange [split ${version} .] 0 0] .]
@@ -258,7 +262,11 @@ variant metis description {Include METIS for graph partitioning and sparse matri
     depends_lib-append port:metis
 }
 
-variant atlas description {Use MacPorts' ATLAS instead of Accelerate Framework} {
+variant accelerate description {use BLAS from Apple's Accelerate.framework} conflicts atlas openblas {
+    depends_lib-append port:vecLibFort
+}
+
+variant atlas description {use BLAS from MacPorts' atlas port} conflicts accelerate openblas {
     depends_lib-append port:atlas
 
     # +atlas requires atlas to be installed without +nofortran
@@ -266,6 +274,23 @@ variant atlas description {Use MacPorts' ATLAS instead of Accelerate Framework} 
     PortGroup active_variants 1.1
     require_active_variants port:atlas "" nofortran
 
+}
+
+variant openblas description {use BLAS from MacPorts' openblas port} conflicts accelerate atlas {
+    depends_lib-append path:lib/libopenblas.dylib:OpenBLAS
+
+    # LAPACK required
+    PortGroup active_variants 1.1
+    require_active_variants path:lib/libopenblas.dylib:OpenBLAS lapack
+}
+
+if {![variant_isset accelerate] && ![variant_isset openblas] && ![variant_isset atlas] } {
+    default_variants-append +accelerate
+}
+
+if {![variant_isset accelerate] && ![variant_isset openblas] && ![variant_isset atlas] } {
+    ui_error "\n\nYou must select either the +accelerate, +atlas, or +openblas variant.\n"
+    return -code error "Invalid variant selection"
 }
 
 livecheck.type      regex

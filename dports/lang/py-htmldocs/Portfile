@@ -47,45 +47,54 @@ if {${name} != ${subport}} {
     notes               ${long_description}
 
     if {${python.version} == 26} {
+      revision  1
       checksums \
         rmd160  a7bd375ac3a62249529da805693c3b15510ff976 \
         sha256  f3faa71f4b0cc8fa2bb6c5624233ae79983a2d5c11195fb2089668c60ceb7f1f
     }
 
     if {${python.version} == 27} {
+      revision  2
+      dist_subdir   ${name}/${revision}
       checksums \
-        rmd160  95434961a1497ac299413170d7497b4bade9daed \
-        sha256  5d23768c9b06a2df01479b625a5b0b3aaf6e863b7d2b959c9033ef2d858999ec
+        rmd160  5962cd9d48d5678a832cfef7a693ffcadb66d55e \
+        sha256  a6b61188de5e26295533a619f0e89dd180c6b4385d27e3239581de8aa1d4ceaf
     }
     
     if {${python.version} == 31} {
+      revision  1
       checksums \
         rmd160  29717979d6a8b4e970a4747e101259da3e3890c1 \
         sha256  ff327cfaa1219d8d82fcb4f3bae3ec4ce28567982a49784004130521d282faa0
     }
     
     if {${python.version} == 32} {
+      revision  1
       checksums \
         rmd160  039539fc90454d35525c8b9478156f7135b86622 \
         sha256  b746ef40a29abe7949e5f183e236a0734c58b841c0600043160a518390704c13
     }
 
     if {${python.version} == 33} {
+      revision  1
       checksums \
         rmd160  84290bfaea54b943025f7088268f256d4a50cf71 \
         sha256  54da33f8a91be819e7ac22fdc88c5125bdd4c67494f52dd79d6b603572c41fb0
     }
 
     if {${python.version} == 34} {
+      revision  1
       checksums \
         rmd160  3cfdc8682fee199be83163026aa2a387f36e14af \
         sha256  62690cf2d6781cf761aa4ae3c81b8a794700f6b61e4cef0cadbcf4f96a5b7da1
     }
 
     if {${python.version} == 35} {
+      revision  2
+      dist_subdir   ${name}/${revision}
       checksums \
-        rmd160  49486d6fc7612d3633b463ccada35c9db8d6f856 \
-        sha256  88987a65776e5f8449509125b246a6146a0566434a2492bfb1adf57232b5a371
+        rmd160  708cb554c1b80bcf795f89936ca9bdac11abffb5 \
+        sha256  ad75e90b950c6abfae550680576ad8ffa48d8ef579fcb98687037590c7576d98
     }
 
     build {}

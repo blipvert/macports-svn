@@ -7,7 +7,7 @@ PortGroup           mpi 1.0
 
 name                hdfeos5
 version             1.15
-revision            7
+revision            8
 categories          science
 platforms           darwin
 license             public-domain
@@ -19,7 +19,8 @@ long_description \
     built with the same calling sequences as the original HDF-EOS 2 library.
 homepage            http://hdfeos.org/
 master_sites        ftp://edhs1.gsfc.nasa.gov/edhs/${name}/latest_release/ \
-                    ftp://edhs1.gsfc.nasa.gov/edhs/${name}/previous_releases/
+                    ftp://edhs1.gsfc.nasa.gov/edhs/${name}/previous_releases/ \
+                    http://www.enomosphere.net/hdfeos/
 
 distname            HDF-EOS5.${version}
 
@@ -37,10 +38,9 @@ worksrcdir          ${name}
 extract.suffix      .tar.Z
 fetch.use_epsv      no
 
-set v [mpi_active_variant_name bin:h5pcc:hdf5]
-if {${v} != "" } {
+mpi.enforce_variant hdf5
+if {[mpi_variant_isset]} {
     set h5cc h5pcc
-    default_variants +${v}
 } else {
     set h5cc h5cc
 }

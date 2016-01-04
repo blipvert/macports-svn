@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rpy2
-version             2.7.4
+version             2.7.6
 revision            0
 categories-append   science
 platforms           darwin
@@ -27,8 +27,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  93694f45b37a06175c4ec84eddc5ef2eb95840be \
-                    sha256  478f40c6775cc04188818d0410cd8340d900bd782ab3fa734cb6c090ecd57ddf
+checksums           rmd160  1df11e29637bec2a57ae5632859c48ecdebbd1f3 \
+                    sha256  ea35a2f37fd36e8af069731bf1421fbb2d3f8550bcb55fde3bebf0bcb1b00a5a
 
 if {${name} ne ${subport}} {
     # To continue using your custom R installation instead of MacPorts' R,

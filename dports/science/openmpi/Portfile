@@ -37,8 +37,8 @@ checksums           rmd160  70de0da1f31793333b51eda328a18c01c4ffa3c0 \
 use_bzip2           yes
 
 livecheck.type      regex
-livecheck.url       http://www.open-mpi.org/software/ompi
-livecheck.regex     openmpi-(\[0-9\.\]+).tar.bz2
+livecheck.url       http://www.open-mpi.org/
+livecheck.regex     Open MPI v(\[0-9\.\]+) released
 
 if {[string first "-devel" $subport] > 0} {
     name                openmpi-devel
@@ -46,16 +46,16 @@ if {[string first "-devel" $subport] > 0} {
     # openmpi switched to git and reset their revision number;
     # remove this when for next release
     set base            32546
-    set tag             g7977fa3
-    set newrev          3182
+    set tag             gdc857a9
+    set newrev          3313
     revision            [expr {$base + $newrev + 2}]
     distname            openmpi-dev-${newrev}-${tag}
 
     master_sites        http://www.open-mpi.org/nightly/master \
                         http://www.open-mpi.de/nightly/master
 
-    checksums           rmd160  16fce5d235f368b082bbd1947661899094ff1a57 \
-                        sha256  ffc41f3b828e092f4a5e61937645dc93b06d2f3d29e48b9d7d957af1974ce11c
+    checksums           rmd160  248cc58c76323fd06d7dfe347a6790a3c4c9e8b9 \
+                        sha256  c9107af93204df3660aca982fd1f5a457be740d939d3c296cad8f27897d8909a
 
     livecheck.version   ${newrev}-${tag}
     livecheck.url       [lindex ${master_sites} 0]

@@ -31,7 +31,8 @@ depends_build-append \
 
 post-extract {
     # superlu 4.1 works with 3.6.1, can remove this after next update
-    reinplace "s,4\.0,4.1,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU_DIST.py
+    reinplace "s,4\.1,4.2,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU_DIST.py
+    reinplace "s,5\.0,5.1,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU.py
 }
 
 pre-configure {
@@ -64,13 +65,14 @@ pre-configure {
 }
 
 subport petsc-devel {
-    bitbucket.setup     petsc petsc a9d30d4a3b22
+    bitbucket.setup     petsc petsc 8fe480cde362
     bitbucket.livecheck master
     version             3.6.99
-    revision            9
+    revision            12
     name                petsc-devel
-    checksums           rmd160  431fabea198a68adcfee36e2b80eb0e4d1f36ce5 \
-                        sha256  bef3c2ba801b2c666aaabf12127690cee0f0f4f061fbe3441213efd2f84ef1b5
+
+    checksums           rmd160  3e552a9a9d22e23977323403ad63bc28f2ec9858 \
+                        sha256  4133d72c538892e21da00f9f97369fee4612ca69220e03f8492075ba28b04fe3
 }
 
 notes               "Add the following line to your .bash_profile if you plan to use\
@@ -124,9 +126,11 @@ variant sundials description {Build with CVODE interface for TS} {
     mpi.enforce_variant   sundials
 }
 
+if {[string first "-devel" $subport] > 0} {
 variant superlu description {Build with SuperLU interface for a serial direct solver} {
     depends_lib-append    port:superlu
     configure.args-append --with-superlu-dir=${prefix}
+}
 }
 
 variant mumps description {Build with MUMPS interface for a parallel direct solver} requires parmetis {

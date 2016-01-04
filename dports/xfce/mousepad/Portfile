@@ -4,8 +4,8 @@
 PortSystem 1.0
 
 name            mousepad
-version         0.2.16
-revision        2
+version         0.4.0
+set branch      [join [lrange [split ${version} .] 0 1] .]
 categories      xfce
 platforms       darwin
 license         GPL-2+
@@ -13,11 +13,21 @@ maintainers     afb
 description     A text editor for Xfce based on Leafpad
 long_description ${description}
 homepage        http://www.xfce.org/
-master_sites    http://www.ca-us.xfce.org/archive/xfce-4.6.0/src/
+master_sites    http://archive.xfce.org/src/apps/${name}/${branch}/
 use_bzip2       yes
-checksums       md5 d98854edb76d823ac20b266fdf5a64a1 \
-                sha1 4e63033e0a71578f3ec9a0d2e6a505efd0424ef9 \
-                rmd160 673a52a38dfa60388db11322cd08189c1b2c10e3
+checksums       md5 f55314c5dda6323883241e6cf01550a7 \
+                sha1 ebadaadc02184b01230666dc12f8ab90032876f9 \
+                sha256 60114431eac8db6bb6ce18bd38f1630cccb684375b97a445a1b6fd619848d132
 
 depends_build   port:intltool port:pkgconfig
-depends_lib     port:xfconf port:libxfcegui4 
+depends_lib     port:gtk2 port:gtksourceview2 \
+                port:libxfce4util port:libxfce4ui
+
+configure.args  --enable-dbus --disable-gtk3
+
+post-activate {
+    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
+    system "${prefix}/bin/gtk-update-icon-cache -f -t ${prefix}/share/icons/hicolor"
+
+    system "${prefix}/bin/glib-compile-schemas ${prefix}/share/glib-2.0/schemas"
+}

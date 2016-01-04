@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
-perl5.setup         Test-Exception 0.40
+perl5.setup         Test-Exception 0.43
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
 description         Convenience methods for testing exception-based code
@@ -16,8 +16,8 @@ long_description    This module provides a few convenience methods for \
 
 platforms           darwin
 
-checksums           rmd160  594281604e4fd9bc23af803f1c36c07c06f1860d \
-                    sha256  d92ccb566d93140abc93b07ec4c13e9b14c8f8f7d7858a2ab575d83b3bb51b26
+checksums           rmd160  b73ac3858566b3fddbfda2979ec91120858d8d3d \
+                    sha256  156b13f07764f766d8b45a43728f2439af81a3512625438deab783b7883eb533
 
 if {${perl5.major} != ""} {
     depends_lib-append \
