@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           bitbucket 1.0
 
-bitbucket.setup     seanfarley mercurial 3.6.2
+bitbucket.setup     seanfarley mercurial 3.6.3
 categories          devel python
 license             GPL-2+
 maintainers         sean openmaintainer
@@ -26,8 +26,8 @@ long_description    Mercurial is a fast, lightweight Source Control Management \
 
 homepage            http://www.selenic.com/mercurial/
 platforms           darwin
-checksums           rmd160  d306aac031e327de232b425ec3dcbc06707f1a75 \
-                    sha256  fdaf37555cfea34d4ebcdfa55776ade51357e9e93a35d8f8de4404a6ff61bafd
+checksums           rmd160  d6bbb2d3b998c670aa918dfbf7cc2c0145381d81 \
+                    sha256  ca2cef19c42e16422aba1fafa8da5149a38be6d1e5eb0427d5a971087287e7fd
 
 depends_build       port:py27-docutils
 
@@ -43,14 +43,14 @@ build.cmd           make
 build.target        all PYTHON=${python.bin}
 
 subport mercurial-devel {
-    bitbucket.setup     seanfarley mercurial 23541bdd1610
+    bitbucket.setup     seanfarley mercurial 443848eece18
     name                mercurial-devel
     version             3.6.99
-    revision            5
+    revision            6
 
     conflicts           mercurial
-    checksums           rmd160  86203ca2fb21af56bb61b58da4c2e7ca86aaadb3 \
-                        sha256  ed197b811191f1a56478f83de361afc351f9f54217ee4e614a6aa2f15ed87d70
+    checksums           rmd160  516ccb16d84028bd6fb999baf35883d0d97a1e85 \
+                        sha256  996804a6dc84eabe6a23aa506e1091b1d5effb7dd10b27c8cfe6ce1c82b3f07b
 }
 
 post-destroot {

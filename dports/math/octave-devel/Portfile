@@ -24,32 +24,38 @@ homepage            http://www.gnu.org/software/octave
 #hg.url              http://hg.savannah.gnu.org/hgweb/octave/
 
 set version_release 4.0.0
-set version_rc      4.0.1
+set version_rc      4.0.1-rc1
 set version_tip     4.1.0+
-
-#revision           0
 
 if { ${name} eq ${subport} } {
     version         ${version_tip}
-    #incr revision  0
-    hg.tag          5a340d8458d6
+    revision        4
+    hg.tag          12e98e5ebd13
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  9fc8bf87a82331ed644f68b31bb8a2cd7f2ec539 \
-        sha256  152b316872d20eca275433a9dd2d339ce7e475b5be36d37d1637601ccd3cd898
+        rmd160  173e4f1376ebbbbce553162c7068f72b48ba67af \
+        sha256  8dcf8a3caaffee78492119b57b79981fd26e9c8330fa2ebc0cd219e504ffed81
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\ntip"
 }
 
 subport octave-devel-rc {
     version         ${version_rc}
-    #incr revision  0
+    revision        4
     hg.tag          20b17dda0e0c
 
     if {${version_rc} eq ${version_release}} {
         conflicts-append octave-devel-release
     }
+
+    # see http://savannah.gnu.org/bugs/?41178
+    patchfiles-append \
+        octave-clang-classdef.patch
+
+    # see http://savannah.gnu.org/bugs/?func=detailitem&item_id=46592
+    patchfiles-append \
+        patch-e870a68742a6.diff
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
@@ -61,7 +67,7 @@ subport octave-devel-rc {
 
 subport octave-devel-release {
     version         ${version_release}
-    #incr revision  0
+    revision        4
     hg.tag          3ccc2d02e64b
 
     if {${version_release} eq ${version_rc}} {
@@ -71,6 +77,10 @@ subport octave-devel-release {
     # see http://savannah.gnu.org/bugs/?41178
     patchfiles-append \
         octave-clang-classdef.patch
+
+    # see http://savannah.gnu.org/bugs/?func=detailitem&item_id=46592
+    patchfiles-append \
+        patch-e870a68742a6.diff
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
@@ -119,6 +129,10 @@ patchfiles-append   \
 # see http://git.savannah.gnu.org/cgit/gnulib.git/commit/lib/stdio.in.h?id=d6176702c3ffb6c56e6620397470e1b3bd540b10
 patchfiles-append   \
     patch-stdio.in.h.diff
+
+# force "${prefix}/bin/octave-${version} --no-gui-libs" to call octave-cli-${version} instead of octave-cli
+patchfiles-append   \
+    patch-append_version_cli.diff
 
 pre-patch {
     # code located in pre-patch because variants from PortGroup compilers must
@@ -225,6 +239,10 @@ compilers.setup     \
     -clang35        \
     -clang34        \
     -clang33
+
+# help prevent conflicts with various octave ports
+configure.args-append \
+    --infodir=${prefix}/share/info/octave_${version}
 
 # offscreen rendering with OpenGL via osmesa would be nice to have, but the following
 #    causes a segmentation fault:
@@ -413,7 +431,7 @@ default_variants-append +qt4gui
 variant fltk description {enable fltk as a graphics toolkit for plotting} {
     depends_lib-append path:lib/libfltk.dylib:fltk
 
-    # as of version 4.1.0 revision 0:
+    # as of version 4.1.0+ revision 0:
     #    without fltk, configure script turns off "native_graphics," and
     #       does not look for either freetype or gl2ps
     #    it still looks for and links against fontconfig, however
@@ -468,12 +486,14 @@ variant app description {} {
         xinstall -d -p -m 0755 ${worksrcpath}/${appName}/Contents/MacOS
 
         set script [open "${worksrcpath}/${appName}/Contents/MacOS/Octave" w 0755]
-        puts ${script} "#!/bin/sh"
-        puts ${script} ""
         if { [variant_isset qt4gui] } {
+            puts ${script} "#!/bin/sh"
+            puts ${script} ""
             puts ${script} "${prefix}/bin/octave-${version} --force-gui"
         } else {
-            puts ${script} "/usr/bin/osascript -e 'tell application \"Terminal\" to do script \"${prefix}/bin/octave-${version}  --no-gui-libs; exit\"'"
+            puts ${script} "#!/usr/bin/osascript"
+            puts ${script} ""
+            puts ${script} "tell application \"Terminal\" to do script \"${prefix}/bin/octave-${version} --no-gui-libs; exit\""
         }
         close ${script}
 
@@ -497,7 +517,7 @@ variant app description {} {
         # have Info.plist be human readable
         system "/usr/bin/plutil -convert xml1 ${worksrcpath}/${appName}/Contents/Info.plist"
 
-        # conversion by plutil set verys limited permission
+        # conversion by plutil set verys limited permissions
         system "/bin/chmod 0644 ${worksrcpath}/${appName}/Contents/Info.plist"
 
         xinstall -d -m 0755 ${worksrcpath}/Octave.iconset
@@ -581,16 +601,8 @@ post-destroot {
         # delete since just a link to versioned name
         file delete ${destroot}${prefix}/bin/${bin}
 
-        # put version number in man file
+        # put version number in man file to avoid conflict
         move ${destroot}${prefix}/share/man/man1/${bin}.1 ${destroot}${prefix}/share/man/man1/${bin}-${version}.1
-    }
-
-    # put version nubmer in info files
-    foreach name {liboctave octave} {
-        move ${destroot}${prefix}/share/info/${name}.info  ${destroot}${prefix}/share/info/${name}-${version}.info
-    }
-    foreach suffix {1 2 3 4 5 6 7 8 9} {
-        move ${destroot}${prefix}/share/info/octave.info-${suffix}  ${destroot}${prefix}/share/info/octave-${version}.info-${suffix}
     }
 
     # put any startup commands in ${destroot}${prefix}/share/octave/${version}/m/startup/octaverc

@@ -97,24 +97,24 @@ switch ${subport_branch} {
     }
     5.5 {
         epoch           2
-        version         5.5.30
+        version         5.5.31
         use_xz          yes
-        checksums       rmd160  4da82b68d8f5a3e6abe0fe60bb8314c402170083 \
-                        sha256  d00dc06fa5e0f3de048fb0cf940b3cc59b43b3f8cad825d4fffb35503cf2e8f2
+        checksums       rmd160  90fff0dc3f7b44a5e8825bfa76571d37b69fe3ff \
+                        sha256  a9ac5b94fcc3811b661a090dddd716f81e43947240b35e6a0123e609a135ac54
     }
     5.6 {
         epoch           2
-        version         5.6.16
+        version         5.6.17
         use_xz          yes
-        checksums       rmd160  1da892a5a935c49b423c6d2190c658e3e9c99a3f \
-                        sha256  8ef43271d9bd8cc8f8d407d3ba569de9fa14a28985ae97c76085bb50d597de98
+        checksums       rmd160  87caf3fa68cd0f80dd27e098377eef154f3123d3 \
+                        sha256  ea9d5749380c7c7171e131616466deacd7cb124b5010eafc34e551b0a7b0fb2c
     }
     7.0 {
         epoch           2
-        version         7.0.1
+        version         7.0.2
         use_xz          yes
-        checksums       rmd160  e7907bcc986e47212605356bd33b59a3d835be5f \
-                        sha256  84fcb8b9c61f70db802d3b6636c6ba602470a375e593375c0c744483aa0c0357
+        checksums       rmd160  0a3c38ef09921118642839e2cdfed849589e1594 \
+                        sha256  556121271a34c442b48e3d7fa3d3bbb4413d91897abbb92aaeced4a7df5f2ab2
     }
     7.1 {
         # When this becomes a stable version, remove the overrides for homepage,
@@ -1075,63 +1075,70 @@ subport ${php}-postgresql {
     
     long_description        ${description}
     
-    variant postgresql82 conflicts postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 description {Use PostgreSQL 8.2 libraries} {
+    variant postgresql82 conflicts postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 postgresql95 description {Use PostgreSQL 8.2 libraries} {
         depends_lib-append      port:postgresql82
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql82/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql82/bin
     }
     
-    variant postgresql83 conflicts postgresql82 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 description {Use PostgreSQL 8.3 libraries} {
+    variant postgresql83 conflicts postgresql82 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 postgresql95 description {Use PostgreSQL 8.3 libraries} {
         depends_lib-append      port:postgresql83
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql83/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql83/bin
     }
     
-    variant postgresql84 conflicts postgresql82 postgresql83 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 description {Use PostgreSQL 8.4 libraries} {
+    variant postgresql84 conflicts postgresql82 postgresql83 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 postgresql95 description {Use PostgreSQL 8.4 libraries} {
         depends_lib-append      port:postgresql84
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql84/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql84/bin
     }
     
-    variant postgresql90 conflicts postgresql82 postgresql83 postgresql84 postgresql91 postgresql92 postgresql93 postgresql94 description {Use PostgreSQL 9.0 libraries} {
+    variant postgresql90 conflicts postgresql82 postgresql83 postgresql84 postgresql91 postgresql92 postgresql93 postgresql94 postgresql95 description {Use PostgreSQL 9.0 libraries} {
         depends_lib-append      port:postgresql90
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql90/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql90/bin
     }
     
-    variant postgresql91 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql92 postgresql93 postgresql94 description {Use PostgreSQL 9.1 libraries} {
+    variant postgresql91 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql92 postgresql93 postgresql94 postgresql95 description {Use PostgreSQL 9.1 libraries} {
         depends_lib-append      port:postgresql91
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql91/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql91/bin
     }
     
-    variant postgresql92 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql93 postgresql94 description {Use PostgreSQL 9.2 libraries} {
+    variant postgresql92 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql93 postgresql94 postgresql95 description {Use PostgreSQL 9.2 libraries} {
         depends_lib-append      port:postgresql92
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql92/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql92/bin
     }
     
-    variant postgresql93 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql94 description {Use PostgreSQL 9.3 libraries} {
+    variant postgresql93 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql94 postgresql95 description {Use PostgreSQL 9.3 libraries} {
         depends_lib-append      port:postgresql93
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql93/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql93/bin
     }
     
-    variant postgresql94 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 description {Use PostgreSQL 9.4 libraries} {
+    variant postgresql94 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 postgresql95 description {Use PostgreSQL 9.4 libraries} {
         depends_lib-append      port:postgresql94
         
         configure.args-append   --with-pgsql=${prefix}/lib/postgresql94/bin \
                                 --with-pdo-pgsql=${prefix}/lib/postgresql94/bin
     }
     
-    if {![variant_isset postgresql82] && ![variant_isset postgresql83] && ![variant_isset postgresql84] && ![variant_isset postgresql90] && ![variant_isset postgresql91] && ![variant_isset postgresql92] && ![variant_isset postgresql93] && ![variant_isset postgresql94]} {
+    variant postgresql95 conflicts postgresql82 postgresql83 postgresql84 postgresql90 postgresql91 postgresql92 postgresql93 postgresql94 description {Use PostgreSQL 9.5 libraries} {
+        depends_lib-append      port:postgresql95
+        
+        configure.args-append   --with-pgsql=${prefix}/lib/postgresql95/bin \
+                                --with-pdo-pgsql=${prefix}/lib/postgresql95/bin
+    }
+    
+    if {![variant_isset postgresql82] && ![variant_isset postgresql83] && ![variant_isset postgresql84] && ![variant_isset postgresql90] && ![variant_isset postgresql91] && ![variant_isset postgresql92] && ![variant_isset postgresql93] && ![variant_isset postgresql94] && ![variant_isset postgresql95]} {
         default_variants +postgresql94
     }
 }

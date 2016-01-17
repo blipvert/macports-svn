@@ -7,8 +7,8 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gimp2-devel
 conflicts           gimp2 gimp3-devel
 set git_name        gimp
-set git_commit      edff1d0647f2f915f47efa471a88f62ed3d01579
-set git_date        20151216
+set git_commit      86cbc2f7a7fbfbcc248aab4acac5d59d68a70cdd
+set git_date        20160110
 version             2.9.3-${git_date}
 license             GPL-3+
 categories          graphics
@@ -28,8 +28,8 @@ master_sites        https://git.gnome.org/browse/${git_name}/snapshot/
 
 distname            ${git_name}-${git_commit}
 
-checksums           rmd160  c791d92a557bedae42ae9eb97be74d64fa6649e9 \
-                    sha256  a6c50583377d0cd4358b2f33128def4d2ae8c65af854c4724c9c901d9b8078b4
+checksums           rmd160  203cfded36a6b6d4b3124179ffd662228e5aaf3d \
+                    sha256  f7316e4cc710de36c7875d8b969ba55fba6ed6751f37fbc779f30387aa17dec1
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -61,6 +61,7 @@ depends_lib         port:desktop-file-utils \
                     port:curl \
                     port:libwmf \
                     port:jasper \
+                    path:lib/pkgconfig/libmypaint.pc:MyPaint-devel \
                     port:lcms2 \
                     port:dbus-glib \
                     port:libxml2 \
@@ -71,7 +72,9 @@ depends_lib         port:desktop-file-utils \
                     port:xorg-libXfixes
 
 # gcc-4.2 5493 and 5666.3_13: gimpcpuaccel.c:180: error: can't find a register in class 'BREG' while reloading 'asm'
-compiler.blacklist-append gcc-3.3 gcc-4.0 gcc-4.2 apple-gcc-4.2
+# redefinition of typedef is invalid in C [-Wtypedef-redefinition] (#50329)
+
+compiler.blacklist *gcc* {clang < 300}
 
 patchfiles          patch-etc-gimprc.diff
 

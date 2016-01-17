@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.16 5.18 5.20 5.22
+perl5.branches      5.22
 perl5.setup         MogileFS-Server 2.72
 license             {Artistic-1 GPL}
 categories          perl net sysutils
@@ -15,6 +15,7 @@ description         MogileFS (distributed filesystem) server
 long_description    ${description}
 
 homepage            https://code.google.com/p/mogilefs/
+#                   http://www.mogilefs.org, http://danga.com/mogilefs/, https://github.com/mogilefs/
 
 checksums           rmd160  1a274d9262b3b1c38df694d522ca7e6d3c07caa0 \
                     sha256  d7d5a45d50127bf62e451c6d86eb247103b01c46662898ae4e18daa08be8e0bf

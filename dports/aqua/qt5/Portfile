@@ -18,7 +18,19 @@ license             {LGPL-2.1 GPL-3}
 
 homepage            http://qt.io
 
+if { ${version} eq "5.5.1" && ${subport} eq "qt5-qtimageformats" } {
+    incr revision 2
+}
+
 if { ${version} eq "5.5.1" && ${subport} eq "qt5-qtwebengine" } {
+    incr revision 1
+}
+
+if { ${version} eq "5.5.1" && ${subport} eq "qt5-qtwebkit" } {
+    incr revision 1
+}
+
+if { ${version} eq "5.5.1" && ${subport} eq "qt5-qtbase" } {
     incr revision 1
 }
 
@@ -179,7 +191,7 @@ array set modules {
     qtdeclarative {
         1d8939c42f4b510443365479ffe8bc525e0faac6
         5fd14eefb83fff36fb17681693a70868f6aaf6138603d799c16466a094b26791
-        ""
+        "port:python27"
         ""
         "qtbase qtxmlpatterns"
         {"Qt QML" "Qt Quick" "Qt Quick Widgets"}
@@ -339,7 +351,7 @@ array set modules {
     qtwebengine {
         0c24bb89cc72a18c06e2fd613db1eb879ada2a2a
         7c4d328dd305991aaf0c3450615f4a8e5d80152194bee6f5925bd8d3477e2b90
-        ""
+        "port:python27"
         ""
         "qtbase qtdeclarative qtxmlpatterns qtquickcontrols qtwebchannel qtlocation"
         {"Qt WebEngine" "Qt WebEngine Widgets"}
@@ -369,7 +381,7 @@ array set modules {
     qtwebkit {
         0594ec1150f7899d72f57d8ff2f108f3f75faaf9
         77583f9dbd3e6ad874386df71b165dc3ce88efdabbc6e5d97a959ee2187d6d69
-        ""
+        "port:python27"
         "port:fontconfig port:icu port:leveldb port:webp port:libxml2 port:libxslt port:zlib port:sqlite3"
         "qtbase qtxmlpatterns qtdeclarative qtlocation qtmultimedia qtsensors qtwebchannel"
         {"Qt WebKit" "Qt WebKit Widgets"}
@@ -670,8 +682,9 @@ if { ${subport} eq ${name} } {
         #
         # versions 5.5.1 of qtdeclarative and qtwebkit also use python with no way of specifying which one
         #
-        configure.env-append PATH="/bin:/sbin:/usr/bin:/usr/sbin:${prefix}/bin:${prefix}/sbin"
-        build.env-append     PATH="/bin:/sbin:/usr/bin:/usr/sbin:${prefix}/bin:${prefix}/sbin"
+        set python_framework ${frameworks_dir}/Python.framework/Versions/2.7
+        configure.env-append PATH=${python_framework}/bin:$env(PATH)
+        build.env-append     PATH=${python_framework}/bin:$env(PATH)
     }
 
     # detremint which variants are to be turned off
@@ -757,7 +770,27 @@ if { ${subport} eq ${name} } {
         }
     }
 
+    if { ${version} eq "5.5.1" } {
+        incr revision 1
+    }
     PortGroup           qmake5 1.0
+
+    # special case
+    if { ${subport} eq "${name}-qtwebkit" } {
+        PortGroup cxx11 1.0
+
+        # in ${worksrcdir}/Source/JavaScriptCore/API/JSBase.h, JSC_OBJC_API_ENABLED is set to FALSE for __MAC_OS_X_VERSION_MIN_REQUIRED < 1090
+        # the default for Qt is to set -mmacosx-version-min=10.7, so JSC_OBJC_API_ENABLED is expected to be FALSE
+        # if QMAKE_MACOSX_DEPLOYMENT_TARGET is changed, then JSC_OBJC_API_ENABLED is TRUE and
+        # ${worksrcdir}/Source/JavaScriptCore/API/ObjCCallbackFunction.h attempts to find JavaScriptCore/JSCallbackFunction.h, which it can not
+        configure.args-delete QMAKE_MACOSX_DEPLOYMENT_TARGET=${macosx_deployment_target}
+
+        # -mmacosx-version-min=10.7 sets the stdlib to libstdc++ unless -stdlib=libc++ is set
+        # QMAKE_CXXFLAGS+=-stdlib=${configure.cxx_stdlib} is insufficient since order of switches matters
+        configure.args-delete \
+            QMAKE_CXXFLAGS_CXX11-=-stdlib=libc++ \
+            QMAKE_LFLAGS_CXX11-=-stdlib=libc++
+    }
 
     # accommodating variant request varies depending on how qtbase was built
     pre-configure {
@@ -823,6 +856,7 @@ if { ${subport} eq ${name} } {
 
     # special case
     if { ${subport} ne "${name}-docs" } {
+
         # https://codereview.qt-project.org/#/c/141654/
         patchfiles-append patch-add_sdk.diff
 
@@ -841,6 +875,64 @@ if { ${subport} eq ${name} } {
 
         #https://codereview.qt-project.org/#/c/138349
         patchfiles-append patch-rpath.diff
+
+        #-----------------------------------------------------------------------------
+        # qtbase is used for:
+        #    1) building qtbase
+        #    2) building MacPorts projects via qmake
+        #    3) building end-user projects
+        #
+        # 1 & 2 require consistency with the MacPorts environment
+        # 3 requires consistency with the default Qt installation
+        #
+        # 2 can be achieved via environment variables
+        #    (e.g. QMAKE_MACOSX_DEPLOYMENT_TARGET=${macosx_deployment_target})
+        #
+        # the only way 3 can be achieved is if no changes are made to the build system
+        #
+        # the following is an attempt to achieve 1 without destroying 3
+        #-----------------------------------------------------------------------------
+
+        # save default spec files
+        post-extract {
+            copy ${worksrcpath}/mkspecs ${worksrcpath}/mkspecs-save
+        }
+
+        # change default compiler flags for the purpose of building qtbase
+        patchfiles-append patch-mkspecs.diff
+        post-patch {
+            global qt_save_cxx_stdlib
+
+            reinplace \
+                "s|__MACPORTS__CXX_STDLIB__|${qt_save_cxx_stdlib}|g" \
+                ${worksrcpath}/mkspecs/common/clang-mac.conf
+
+            foreach spec {macx-clang macx-clang-32} {
+                reinplace \
+                    "s|__MACPORTS_DEPLOYMENT_TARGET__|${macosx_deployment_target}|g" \
+                    ${worksrcpath}/mkspecs/${spec}/qmake.conf
+            }
+        }
+
+        # return modified spec files to the default values
+        post-build {
+            if { [variant_exists universal] && [variant_isset universal] } {
+                foreach arch ${universal_archs_to_use} {
+                    move -force ${worksrcpath}-${arch}/mkspecs-save/common/clang-mac.conf ${worksrcpath}-${arch}/mkspecs/common/clang-mac.conf
+
+                    foreach spec {macx-clang macx-clang-32} {
+                        move -force ${worksrcpath}-${arch}/mkspecs-save/${spec}/qmake.conf ${worksrcpath}-${arch}/mkspecs/${spec}/qmake.conf
+                    }
+                }
+            } else {
+                move -force ${worksrcpath}/mkspecs-save/common/clang-mac.conf ${worksrcpath}/mkspecs/common/clang-mac.conf
+
+                foreach spec {macx-clang macx-clang-32} {
+                    move -force ${worksrcpath}/mkspecs-save/${spec}/qmake.conf ${worksrcpath}/mkspecs/${spec}/qmake.conf
+                }
+            }
+        }
+        #-----------------------------------------------------------------------------
     }
 
     if { [variant_isset tests] } {
@@ -991,6 +1083,10 @@ if { ${subport} eq ${name} } {
     # Qt builds part of the system using environment provided my MacPorts.
     # It builds the rest using its own internal environment.
     # For consistency, clear MacPorts environment.
+
+    # configure.cxx_stdlib value is needed later in a post-patch
+    set qt_save_cxx_stdlib ${configure.cxx_stdlib}
+
     configure.cxx_stdlib
     configure.sdkroot
     configure.cc_archflags

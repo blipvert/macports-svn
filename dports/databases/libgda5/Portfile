@@ -3,11 +3,12 @@
 
 PortSystem          1.0
 PortGroup           gobject_introspection 1.0
+PortGroup           active_variants 1.1
 
 name                libgda5
 set gname           libgda
 version             5.2.4
-revision            3
+revision            5
 license             {GPL-2 LGPL}
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GDA provides uniform access to different kinds of data sources.
@@ -39,7 +40,7 @@ depends_build       port:pkgconfig \
 depends_lib         port:desktop-file-utils \
                     port:readline \
                     port:gtk3 \
-                    port:gtksourceview3 \
+                    path:bin/dot:graphviz \
                     port:goocanvas2 \
                     port:iso-codes \
                     port:libsecret \
@@ -49,8 +50,7 @@ depends_lib         port:desktop-file-utils \
                     port:libxslt \
                     port:ncurses
 
-depends_run         port:gnome-themes-standard \
-                    port:yelp
+depends_run         port:gnome-themes-standard
 
 gobject_introspection yes
 
@@ -74,7 +74,8 @@ configure.args      --enable-system-sqlite=no \
                     --enable-gda-gi=yes \
                     --enable-gdaui-gi=yes \
                     --disable-silent-rules \
-                    --without-graphviz \
+                    --with-graphviz \
+                    --without-gtksourceview \
                     --with-ldap=no \
                     --with-bdb=no \
                     --with-mdb=no \
@@ -153,7 +154,7 @@ if {![variant_isset postgresql90] && \
     default_variants +postgresql94
 }
 
-variant db47 conflicts db48 db51 db53 db60  \
+variant db47 conflicts db48 db53 db60  \
     description {support for Berkeley DB 4.7.x} {
     set db_version 47
     depends_lib-append  port:db${db_version}
@@ -163,7 +164,7 @@ variant db47 conflicts db48 db51 db53 db60  \
                             --with-bdb-libdir-name=lib/db${db_version}
 }
 
-variant db48 conflicts db47 db51 db53 db60 \
+variant db48 conflicts db47 db53 db60 \
     description {support for Berkeley DB 4.8.x} {
     set db_version 48
     depends_lib-append  port:db${db_version}
@@ -173,17 +174,7 @@ variant db48 conflicts db47 db51 db53 db60 \
                             --with-bdb-libdir-name=lib/db${db_version}
 }
 
-variant db51 conflicts db47 db48 db53 db60 \
-    description {support for Berkeley DB 5.1.x} {
-    set db_version 51
-    depends_lib-append  port:db${db_version}
-    configure.cppflags-append "-I${prefix}/include/db${db_version}"
-    configure.args-delete   --with-bdb=no
-    configure.args-append   --with-bdb=${prefix} \
-                            --with-bdb-libdir-name=lib/db${db_version}
-}
-
-variant db53 conflicts db47 db48 db51 db60 \
+variant db53 conflicts db47 db48 db60 \
     description {support for Berkeley DB 5.3.x} {
     set db_version 53
     depends_lib-append  port:db${db_version}
@@ -193,7 +184,7 @@ variant db53 conflicts db47 db48 db51 db60 \
                             --with-bdb-libdir-name=lib/db${db_version}
 }
 
-variant db60 conflicts db47 db48 db51 db53 \
+variant db60 conflicts db47 db48 db53 \
     description {support for Berkeley DB 6.0.x} {
     set db_version 60
     depends_lib-append  port:db${db_version}
@@ -205,9 +196,18 @@ variant db60 conflicts db47 db48 db51 db53 \
 
 if {![variant_isset db47] && \
     ![variant_isset db48] && \
-    ![variant_isset db51] && \
     ![variant_isset db53]} {
     default_variants +db60
+}
+
+variant quartz {}
+
+if {[variant_isset quartz]} {
+    require_active_variants gtk3 quartz
+} else {
+    require_active_variants gtk3 x11
+    depends_run-append      port:gnome-keyring \
+                            port:yelp
 }
 
 post-activate {

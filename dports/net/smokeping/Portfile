@@ -2,12 +2,10 @@
 # $Id$
 
 PortSystem          1.0
-
 PortGroup           perl5 1.0
 
 name                smokeping
-version             2.6.8
-revision            1
+version             2.6.11
 license             GPL-2+
 categories          net perl
 maintainers         nomaintainer
@@ -23,8 +21,8 @@ platforms           darwin
 homepage            http://oss.oetiker.ch/smokeping/
 master_sites        http://oss.oetiker.ch/smokeping/pub/
 
-checksums           rmd160  4a81dfbceee93f917d77698a9b73f6133eb21ffa \
-                    sha256  15fd99487d01649a552d2954bc1c6b0442967a72fca51c8ff197447389b1b16c
+checksums           rmd160  80722b7b30fa6ce589cc330fe8c657fc85cebc69 \
+                    sha256  f2b3c386e95a74af2b1e7aec6410d0a58852339f00e9963f3c770cfd85ba30dd
 
 patchfiles          patch-etc-config.dist.diff \
                     patch-bin-smokeping.diff \
@@ -32,23 +30,25 @@ patchfiles          patch-etc-config.dist.diff \
                     patch-bin-smokeinfo.diff \
                     patch-bin-smokeping_cgi.diff
 
-set perl_version    5.16
-perl5.branches      ${perl_version}
-configure.perl      ${prefix}/bin/perl${perl_version}
+perl5.branches      5.22
 
-depends_lib-append  port:perl${perl_version} \
-                    port:p${perl_version}-fcgi \
-                    port:p${perl_version}-libwww-perl \
-                    port:p${perl_version}-socket6 \
-                    port:p${perl_version}-net-snmp \
-                    port:p${perl_version}-net-telnet \
-                    port:p${perl_version}-net-dns \
-                    port:p${perl_version}-net-radius \
-                    port:p${perl_version}-perl-ldap \
-                    port:p${perl_version}-io-socket-ssl \
-                    port:p${perl_version}-pathtools \
-                    port:p${perl_version}-snmp_session \
-                    port:p${perl_version}-config-grammar \
+depends_lib-append  port:perl${perl5.major} \
+                    port:p${perl5.major}-cgi \
+                    port:p${perl5.major}-cgi-fast \
+                    port:p${perl5.major}-fcgi \
+                    port:p${perl5.major}-libwww-perl \
+                    port:p${perl5.major}-socket6 \
+                    port:p${perl5.major}-net-snmp \
+                    port:p${perl5.major}-net-telnet \
+                    port:p${perl5.major}-net-dns \
+                    port:p${perl5.major}-net-openssh \
+                    port:p${perl5.major}-net-radius \
+                    port:p${perl5.major}-perl-ldap \
+                    port:p${perl5.major}-io-socket-ssl \
+                    port:p${perl5.major}-io-tty \
+                    port:p${perl5.major}-pathtools \
+                    port:p${perl5.major}-snmp_session \
+                    port:p${perl5.major}-config-grammar \
                     port:mod_fastcgi \
                     port:apache2 \
                     port:rrdtool \
@@ -93,6 +93,12 @@ post-patch {
     reinplace "s|/usr/share/smokeping/etc|${smokeetc}|g" \
         ${worksrcpath}/lib/Smokeping/probes/passwordchecker.pm
 }
+
+configure.perl      ${perl5.bin}
+# configure.env-append PERL5LIB=${perl5.lib}
+
+# TODO: smokeping violates the layout of the ports-filesystems!
+# configure.args-append --with-htdocs-dir=${prefix}/apache2/htdocs/smokeping
 
 post-destroot {
 

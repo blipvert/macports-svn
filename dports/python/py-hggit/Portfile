@@ -28,19 +28,19 @@ long_description        This is the Hg-Git plugin for Mercurial, adding the abil
 subport py27-$realname-devel {}
 
 if {[string match "*-devel" $subport]} {
-    bitbucket.setup     durin42 hg-git e7316a108780
+    bitbucket.setup     durin42 hg-git d07933271233
     name                py-$realname-devel
     version             0.8.99
-    revision            12
+    revision            13
 
-    checksums           rmd160  8a30cc4cef8ea4712fff3176399e3d1ae6f5d4ba \
-                        sha256  a173a9f2ee2bf9011a7886218203a0d20501138bca8c62570a18737edf8c462b
+    checksums           rmd160  00a2b04477fc6645606994587e6f654d970979d1 \
+                        sha256  a8b06e529cdfd251ae3053aa7a57f453665004c6713fcfd0083b3e77b59a6418
 } else {
-    bitbucket.setup     durin42 hg-git 0.8.3
+    bitbucket.setup     durin42 hg-git 0.8.4
     name                py-${realname}
 
-    checksums           rmd160  de0d6370d60a28692dd2f5ab1e1d4c96283d69f7 \
-                        sha256  849cca89b5a59b608a340b38481d7407e95de16fe4f135881a402ca67fecd02a
+    checksums           rmd160  343ce6ddbb9d1ef754a34e480c984e7fccd435d2 \
+                        sha256  ab4dd919a5931868ca86ec50fef88902b8857a3b0c4933d7b4e817c414a6d910
 }
 
 python.versions         27

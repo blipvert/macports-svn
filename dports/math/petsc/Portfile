@@ -6,6 +6,7 @@ PortGroup           bitbucket 1.0
 PortGroup           mpi 1.0
 
 bitbucket.setup     petsc petsc 3.6.3 v
+revision            1
 categories          math science
 maintainers         sean
 license             BSD
@@ -30,8 +31,8 @@ depends_build-append \
                     port:c2html
 
 post-extract {
-    # superlu 4.1 works with 3.6.1, can remove this after next update
-    reinplace "s,4\.1,4.2,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU_DIST.py
+    # superlu 4.3 works with 3.6.1, can remove this after next update
+    reinplace "s,4\.1,4.3,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU_DIST.py
     reinplace "s,5\.0,5.1,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU.py
 }
 
@@ -65,14 +66,14 @@ pre-configure {
 }
 
 subport petsc-devel {
-    bitbucket.setup     petsc petsc 8fe480cde362
+    bitbucket.setup     petsc petsc 8591b927c43c
     bitbucket.livecheck master
     version             3.6.99
-    revision            12
+    revision            13
     name                petsc-devel
 
-    checksums           rmd160  3e552a9a9d22e23977323403ad63bc28f2ec9858 \
-                        sha256  4133d72c538892e21da00f9f97369fee4612ca69220e03f8492075ba28b04fe3
+    checksums           rmd160  470c1ca0ec60c52e019b0462bb9fe8318b81aa70 \
+                        sha256  a1579bdbf4bd5272c8d9143c5f27f313e8eaebdd5442b226af73d9eac56ae79c
 }
 
 notes               "Add the following line to your .bash_profile if you plan to use\
@@ -194,6 +195,12 @@ variant valgrind description {Build with valgrind support} {
     depends_lib-append    port:valgrind
     configure.args-delete --with-valgrind=0
     configure.args-append --with-valgrind-dir=${prefix}
+}
+
+variant sprng description {Build with SPRNG interface for a sparse random number generator} {
+    depends_lib-append    port:sprng
+    configure.args-append --with-sprng-dir=${prefix}
+    mpi.enforce_variant   sprng
 }
 
 variant debug description {Build with debug support} {

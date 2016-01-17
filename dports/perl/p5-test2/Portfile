@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.16 5.18 5.20 5.22
-perl5.setup         Test2 0.000012 ../by-authors/id/E/EX/EXODIST
+perl5.branches      5.22
+perl5.setup         Test2 0.000020 ../by-authors/id/E/EX/EXODIST
 license             {Artistic-1 GPL}
 maintainers         devans openmaintainer
 description         Test2 - Framework for writing test tools that all work together. (EXPERIMENTAL)
@@ -13,8 +13,8 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  70c5cbd31c5adf4d8446c06c18f048ed5d604d9f \
-                    sha256  990befc5586db3e0a4890f70e4ba2895ca71daad0318176d93c8283f90614f74
+checksums           rmd160  3ada92fea9126e86e71c8fac92930b1afd68b5a0 \
+                    sha256  8945fe7c1eac2e95657fba97d5d6f3cbafeaae506106126381780370e7faf56a
 
 if {${perl5.major} != ""} {
     depends_lib-append \

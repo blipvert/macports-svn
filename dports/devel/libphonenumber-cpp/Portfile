@@ -3,12 +3,11 @@
 
 PortSystem          1.0
 PortGroup           cmake 1.0
-PortGroup           conflicts_build 1.0
 PortGroup           github 1.0
 
 cmake.out_of_source yes
 
-github.setup        googlei18n libphonenumber 7.2.2 libphonenumber-
+github.setup        googlei18n libphonenumber 7.2.3 libphonenumber-
 
 name                libphonenumber-cpp
 license             Apache-2
@@ -19,8 +18,8 @@ maintainers         devans openmaintainer
 categories          devel
 platforms           darwin
 
-checksums           rmd160  98c0839c617f0af671bc7f3f581d29307dbdd103 \
-                    sha256  28c56c61ba516ba144edc48aed7f63a209b542184fb24b4ba052b749bdca9231
+checksums           rmd160  d16b7817add1b36ce7a0966cd5997ee0e807efd4 \
+                    sha256  0baab7f2ee3d94fb0e9302babfb00f8e7d1f660dc0fb873c0a0e699aa961989e
 
 worksrcdir          ${worksrcdir}/cpp
 
@@ -43,8 +42,6 @@ depends_build-append \
 depends_lib-append  port:boost \
                     port:icu \
                     port:protobuf-cpp
-
-conflicts_build     ${name}
 
 configure.args-append \
                     -DGTEST_SOURCE_DIR=${gtest_srcdir} \
