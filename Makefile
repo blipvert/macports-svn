@@ -18,10 +18,9 @@ install: all
 selfupdate:: install index
 
 index::
-	@(cd dports && portindex -o ${HOME}/.macports${CURDIR}/dports)
-	@for f in PortIndex PortIndex.quick; do \
-		[ -f dports/$$f ] || \
-		ln -sf ${HOME}/.macports${CURDIR}/dports/$$f dports/$$f; done
+	@mkdir -p ${HOME}/.macports${CURDIR}/dports
+	(cd dports && portindex && \
+		cp PortIndex PortIndex.quick ${HOME}/.macports${CURDIR}/dports)
 
 clean:
 	@(cd base && ([ ! -f Makefile ] || ${MAKE} clean))
