@@ -1,0 +1,37 @@
+# $Id: Portfile 114324 2013-12-05 08:44:51Z ryandesign@macports.org $
+
+PortSystem          1.0
+PortGroup python    1.0
+PortGroup github    1.0
+
+name                py-pyinstaller
+version             3.1
+revision            1	
+
+github.setup        pyinstaller PyInstaller ${version} v
+github.tarball_from releases
+
+checksums           rmd160  8d0659ac74a81b634f0712a64ff28db71a3450e4 \
+                    sha256  5a28c3bb9d23ea644f9dc9e561e66471b83258d44063bcb108dfbbfe4af3c02b
+
+platforms           darwin
+supported_archs     noarch
+maintainers         openmaintainer adfernandes
+description         converts (packages) Python programs into stand-alone executables
+long_description    ${description} - note that there is a GPL license exception that allows PyInstaller to build and distribute non-free programs, including commercial ones
+license             GPL
+
+homepage            http://www.pyinstaller.org/
+
+python.versions     27 33 34 35
+
+if {${name} ne ${subport}} {
+
+    depends_build       port:py${python.version}-setuptools
+    livecheck.type      none
+
+} else {
+    livecheck.type      regex
+    livecheck.url       ${homepage}
+    livecheck.regex     "The latest stable release of PyInstaller is (\\d+(?:\\.\\d+)*)"
+}

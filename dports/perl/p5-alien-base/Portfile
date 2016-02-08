@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22
-perl5.setup         Alien-Base 0.024
+perl5.setup         Alien-Base 0.027
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Alien::Base - Base classes for Alien:: modules
@@ -13,8 +13,8 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  d15aca5ca262322ce5813cd401277adb5c3f7857 \
-                    sha256  d754bd238453e8f62bebfad5eef78e120079ce098fd22b1d2532bf812fd50413
+checksums           rmd160  e31b4e6fd714f52a85232eb8b781286b0b2029b3 \
+                    sha256  af07931c7fea149a1fc931d73f8c8da90f8e65491aa9736340ff2fe6993a4d33
 
 if {${perl5.major} != ""} {
     depends_lib-append \

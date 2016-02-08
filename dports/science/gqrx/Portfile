@@ -19,10 +19,10 @@ dist_subdir         gqrx
 
 if {${subport} eq ${name}} {
 
-    github.setup    csete gqrx 2.5.1 v   
+    github.setup    csete gqrx 2.5.2 v   
     checksums       \
-        rmd160 0bfa0aa6a9e1d1348daf0cbf7e4f87faafd2c8cc \
-        sha256 2214f2631b91f2c307ccab3c7d55b694fe1cd8a941dc8271bcf38234ab60fb05
+        rmd160 d646f2f3d51be02746e27820ff0101f4b04a8b9b \
+        sha256 9b6622d3ffe859f9547934de6ddfa98ca81acecf46f387f5c1be6b7d346502b4
 
     patchfiles-append   patch-gqrx.pro.release.diff
 
@@ -37,10 +37,10 @@ provides the release version, which is typically updated every month or so.
 
 subport gqrx-devel {
 
-    github.setup        csete gqrx 7e4a45a7e160b80b4dfefa2a705ebcdfd4fad295
-    version             20160113
-    checksums           rmd160 6d5673644b29c62d767c8cb51c1374b1498e18f9 \
-                        sha256 1125c339a264606953b33f5c8984f5ec44cf6f82ba7523952a8fc2ee06cea64f
+    github.setup        csete gqrx d8f989235d46da839cfff3f9067d01b1d5398886
+    version             20160129
+    checksums           rmd160 12d2683d950ffa2416ec2146c058b191fcf8ca78 \
+                        sha256 849262508d9baa56b2040bb6aa9215a40029dfbddf044355f66bb5fe7ad5d533
 
     patchfiles-append   patch-gqrx.pro.devel.diff
 
@@ -107,9 +107,19 @@ post-patch {
 
     reinplace "s|@APPSDIR@|${qt_apps_dir}|g" ${worksrcpath}/gqrx.pro
 
+    # remove old version setting
+
+    reinplace "s|\[ #\]*VER =.*||g" ${worksrcpath}/gqrx.pro
+
     # set version
 
-    reinplace "s|@VERSION@|${version}|g" ${worksrcpath}/gqrx.pro
+    if {${name} eq ${subport}} {
+        set VERSION_INFO "release-${version}"
+    } else {
+        set VERSION_INFO "git-[string range ${github.version} 0 7](${version})"
+    }
+
+    reinplace "s|\$\${VER}|MacPorts-${VERSION_INFO}|g" ${worksrcpath}/gqrx.pro
 
     # set arch type(s)
 

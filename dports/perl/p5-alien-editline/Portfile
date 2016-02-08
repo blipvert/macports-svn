@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22
-perl5.setup         Alien-Editline 0.04
+perl5.setup         Alien-Editline 0.06
 license             {Artistic-1 GPL}
 maintainers         devans openmaintainer
 description         Make available Editline (libedit)
@@ -13,12 +13,17 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  6307e3a22630b9577e4020272c7fea7fb357f890 \
-                    sha256  c41b641dc5162a359b05295568a2e7f56e8b8ca83ccbee88e2fbaf686420206b
+checksums           rmd160  8143c3068802559cbbe740a166fdeb67a5b8bfac \
+                    sha256  b901b2dc79325f19905399acc103b620efee56b000232c786a9e7ae914380d22
 
 if {${perl5.major} != ""} {
+    depends_build-append \
+                    port:p${perl5.major}-test-alien \
+                    port:p${perl5.major}-test-stream
+
     depends_lib-append \
                     port:p${perl5.major}-alien-base \
+                    port:p${perl5.major}-file-sharedir \
                     port:libedit
 
     supported_archs noarch

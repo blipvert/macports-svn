@@ -8,7 +8,7 @@ PortGroup           wxWidgets 1.0
 name                py-robotframework-ride
 set internal_name   robotframework-ride
 
-version             1.4.1
+version             1.5.2.1
 
 license             Apache-2
 
@@ -26,8 +26,8 @@ python.default_version 27
 master_sites        https://pypi.python.org/packages/source/r/${internal_name}
 distname            ${internal_name}-${version}
 
-checksums           rmd160  36d5293cd25d7acf37b55e2c53c0f0dea606ec73 \
-                    sha256  e280119c511755ec2a0befb09a829700eb358c0584c1108af930fc9486eb432c
+checksums           rmd160  7698d06de28271c1909dcaffb90f08a2b37bcb44 \
+                    sha256  50c929f2629b0e86fc39d45887061df784a4ac9df39ccfcb87660c49897d1862
 
 if {${name} ne ${subport}} {
     build.cmd           ${python.bin} setup.py
@@ -56,7 +56,7 @@ if {${name} ne ${subport}} {
 if {${name} eq ${subport}} {
     livecheck.type      regex
     livecheck.url      https://pypi.python.org/pypi/${internal_name}
-    livecheck.regex     ${internal_name}\&nbsp\;(\[0-9.\]+)\<
+    livecheck.regex     ${internal_name} (\[0-9.\]+)\<
 } else {
     livecheck.type      none
 }

@@ -29,9 +29,9 @@ if {${subport} eq ${name}} {
 
     # release
 
-    version         ${branch}.1
-    checksums       rmd160 b50b982f0f60a0f52c70527691a42cd5718b2ceb \
-                    sha256 d41462bdd80dc37f0d5608167b354bb3af8c068eee640be04c907154c5c113e2
+    version         ${branch}.3
+    checksums       rmd160 4328fe65c290f641ee37c21ddd117bde33533ed8 \
+                    sha256 b73f8c1029611df7ed81796bf5ca8ba0ef41c6761132340c73ffe42704f980fa
 
     long_description ${base_long_description} \
         The ${subport} release port is updated roughly every few months.
@@ -47,12 +47,12 @@ if {${subport} eq ${name}} {
 } else {
 
     # devel
-    version         20160113
+    version         20160201
     set dist_branch 3.4
-    set dist_date   20160113
-    set dist_hash   g0a9d8
-    checksums       rmd160 08b528a4aca5a5dab127888498544653852584fb \
-                    sha256 01a94d127b443fe9d5d2f1b887f57203c4827e1c36d0e6190614dd1507226903
+    set dist_date   20160201
+    set dist_hash   g812d9
+    checksums       rmd160 516cb53c60c21d875bad02db46599a9a4865d885 \
+                    sha256 f5d399a7c13d464befa61d3357280c2a05415741ad2d51cd8caf8369d734505f
 
     master_sites    http://www.cmake.org/files/dev/
     distname        ${name}-${dist_branch}.${dist_date}-${dist_hash}

@@ -8,7 +8,7 @@ PortGroup           muniversal 1.0
 name                OpenBLAS
 categories          math science
 license             BSD
-maintainers         nicos openmaintainer
+maintainers         nicos michaelld openmaintainer
 description         OpenBLAS is an optimized BLAS library based on GotoBLAS2
 long_description    ${description}
 platforms           darwin
@@ -22,12 +22,14 @@ patchfiles          patch-libnoarch.diff \
 
 subport OpenBLAS-devel {}
 if {[string first "-devel" $subport] > 0} {
-    github.setup    xianyi OpenBLAS c6a27bbe64f7
+    github.setup    xianyi OpenBLAS 962376664d6b79d19c91464a30be60fa304fdc44
+    version         20160201
+checksums           rmd160 a4117c403082f7a34aa3f3b966a890bafde0ce90 \
+                    sha256 0f716abea56ff2855cfa44ecfaa1a457e7ade0e3c4d0cb70aa51cf5979c90082
+
     name            ${github.project}-devel
-    version         20160110
     conflicts       OpenBLAS
 
-    fetch.type      git
     livecheck.url   ${github.homepage}/commits/develop.atom
 } else {
     github.setup    xianyi OpenBLAS 0.2.15 v
@@ -64,12 +66,12 @@ variant gcc49 conflicts gcc45 gcc46 gcc47 gcc48 gcc5 gcc6 clang \
 }
 
 variant gcc5 conflicts gcc45 gcc46 gcc47 gcc48 gcc49 gcc6 clang \
-    description "Use Gcc49 as compiler" { 
+    description "Use Gcc5 as compiler" { 
     configure.compiler  macports-gcc-5
 }
 
 variant gcc6 conflicts gcc45 gcc46 gcc47 gcc48 gcc49 gcc5 clang \
-    description "Use Gcc49 as compiler" { 
+    description "Use Gcc6 as compiler" { 
     configure.compiler  macports-gcc-6
 }
 
@@ -80,12 +82,12 @@ variant clang conflicts gcc45 gcc46 gcc47 gcc48 gcc49 gcc5 gcc6 \
     } else {
         # Xcode's clang < 5.0 does not support avx
 
-	#Use a compiler depending on system
-       if {${configure.cxx_stdlib} eq "libc++"} {
-           configure.compiler      macports-clang-3.7
-       } else {
-           configure.compiler      macports-clang-3.4
-       }
+        #Use a compiler depending on system
+        if {${configure.cxx_stdlib} eq "libc++"} {
+            configure.compiler      macports-clang-3.7
+        } else {
+            configure.compiler      macports-clang-3.4
+        }
     }
     depends_build-append    port:gcc5
     configure.fc            ${prefix}/bin/gfortran-mp-5

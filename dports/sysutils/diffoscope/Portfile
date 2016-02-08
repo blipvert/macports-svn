@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                diffoscope
-version             45
+version             48
 platforms           darwin
 supported_archs     noarch
 license             GPL-3+
@@ -24,9 +24,9 @@ long_description    diffoscope will try to get to the bottom of what makes \
 homepage            https://diffoscope.org/
 master_sites        pypi:d/diffoscope
 
-checksums           md5     543b539910b8314f0515c81471d4052c \
-                    rmd160  7ec9c1deceee2802d539ba616a05c0bd7d481303 \
-                    sha256  9dbb685cd6a87478192096f6d6434d225e34287b9cecc34f3d156dba51b716bd
+checksums           md5     8147ef4c3ba2e9389150f071bd4df0a4 \
+                    rmd160  5beba3782f2e3ea56dc5a008e1b0b7d036b8f1f2 \
+                    sha256  3f60db78501f10739f96663542d53b4586c4bee86d3ee0569a3fec97ac9dc287
 
 python.default_version 35
 

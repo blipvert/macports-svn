@@ -22,9 +22,9 @@ if {${subport} eq ${name}} {
     version         5.1.2
     distname        qwt-${version}
     revision        3
-    conflicts       qwt52 qwt60 qwt-60 qwt-devel
-    checksums       sha1 2fc04b78c438635a78e41a22fea6f9e016f7ca17 \
-                    rmd160 a5a94aa3870a631f9605e6370c4d04fb1c79347e
+    conflicts       qwt52 qwt60 qwt61
+    checksums       sha1    2fc04b78c438635a78e41a22fea6f9e016f7ca17 \
+                    rmd160  a5a94aa3870a631f9605e6370c4d04fb1c79347e
     patchfiles      patch-qwtconfig.pri.51.diff
     livecheck.url   http://sourceforge.net/api/file/index/project-id/13693/mtime/desc/rss
     livecheck.regex \\/qwt\\/(5\\.1\\.\\d+)\\/
@@ -36,7 +36,7 @@ subport qwt52 {
     version         5.2.3
     revision        1
     distname        qwt-${version}
-    conflicts       qwt qwt60 qwt-60 qwt-devel
+    conflicts       qwt qwt60 qwt61
     checksums       sha1    ff81595a1641a8b431f98d6091bb134bc94e0003 \
                     rmd160  9b2128ad2b53a65678f9ea57d34cdc73a3674d21
     patchfiles      patch-qwtconfig.pri.52.diff
@@ -50,7 +50,7 @@ subport qwt60 {
     version         6.0.2
     revision        1
     distname        qwt-${version}
-    conflicts       qwt qwt52 qwt-devel
+    conflicts       qwt qwt52 qwt61
     checksums       sha1    cbdd00b29521987c9e7bc6aa51092f0474b9428d \
                     rmd160  c9d31f40b6001f09c59dbf4c0628ddd860474821
     patchfiles      patch-qwtconfig.pri.60.diff \
@@ -62,20 +62,20 @@ subport qwt60 {
 
 }
 
-subport qwt-devel {
+subport qwt61 {
 
-    version         6.1.0-rc3
+    version         6.1.2
     revision        1
-    distname        qwt-6.1-rc3
-    conflicts       qwt qwt52 qwt60 qwt-60
-    checksums       sha1    0ee2e80fd9a5d5cc1efc2e09783d20fc4f76aa13 \
-                    rmd160  560fb2e91eb3a825bcc93fc970ab574b85f3390d
-    patchfiles      patch-qwtconfig.pri.610rc3.diff \
-                    patch-qwtbuild.pri.610rc3.diff \
-                    patch-qwtfunctions.pri.610rc3.diff \
-                    patch-designer_designer.pro.610rc3.diff
+    distname        qwt-${version}
+    conflicts       qwt qwt52 qwt60
+    checksums       sha1    6af82b6ee4132f779d1c8c2db872f01463b0d61c \
+                    sha256  2b08f18d1d3970e7c3c6096d850f17aea6b54459389731d3ce715d193e243d0c
+
+    patchfiles      patch-designer_designer.pro.61.diff \
+                    patch-qwtconfig.pri.61.diff \
+                    patch-qwtbuild.pri.61.diff 
     livecheck.url   http://sourceforge.net/api/file/index/project-id/13693/mtime/desc/rss
-    livecheck.regex \\/(6\\.1\\.\\d-rc\\d)\\/
+    livecheck.regex \\/qwt\\/(6\\.1\\.\\d+)\\/
 
 }
 
@@ -163,15 +163,27 @@ if {${qwt_major} < 6} {
     }
 } else {
 
-    # QWT 6+ uses Qt4+ only
-    PortGroup qt4 1.0
+    variant qt5 conflicts qt4 description "Build with Qt5" {}
+    variant qt4 conflicts qt5 description "Build with Qt4" {}
 
+    # QWT 6+ uses Qt4+ only
+    if {![variant_isset qt5]} {
+        PortGroup qt4 1.0
+    } else {
+        PortGroup           qt5 1.0
+        set qt_arch_types   "x86_64"
+        post-patch {
+            reinplace "s|QT_STATIC_CONST|static const|" \
+                ${worksrcpath}/src/qwt_scale_map.cpp \
+                ${worksrcpath}/src/qwt_scale_map.h
+        }
+    }
 }
 
 configure.cmd       ${qt_qmake_cmd}
 configure.pre_args  INSTALLBASE="${prefix}"
 
-# qmake does not handle these flags flags
+# qmake does not handle these flags
 configure.universal_args-delete --disable-dependency-tracking
 configure.args-delete           --disable-dependency-tracking
 
@@ -200,6 +212,8 @@ post-destroot {
             # link headers into ${qt_includes_dir}, removing
             # directories if they are already there first
 
+            file mkdir ${destroot}${qt_includes_dir}
+            file mkdir ${destroot}${qt_libs_dir}
             set inc_file ${destroot}${qt_includes_dir}/${tf}
             if {[file exists ${inc_file}]} {
                 file delete -force ${inc_file}

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           elisp 1.0
 
-github.setup        djcb mu 0.9.15
+github.setup        djcb mu 0.9.16 v
 revision            0
 license             GPL-3
 categories          mail
@@ -22,8 +22,8 @@ platforms           darwin
 
 homepage            http://www.djcbsoftware.nl/code/mu/
 
-checksums           rmd160  bc738837662a64e1fab968aeea4480134f8862b5 \
-                    sha256  d5747178c011525f277720078fc0fdf1d70e41ba156420cada5326d63aab1d12
+checksums           rmd160  46f7cc07f49421fdec18cff247de442b670aa5e6 \
+                    sha256  2d2322cfe17f05ba6b625e9b29080466eaa29fa79f917433538b023ec3e956b4
 
 depends_build       port:pkgconfig
 depends_lib         port:gmime port:xapian-core port:guile
@@ -48,13 +48,13 @@ variant emacs description {Build with emacs bindings} {
 }
 
 subport mu-devel {
-    github.setup    djcb mu ed935112e66f
+    github.setup    djcb mu 7ea5f4c8e223
     name            mu-devel
-    version         0.9.15.99
-    revision        9
+    version         0.9.16.99
+    revision        1
 
-    checksums       rmd160  5861a3e7704bb3150ae0f435368fa22fd989dc4a \
-                    sha256  fed6cab2aa869d59573984b34fb4687b45a31b9e0df90df4993f23a2f47918f9
+    checksums       rmd160  ce099461af1f415c51bba9a97ca073aaea86779d \
+                    sha256  8f99862a234cc5367560256c105068fc40c81f4ccdcc188eba5ef55182ae0dc0
 
     post-extract    {
         # set the displayed version to a 6-character string since most releases

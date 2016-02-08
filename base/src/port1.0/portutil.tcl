@@ -523,13 +523,10 @@ proc handle_option_string {option action args} {
             set fulllist {}
             # args is a list of strings/list
             foreach arg $args {
-                # Strip trailing empty lines
-                if {[string index $arg 0] eq "\n"} {
-                    set arg [string range $arg 1 end]
-                }
-                if {[string index $arg end] eq "\n"} {
-                    set arg [string range $arg 0 end-1]
-                }
+                # Strip empty lines at beginning
+                set arg [string trimleft $arg "\n"]
+                # Strip all trailing whitespace
+                set arg [string trimright $arg]
 
                 # Determine indent level
                 set indent ""
@@ -540,6 +537,7 @@ proc handle_option_string {option action args} {
                     }
                     append indent $c
                 }
+
                 # Remove indent on first line
                 set arg [string replace $arg 0 [expr {$i - 1}]]
                 # Remove indent on each other line
@@ -2117,12 +2115,12 @@ proc check_variants {target} {
             break
         }
     }
-    if {$statereq && ![tbool ports_force]} {
+    if {$statereq} {
 
         set state_fd [open_statefile]
 
         array set oldvariations {}
-        if {[check_statefile_variants variations oldvariations $state_fd]} {
+        if {![tbool ports_force] && [check_statefile_variants variations oldvariations $state_fd]} {
             ui_error "Requested variants \"[canonicalize_variants [array get variations]]\" do not match those the build was started with: \"[canonicalize_variants [array get oldvariations]]\"."
             ui_error "Please use the same variants again, or run 'port clean [option subport]' first to remove the existing partially completed build."
             set result 1

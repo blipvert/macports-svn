@@ -43,14 +43,14 @@ build.cmd           make
 build.target        all PYTHON=${python.bin}
 
 subport mercurial-devel {
-    bitbucket.setup     seanfarley mercurial 443848eece18
+    bitbucket.setup     seanfarley mercurial 4511e8dac4c7
     name                mercurial-devel
     version             3.6.99
-    revision            6
+    revision            10
 
     conflicts           mercurial
-    checksums           rmd160  516ccb16d84028bd6fb999baf35883d0d97a1e85 \
-                        sha256  996804a6dc84eabe6a23aa506e1091b1d5effb7dd10b27c8cfe6ce1c82b3f07b
+    checksums           rmd160  662502013f778944d0cf1893f561b7a63785a922 \
+                        sha256  33ced955fe785a406f484cdc324167c642e126f4e917a81d17b88ca203696146
 }
 
 post-destroot {
