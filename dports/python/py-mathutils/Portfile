@@ -24,7 +24,7 @@ distname            mathutils-${version}
 checksums           rmd160  c1e4837d1534cdb9191cef8847b593108bd7e5d3 \
                     sha256  34c6c0ddb28d4f6004942aa0a128d88229a5c71208ec500f6a4e3d53ec750cd8
 
-python.versions     26 27 33 34
+python.versions     33 34
 
 if {${name} ne ${subport}} {
     livecheck.type  none
