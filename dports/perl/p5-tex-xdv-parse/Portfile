@@ -6,19 +6,18 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
 perl5.setup         TeX-XDV-Parse 0.04
-#perl5.setup         TeX-XDV-Parse 0.04 ../by-authors/id/J/JR/JRM
 
 platforms           darwin
 maintainers         nomaintainer
-#license             {Artistic-1 GPL}
-license             unknown
+license             {Artistic-1 GPL}
 
-# Uncomment this line if you know there will be no arch-specific code:
-#supported_archs     noarch
+supported_archs     noarch
 
-description         TeX::XDV::Parse (no description available)
+description         Perl extension for parsing TeX XDV files.
 
-long_description    ${description}
+long_description    TeX::XDV::Parse is an extension of TeX::DVI::Parse, much as XDV is an \
+                    extension of DVI. This module simply overlays the additional XDV \
+                    functionality on top of TeX::DVI::Parse and inherits its interface.
 
 checksums           rmd160 0416b464703070317d38abb57a02ade2aaf91609 \
                     sha256 0bc4bd8e50828c63aacbc77275c793f5af862c15fc6b1d403b11903b91247a2b
@@ -29,5 +28,3 @@ if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-tex-dvi
 }
-
-

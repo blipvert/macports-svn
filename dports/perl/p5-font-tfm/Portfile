@@ -6,19 +6,17 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
 perl5.setup         Font-TFM 1.01
-#perl5.setup         Font-TFM 1.01 ../by-authors/id/J/JA/JANPAZ
 
 platforms           darwin
 maintainers         nomaintainer
-#license             {Artistic-1 GPL}
-license             unknown
+license             {Artistic-1 GPL}
 
-# Uncomment this line if you know there will be no arch-specific code:
-#supported_archs     noarch
+supported_archs     noarch
 
-description         Font::TFM (no description available)
+description         Read information from TeX font metric files.
 
-long_description    ${description}
+long_description    Font::TFM provides a subclassable wrapper around a TFM \
+                    (TeX font metrics) file.
 
 checksums           rmd160 5873bdec98276f44869c6dc01bba9aa6234c3d11 \
                     sha256 d3ca55976c118e61e27b0eed65946e6479b17d7f7ef5bb38b64b90536d32c9fc

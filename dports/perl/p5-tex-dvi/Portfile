@@ -6,19 +6,18 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.16 5.18 5.20 5.22
 perl5.setup         TeX-DVI 1.01
-#perl5.setup         TeX-DVI 1.01 ../by-authors/id/J/JA/JANPAZ
 
 platforms           darwin
 maintainers         nomaintainer
-#license             {Artistic-1 GPL}
-license             unknown
+license             {Artistic-1 GPL}
 
-# Uncomment this line if you know there will be no arch-specific code:
-#supported_archs     noarch
+supported_archs     noarch
 
-description         TeX::DVI (no description available)
+description         Read and write TeX's DVI (DeVice Independent) file.
 
-long_description    ${description}
+long_description    Contains wrapper classes TeX::DVI and TeX::DVI::Parse which provide \
+                    a native Perl interface to the information inside TeX's DVI (DeVice \
+                    Independent) file.
 
 checksums           rmd160 fce0ff9e92977e21231d9d72d161b5727fec37b0 \
                     sha256 7e82d078bb82e5cabbae8cbfc9d83658563f7bf002af3c790c645ea5f66d40d0
