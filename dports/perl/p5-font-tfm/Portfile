@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.16 5.18 5.20 5.22
+perl5.setup         Font-TFM 1.01
+#perl5.setup         Font-TFM 1.01 ../by-authors/id/J/JA/JANPAZ
+
+platforms           darwin
+maintainers         nomaintainer
+#license             {Artistic-1 GPL}
+license             unknown
+
+# Uncomment this line if you know there will be no arch-specific code:
+#supported_archs     noarch
+
+description         Font::TFM (no description available)
+
+long_description    ${description}
+
+checksums           rmd160 5873bdec98276f44869c6dc01bba9aa6234c3d11 \
+                    sha256 d3ca55976c118e61e27b0eed65946e6479b17d7f7ef5bb38b64b90536d32c9fc
+
+
