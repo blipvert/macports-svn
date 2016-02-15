@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name                cadabra
-version             1.33
+version             1.42
 revision            1
 categories          math
 platforms           darwin
@@ -24,8 +24,8 @@ long_description    Cadabra is a computer algebra system for the \
 homepage            http://cadabra.phi-sci.com/
 master_sites        ${homepage}
 
-checksums           rmd160  52686bdd7a635a6db30a91add951720f14c1ddc6 \
-                    sha256  075dad3a1a9fd8774473f6d28f036f65629a286304c02f0ac1e10be3cb2ebd12
+checksums           rmd160  956c554690cc6a8536cd37918624441fa4694b1e \
+                    sha256  fb0c49c85607bb61dae9da1e5ae19ce235b5be1404dfdd20bd6b97b64f89a6fe
 
 depends_build       port:pkgconfig \
                     port:pcrexx
@@ -34,16 +34,6 @@ depends_lib         port:modglue \
                     port:pcre \
                     port:gmp \
                     port:LiE
-
-# Invalid C++, ticket #33045
-#
-# Cannot use clang because xperm uses nested functions and variable
-# sized arrays, both of which clang will never support. Silly llvm makes
-# cadabra crash all over the place for no good reason, so that's out
-# too. Furthermore, we cannot use any GCC other than Apple's because
-# that will lead to cadabra being linked to two different libstdc++
-# libraries, with malloc failures as a result.
-compiler.whitelist  gcc-4.2 gcc-4.0 apple-gcc-4.2
 
 configure.args      --disable-gui \
                     --disable-runtime-dependency-check
