@@ -59,7 +59,7 @@ py-astropy              0.4.1_4     32
 py-atpy                 0.9.7_2     32 33
 py-atspi                0.4.1_1     26
 py-authkit              0.3.0pre5_1 25
-py-autopep8             1.0.4_1     31 32
+py-autopep8             1.1.1_1     26 31 32 33
 py-axiom                0.7.1_1     26
 py-babel                1.3_1       25
 py-backports-ssl        0.0.7_1     33
@@ -394,7 +394,7 @@ py-pcapy                0.10.5_1    24 25 26
 py-pdfrw                0.1_1       25 26
 py-peak                 0.5a3_2     24
 py-pedal                2.0.0a7_1   24
-py-pep8                 1.5.7_1     25 31 32
+py-pep8                 1.6.2_1     25 26 31 32 33
 py-pexpect              2.4_1       24 25 26
 py-pgsql                2.5.1_4     24 25
 py-phonenumbers         6.3.0_1     25 31 32
