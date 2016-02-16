@@ -2,9 +2,11 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           blip 1.0
 
 name                jsoncpp
 version             0.6.0-rc2
+blip.revision       1
 categories          devel
 platforms           darwin
 maintainers         gmail.com:felipou
@@ -44,4 +46,10 @@ destroot {
 
     xinstall -d -m 755 ${destroot}${prefix}/include/json
     eval xinstall -m 644 [glob ${worksrcpath}/include/json/*] ${destroot}${prefix}/include/json
+}
+
+post-destroot {
+    copy ${filespath}/jsoncpp.pc ${destroot}${prefix}/lib/pkgconfig
+    reinplace "s|@@prefix@@|${prefix}|" ${destroot}${prefix}/lib/pkgconfig/jsoncpp.pc
+    reinplace "s|@@version@@|${version}|" ${destroot}${prefix}/lib/pkgconfig/jsoncpp.pc
 }
