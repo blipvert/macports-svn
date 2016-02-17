@@ -25,3 +25,5 @@ index::
 clean:
 	@(cd base && ([ ! -f Makefile ] || ${MAKE} clean))
 
+push::
+	git push github master origin/trunk:trunk
