@@ -5,7 +5,7 @@ PortSystem      1.0
 PortGroup       compiler_blacklist_versions 1.0
 PortGroup       texlive 1.0
 PortGroup       blip 1.0
-blip.revision	8
+blip.revision	9
 
 # luajittex requires muniversal (and some patches to configure
 # scripts) to build universal
@@ -293,6 +293,11 @@ variant blip {
         patch-texk_web2c_mplibdir_mp.w_tension.diff \
         patch-texk_web2c_lib_texmfmp.c_progname.diff \
         patch-texk_web2c_web2c_splitup.c_support_mp.diff
+
+    post-patch {
+        system "find ${worksrcpath} -type f -name configure.orig -print0 | xargs -0 rm -f"
+        system "find ${worksrcpath} -type f -name Makefile.in.orig -print0 | xargs -0 rm -f"
+    }
     
     post-destroot {
         set web2c_src ${worksrcpath}/texk/web2c
