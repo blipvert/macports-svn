@@ -1,0 +1,16 @@
+--- src/display.cc
++++ src/display.cc	2016-02-16 14:52:03.000000000 -0500
+@@ -341,10 +341,11 @@
+ 		str << "}";
+ 		}
+ 	else {
+-		str << "**{";
++		str << "**"
++                    << (parent.output_format==exptree_output::out_plain?"(":"{");
+ 		++ch;
+ 		parent.get_printer(ch)->print_infix(str, ch);
+-		str << "}";
++                str << (parent.output_format==exptree_output::out_plain?")":"}");
+ 		}
+ 	}
+ 

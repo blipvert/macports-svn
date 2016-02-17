@@ -6,7 +6,7 @@ PortGroup blip 1.0
 
 name                cadabra
 version             1.42
-blip.revision       3
+blip.revision       4
 categories          math
 platforms           darwin
 license             GPL-3+
@@ -30,7 +30,8 @@ checksums           rmd160  956c554690cc6a8536cd37918624441fa4694b1e \
                     sha256  fb0c49c85607bb61dae9da1e5ae19ce235b5be1404dfdd20bd6b97b64f89a6fe
 
 patchfiles \
-                    patch-fixguipath.diff
+                    patch-fixguipath.diff \
+                    patch-maxima-exponent.diff
 
 depends_build       port:pkgconfig \
                     port:pcrexx
