@@ -1,0 +1,45 @@
+ # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+PortGroup       python 1.0
+
+name            xgridfit
+version         2.3
+description         XML-based TrueType font hinter.
+long_description    Xgridfit is a high-level, XML-based language for \
+                    gridfitting, or "hinting," TrueType fonts.  Its output \
+                    is a Python script that can be run in FontForge.
+
+platforms       darwin
+categories		print
+license			LGPL 2.1
+maintainers		blipvertica.com:blipvert
+homepage		http://xgridfit.sourceforge.net/
+master_sites    sourceforge
+worksrcdir      ${name}
+
+patchfiles \
+    patch-substitution_vars.diff \
+    patch-python3.diff
+
+depends_run-append \
+    port:fontforge \
+    port:libxslt \
+    port:libxml2 \
+    port:py-libxml2
+
+checksums       rmd160  d1451f9ad9f3a08eafa913212d9fc1d6f8a7c9d0 \
+                sha256  18213af2ed8b9f6369fa2515bff483392ec8ca5432a2fb7f3f91675ce12d330a
+
+post-patch {
+    reinplace "s|@DESTDIR@|${destroot}|" ${worksrcpath}/Makefile
+    reinplace "s|@PREFIX@|${prefix}|" ${worksrcpath}/Makefile
+    reinplace "s|@PREFIX@|${prefix}|" ${worksrcpath}/python/xgflib.py
+}
+
+build {}
+
+destroot {
+    system "make -C ${worksrcpath} install-mac"
+}

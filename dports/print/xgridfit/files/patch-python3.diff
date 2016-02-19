@@ -1,0 +1,148 @@
+diff lib/xgridfit-python.xsl b/lib/xgridfit-python.xsl
+--- lib/xgridfit-python.xsl
++++ lib/xgridfit-python.xsl
+@@ -540,11 +540,11 @@ CURRENT_FONT.maxp_maxStackDepth = 0
+     try:
+         CURRENT_FONT[name].ttinstrs = fontforge.parseTTInstrs(instrs)
+     except TypeError as detail:
+-        print "Warning: can't install instructions for glyph ", name
+-        print detail
++        print("Warning: can't install instructions for glyph ", name)
++        print(detail)
+     except ValueError as detail:
+-        print "Warning: can't install instructions for glyph ", name
+-        print detail
++        print("Warning: can't install instructions for glyph ", name)
++        print(detail)
+ </xsl:text>
+     <xsl:if test="$compile_globals='yes'">
+       <xsl:text>CURRENT_FONT.cvt = (</xsl:text>
+diff python/xgflib.py b/python/xgflib.py
+--- python/xgflib.py
++++ python/xgflib.py
+@@ -9,10 +9,10 @@ from time import time
+ try:
+     import libxml2
+ except ImportError:
+-    print """
++    print("""
+     Xgridfit depends on libxml2 and its Python bindings.
+     Install these and try again.
+-    """
++    """)
+     exit(1)
+ 
+ VERSION = '2.2'
+@@ -878,22 +878,22 @@ do not check")
+                                  help="name of separate script file for output of \
+ <outfile> (works only with options --language ff --output-glyph-script)")
+         (opts, self.args) = self.opt_pars.parse_args()
+-        self.params = {'max_stack': None, 'auto_instr': None,
+-                       'delta_break': None, 'compile_globals': None,
+-                       'color': None, 'delete_all': None,
+-                       'data_file': None, 'glyph_select': None,
+-                       'init_graphics': None,
+-                       'auto_hint': None, 'infile': None,
+-                       'outfile': None, 'push_break': None,
+-                       'push_break': None, 'combine_prep': None,
+-                       'silent_mode': None, 'max_storage': None,
+-                       'outfile_base': None, 'outfile_script_name': None,
+-                       'max_twilight': None}
++        params = {'max_stack': None, 'auto_instr': None,
++                  'delta_break': None, 'compile_globals': None,
++                  'color': None, 'delete_all': None,
++                  'data_file': None, 'glyph_select': None,
++                  'init_graphics': None,
++                  'auto_hint': None, 'infile': None,
++                  'outfile': None, 'push_break': None,
++                  'push_break': None, 'combine_prep': None,
++                  'silent_mode': None, 'max_storage': None,
++                  'outfile_base': None, 'outfile_script_name': None,
++                  'max_twilight': None}
+         # Extract all the params that have got to be passed to the
+         # XSLT processor and put them in self.params (but we pass
+         # 'yes' not True).
+         for k in opts.__dict__.keys():
+-            if k in self.params:
++            if k in params:
+                 int_val = opts.__dict__[k]
+                 if int_val is not None:
+                     if int_val == True:
+@@ -902,11 +902,12 @@ do not check")
+                         int_val = 'no'
+                     if type(int_val) is int:
+                         int_val = str(int_val)
+-                    self.params[k] = int_val
++                    params[k] = int_val
+         # Discard any undefined params.
+-        for k in self.params.keys():
+-            if self.params[k] is None:
+-                del self.params[k]
++        self.params = {}
++        for k in params.keys():
++            if params[k] is not None:
++                self.params[k] = params[k]
+         if DISPLAY_DIAGNOSTIC_MESSAGES:
+             stderr.write("Parameters:\n")
+             stderr.write(str(self.params))
+@@ -1008,20 +1009,20 @@ class Configuration():
+         else:
+             stdout.write("None (this is the default configuration)")
+         stdout.write("\n")
+-        print "Processors in order of preference:"
++        print("Processors in order of preference:")
+         for p in self.processor_priority:
+             stdout.write("  " + p)
+             if p in self.jar_files:
+                 stdout.write(" (" + self.jar_files[p] + ")")
+             stdout.write("\n")
+-        print "Validators in order of preference:"
++        print("Validators in order of preference:")
+         for v in self.validator_priority:
+             stdout.write("  " + v)
+             if v in self.jar_files:
+                 stdout.write(" (" + self.jar_files[v] + ")")
+             stdout.write("\n")
+-        print "Xgridfit base directory: "
+-        print " ", XGRIDFIT_DIR
++        print("Xgridfit base directory: ")
++        print(" ", XGRIDFIT_DIR)
+     def __processor_jar_files_changed(self):
+         """ True if the current list of processor jar files differs from the default """
+         changed = False
+@@ -1209,7 +1210,7 @@ def run_xgridfit(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+     # Parse the command line.
+     options_and_args = OptionsAndArgs()
+     if options_and_args.version:
+-        print VERSION
++        print(VERSION)
+         return True
+     # Choose the XSLT script we want.
+     xsl_file = 'xgridfit-python.xsl'
+@@ -1308,7 +1309,7 @@ def run_xgridfit(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+                     if xgf_prog.returncode != 0:
+                         stderr.write("Error executing Xgridfit-generated script\n")
+                 else:
+-                    f = open(output_script, 'w')
++                    f = open(output_script, 'wb')
+                     f.write(ffscript)
+                     f.close()
+         # A little fussy, but it calms my nerves.
+@@ -1319,7 +1320,7 @@ def run_xgridfit(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+         if not error_free:
+             break
+     if options_and_args.elapsed_time:
+-        print "Elapsed time:", time() - start_time
++        print("Elapsed time:", time() - start_time)
+     return error_free
+ 
+ def run_config(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+@@ -1442,7 +1443,7 @@ def run_ttx2xgf(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+             stderr.write(str(d) + "\n")
+             error_free = False
+     if options_and_args.elapsed_time:
+-        print "Elapsed time:", time() - start_time
++        print("Elapsed time:", time() - start_time)
+     return error_free
+ 
+ def run_xgfmerge(xgfdir="@PREFIX@/share/xml/xgridfit/"):

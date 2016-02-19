@@ -1,0 +1,62 @@
+diff Makefile Makefile
+--- Makefile
++++ Makefile
+@@ -9,8 +9,8 @@ SHELL=/bin/bash
+ 
+ include version.mk
+ 
+-DESTDIR =
+-PREFIX = /usr/local
++DESTDIR = @DESTDIR@
++PREFIX = @PREFIX@
+ 
+ # %{_bindir} in rpm speak
+ BINDIR = $(PREFIX)/bin
+diff python/xgflib.py python/xgflib.py
+--- python/xgflib.py
++++ python/xgflib.py
+@@ -18,7 +18,7 @@ except ImportError:
+ VERSION = '2.2'
+ JAVA_EXECUTABLE = 'java'
+ DISPLAY_DIAGNOSTIC_MESSAGES = False
+-XGRIDFIT_DIR = abspath('/usr/local/share/xml/xgridfit/')
++XGRIDFIT_DIR = abspath('@PREFIX@/share/xml/xgridfit/')
+ XSLT_DIR = abspath(join(XGRIDFIT_DIR, 'lib'))
+ UTIL_DIR = abspath(join(XGRIDFIT_DIR, 'utils'))
+ SCHEMA_DIR = abspath(join(XGRIDFIT_DIR, 'schemas'))
+@@ -1202,7 +1202,7 @@ class Configuration():
+                 stderr.write("I don't know a processor or validator " + priority_item + "\n")
+                 exit(1)
+ 
+-def run_xgridfit(xgfdir="/usr/local/share/xml/xgridfit/"):
++def run_xgridfit(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+     XGRIDFIT_DIR = abspath(xgfdir)
+     """ Validates and compiles an Xgridfit program. """
+     start_time = time()
+@@ -1322,7 +1322,7 @@ def run_xgridfit(xgfdir="/usr/local/share/xml/xgridfit/"):
+         print "Elapsed time:", time() - start_time
+     return error_free
+ 
+-def run_config(xgfdir="/usr/local/share/xml/xgridfit/"):
++def run_config(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+     XGRIDFIT_DIR = abspath(xgfdir)
+     """ Creates/reads/updates a configuration file. """
+     # Parse the command line
+@@ -1354,7 +1354,7 @@ def run_config(xgfdir="/usr/local/share/xml/xgridfit/"):
+         return False
+     return True
+ 
+-def run_ttx2xgf(xgfdir="/usr/local/share/xml/xgridfit/"):
++def run_ttx2xgf(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+     XGRIDFIT_DIR = abspath(xgfdir)
+     """ Extract TT instructions from a TTX file. """
+     start_time = time()
+@@ -1445,7 +1445,7 @@ def run_ttx2xgf(xgfdir="/usr/local/share/xml/xgridfit/"):
+         print "Elapsed time:", time() - start_time
+     return error_free
+ 
+-def run_xgfmerge(xgfdir="/usr/local/share/xml/xgridfit/"):
++def run_xgfmerge(xgfdir="@PREFIX@/share/xml/xgridfit/"):
+     XGRIDFIT_DIR = abspath(xgfdir)
+     start_time = time()
+     # Parse the command line
