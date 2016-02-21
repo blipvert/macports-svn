@@ -1,0 +1,32 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           qmake 1.0
+
+name                qdirstat
+version             2.5.20140910
+categories          sysutils
+license             GPL-2
+maintainers         com.blipvertica:blipvert
+description         Qt-based directory statistics
+long_description    Qt-based directory statistics (KDirStat without \
+                    any KDE - from the original KDirStat author)
+
+homepage            https://github.com/shundhammer/qdirstat
+
+fetch.type          git
+git.url             git://github.com/shundhammer/qdirstat
+git.branch          0e70c886a61fe61442e3b5ce4e5cd7c2d09b3f20
+
+platforms           darwin
+
+patchfiles          patch-src_Logger.cpp.diff \
+                    patch-qdirstat.pro.diff
+
+destroot {
+    xinstall -m 755 -d ${destroot}${qt_apps_dir}
+    copy ${worksrcpath}/src/${name}.app ${destroot}${qt_apps_dir}
+}
+
+livecheck.type   none
