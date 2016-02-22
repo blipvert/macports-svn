@@ -56,6 +56,12 @@ variant ruby description {build ruby bindings} {
     }
 }
 
+variant perl description {build perl bindings} {
+    depends_lib-append  port:perl5
+
+    configure.args-replace --without-perl --with-perl
+}
+
 default_variants    +ruby
 
 livecheck.type      regex
