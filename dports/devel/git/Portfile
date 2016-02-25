@@ -3,9 +3,11 @@
 
 PortSystem          1.0
 PortGroup           perl5 1.0
+PortGroup           blip 1.0
 
 name                git
 version             2.7.1
+blip.revision       1
 
 description         A fast version control system
 long_description    Git is a fast, scalable, distributed open source version \
@@ -225,6 +227,18 @@ variant credential_osxkeychain description {Install git credential-osxkeychain u
             "${destroot}${prefix}/bin/"
     }
 }
+
+variant mediawiki description {Install git-mediawiki backend} {
+    depends_run-append port:p${perl5.major}-mediawiki-api
+    
+    post-build {
+        system -W "${worksrcpath}/contrib/mw-to-git" "make [join ${build.args}]"
+    }
+
+    post-destroot {
+        system -W "${worksrcpath}/contrib/mw-to-git" "make DESTDIR=${destroot} [join ${destroot.args}] ${destroot.target}"
+    }
+}        
 
 platform darwin 8 {
     build.args-append   NO_APPLE_COMMON_CRYPTO=1
