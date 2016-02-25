@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.16 5.18 5.20 5.22
+perl5.setup         TeX-Hyphen 1.16
+
+platforms           darwin
+maintainers         net.blipvertica!blipvert
+license             {Artistic-1 GPL}
+
+supported_archs     noarch
+
+description         Hyphenate words using TeX's patterns.
+
+long_description    ${description}
+
+checksums           rmd160 b5b0cb4a05d541f02b733194ed3cc4a449a8b5da \
+                    sha256 ea4a74d6fa5e76b8afdbf830973fd6e6da67078cb287630e4d6a21f835b82885

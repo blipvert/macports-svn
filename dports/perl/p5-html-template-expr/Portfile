@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.16 5.18 5.20 5.22
+perl5.setup         HTML-Template-Expr 0.07
+
+platforms           darwin
+maintainers         net.blipvertica!blipvert
+license             {Artistic-1 GPL}
+
+supported_archs     noarch
+
+description         HTML::Template extension adding expression support.
+
+long_description    ${description}
+
+checksums           rmd160 32d8a61df5fddae30bc90318cf078b4e8c830bd2 \
+                    sha256 5c32272e5e96ea9b63f304fab9ce711f0a9027208d1ab2138a473b4d9f09b225
+
+if {${perl5.major} != ""} {
+    depends_lib-append \
+                    port:p${perl5.major}-html-template \
+                    port:p${perl5.major}-parse-recdescent
+}
