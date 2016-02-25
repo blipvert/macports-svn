@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.16 5.18 5.20 5.22
+perl5.setup         MediaWiki-API 0.41
+
+platforms           darwin
+maintainers         net.blipvertica.com!blipvert
+license             GPL-3+
+
+description         MediaWiki::API Provides a Perl interface to the MediaWiki API
+
+long_description    ${description}
+
+checksums           rmd160 fb5dfcbdb01df4bfe6f107a6b1327bdfd1bb073c \
+                    sha256 8e9062dfa34cb81dfff4ac9078a8afd5b0ee76e928cc1f9a57f9390f917d6265
+
+if {${perl5.major} != ""} {
+    depends_lib-append \
+                    port:p${perl5.major}-json \
+                    port:p${perl5.major}-libwww-perl
+}
