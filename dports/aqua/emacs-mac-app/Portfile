@@ -2,9 +2,11 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           blip 1.0
 
 name                emacs-mac-app
 version             5.15
+blip.revision       1
 categories          aqua editors
 maintainers         hum openmaintainer
 
@@ -44,6 +46,10 @@ configure.args      --with-mac \
 
 if {${os.major} >= 11 && ${os.platform} eq "darwin"} {
     configure.cflags-append -fobjc-arc
+}
+
+post-patch {
+    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/src/emacs.c
 }
 
 post-destroot {
