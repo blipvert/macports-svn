@@ -76,7 +76,7 @@ if {${os.platform} eq "darwin" && ${os.subplatform} eq "macosx" && ${os.major} >
         }
     }
 
-    variant x11 conflicts quartz {}
+    variant x11_no_quartz conflicts quartz {}
 
     if {![variant_isset quartz]} {
         default_variants +x11
@@ -84,7 +84,7 @@ if {${os.platform} eq "darwin" && ${os.subplatform} eq "macosx" && ${os.major} >
 } else {
     # Even though X11 is the only option, make a variant so that other ports
     # can check for it being set with require_active_variants.
-    variant x11 {}
+    variant x11_no_quartz {}
     default_variants +x11
 }
 

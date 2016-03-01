@@ -64,7 +64,7 @@ pre-activate {
     }
 }
 
-variant x11 conflicts quartz {
+variant x11_no_quartz conflicts quartz {
     patchfiles-append     patch-disable-quartz.diff
     depends_lib-append    port:gdk-pixbuf2 \
                           port:mesa \

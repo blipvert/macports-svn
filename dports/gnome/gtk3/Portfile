@@ -234,7 +234,7 @@ variant quartz conflicts x11 {
     configure.args-append   --enable-quartz-backend
 }
 
-variant x11 conflicts quartz {
+variant x11_no_quartz conflicts quartz {
     require_active_variants path:lib/pkgconfig/cairo.pc:cairo x11
     require_active_variants path:lib/pkgconfig/pango.pc:pango x11
 

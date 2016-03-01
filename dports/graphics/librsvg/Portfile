@@ -100,7 +100,7 @@ post-deactivate {
     system "${prefix}/bin/gdk-pixbuf-query-loaders --update-cache"
 }
 
-variant x11 conflicts quartz {}
+variant x11_no_quartz conflicts quartz {}
 variant quartz conflicts x11 {}
 
 livecheck.type      gnome

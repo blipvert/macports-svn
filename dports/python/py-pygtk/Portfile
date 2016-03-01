@@ -87,7 +87,7 @@ if {${name} ne ${subport}} {
     variant quartz conflicts x11 {
         require_active_variants gtk2 quartz
     }
-    variant x11 conflicts quartz {
+    variant x11_no_quartz conflicts quartz {
         require_active_variants gtk2 x11
     }
     if {![variant_isset x11] && ![variant_isset quartz]} {
