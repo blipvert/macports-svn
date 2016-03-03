@@ -20,10 +20,10 @@ archive_sites
 subport OpenBLAS-devel {}
 if {[string first "-devel" $subport] > 0} {
 
-    github.setup    xianyi OpenBLAS 38593cd3a35a63cb9d2ce75106cd4c3a678445c7
-    version         20160213
-checksums           rmd160 de88157ca14ef5a7e5e227ad6cb2cd701229caec \
-                    sha256 9db1e323757fd57bb1489b7de88e65a42daa32b86d1c5a9f6dd80a6b0bef927c
+    github.setup    xianyi OpenBLAS 1edf30b7906323d047386651053edec43c9c4454 
+    version         20160229
+checksums           rmd160 257567e44aa487e6de1fecf2e178eb39f4058cac \
+                    sha256 c51b36c6b433a9c91b724eb60c0b3b923a3efcecca2ba39f0bf82f251383ca61
 
     name            ${github.project}-devel
     conflicts       OpenBLAS
@@ -201,13 +201,15 @@ if {[variant_isset universal]} {
             delete file ${destroot}-${arch}/${prefix}/lib/cmake
             if {[variant_isset lapack]} {
                 #Install lapacke headers too
-                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/LAPACKE/include/lapacke_config.h \
+                set LAPACKE_DIR [exec /bin/ls ${worksrcpath}/lapack-netlib | \
+                                     grep -i lapacke]
+                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/${LAPACKE_DIR}/include/lapacke_config.h \
                     ${destroot}-${arch}${prefix}/include/lapacke_config.h
-                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/LAPACKE/include/lapacke_mangling.h \
+                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/${LAPACKE_DIR}/include/lapacke_mangling.h \
                     ${destroot}-${arch}${prefix}/include/lapacke_mangling.h
-                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/LAPACKE/include/lapacke_utils.h \
+                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/${LAPACKE_DIR}/include/lapacke_utils.h \
                     ${destroot}-${arch}${prefix}/include/lapacke_utils.h
-                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/LAPACKE/include/lapacke.h \
+                xinstall -m 755 ${worksrcpath}-${arch}/lapack-netlib/${LAPACKE_DIR}/include/lapacke.h \
                     ${destroot}-${arch}${prefix}/include/lapacke.h
             }
         }
@@ -224,13 +226,15 @@ if {[variant_isset universal]} {
         delete file ${destroot}/${prefix}/lib/cmake
         if {[variant_isset lapack]} {
             #Install lapacke headers too
-            xinstall -m 755 ${worksrcpath}/lapack-netlib/LAPACKE/include/lapacke_config.h \
+            set LAPACKE_DIR [exec /bin/ls ${worksrcpath}/lapack-netlib | \
+                                 grep -i lapacke]
+            xinstall -m 755 ${worksrcpath}/lapack-netlib/${LAPACKE_DIR}/include/lapacke_config.h \
                 ${destroot}${prefix}/include/lapacke_config.h
-            xinstall -m 755 ${worksrcpath}/lapack-netlib/LAPACKE/include/lapacke_mangling.h \
+            xinstall -m 755 ${worksrcpath}/lapack-netlib/${LAPACKE_DIR}/include/lapacke_mangling.h \
                 ${destroot}${prefix}/include/lapacke_mangling.h
-            xinstall -m 755 ${worksrcpath}/lapack-netlib/LAPACKE/include/lapacke_utils.h \
+            xinstall -m 755 ${worksrcpath}/lapack-netlib/${LAPACKE_DIR}/include/lapacke_utils.h \
                 ${destroot}${prefix}/include/lapacke_utils.h
-            xinstall -m 755 ${worksrcpath}/lapack-netlib/LAPACKE/include/lapacke.h \
+            xinstall -m 755 ${worksrcpath}/lapack-netlib/${LAPACKE_DIR}/include/lapacke.h \
                 ${destroot}${prefix}/include/lapacke.h
         }
     }

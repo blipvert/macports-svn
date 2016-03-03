@@ -66,14 +66,14 @@ pre-configure {
 }
 
 subport petsc-devel {
-    bitbucket.setup     petsc petsc 01047abbcf2d
+    bitbucket.setup     petsc petsc 2061b0d76cae
     bitbucket.livecheck master
-    version             3.6.99
-    revision            17
     name                petsc-devel
+    version             3.6.99
+    revision            19
 
-    checksums           rmd160  2207df78ad7df40a6df32998b486bcd5ed6b52ef \
-                        sha256  576a0f5615f95cde9e20e5da0577d8e1a7d66275b5eeaf4aeda2c4fd67c4b896
+    checksums           rmd160  9dfdaa27e9d7d82c61f8de96a2c556696cad8e4d \
+                        sha256  6869858b9d0227e6b5e7cf7edd7c542e1fb6453d96d713c9613234d250f78944
 }
 
 notes               "Add the following line to your .bash_profile if you plan to use\

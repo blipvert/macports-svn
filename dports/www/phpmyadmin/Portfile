@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                phpmyadmin
 set my_name         phpMyAdmin
-version             4.5.4.1
+version             4.5.5.1
 categories          www php databases
 platforms           darwin freebsd
 maintainers         ryandesign openmaintainer
@@ -26,9 +26,9 @@ master_sites        https://files.phpmyadmin.net/phpMyAdmin/${version}/
 distname            ${my_name}-${version}-all-languages
 use_xz              yes
 
-checksums           sha1    2c06ba92afc2dba8688083480787822c50ece4df \
-                    rmd160  889d9a24d13997b759764ace0a2153f2a702657f \
-                    sha256  4f79a1e3687ed6976903b0fab6a29f960e657e4eb4c9e8a9b92bcf4f1d57194d
+checksums           sha1    9c42496b1f5d042d4e357a9e4ef38a7ebb899836 \
+                    rmd160  6c2c20b1ab8ec2472771f20ed5497c4e64d79d16 \
+                    sha256  bf8ab258d5c6ce5cfaf7ff330827599c1cfd29b0cc4c9b83f4263ee143c00ef4
 
 # The php variants deliberately do not conflict
 

@@ -6,11 +6,10 @@ PortSystem          1.0
 name                mysql56
 set name_mysql      ${name}
 version             5.6.29
-# Set revision_client, revision_server and revision_innodb_memcached_plugin to 0 on
+# Set revision_client and revision_server to 0 on
 # version bump.
-set revision_client 1
+set revision_client 5
 set revision_server 0
-set revision_innodb_memcached_plugin 0
 set version_branch  [join [lrange [split ${version} .] 0 1] .]
 categories          databases
 platforms           darwin
@@ -38,6 +37,9 @@ if {$subport eq $name} {
 
     patch.pre_args      -p1
     patchfiles          patch-cmake-install_layout.cmake.diff
+
+    # Add yasll includes and libs before prefix
+    patchfiles-append   patch-cmake-install_layout.cmake-yassl.diff
 
     # Fix detection of htonll/ntohll.
     patchfiles-append   patch-configure.cmake.diff \
@@ -67,6 +69,8 @@ if {$subport eq $name} {
 
     post-patch {
         reinplace "s|@NAME@|${name_mysql}|g" \
+            ${worksrcpath}/cmake/install_layout.cmake
+        reinplace "s|@WORKSRCPATH@|${worksrcpath}|g" \
             ${worksrcpath}/cmake/install_layout.cmake
         reinplace "s|@NAME@|${name_mysql}|g" \
             ${cmake.build_dir}/macports/macports-default.cnf \
@@ -128,9 +132,6 @@ if {$subport eq $name} {
             ${destroot}${prefix}/share/${name_mysql}/support-files/macports
         copy ${cmake.build_dir}/macports/my.cnf \
             ${destroot}${prefix}/share/${name_mysql}/support-files/macports/
-        # Remove file supplied by ${name_mysql}-innodb-memcached-plugin subport.
-        delete ${destroot}${prefix}/share/${name_mysql}/innodb_memcached_config.sql
-
     }
 
     post-install {
@@ -159,16 +160,12 @@ if {$subport eq $name} {
         }
     }
 
-    variant openssl description {Enable OpenSSL support} {}
-    # Until yassl builds use MacPorts openssl.
-    # Getting mysql56 to build with yassl would make the binaries distributable.
-    # When mysql56 builds with yassl remove "true" from the "if" statement below or
-    # put the contents of the "if" block into the openssl variant block.
-    if { true || [variant_isset openssl] } {
+    variant openssl description {Instead of the bundled yaSSL use OpenSSL} {
         configure.args-delete   -DWITH_SSL:STRING=bundled
         configure.args-append   -DWITH_SSL:STRING=${prefix}
         depends_lib-append      path:lib/libssl.dylib:openssl
         archcheck.files-append  lib/libssl.dylib
+        patchfiles-delete       patch-cmake-install_layout.cmake-yassl.diff
     }
 
     notes "
@@ -243,12 +240,4 @@ If this is a new install you might want to run:
 "
 
     livecheck.type          none
-}
-
-subport ${name_mysql}-innodb-memcached-plugin {
-
-    replaced_by     ${name_mysql}
-    PortGroup       obsolete 1.0
-
-    depends_lib     port:${name_mysql}
 }

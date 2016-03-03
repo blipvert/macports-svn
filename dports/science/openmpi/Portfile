@@ -46,16 +46,16 @@ if {[string first "-devel" $subport] > 0} {
     # openmpi switched to git and reset their revision number;
     # remove this when for next release
     set base            32546
-    set tag             g69e3c6f
-    set newrev          3407
+    set tag             gc9f7bb6
+    set newrev          3563
     revision            [expr {$base + $newrev + 2}]
     distname            openmpi-dev-${newrev}-${tag}
 
     master_sites        http://www.open-mpi.org/nightly/master \
                         http://www.open-mpi.de/nightly/master
 
-    checksums           rmd160  8a9e5393cee62da5f2d229c5aec5f657aaf46475 \
-                        sha256  38b68a9f83f82247218705e0fabb15d23e6c0d670643bad7dd9eca3baaba6bcd
+    checksums           rmd160  d83f77697fa8873ae03f95ba9c456724bddaa17b \
+                        sha256  ec1cb58ab9a5416198d696116543518451c15d4f017c2795a564fdd667cdc2bf
 
     livecheck.version   ${newrev}-${tag}
     livecheck.url       [lindex ${master_sites} 0]

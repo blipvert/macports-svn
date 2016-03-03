@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                npm
-version             2.14.18
+version             2.14.20
 
 categories          devel
 platforms           darwin
@@ -26,8 +26,8 @@ master_sites        http://registry.npmjs.org/npm/-/
 
 extract.suffix      .tgz
 
-checksums           rmd160  d39b018a74fd1af309054a80ec78b289d716f278 \
-                    sha256  72f7b6fcc9f306bcc47e6da2ba546c66e31edc9d94e57c981c564622d999544a
+checksums           rmd160  d69727056d9c7d787d24e193e94e0abd979f9c6d \
+                    sha256  476946e83d2b83a66b2916dbcb6f45eb7a392e04c9e680bea19aaaf0c6e86d71
 
 worksrcdir          "package"
 

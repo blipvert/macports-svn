@@ -6,16 +6,17 @@ PortGroup           python 1.0
 
 name                py-argparse
 version             1.2.1
-revision            0
+revision            1
+
 categories-append   devel
-license             Python
+license             PSF
 platforms           darwin
 supported_archs     noarch
 
 maintainers         nomaintainer
 
-description         Python command-line parsing library
-long_description    ${description} backported from Python 2.7
+description         stub for obsolete py26-argparse
+long_description    ${description}
 
 homepage            http://code.google.com/p/argparse/
 master_sites        googlecode:argparse
@@ -24,20 +25,10 @@ distname            argparse-${version}
 checksums           rmd160  4ba4f413fab2a5f566b9b9bf1572714cd762fc66 \
                     sha256  ddaf4b0a618335a32b6664d4ae038a1de8fbada3b25033f9021510ed2b3941a4
 
-python.versions     24 25 26 31
+python.versions     26
 
 if {${name} ne ${subport}} {
-    if {${subport} ne "py26-argparse"} {
-        version     1.2.1
-        revision    1
-        depends_lib
-        replaced_by [expr {$subport eq "py31-argparse" ? "python34" : "python27"}]
-        PortGroup   obsolete 1.0
-    } else {
-        depends_build-append    port:py${python.version}-setuptools
-    }
+    depends_lib
+    replaced_by     python27
+    PortGroup       obsolete 1.0
 }
-
-livecheck.type      regex
-livecheck.url       ${master_sites}
-livecheck.regex     "argparse-(\\d+(?:\\.\\d+)*)${extract.suffix}"

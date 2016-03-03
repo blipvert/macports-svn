@@ -7,10 +7,10 @@ PortGroup           github 1.0
 
 name                airspy
 
-github.setup        airspy host d5108d637780fdce5d8b0869474520e4a318b95f
-version             20160112
-checksums           rmd160 6076d914d21d717c7059504daa624bf6506ccc0d \
-                    sha256 d00cbb46951c80f0175373106726bb7b7cccc6d2fce138a26f9df81cca526c73
+github.setup        airspy host 8cf23fae29e5d8dabe0977cfbe3ee73586156b37
+version             20160225
+checksums           rmd160 56db44048b43b938edd1a1220cce60a619a8a6a6 \
+                    sha256 4d20fff5ae6758ffc915fc60e148fa3c604015ebdcf7eb6906128d3cf7dedf47
 
 homepage            http://www.airspy.com/
 
@@ -27,10 +27,6 @@ depends_lib-append	path:lib/libusb-1.0.dylib:libusb
 # do VPATH (out of source tree) build
 
 cmake.out_of_source yes
-
-# remove use of -std=gnu90, since some older compilers do not recognize it
-
-patchfiles-append patch-disable-std-gnu90.diff
 
 # remove top-level library path, such that internal libraries are used
 # instead of any already-installed ones.

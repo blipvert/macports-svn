@@ -5,7 +5,7 @@ PortSystem 1.0
 
 name            maxima
 version         5.36.1
-revision        4
+revision        5
 categories      math
 maintainers     mareimbrium.org:kuba openmaintainer
 platforms       darwin
@@ -73,6 +73,8 @@ variant printable_doc description {Build printable documentation} {
                             port:texlive-generic-recommended \
                             port:texlive-fonts-recommended
     build.target            all pdf
+
+    patchfiles-append       doc_info_Makefile.in-dont-fail.patch
 
     post-patch {
         # Replace outdated texinfo.tex file with whatever current texinfo ships.

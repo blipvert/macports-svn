@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22
-perl5.setup         Capture-Tiny 0.30 ../by-authors/id/D/DA/DAGOLDEN
+perl5.setup         Capture-Tiny 0.36 ../by-authors/id/D/DA/DAGOLDEN
 
 platforms           darwin
 maintainers         nomaintainer
@@ -17,5 +17,5 @@ description         Capture::Tiny - Capture STDOUT and STDERR from Perl, XS \
 
 long_description    ${description}
 
-checksums           rmd160  f48781847db9e286d9066dcf099261412f932909 \
-                    sha256  a3b4e55278757e77d50df0b1a79f42e6e8354b7d41db806da39bf161bee63aea
+checksums           rmd160  7d1d1018f536c61ca76f6afd2dded58bb0a4ddfe \
+                    sha256  ab8742e53ad204a421bc82d5813f3c4c85c76581ea10d910d0aefc161f8cb03d

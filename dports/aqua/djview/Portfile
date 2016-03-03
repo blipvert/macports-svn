@@ -2,11 +2,9 @@
 # $Id$
 
 PortSystem          1.0
-PortGroup           qt4 1.0
 
 name                djview
-version             4.10
-revision            1
+version             4.10.6
 categories          aqua graphics www
 license             GPL-2+ MIT
 maintainers         nicos openmaintainer
@@ -21,20 +19,42 @@ long_description    DjVu can advantageously replace PDF, PS, TIFF,JPEG, and GIF 
 
 homepage            http://djvu.sourceforge.net/djview4.html
 
-master_sites        sourceforge:project/djvu/DjView/${version}/
+master_sites        sourceforge:project/djvu/DjView/4.10/
 
-patchfiles          patch-makefile-target-fix.diff \
-                    patch-makefile-qmake-workaround.diff \
-                    patch-powerpc.diff \
-                    patch-test-nsdejavu-no.diff
+patchfiles          patch-powerpc.diff \
+                    patch-makefile-qmake-workaround.diff 
 
-checksums           rmd160  859dcdbfd43ecf7506786f5658ca12ce6041d83d \
-                    sha256  7caf7ee249edd994092b32a5573f111b2337ec99159083a5cf1a20432633ba7f
+checksums           rmd160  9c8a5d878a594e4f87d3c1a392674148076061ee \
+                    sha256  8446f3cd692238421a342f12baa365528445637bffb96899f319fe762fda7c21
 
 depends_lib-append \
     port:djvulibre
 
 universal_variant yes
+
+if {$subport eq $name} {
+    PortGroup           qt4 1.0
+    conflicts           djview-qt5
+} else {
+    PortGroup           qt5 1.0
+    conflicts           ${name}
+}
+
+subport djview-qt5 {
+    #Location of qmake
+    configure.env-append QMAKE=${prefix}/libexec/qt5/bin/qmake \
+                         QMAKESPEC=macx-g++
+
+    if {${os.major} >= 13} {
+        #On 10.9 onwards, we need to update the minimum deployment target
+        pre-configure {
+            reinplace "s|QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6|QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9|g" \
+                ${worksrcpath}/src/djview.pro
+        }
+        #Changing the deployment target requires autoreconf
+        use_autoreconf       yes
+    }
+}
 
 configure.ldflags
 configure.args \
@@ -54,5 +74,6 @@ destroot {
     copy ${worksrcpath}/src/djview.app ${destroot}${applications_dir}
 }
 
+livecheck.regex     /${name}-(\[0-9.\]+)${extract.suffix}
 livecheck.name      djvu
 livecheck.distname  DjView

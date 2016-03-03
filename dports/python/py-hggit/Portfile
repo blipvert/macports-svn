@@ -7,7 +7,6 @@ PortGroup               bitbucket 1.0
 
 epoch                   20130201
 
-set realname            hggit
 name                    py-hggit
 
 categories-append       devel
@@ -25,22 +24,22 @@ long_description        This is the Hg-Git plugin for Mercurial, adding the abil
                         developers using both Git and Mercurial.
 
 # can't set python.versions before adding custom subports
-subport py27-$realname-devel {}
+subport py27-hggit-devel {}
 
 if {[string match "*-devel" $subport]} {
-    bitbucket.setup     durin42 hg-git bcf3d04d6585
-    name                py-$realname-devel
+    bitbucket.setup     durin42 hg-git 4006f2a59058
+    name                py-hggit-devel
     version             0.8.99
-    revision            14
+    revision            15
 
-    checksums           rmd160  f450614ba589eefa5e72321312eb330e666284b2 \
-                        sha256  b2909544237381d6488bb633c09a86c28fd09719c18b9003ab09e544f767ae78
+    checksums           rmd160  bd982f8a1c586a57ac77f2eb3d11528f4f7712b1 \
+                        sha256  489694f7bb8853f8740203b22664c56e73db5a8602c49b8a3e96be7ba0661698
 } else {
-    bitbucket.setup     durin42 hg-git 0.8.4
-    name                py-${realname}
+    bitbucket.setup     durin42 hg-git 0.8.5
+    name                py-hggit
 
-    checksums           rmd160  343ce6ddbb9d1ef754a34e480c984e7fccd435d2 \
-                        sha256  ab4dd919a5931868ca86ec50fef88902b8857a3b0c4933d7b4e817c414a6d910
+    checksums           rmd160  91a804d7feafb7a6010e099f538d672b8c53e788 \
+                        sha256  3b66224119bd93d870ec1a55f07fae0191b84ff3ae810c557081cf2679bf3af4
 }
 
 python.versions         27
@@ -49,17 +48,17 @@ if {${name} ne ${subport}} {
     depends_lib-append  bin:hg:mercurial \
                         bin:dulwich-2.7:py${python.version}-dulwich
 
-    conflicts           py${python.version}-$realname-devel
+    conflicts           py${python.version}-hggit-devel
     if {[string match "*-devel" $subport]} {
-        conflicts       py${python.version}-$realname
+        conflicts       py${python.version}-hggit
     } else {
         livecheck.type      none
     }
 
     notes               "
-To enable ${realname}, add the following to your ~/.hgrc:
+To enable hggit, add the following to your ~/.hgrc:
 
 \[extensions\]
-${realname} =
+hggit =
 "
 }

@@ -3999,7 +3999,7 @@ proc action_portcmds { action portlist opts } {
                     if {[file isfile $logfile]} {
                         puts $logfile
                     } else {
-                        ui_error "Log file not found for port in $portdir"
+                        ui_error "Log file for port $portname not found"
                     }
                 }
 
