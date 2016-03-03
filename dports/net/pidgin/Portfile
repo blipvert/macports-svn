@@ -123,7 +123,7 @@ if {${subport} eq $name} {
                             port:gtk2 \
                             port:libao
 
-    variant x11 conflicts quartz {
+    variant x11_no_quartz conflicts quartz {
         depends_lib-append      port:xorg-libX11 \
                                 port:xorg-libXext \
                                 port:xorg-libXScrnSaver \

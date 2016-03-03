@@ -115,7 +115,7 @@ variant workshop description {Enable build of workshop operations} {
 # inherited from libsdl and librsvg
 #
 
-variant x11 conflicts quartz {}
+variant x11_no_quartz conflicts quartz {}
 variant quartz conflicts x11 {}
 
 if {![variant_isset quartz]} {

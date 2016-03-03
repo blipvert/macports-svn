@@ -88,7 +88,7 @@ variant gtksourceview2 description "enable gtksourceview2 support" {
     depends_lib-append      port:gtksourceview2
 }
 
-variant x11 conflicts quartz {
+variant x11_no_quartz conflicts quartz {
     configure.args-append   --without-quartz
 }
 

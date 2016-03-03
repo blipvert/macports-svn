@@ -49,7 +49,7 @@ configure.args  --enable-compile-warnings=minimum
 # based on the variant of gtk2 used for the build
 #
 
-variant x11 conflicts quartz {
+variant x11_no_quartz conflicts quartz {
     require_active_variants port:gtk2 x11
 }
 

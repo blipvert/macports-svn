@@ -165,7 +165,7 @@ variant quartz conflicts x11 gtk2 {
         -DENABLE_OPENGL=OFF
 }
 
-variant x11 conflicts quartz {
+variant x11_no_quartz conflicts quartz {
     require_active_variants port:gtk3 x11
 
     configure.args-append \

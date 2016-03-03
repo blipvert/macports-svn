@@ -66,7 +66,7 @@ variant random_org description "enable random.org support" {
 
 default_variants +random_org
 
-variant x11 conflicts quartz {
+variant x11_no_quartz conflicts quartz {
     require_active_variants port:gtk2 x11
 }
 variant quartz conflicts x11 {

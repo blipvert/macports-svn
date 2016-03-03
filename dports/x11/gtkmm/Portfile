@@ -48,7 +48,7 @@ configure.perl  ${prefix}/bin/perl${pbranch}
 # the corresponding variants for gtk2 change
 #
 
-variant x11 conflicts quartz {}
+variant x11_no_quartz conflicts quartz {}
 variant quartz conflicts x11 {}
 
 if {![variant_isset quartz]} {
