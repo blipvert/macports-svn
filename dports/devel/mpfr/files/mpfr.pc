@@ -1,0 +1,14 @@
+prefix=@@prefix@@
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+version = @@version@@
+
+name = mpfr
+pkgname = mpfr
+
+Name: ${name}
+Version: ${version}
+Description: Multiple-precision floating-point library
+Cflags: -I${includedir}
+Libs: -L${libdir} -lmpfr
