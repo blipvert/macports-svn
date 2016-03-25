@@ -43,14 +43,27 @@ build.cmd           make
 build.target        all PYTHON=${python.bin}
 
 subport mercurial-devel {
-    bitbucket.setup     seanfarley mercurial 8949d73b2e1f
+    bitbucket.setup     seanfarley mercurial 62e73d42bd14
     name                mercurial-devel
     version             3.7.99
-    revision            1
+    revision            4
 
-    conflicts           mercurial
-    checksums           rmd160  655ff126dd0d388e6af168708a80b9231e67efc7 \
-                        sha256  4a1dce9524525e853b47b198be6f4369cb6809f9cd312e5c5cc8e9e3a3e054c9
+    conflicts           mercurial chg
+    checksums           rmd160  9201e77ee0d4c56a4aa117422bc15175d1ef048c \
+                        sha256  18f78e60fcaf41b7c7b33b11c00861c956cf3aba353900d64a204bcad5d94fc1
+
+    # chg is not part of core Mercurial
+    post-build {
+        system -W ${worksrcpath}/contrib/chg "${build.cmd} CC=\"${configure.cc} \
+            [get_canonical_archflags]\" CFLAGS=${configure.cflags} \
+            CPPFLAGS='-DHGPATH=\\\"${prefix}/bin/hg\\\"' \
+            PYTHON=${prefix}/bin/python2.7 HG=${prefix}/bin/hg \
+            HGEXTDIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages/hgext"
+    }
+
+    post-destroot {
+        file copy ${worksrcpath}/contrib/chg/chg ${destroot}${prefix}/bin
+    }
 }
 
 post-destroot {

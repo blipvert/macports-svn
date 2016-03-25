@@ -626,9 +626,10 @@ variant universal {
                                             ui_debug "universal: merge: ${prefixDir}/${fl} differs in ${base1} and ${base2}; assume trivial difference"
                                             copy ${dir1}/${fl} ${dir}
                                         }
-                                        *.jar {
-                                            # jar files can be different because of timestamp
-                                            ui_debug "universal: merge: ${prefixDir}/${fl} differs in ${base1} and ${base2}; assume timestamp difference"
+                                        *.pyc {
+                                            # pyc files should be same across architectures
+                                            # the timestamp is recorded, however
+                                            ui_debug "universal: merge: ${prefixDir}/${fl} differs in ${base1} and ${base2}; assume trivial difference"
                                             copy ${dir1}/${fl} ${dir}
                                         }
                                         *.elc {
@@ -647,6 +648,7 @@ variant universal {
                                         *.xz -
                                         *.gz -
                                         *.zip -
+                                        *.jar -
                                         *.bz2 {
                                             # compressed files can differ due to entropy
                                             switch -glob ${fl} {
@@ -660,6 +662,9 @@ variant universal {
                                                     set cat /usr/bin/gzcat
                                                 }
                                                 *.zip {
+                                                    set cat "/usr/bin/unzip -p"
+                                                }
+                                                *.jar {
                                                     set cat "/usr/bin/unzip -p"
                                                 }
                                                 *.bz2 {

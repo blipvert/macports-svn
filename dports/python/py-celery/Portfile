@@ -6,7 +6,7 @@ PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-celery
-version             3.1.20
+version             3.1.23
 revision            0
 categories-append   devel
 platforms           darwin
@@ -27,8 +27,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  df3d6d98c6626a2ee3f7f765053fb4164bc573bb \
-                    sha256  d02f191c3d92a851c9d2028e91baf2a0f2734cd3b659743d3624011d1ef7a6d5
+checksums           rmd160  37c36295bdfb0a77e229206c63975a47846b031f \
+                    sha256  1a359c815837f9dbf193a7dbc6addafa34612c077ff70c66e3b16e14eebd2418
 
 if {${name} ne ${subport}} {
     # celery depends on pkg_resources from setuptools

@@ -37,10 +37,10 @@ if {${subport} eq ${name}} {
 
     # devel
 
-    github.setup    glfw glfw 5dc9d0f5810864c4048abd2cf2b8ae00e0c26470
-    version         20160228
-    checksums       rmd160 1f2bbb0668de51a5c18808c1b658eb9d893e26ee \
-                    sha256 af6aeb42185d5df0c2ab06ba5a640b6299a871c1490930c235a7fd93f76600bf
+    github.setup    glfw glfw 728a088cd7d8fe5884ed1e30f8dadf1f73cf6e96
+    version         20160318
+    checksums       rmd160 0617efcfb721f9e00fad1b6b0bd6aca1e9218bfc \
+                    sha256 e53867ffeb0a712b6a187cefb0785d0af246f22385d2a79cd8d372c9ea6a4391
 
     # patch to fix install directory for cmake files and docs
 

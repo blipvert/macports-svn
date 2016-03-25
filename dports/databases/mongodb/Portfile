@@ -5,12 +5,10 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 PortGroup           conflicts_build 1.0
 PortGroup           cxx11 1.0
-PortGroup           muniversal 1.0
 
 name                mongodb
 epoch               1
-version             3.2.3
-revision            1
+version             3.2.4
 license             {AGPL-3 OpenSSLException}
 categories          databases
 maintainers         ryandesign
@@ -24,8 +22,8 @@ homepage            http://www.mongodb.org/
 master_sites        http://downloads.mongodb.org/src/
 distname            ${name}-src-r${version}
 
-checksums           rmd160  d67e7100b477c51a1317312d6fd938ccfeebed14 \
-                    sha256  82030ada190095b5d95c0b59e9cf74efe9db602b49d2b8857b06f2683a5227fa
+checksums           rmd160  d27f29b5fce9bb559a0cf84feddabd367515d44e \
+                    sha256  b60743cc641de975c38e6e69ebbef60059ee9fe176cdd98bfab8d5c844dab42c
 
 depends_build       port:scons
 
@@ -33,19 +31,6 @@ depends_lib         port:libpcap \
                     path:lib/libssl.dylib:openssl
 
 license_noconflict  scons
-
-pre-extract {
-    if {${build_arch} eq "i386"} {
-        ui_error "Building ${subport} @${version} for ${build_arch} currently fails."
-        ui_error "See https://jira.mongodb.org/browse/SERVER-22810"
-        return -code error "incompatible architecture"
-    }
-    if {[variant_isset universal]} {
-        ui_error "Building ${subport} @${version} with the universal variant currently fails."
-        ui_error "See https://jira.mongodb.org/browse/SERVER-22810"
-        return -code error "incompatible architecture"
-    }
-}
 
 use_configure       no
 
@@ -64,29 +49,25 @@ conflicts_build     libbson mongo-c-driver mongo-cxx-driver
 build.cmd           ${prefix}/bin/scons
 build.target        all mongobridge mongosniff
 build.args          CC="${configure.cc}" \
+                    CCFLAGS="${configure.cc_archflags}" \
                     CPPPATH="${prefix}/include" \
                     CXX="${configure.cxx}" \
                     LIBPATH="${prefix}/lib" \
+                    LINKFLAGS="${configure.ld_archflags}" \
+                    TARGET_ARCH=${build_arch} \
                     --disable-warnings-as-errors \
                     --libc++ \
                     --osx-version-min=${macosx_deployment_target} \
-                    --ssl
+                    --ssl \
+                    --wiredtiger=on
 
 # Specify a short variant dir because the default variant dir is deeply nested
 # and can be very long, so long that on some systems the build will fail with
 # "Argument list too long"; see https://jira.mongodb.org/browse/SERVER-13829
 build.args-append   VARIANT_DIR=MP
 
-supported_archs     i386 x86_64
-lappend merger_build_args(x86_64) --wiredtiger=on
-lappend merger_build_args(i386) --wiredtiger=off
-foreach arch ${supported_archs} {
-    lappend merger_build_args(${arch}) CCFLAGS='-arch ${arch}' LINKFLAGS='-arch ${arch}' TARGET_ARCH=${arch}
-    lappend merger_destroot_args(${arch}) {*}$merger_build_args(${arch})
-}
-if {![variant_isset universal] && [info exists merger_build_args(${build_arch})]} {
-    build.args-append {*}$merger_build_args(${build_arch})
-}
+# https://jira.mongodb.org/browse/SERVER-22810
+supported_archs     x86_64
 
 destroot.args       {*}${build.args}
 destroot.destdir    --prefix=${destroot}${prefix}
@@ -97,9 +78,6 @@ set mongouser       _mongo
 add_users           ${mongouser} group=${mongouser} realname=MongoDB\ Server
 
 post-destroot {
-    if {[variant_isset universal]} {
-        system -W ${worksrcpath} "lipo -create ${worksrcpath}-i386/mongobridge ${worksrcpath}-x86_64/mongobridge -output mongobridge"
-    }
     xinstall -W ${worksrcpath} mongobridge ${destroot}${prefix}/bin
 
     xinstall -m 755 -o ${mongouser} -g ${mongouser} -d \

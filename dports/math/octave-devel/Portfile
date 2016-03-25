@@ -24,26 +24,30 @@ homepage            http://www.gnu.org/software/octave
 #hg.url              http://hg.savannah.gnu.org/hgweb/octave/
 
 set version_release 4.0.0
-set version_rc      4.0.1-rc3
+set version_rc      4.0.1-rc4
 set version_tip     4.1.0+
 
 if { ${name} eq ${subport} } {
     version         ${version_tip}
-    revision        4
-    hg.tag          12e98e5ebd13
+    revision        5
+    hg.tag          2868abbc88eb
+
+    # see http://savannah.gnu.org/bugs/?41027
+    patchfiles-append   \
+        octave-bug_41027-half.patch
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  173e4f1376ebbbbce553162c7068f72b48ba67af \
-        sha256  8dcf8a3caaffee78492119b57b79981fd26e9c8330fa2ebc0cd219e504ffed81
+        rmd160  0a5fd063e2587d451a1c8bde668e1c9b542d5fde \
+        sha256  58b725674c43ea866c87235da7e7c9a75e9629b3215908c0c8c20aa60ee818b4
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\ntip"
 }
 
 subport octave-devel-rc {
     version         ${version_rc}
-    #revision        0
-    hg.tag          a58d5e6df908
+    revision        1
+    hg.tag          2b66f30a0de7
 
     if {${version_rc} eq ${version_release}} {
         conflicts-append octave-devel-release
@@ -53,10 +57,14 @@ subport octave-devel-rc {
     patchfiles-append \
         patch-e870a68742a6.diff
 
+    # see http://savannah.gnu.org/bugs/?41027
+    patchfiles-append   \
+        octave-bug_41027.patch
+
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  5c6fe167b032eb318458a8223838e123f27525e4 \
-        sha256  90a99019216c612b6f3b1222915769ee8cc9f6a0016a10e4e0781b5510672545
+        rmd160  4bf919790f28f21752381e127cf55b3a5f4d7344 \
+        sha256  4785967cff091dddd7d82dbbd094658a39ad26d4a7219abc1f1bbc4fe696d43a
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\nrc-"
 }
@@ -78,6 +86,18 @@ subport octave-devel-release {
     patchfiles-append \
         patch-e870a68742a6.diff
 
+    # allow osmesa support to at least compile
+    patchfiles-append   \
+        osmesa_mac_fix.patch
+
+    # force "${prefix}/bin/octave-${version} --no-gui-libs" to call octave-cli-${version} instead of octave-cli
+    patchfiles-append   \
+        patch-append_version_cli.diff
+
+    # see http://savannah.gnu.org/bugs/?41027
+    patchfiles-append   \
+        octave-bug_41027.patch
+
     checksums-append               \
         ${hg.tag}${extract.suffix} \
         rmd160  4bbcc004ffdde859b0735e602aac2d01388d0b2c \
@@ -98,8 +118,7 @@ checksums-append \
     sha256  85add8ce0c53e8868d903c28c407d864ca54bd42e8d472e09b1a1bb4b105b741
 
 master_sites        http://hg.savannah.gnu.org/hgweb/octave/archive:octave \
-                    http://hg.savannah.gnu.org/hgweb/octave/gnulib-hg/archive:gnulib \
-use_bzip2           yes
+                    http://hg.savannah.gnu.org/hgweb/octave/gnulib-hg/archive:gnulib
 
 distfiles           \
     ${hg.tag}${extract.suffix}:octave \
@@ -114,21 +133,9 @@ post-extract {
     move ${worksrcpath}/../gnulib-hg-${hg_gnu_tag} ${worksrcpath}/gnulib-hg
 }
 
-# allow osmesa support to at least compile
-patchfiles-append   \
-    osmesa_mac_fix.patch
-
-# see http://savannah.gnu.org/bugs/?41027
-patchfiles-append   \
-    octave-bug_41027.patch
-
 # see http://git.savannah.gnu.org/cgit/gnulib.git/commit/lib/stdio.in.h?id=d6176702c3ffb6c56e6620397470e1b3bd540b10
 patchfiles-append   \
     patch-stdio.in.h.diff
-
-# force "${prefix}/bin/octave-${version} --no-gui-libs" to call octave-cli-${version} instead of octave-cli
-patchfiles-append   \
-    patch-append_version_cli.diff
 
 pre-patch {
     # code located in pre-patch because variants from PortGroup compilers must
@@ -582,22 +589,24 @@ if {${magickDefault}} {
     default_variants-append +graphicsmagick
 }
 
-# remove architecture flags from header file
-if { [variant_exists universal] && [variant_isset universal] } {
-    merger-post-destroot {
-        foreach arch ${universal_archs_to_use} {
-            set hfile ${destroot}-${arch}${prefix}/include/octave-${version}/octave/oct-conf.h
-            reinplace "s:-arch ${arch}::g"   ${hfile}
-            reinplace {s:-m32::g}            ${hfile}
-            reinplace {s:-m64::g}            ${hfile}
+if { ${subport} eq "octave-devel-rc" || ${subport} eq "octave-devel-release" } {
+    # remove architecture flags from header file
+    if { [variant_exists universal] && [variant_isset universal] } {
+        merger-post-destroot {
+            foreach arch ${universal_archs_to_use} {
+                set hfile ${destroot}-${arch}${prefix}/include/octave-${version}/octave/oct-conf.h
+                reinplace "s:-arch ${arch}::g"   ${hfile}
+                reinplace {s:-m32::g}                ${hfile}
+                reinplace {s:-m64::g}                ${hfile}
+            }
         }
-    }
-} else {
-    post-destroot {
-        set hfile ${destroot}${prefix}/include/octave-${version}/octave/oct-conf.h
-        reinplace "s:-arch ${build_arch}::g" ${hfile}
-        reinplace {s:-m32::g}                ${hfile}
-        reinplace {s:-m64::g}                ${hfile}
+    } else {
+        post-destroot {
+            set hfile ${destroot}${prefix}/include/octave-${version}/octave/oct-conf.h
+            reinplace "s:-arch ${build_arch}::g" ${hfile}
+            reinplace {s:-m32::g}                ${hfile}
+            reinplace {s:-m64::g}                ${hfile}
+        }
     }
 }
 

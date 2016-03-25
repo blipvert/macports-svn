@@ -22,14 +22,14 @@ subport py27-hgevolve-devel {
 }
 
 if {[string match "*-devel" $subport]} {
-    bitbucket.setup     marmoute mutable-history a3da15803b7a
+    bitbucket.setup     marmoute mutable-history 9bcb24c3ba8d
     bitbucket.livecheck default
     name                py-hgevolve-devel
     version             5.2.99
-    revision            13
+    revision            16
 
-    checksums           rmd160  c4f3ef28e0f9e70a3c0e295f89e10aef4b24eee0 \
-                        sha256  d7713110ff4a0f197072a7fbcdbb4bdbb3bbebc7a22dd2247259a9a839fac14f
+    checksums           rmd160  b2aa9ab74f27ecdd938574db7c417ac139d18682 \
+                        sha256  efa44082c717890621993a7d3f77f09837979684e939548e81c537e834984efe
 } else {
     bitbucket.setup     marmoute mutable-history 5.3.0
     name                py-hgevolve

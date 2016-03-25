@@ -4,19 +4,20 @@
 PortSystem          1.0
 PortGroup           octave 1.0
 
-octave.setup        database 2.3.2
+octave.setup        database 2.4.1
 platforms           darwin
 license             GPL-3+
-maintainers         nomaintainer
+maintainers         gmail.com:mschamschula openmaintainer
 description         Interface to SQL databases, currently only \
                     postgresql using libpq.
 long_description    ${description}
 
-checksums           rmd160 e0e58800e9f9906ef89afff7526bd70f608de713 \
-                    sha256 922e9c298da92f3ac9596ec4fb0db2acc0f5270aa707b67f0151c2529f658d79
+checksums           rmd160 aae19721bd61b4df84979432669496fe2081b46c \
+                    sha256 76ce81ba5effa438b1b2d521dff94babf97b571910812af73af89e3c7f64bce0
 
-depends_lib-append  port:swig-octave \
-                    path:bin/mysql_config5:mysql5 \
+depends_lib-append  port:octave-struct \
+                    port:swig-octave \
+                    path:bin/mysql_config:mysql5 \
                     port:sqlite3 \
                     port:unixODBC
 
@@ -24,7 +25,7 @@ depends_lib-append  port:swig-octave \
 # versions < 8.3 removed as of 2.3.2.
 
 set postgresql_suffixes {83 84 90 91 92 93 94}
-set default_postgresql_suffix 92
+set default_postgresql_suffix 94
 
 set postgresql_ports {}
 set postgresql_variants {}

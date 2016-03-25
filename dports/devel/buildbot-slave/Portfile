@@ -6,7 +6,7 @@ PortGroup               python 1.0
 
 name                    buildbot-slave
 version                 0.8.12
-revision                1
+revision                2
 categories              devel python
 platforms               darwin
 supported_archs         noarch
@@ -38,6 +38,9 @@ set sharedir            ${prefix}/share/${subport}
 set docdir              ${prefix}/share/doc/${subport}
 set plistfile           org.macports.buildslave.template.plist
 
+# Add a user that can be used to run the buildbot slave
+add_users               buildbot group=buildbot
+
 post-extract {
     file mkdir ${worksrcpath}/macports
     copy ${filespath}/${plistfile} ${worksrcpath}/macports/${plistfile}
@@ -59,22 +62,23 @@ post-destroot {
 }
 
 # note some tests need py-mock
-#depends_test            port:py${python.version}-mock
+#depends_test           port:py${python.version}-mock
 test.run                yes
 test.env                PYTHONPATH=.
 test.cmd                ${prefix}/bin/trial-${python.branch}
 test.target             buildslave.test
 
-livecheck.type  regex
-livecheck.url   https://pypi.python.org/pypi/${name}/
-livecheck.regex {buildbot\/(\d+\.\d+(?:\.\d+)(?:b\d))}
+livecheck.type          regex
+livecheck.url           https://pypi.python.org/pypi/${name}/
+livecheck.regex         {buildbot-slave\/(\d+\.\d+(?:\.\d+))\"}
+#livecheck.regex        {buildbot-slave\/(\d+\.\d+(?:\.\d+)(?:b\d))}
 
 notes "
 
 An example launchd plist file is available in ${sharedir}.  After you have
-created your build slave, edit the UserName and WorkingDirectory fields to
-appropriate values. As the root user, copy it to /Library/LaunchDaemons and
-instruct launchd to run it with:
+created your build slave, edit the WorkingDirectory field to appropriate
+values. As the root user, copy it to /Library/LaunchDaemons and instruct
+launchd to run it with:
 sudo launchctl load -w /Library/LaunchDaemons/your.plist.name
 
 "

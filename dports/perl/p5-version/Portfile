@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 epoch               2
 perl5.branches      5.22
-perl5.setup         version 0.9914
+perl5.setup         version 0.9916
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl extension for Version Objects
@@ -17,5 +17,5 @@ long_description    Version objects were added to Perl in 5.10. \
 
 platforms           darwin
 
-checksums           rmd160  455966ff7a7f00180bb12e1d319bc980453296ff \
-                    sha256  ad883cc38f0320cf8707ac3b5629c01a53a405a15edad6869a82de64f5e6766f
+checksums           rmd160  059b533e703ed8dd554de9251f06969ff73415c4 \
+                    sha256  723cfb7ce1ef0c97d68274f8fbd49b94756327316fd0d8c10cf542dff1f801e0

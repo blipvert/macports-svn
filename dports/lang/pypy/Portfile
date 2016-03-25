@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                pypy
-version             4.0.1
+version             5.0.1
 categories          lang python devel
 license             MIT PSF
 maintainers         jmr openmaintainer
@@ -20,9 +20,9 @@ homepage            http://pypy.org/
 master_sites        https://bitbucket.org/pypy/pypy/downloads/
 use_bzip2           yes
 distname            ${name}-${version}-src
-checksums           md5 f5b35ebedee2fa4fdfee82733be59996 \
-                    rmd160 f821a0bf24ddead5585db77f7825c8fbf0d2f2d3 \
-                    sha256 29f5aa6ba17b34fd980e85172dfeb4086fdc373ad392b1feff2677d2d8aea23c
+checksums           md5 798c6e83536a5fa5ed7d6efb4d06db1a \
+                    rmd160 cf1e761f26bdec0b7da28fe55a9e87dd03b0213a \
+                    sha256 1573c9284d3ec236c8e6ef3b954753932dff29462c54b5885b761d1ee68b6e05
 
 depends_build       port:pkgconfig
 depends_lib         port:libffi \
@@ -35,21 +35,23 @@ depends_lib         port:libffi \
 patchfiles          darwin.py.diff \
                     make_output.diff \
                     configure.py.diff \
-                    ffiplatform.py.diff
+                    ffiplatform.py.diff \
+                    cbuild.py.diff
 
 post-patch {
-    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/lib_pypy/cffi/ffiplatform.py
+    reinplace "s|__PREFIX__|${prefix}|" ${worksrcpath}/lib_pypy/cffi/ffiplatform.py \
+                                        ${worksrcpath}/ctypes_configure/cbuild.py
 }
 
 use_configure       no
 
 # use pypy to build if it's already installed
-if {[file executable ${prefix}/lib/pypy/pypy]} {
-    build.cmd       ${prefix}/lib/pypy/pypy
-} else {
+#if {[file executable ${prefix}/lib/pypy/pypy]} {
+#    build.cmd       ${prefix}/lib/pypy/pypy
+#} else {
     depends_build-append port:python27
     build.cmd       ${prefix}/bin/python2.7
-}
+#}
 
 # a lot of memory is used before the C compiler even runs, so limit build.jobs
 # according to available memory more tightly than the default

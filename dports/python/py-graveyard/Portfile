@@ -48,6 +48,9 @@ py-coverage             3.7.1_1     25 26 31 32 33
 py-dispel4py-devel      0.0.1-3_1   26
 py-dispel4py-registry-devel \
                         0.0.1-3_1   26
+py-django               1.7.1_1     26 33
+py-django-nose          0.7.0_1     26
+py-django-htmlmin       1.2_1       26
 py-eggtrayicon          2.25.3_3    26
 py-fipy                 3.1_1       26
 py-flake8               2.4.0_1     26 33
@@ -59,6 +62,7 @@ py-gensim               0.11.1_1    26 33
 py-geopandas            0.1.1_1     33
 py-gmpy                 1.17_1      25 26 31 32 33
 py-gmpy2                2.0.7_1     26 31 32 33
+py-gobject3             3.18.2_1    33
 py-gtkhtml2             2.25.3_3    26
 py-gtkspell             2.25.3_4    26
 py-http-parser          0.8.3_1     26 31 32 33
@@ -68,6 +72,7 @@ py-kapteyn              2.2_1       26
 py-libcloud             0.17.0_1    26 33
 py-matplotlib           1.5.0_1     26 33
 py-memprof              0.3.3_1     26 32 33
+py-mdp-toolkit          3.3_2       26 33
 py-mitmproxy            0.10.1_2    26
 py-mock                 1.0.1_1     25 31 32 33
 py-netlib               0.10.1_1    26

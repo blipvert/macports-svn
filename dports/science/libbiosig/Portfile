@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 
 name                libbiosig
-version             1.7.3
+version             1.7.7
 categories          science
 platforms           darwin
 license             GPL-3
@@ -22,8 +22,8 @@ master_sites.mirror_subdir \
                     /BioSig%20for%20C_C++/src
 distname            biosig4c++-${version}.src
 worksrcdir          biosig4c++-${version}
-checksums           rmd160  45b8dc638acf40d78e46f0867596fdd7bd6ed634 \
-                    sha256  c3debc3315dca2ad915bd0e6aac55df29c87b2b2be028f8b8b72a136f1b79c97
+checksums           rmd160  4819cab9e9eaac73a62c65a02229396a2331d949 \
+                    sha256  b5574b5491964416853b21680c7259d511d5e17908e7d972f14ca6e5609b9727
 
 depends_build-append \
                     port:gawk

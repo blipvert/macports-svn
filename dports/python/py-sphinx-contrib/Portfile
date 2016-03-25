@@ -5,9 +5,9 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           bitbucket 1.0
 
-bitbucket.setup     birkenfeld sphinx-contrib 9a603c95191e
+bitbucket.setup     birkenfeld sphinx-contrib 6d1c958ca7bd
 name                py-sphinx-contrib
-version             0.0.20160229
+version             0.0.20160313
 categories-append   textproc devel
 license             BSD
 maintainers         sean openmaintainer
@@ -19,8 +19,8 @@ long_description \
 platforms           darwin
 supported_archs     noarch
 
-checksums           rmd160  d8526482459de6c57c73675a86fa4cc31ee25ca9 \
-                    sha256  8e013686c9f1b0b7006e347f44a8ef043b6149b7fa2fea77a917d9eef00a72ad
+checksums           rmd160  5075e15124af8da7692191a7aa03953025d74570 \
+                    sha256  da6c8709dea6edb5c89d3ad946f2014883a2d3cb4428ff9e03c6e35fd1ddcbf5
 
 python.versions     27
 

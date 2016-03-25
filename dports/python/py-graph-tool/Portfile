@@ -8,8 +8,9 @@ PortGroup           compiler_blacklist_versions 1.0
 
 set realname        graph-tool
 name                py-${realname}
-version             2.12
-epoch               20151108
+version             2.13
+revision            1
+epoch               20160307
 categories          python science
 platforms           darwin
 license             GPL-3
@@ -22,9 +23,9 @@ long_description    graph-tool is an efficient python module for manipulation \
 homepage            http://graph-tool.skewed.de
 master_sites        http://downloads.skewed.de/graph-tool/
 use_bzip2           yes
-checksums           md5     b73cd472dbda6f9bf77038ff5a26b157 \
-                    sha1    62efc1d0cf02588a9f7f1408794df9c9f3495344 \
-                    rmd160  f4f8b3c9c378bd1d27e23ac363c3cca4bc279d38
+checksums           md5     eb36e9dccc28c104808100abf45fc8f7 \
+                    sha1    c2e26d1087f41d7d138bd3ce77af1c518367dc13 \
+                    rmd160  eb7dcaefa46c02ed5e1bc2a3be55f94c320764b3
 distname            ${realname}-${version}
 
 python.versions     27 34 35
@@ -38,7 +39,7 @@ if {${os.major} <= 12 && ${os.platform} eq "darwin"} {
                     rmd160  cd2e8506522821750d70a97b951254f0a133d218
 } else {
     if {${name} ne ${subport}} {
-        compiler.blacklist *gcc* {clang < 700} {macports-clang-3.[0-6]}
+        compiler.blacklist *gcc* {clang <= 700.1.81} {macports-clang-3.[0-6]}
         compiler.fallback-append macports-clang-3.7
         configure.cxxflags-append -std=c++14 -stdlib=libc++
     }
@@ -71,6 +72,13 @@ if {${name} ne ${subport}} {
                          PYTHON_CPPFLAGS=-I${python.include} \
                          PYTHON_LDFLAGS="-L${python.libdir}/.. -lpython${python.branch}" \
                          PYTHON_EXTRA_LDFLAGS="-L${python.libdir}/.. -lpython${python.branch}"
+    # With python2.7 PYTHON_EXTRA_LIBS is determined to be
+    # '-u _PyMac_Error Python.framework/Versions/2.7/Python'. Not clear whether
+    # python2.7 or py-graph-tool's configure script is to blame, but we can easily
+    # work around this:
+    if {${python.version} eq "27"} {
+        configure.env-append PYTHON_EXTRA_LIBS="-u _PyMac_Error"
+    }
     configure.cppflags-append -I${prefix}/include -I${python.include}/..
     configure.ldflags-append -L${prefix}/lib
     configure.args-append --with-boost=${prefix} --exec-prefix=${python.prefix}

@@ -9,7 +9,7 @@ name                cmake
 categories          devel
 license             BSD
 installs_libs       no
-maintainers         michaelld css
+maintainers         michaelld
 description         Cross-platform make
 set base_long_description \
     "An extensible, open-source system that manages the build \
@@ -23,22 +23,21 @@ dist_subdir         cmake
 
 subport cmake-devel {}
 
-set branch          3.4
+set branch          3.5
 
 if {${subport} eq ${name}} {
 
     # release
 
-    version         ${branch}.3
-    checksums       rmd160 4328fe65c290f641ee37c21ddd117bde33533ed8 \
-                    sha256 b73f8c1029611df7ed81796bf5ca8ba0ef41c6761132340c73ffe42704f980fa
+    version         ${branch}.1
+    checksums       rmd160 f212f91ca1e3d039b2cfccee4f235c45eeb6b677 \
+                    sha256 93d651a754bcf6f0124669646391dd5774c0fc4d407c384e3ae76ef9a60477e8
+
+    master_sites    http://www.cmake.org/files/v${branch}/
+    conflicts       cmake-devel
 
     long_description ${base_long_description} \
         The ${subport} release port is updated roughly every few months.
-   
-    conflicts       cmake-devel
-
-    master_sites    http://www.cmake.org/files/v${branch}/
 
     livecheck.type  regex
     livecheck.regex ${name}-(\[0-9.\]+)${extract.suffix}
@@ -47,12 +46,13 @@ if {${subport} eq ${name}} {
 } else {
 
     # devel
-    version         20160229
+
+    version         20160324
     set dist_branch 3.5
-    set dist_date   20160228
-    set dist_hash   g84a28f
-    checksums       rmd160 2e583e9daa0bddad344ca90794bfac8a7507e5da \
-                    sha256 8b1a590c95784155a5a6aa64666502c2da9815afbea155a76fa7327fcb055c26
+    set dist_date   20160324
+    set dist_hash   gfed39
+    checksums       rmd160 72749cc5b492309c6232a8a6351ce2ad3ff712bf \
+                    sha256 3a81aee0e4ec9c46e15ea2a719a0c97d0c60854883bfe69e8a4a8e317017a5c4
 
     master_sites    http://www.cmake.org/files/dev/
     distname        ${name}-${dist_branch}.${dist_date}-${dist_hash}

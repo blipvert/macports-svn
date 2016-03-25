@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           python 1.0
 
-github.setup        PyMVPA PyMVPA 2.4.1 upstream/
+github.setup        PyMVPA PyMVPA 2.4.3 upstream/
 
 name                py-pymvpa
 revision            0
@@ -29,8 +29,8 @@ long_description    PyMVPA is a Python package intended to ease statistical \
 
 homepage            http://www.pymvpa.org
 
-checksums           rmd160  8b3133a925e202fb779967c1df46013281d2fd36 \
-                    sha256  f76a3d7420880b139e060253bd0fc68fcd7c3d1675098f568843c9c2a0f2d65b
+checksums           rmd160  7153fb901134e00de2af95d7dbe644808ea63438 \
+                    sha256  365c1cc5aebf6ca24a6ade11ef65899e22eb255cf85be61a6b06171336a1b61c
 
 if {${name} ne ${subport}} {
     depends_build-append \
