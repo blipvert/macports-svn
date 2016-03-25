@@ -5,7 +5,6 @@ PortSystem      1.0
 PortGroup       compiler_blacklist_versions 1.0
 PortGroup       texlive 1.0
 PortGroup       blip 1.0
-blip.revision	9
 
 # luajittex requires muniversal (and some patches to configure
 # scripts) to build universal
@@ -14,6 +13,8 @@ PortGroup       muniversal 1.0
 name            texlive-bin
 version         2015
 revision        8
+
+blip.revision	10
 
 categories      tex
 maintainers     dports
@@ -84,6 +85,7 @@ patchfiles-append  patch-texk_chktex_Makefile.in.diff \
                    patch-texk_texlive_linked_scripts_Makefile.in.diff \
                    patch-texk_texlive_tl_scripts_Makefile.in.diff \
                    patch-texk_xdvik_xdvi-sh.in.diff \
+                   patch-texk_kpathsea_kpathsea.pc.in.diff \
 
 # patches to luajit/luajittex's config scripts to correctly detect
 # architecture in universal builds
