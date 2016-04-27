@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                vips
-version             8.2.2
+version             8.3.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         VIPS is an image processing library.
 long_description    VIPS is an image processing library. It is good for \
@@ -17,8 +17,8 @@ license             LGPL-2.1+
 homepage            http://www.vips.ecs.soton.ac.uk
 master_sites        ${homepage}/supported/${branch}/
 
-checksums           rmd160  f0cccbb874e7dbce736508bec082acdafc9736dc \
-                    sha256  0f688a34e99714ff0901cba8cdf93ec9878447e33dea122f4b226416550a6389
+checksums           rmd160  adb3602eaca3257566fe2f56b041fb3b764c5851 \
+                    sha256  d6ca79b1c5d78f33ebb6d7d3d6948a3bd7ade1c0e09fd162707b1023e17243ec
 
 depends_build       port:gtk-doc \
                     port:pkgconfig
@@ -27,18 +27,21 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     path:lib/pkgconfig/pango.pc:pango \
                     port:cfitsio \
                     port:fftw-3 \
+                    port:giflib \
                     port:ImageMagick \
                     port:jpeg \
                     port:lcms2 \
                     port:libexif \
                     port:libgsf \
                     port:libpng \
+                    port:librsvg \
                     port:libtool \
                     port:libxml2 \
                     port:matio \
                     port:openexr \
                     port:openslide \
                     port:orc \
+                    port:poppler \
                     port:tiff \
                     port:zlib
 
@@ -69,6 +72,12 @@ variant python34 description {Install Python 3.4 interface} {
     depends_lib-append      port:py34-gobject3
     post-destroot {
         install_pygi        3.4
+    }
+}
+variant python35 description {Install Python 3.5 interface} {
+    depends_lib-append      port:py35-gobject3
+    post-destroot {
+        install_pygi        3.5
     }
 }
 default_variants    +python27

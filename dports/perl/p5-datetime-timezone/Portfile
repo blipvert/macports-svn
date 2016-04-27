@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 epoch               5
 perl5.branches      5.22
-perl5.setup         DateTime-TimeZone 1.95
+perl5.setup         DateTime-TimeZone 1.98
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
 supported_archs     noarch
@@ -19,8 +19,8 @@ long_description    This class is the base class for all time zone \
 
 platforms           darwin
 
-checksums           rmd160  91940e4e70cf87389af785730ef4df0cee31229d \
-                    sha256  de2b1888718c7a0383060f250589b6ea36fa7afa2be9c4e1b06d29e05b25d4f1
+checksums           rmd160  09ece0121a74b103afd0f843dd730a418f2b3bba \
+                    sha256  8d6a8289b2535d0dbe1579cc426bab95788eb482dd039b164aed01ad2e5b65c2
 
 if {${perl5.major} != ""} {
     depends_build-append \

@@ -6,7 +6,7 @@ PortGroup           gobject_introspection 1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                vte
-version             0.43.2
+version             0.44.1
 set branch          [join [lrange [split $version .] 0 1] .]
 maintainers         devans openmaintainer
 categories          gnome
@@ -24,8 +24,8 @@ master_sites        gnome:sources/$name/$branch/
 
 use_xz              yes
 
-checksums           rmd160  b980f9b462335a329a679e77852c241c0351d753 \
-                    sha256  1c133253d1a6b90df8b0042c96c141959484225f449678d3841f125e574e2c36
+checksums           rmd160  7a3a4cb3e327bb0bfb4edfc82ce4165dcfcf2d1c \
+                    sha256  712dd548339f600fd7e221d12b2670a13a4361b2cd23ba0e057e76cc19fe5d4e
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -36,7 +36,6 @@ depends_build       port:pkgconfig \
 
 depends_lib         port:gtk3 \
                     port:gnutls \
-                    port:pcre2 \
                     port:zlib \
                     port:vala
 
@@ -61,7 +60,6 @@ configure.cmd       ./autogen.sh
 
 configure.args      --disable-Bsymbolic \
                     --disable-silent-rules \
-                    --with-pcre2 \
                     --enable-vala=yes
 
 configure.cflags-append -fstrict-aliasing
@@ -84,12 +82,14 @@ platform darwin {
     if {${configure.cxx_stdlib} eq "libstdc++"} {
         # vte 0.43.1+ build fails on platforms supporting libstdc++ (#50492)
         version             0.43.0
-        revision            1
+        revision            2
         checksums           rmd160  d9a1eb6d6d5cbb39e04f625d22e43315500750b8 \
                             sha256  2f10ae4148633e9ee458639f72cf2929703d413b95eee416fd6f03db8c4d4ab9
         patchfiles          patch-src-Makefile.am-0.43.0.diff \
                             patch-src-pty.cc-0.43.0.diff \
                             patch-src-vteutils.cc-0.43.0.diff
+        configure.args-append \
+                            --without-pcre2
         livecheck.type      none
     } else {
         livecheck.type      gnome

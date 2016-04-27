@@ -5,6 +5,7 @@ PortSystem          1.0
 
 name                proj
 version             4.9.2
+revision            1
 set datumgrid_version 1.5
 categories          gis
 platforms           darwin
@@ -37,6 +38,10 @@ pre-destroot {
 }
 
 configure.args      --mandir=${prefix}/share/man
+
+post-destroot {
+    xinstall -m 644 ${worksrcpath}/src/projects.h ${destroot}${prefix}/include/
+}
 
 livecheck.type      regex
 livecheck.url       ${master_sites}

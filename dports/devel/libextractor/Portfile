@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                libextractor
 version             1.3
-revision            1
+revision            2
 categories          devel
 license             GPL-3+
 maintainers         ryandesign openmaintainer
@@ -18,7 +18,7 @@ long_description \
    actual extraction, and to be trivially extendable by linking against \
    external extractors for additional file types.
 
-homepage            http://gnunet.org/libextractor/
+homepage            http://www.gnu.org/software/libextractor/
 master_sites        gnu
 platforms           darwin
 
@@ -52,7 +52,8 @@ depends_lib         port:bzip2 \
                     port:zlib
 
 patchfiles          patch-configure.diff \
-                    patch-src-plugins-html_extractor.c.diff
+                    patch-src-plugins-html_extractor.c.diff \
+                    patch-src-plugins-jpeg_extractor.c.diff
 
 configure.args      --enable-ffmpeg \
                     --enable-glib \

@@ -19,10 +19,11 @@ dist_subdir         volk
 
 if {${name} eq ${subport}} {
 
-    github.setup    gnuradio volk 1.2.1 v
+    github.setup    gnuradio volk 1.2.2 v
     checksums       \
-        rmd160 e1b2ef30b4ba18df4afe36a552d13ba900c9431d \
-        sha256 1a5a263258b7dea8cdb4e2256fbbe95d678999db93245279c1bf8503935401ba
+        rmd160 ba5e73686ea80a479bfa0dd545b71b3e3b85a9d9 \
+        sha256 f7f186205e05dc62448cd138a38cc4434142e8dd7c3eb914b79689b3055f1152
+
     # bump the epoch because I moved the version from 20150707 to 1.0.1
     epoch           1
     long_description ${long_description} ${subport} \
@@ -33,11 +34,11 @@ provides the release version, which is typically updated every month or so.
 
 subport volk-devel {
 
-    github.setup    gnuradio volk b1b69e1ae35aff1c0e0758b4900617ea18138dbb
-    version         20160218
+    github.setup    gnuradio volk 9e7e39f870a0bfb1439cc6fdd821a442201121de
+    version         20160412
     checksums       \
-        rmd160 f1a9a063b3d321912e143eb3bdbe906ed0a6f211 \
-        sha256 1c546b8eb1a0406b86a7c02d5e9dfea65fc3c9f2208f054323df23fab6ade222
+        rmd160 83c984564e35c8342a02bf6aa1350759c81fb780 \
+        sha256 a06dbb126410ce0a93f81faa373b0dfc114ca1c38c61dde4ee1bddc13d1b2875
 
     conflicts       volk
     long_description ${long_description} ${subport} \

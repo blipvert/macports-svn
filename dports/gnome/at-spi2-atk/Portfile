@@ -5,18 +5,17 @@ PortSystem          1.0
 
 name                at-spi2-atk
 # you probably want to keep this at the same version as at-spi2-core
-version             2.18.1
+version             2.20.1
 
-checksums           rmd160  e762b507a6c6db52821d462f56be965ba5e356ce \
-                    sha256  c4b15f9386d34d464ddad5f6cc85669742c016df87141ceee93513245979c12d
+checksums           rmd160  94b60f5283d457aa327f69ec47fbd713f0e8a7fc \
+                    sha256  2358a794e918e8f47ce0c7370eee8fc8a6207ff1afe976ec9ff547a03277bf8e
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Gnome Accesibility Technology Service
-long_description \
-   'at-spi' is a part of the Gnome Accessibility Project.  It provides a \
-   Service Provider Interface for the Assistive Technologies available on \
-   the GNOME platform, and a library against which applications can be linked.
+long_description    'at-spi' is a part of the Gnome Accessibility Project.  It provides a \
+                    Service Provider Interface for the Assistive Technologies available on \
+                    the GNOME platform, and a library against which applications can be linked.
 maintainers         devans openmaintainer
 categories          gnome
 platforms           darwin
@@ -36,5 +35,7 @@ patchfiles          configure.ac.patch
 
 use_autoreconf      yes
 autoreconf.args     -fvi
+
+configure.args      --disable-silent-rules
 
 livecheck.type      gnome

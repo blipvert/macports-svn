@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22
-perl5.setup         DateTime-Format-Strptime 1.64
+perl5.setup         DateTime-Format-Strptime 1.67
 license             Artistic-2
 maintainers         nomaintainer
 description         Parse and format strp and strf time patterns
@@ -18,8 +18,8 @@ long_description    This module implements most of strptime(3), the \
 
 platforms           darwin
 
-checksums           rmd160  3923cc7a2b978c3f7805fea81e1faa4d53dc6923 \
-                    sha256  b7168c3740d39f07d2c7e36797c296184fd1cf20d4d9305c021bd7ee719a5400
+checksums           rmd160  e5752bdd67cb6ba5fa4192f33ba4d3050c2e67c4 \
+                    sha256  bedc31384dac1ab739edcaa7155411971b513d5d2ee323489bc3257cede07946
 
 if {${perl5.major} != ""} {
     depends_build-append \

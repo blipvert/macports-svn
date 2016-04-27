@@ -3,7 +3,7 @@
 PortSystem 1.0
 
 name		nmap
-version		7.10
+version		7.12
 categories	net
 maintainers	darkart.com:opendarwin.org geeklair.net:dluke
 description	Port scanning utility for large networks
@@ -26,26 +26,23 @@ long_description Nmap is a utility for port scanning large networks, although \
 master_sites	http://download.insecure.org/nmap/dist/ \
 		ftp://nuxi.ucdavis.edu/pub/misc/
 
-checksums	md5	4fbc455d3f097755fca9d56ae60fa5bc \
-		sha1	f4d7bf3710b9a00d0a8958467d331806af39591b \
-		rmd160	a0f725026eb35e5a59ffefc69af352b672f8adc6 \
-		sha256	58cf8896d09057d1c3533f430c06b22791d0227ebbb93dede2ccb73693ed4b4b
+checksums	md5	0764f4dabe7cccda3c49fc3990b62a8a \
+		sha1	0c25e4089f93adec2ad50e99b92dc8c5bf85c231 \
+		rmd160	8cab24dc5bd69cff06f235b5166a511f5bf2865f \
+		sha256	63df082a87c95a189865d37304357405160fc6333addcf5b84204c95e0539b04
 
 depends_lib	port:libpcap \
-		path:lib/libssl.dylib:openssl \
-		port:pcre \
 		port:zlib \
 		port:apr \
-		port:subversion
 
 use_bzip2	yes
 
 configure.args	--without-zenmap --without-ndiff \
 		--mandir=\\\${prefix}/share/man \
 		--infodir=\\\${prefix}/share/info \
-		--with-openssl=${prefix} \
-		--with-libpcre=${prefix} \
-		--with-liblua=included
+		--with-liblua=included \
+		--without-subversion
+		
 
 # nmap's configure script in nselib-bin does not respect --with-liblua=included
 # as with many ports, configure fails if nawk is installed, force use of system awk
@@ -54,14 +51,22 @@ configure.env ac_cv_header_lua_h=no ac_cv_prog_AWK=awk
 use_parallel_build	no
 configure.ccache	no
 
-variant no_ssl	description {build without ssl support} {
-			configure.args-delete --with-openssl=${prefix}
-			depends_lib-delete path:lib/libssl.dylib:openssl
+#- add back +ssl and +pcre once we remove the compatibility variants
+default_variants +subversion
+
+variant ssl description {build with ssl support} {
+			configure.args-append --with-openssl=${prefix}
+			depends_lib-append path:lib/libssl.dylib:openssl
 		}
 
-variant no_pcre	description {build without pcre support} {
-			configure.args-delete --with-pcre=${prefix}
-			depends_lib-delete port:pcre
+variant pcre description {build with pcre support} {
+			configure.args-append --with-pcre=${prefix}
+			depends_lib-append port:pcre
+		}
+
+variant subversion description {build with subversion (nmap-update) support} {
+			configure.args-delete --without-subversion
+			depends_lib-append port:subversion
 		}
 
 variant zenmap description {build zenmap in addition to nmap} {
@@ -69,3 +74,13 @@ variant zenmap description {build zenmap in addition to nmap} {
 			configure.python ${prefix}/bin/python2.7
 			depends_lib-append port:py27-pygtk
 		}
+
+#- remove after March 2017, backwards compatibility for previous variants
+variant no_ssl description {Legacy compatibility variant} {}
+if {![variant_isset no_ssl]} {
+	default_variants +ssl
+}
+variant no_pcre description {Legacy compatibility variant} {}
+if {![variant_isset no_pcre]} {
+	default_variants +pcre
+}

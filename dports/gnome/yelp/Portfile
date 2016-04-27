@@ -4,8 +4,8 @@
 PortSystem          1.0
 
 name                yelp
+version             3.20.1
 license             GPL-2
-version             3.18.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Help browser for GNOME.
 long_description    Yelp is the default help browser for the \
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b6f529d62f612b64df959d1f637fa7e73d97cb5d \
-                    sha256  ba3a4eb4717c0ecf4a2e40eff0963fcd12c700c4fb80b83ecaad8b7032256880
+checksums           rmd160  c5d59421b9a1755cc301c34c5fbbbfaea60ca1d6 \
+                    sha256  dda0b051ad32908cb9d894d1db3ffdac69b21849b8a6a9a74d9669b017f608c2
 
 depends_build       port:pkgconfig \
                     port:intltool \

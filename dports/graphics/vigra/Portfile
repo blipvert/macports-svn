@@ -10,6 +10,7 @@ PortGroup           github 1.0
 
 github.setup        ukoethe vigra 1-11-0 Version-
 version             [strsed ${github.version} {g/-/./}]
+revision            1
 categories          graphics
 platforms           darwin
 license             MIT
@@ -36,6 +37,8 @@ depends_lib         port:jpeg \
                     port:hdf5
 
 cmake.out_of_source yes
+
+patchfiles          patch-include-vigra-hdf5impex.hxx.diff
 
 post-patch {
     reinplace "s|@DOCDIR@|${prefix}/share/doc/${name}|g" ${worksrcpath}/config/vigra-config.in

@@ -21,8 +21,7 @@ dist_subdir         gnuradio
 
 if {${subport} eq ${name}} {
 
-    github.setup    gnuradio gnuradio 3.7.9.1 v
-    revision        1
+    github.setup    gnuradio gnuradio 3.7.9.2 v
 
     long_description    ${description}: \
         This port is kept up with the GNU Radio release, currently ${version}, which is typically updated every few months.
@@ -30,8 +29,8 @@ if {${subport} eq ${name}} {
     conflicts       gnuradio-next gnuradio-devel
 
     checksums \
-        rmd160 6b91a3e53b542045b1fad6c4953f7bdda974759c \
-        sha256 2da66524120ad47a6145e346a73f4f8eca497e0866ca5471978b52adcfbccb70
+        rmd160 ce3deac2585ef4cc83873c315f6c6900842d7ea7 \
+        sha256 7190a35a61148706ada2e1a5040fb91963f435097ad692e32f3b2cbf6b290714
 
     # set the version override string
 
@@ -52,11 +51,11 @@ subport gnuradio-devel {
     name                gnuradio-devel
     conflicts           gnuradio gnuradio-next
 
-    github.setup        gnuradio gnuradio 64a702e19d1e8e1b948e6ef76e98dff41837bb92
-    version             20160309
+    github.setup        gnuradio gnuradio bdf85171b8a35004cdbf634f48ff696787b5fbde
+    version             20160414
     checksums \
-        rmd160 03539013f294206cda13843ac2add3e1a7ac91ed \
-        sha256 20c90cd6926f76cb3570b74b01c213df92d32ae9339eec9b5f45b1bab951c4e6
+        rmd160 561c06b74eb71c8da69fd4aa6b0410efff8a458d \
+        sha256 3262b80147b0353eb8d0cd819d4f25c714111f886648623e6e0b581353831615
 
     # set the version override string
 
@@ -72,11 +71,11 @@ subport gnuradio-next {
     name                gnuradio-next
     conflicts           gnuradio gnuradio-devel
 
-    github.setup        gnuradio gnuradio 61ac8a9a685ef64db3d4478f4072b705d059e6ec
-    version             20160309
+    github.setup        gnuradio gnuradio d13de2faffc6e9c50d353e1c3567d688b326b805
+    version             20160414
     checksums \
-        rmd160 1728ecc81d50e70825965186442cda76115b843c \
-        sha256 eba44512820ff45f0cdf0dc193eeaa01a74a947daf36953558d0ed4abfb415c5
+        rmd160 b167bca7199dbb690501716fff7d8de4fc4f6f2f \
+        sha256 09ae28cd8ccad4ce5584c36389d642020e2a5ae15e99a9cc7c357a13bf425635
 
     # set the version override string
 

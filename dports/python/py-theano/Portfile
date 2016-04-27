@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-theano
-version             0.8.0
+version             0.8.2
 revision            0
 categories-append   devel
 platforms           darwin
@@ -19,18 +19,19 @@ description         Optimizing compiler for evaluating mathematical expressions 
 long_description    ${description}
 
 homepage            http://deeplearning.net/software/theano/
-master_sites        pypi:T/Theano
+master_sites        https://pypi.python.org/packages/30/3d/2354fac96ca9594b755ec22d91133522a7db0caa0877165a522337d0ed73
 
 distname            Theano-${version}
 
-checksums           rmd160  9e6c7fb4c78f1f1e43152cca95afeb484ae95b1e \
-                    sha256  87f117277ebc3a3cd5394d2ae3e65a2aa3f8da3265a33e2a5c1ee63a9e6bceb5
+checksums           rmd160  3ba9c49fe7149e5a6b773d9a394bbe6752d9e3ba \
+                    sha256  7463c8f7ed1a787bf881f36d38a38607150186697e7ce7e78bfb94b7c6af8930
 
 if {${name} ne ${subport}} {
     depends_build-append \
                         port:py${python.version}-setuptools
     depends_lib-append  port:py${python.version}-numpy \
-                        port:py${python.version}-scipy
+                        port:py${python.version}-scipy \
+                        port:py${python.version}-six
 
     # Fix permissions (#43188)
     post-extract {

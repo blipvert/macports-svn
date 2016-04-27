@@ -3,11 +3,12 @@
 
 PortSystem          1.0
 PortGroup           active_variants 1.1
+PortGroup           compiler_blacklist_versions 1.0
 PortGroup           gobject_introspection 1.0
 
 name                gtksourceview3
 set gname           gtksourceview
-version             3.18.2
+version             3.20.2
 license             LGPL-2.1+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         devans openmaintainer
@@ -27,15 +28,11 @@ master_sites        gnome:sources/${gname}/${branch}/
 distname            ${gname}-${version}
 use_xz              yes
 
-checksums           rmd160  1d32c6147346147fb90f323a7f8e7b3cbf72afac \
-                    sha256  60f75a9f0039e13a2281fc595b5ef7344afa06732cc53b57d13234bfb0a5b7b2
+checksums           rmd160  a4273706663a4e634ef7225295579c734fd2aa1d \
+                    sha256  9e44369c4c0a9077650c1fee4972ef2760a5c34a17c05be8ccf25db95a8e7d0f
 
 depends_build       port:pkgconfig \
-                    port:intltool \
-                    port:gtk-doc \
-                    port:autoconf \
-                    port:automake \
-                    port:libtool
+                    port:gtk-doc
 
 depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:gettext \
@@ -47,13 +44,13 @@ gobject_introspection yes
 
 patchfiles          patch-no-as-needed.diff
 
-# reconfigure using upstream autogen.sh for intltool 0.51 compatibility
+# autoreconf required due to patching of m4/ax_compiler_flags_ldflags.m4
 
-post-patch {
-    xinstall -m 755 ${filespath}/autogen.sh ${worksrcpath}
-}
+use_autoreconf      yes
+autoreconf.args     -fvi
 
-configure.cmd       ./autogen.sh
+# blacklist compilers that do not support C11 (redefinition of typedef ‘GtkSourceTag’ at gtksourceview/gtksourcetag.h:35)
+compiler.blacklist  *gcc* {clang < 300}
 
 configure.args      --enable-compile-warnings=minimum \
                     --disable-silent-rules

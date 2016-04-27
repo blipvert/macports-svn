@@ -5,7 +5,7 @@ PortSystem              1.0
 PortGroup               compiler_blacklist_versions 1.0
 
 name                    nodejs
-version                 4.4.1
+version                 4.4.3
 
 categories              devel net
 platforms               darwin
@@ -24,8 +24,8 @@ conflicts               nodejs-devel
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  e2cdf54cfc6878ad8ff88769bea4efdfaeaed42d \
-                        sha256  f3e604cc4d05a4810c37cd43a838a2dc4399d517bd1e8c53b7670dcffc4dc481
+checksums               rmd160  7077518fabdb87f0d3a11a7907c38c4b109f9973 \
+                        sha256  8e67b95721aab7bd721179da2fe5dd97f9acc1306c15c9712ee103bcd6381638
 
 distname                node-v${version}
 

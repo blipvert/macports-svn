@@ -47,15 +47,15 @@ Provides the UHD GIT maint or master branch, depending on which is more advanced
 
     name            uhd-devel
     conflicts       uhd
-    github.setup    EttusResearch uhd 2d68f228888807d0fd76c7b759ec39fd86523f67
-    version         20160217
-    checksums       rmd160 7d58a5619e0994479009257601f1d1a32203fad1 \
-                    sha256 e6dd3b0e2e9d84841ec32eb835358ac3ee3e3c76b1ca3f314791c471f3d1b48e
+    github.setup    EttusResearch uhd 0feabd678fe3bde22e994649b9071bb05f4050d3
+    version         20160421
+    checksums       rmd160 1e61f6d1fc0fba72edbad16cb6b6d1ac9eae63fd \
+                    sha256 f564c785758042df17e96355e386649163e0a86ff4d7e9c8e9c818bc1cd8c25a
 
     # overload the github livecheck URL with the maint branch,
     # when it is more advanced; comment out for master.
 
-    # livecheck.url   ${github.homepage}/commits/maint.atom
+    livecheck.url   ${github.homepage}/commits/maint.atom
 
     # set the version override string
 

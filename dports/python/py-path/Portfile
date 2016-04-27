@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-path
-version             8.1.2
+version             8.2.1
 revision            0
 categories-append   devel
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}.
 
 distname            ${python.rootname}.py-${version}
 
-checksums           rmd160  701a17a54a62aa909363040215d7de6c1e2e1eb0 \
-                    sha256  ada95d117c4559abe64080961daf5badda68561afdd34c278f8ca20f2fa466d2
+checksums           rmd160  694394973214b3e999ed0678a9dc3a85b438be36 \
+                    sha256  c9ad2d462a7f8d7f6f6d2b89220bd50425221e399a4b8dfe5fa6725eb26fd708
 
 if {${name} ne ${subport}} {
     depends_build-append \

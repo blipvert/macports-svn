@@ -5,7 +5,7 @@ PortSystem                      1.0
 PortGroup                       cmake 1.0
 
 name                            armadillo
-version                         6.600.5
+version                         6.700.5
 categories                      science
 platforms                       darwin
 maintainers                     gmail.com:mschamschula \
@@ -26,8 +26,8 @@ long_description                Armadillo is a C++ linear algebra library (matri
 homepage                        http://arma.sf.net/
 master_sites                    sourceforge:project/arma
 
-checksums                       rmd160  1c00a9fd9665ecbdb2cd12e0f53e4556bd65667e \
-                                sha256  6da5b32f5f2551815948bcfa5182b77b605607660d911b8f9f098f03e3cf7707
+checksums                       rmd160  8544cd2dcb3f159e66aa52e0325a5d5fc47b47a3 \
+                                sha256  d5817a8ff07da3bd8753b1e037ef39e7a6c81d88bb7119a2a8e6c3dc93b48db1
 
 depends_build-append            port:pkgconfig
 

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22
-perl5.setup         Devel-Symdump 2.15
+perl5.setup         Devel-Symdump 2.17
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Inspect the symbol table and class hierarchy
@@ -14,7 +14,7 @@ long_description    A convenient way to inspect perl's symbol table and \
 
 platforms           darwin
 
-checksums           rmd160  a80d1431caa53bf29d9e30a6c7939c3f38afc632 \
-                    sha256  76c2a90d31318204ecf1977f0217ce57b142e6681fe2b99fb8789efc5dd86f41
+checksums           rmd160  1ccc04f193b732d00b206dcf24cd77be665d97da \
+                    sha256  2c50fc7935e6e6200b74fbb9149c8078ee8f92788d2a9c5ab25c9ebace946e62
 
 supported_archs     noarch

@@ -23,14 +23,14 @@ homepage            http://www.gnu.org/software/octave
 #fetch.type          hg
 #hg.url              http://hg.savannah.gnu.org/hgweb/octave/
 
-set version_release 4.0.0
+set version_release 4.0.1
 set version_rc      4.0.1-rc4
 set version_tip     4.1.0+
 
 if { ${name} eq ${subport} } {
     version         ${version_tip}
-    revision        5
-    hg.tag          2868abbc88eb
+    revision        10
+    hg.tag          225d88a97104
 
     # see http://savannah.gnu.org/bugs/?41027
     patchfiles-append   \
@@ -38,15 +38,15 @@ if { ${name} eq ${subport} } {
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  0a5fd063e2587d451a1c8bde668e1c9b542d5fde \
-        sha256  58b725674c43ea866c87235da7e7c9a75e9629b3215908c0c8c20aa60ee818b4
+        rmd160  12db3bfd49342fcf948a47fd8814d2a2aee4779e \
+        sha256  e3734195ef42de35953e20c4dec9d741273e35c8a97b4a44777587a1d5e2642d
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\ntip"
 }
 
 subport octave-devel-rc {
     version         ${version_rc}
-    revision        1
+    revision        4
     hg.tag          2b66f30a0de7
 
     if {${version_rc} eq ${version_release}} {
@@ -71,28 +71,16 @@ subport octave-devel-rc {
 
 subport octave-devel-release {
     version         ${version_release}
-    revision        4
-    hg.tag          3ccc2d02e64b
+    #revision        0
+    hg.tag          5162cdfb56d8
 
     if {${version_release} eq ${version_rc}} {
         conflicts-append octave-devel-release
     }
 
-    # see http://savannah.gnu.org/bugs/?41178
-    patchfiles-append \
-        octave-clang-classdef.patch
-
     # see http://savannah.gnu.org/bugs/?func=detailitem&item_id=46592
     patchfiles-append \
         patch-e870a68742a6.diff
-
-    # allow osmesa support to at least compile
-    patchfiles-append   \
-        osmesa_mac_fix.patch
-
-    # force "${prefix}/bin/octave-${version} --no-gui-libs" to call octave-cli-${version} instead of octave-cli
-    patchfiles-append   \
-        patch-append_version_cli.diff
 
     # see http://savannah.gnu.org/bugs/?41027
     patchfiles-append   \
@@ -100,8 +88,8 @@ subport octave-devel-release {
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  4bbcc004ffdde859b0735e602aac2d01388d0b2c \
-        sha256  2a4017a03ca80c280b5d39cf88af8954c7bfdbf1b3b40b9f09d3bd4bd1dd6040
+        rmd160  64c48708d456e8efb48877af6443a2c637f3d3a6 \
+        sha256  8b6b93d2fe830f7aa5b446856105436c51547e1ff8fe47a4184ea535bdd370d1
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\nrelease-"
 }
@@ -318,7 +306,15 @@ depends_lib-append  port:qhull
 depends_lib-append  port:zlib
 
 #--without-hdf5
-depends_lib-append  port:hdf5
+if { ${name} eq ${subport} } {
+    # see #51080
+    depends_lib-append  port:hdf5-18
+    configure.args-append \
+        --with-hdf5-libdir=${prefix}/lib/hdf5-18 \
+        --with-hdf5-includedir=${prefix}/include/hdf5-18
+} else {
+    depends_lib-append  port:hdf5
+}
 
 #--disable-fftw-threads
 #--without-fftw3
@@ -560,6 +556,10 @@ variant docs description {build documentation files} {
     depends_build-append \
         port:texlive-basic \
         port:texlive-latex
+
+    # see #51132
+    depends_build-append \
+        port:texlive-fonts-recommended
 
     configure.args-replace --disable-docs --enable-docs
 }

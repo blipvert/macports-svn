@@ -9,9 +9,9 @@ PortGroup           gobject_introspection 1.0
 name                gegl-devel
 conflicts           gegl
 set git_name        gegl
-set git_commit      3068dc5ac14183aa2b56cf28f6ad463f6ef9399d
-set git_date        20160224
-version             0.3.5-${git_date}
+set git_commit      e62c6159195104f098eff47d72bae2253cb4a0cd
+set git_date        20160416
+version             0.3.7-${git_date}
 license             {GPL-3+ LGPL-3+}
 categories          graphics
 maintainers         devans
@@ -29,8 +29,8 @@ master_sites        https://git.gnome.org/browse/${git_name}/snapshot/
 
 distname            ${git_name}-${git_commit}
 
-checksums           rmd160  a6c4631a9bd541157a310efe3001405430951da0 \
-                    sha256  a4c07014eedf4bf0b24c77bf73f0dafa41df679db091a2145512837c7f9536f0
+checksums           rmd160  b477c150af20bd2bc7999dc7c6ae0c608ae30c3c \
+                    sha256  7a39e12907bc5ae6b4dfa8c114e8f067842ed1ccd75efe08d5742ec0c2884da2
 
 depends_build       port:pkgconfig \
                     port:intltool \

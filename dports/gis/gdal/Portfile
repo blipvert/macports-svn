@@ -3,9 +3,11 @@
 
 PortSystem          1.0
 PortGroup           mpi 1.0
+PortGroup           muniversal 1.0
 
 name                gdal
 version             2.0.2
+revision            1
 categories          gis
 license             MIT BSD
 platforms           darwin
@@ -91,7 +93,6 @@ configure.args-append \
                     --without-php \
                     --without-ruby \
                     --without-python \
-                    --without-xerces \
                     --without-expat \
                     --without-poppler \
                     --mandir=${prefix}/share/man
@@ -111,19 +112,29 @@ patchfiles          patch-swig_python_GNUmakefile \
                     patch-ogr_api_cpp.diff \
                     patch-nawk.diff
 
-# Patches for universal build
+
+pre-configure {
+    global worksrcpath_dirs
+    if { ![variant_isset universal] } {
+        set worksrcpath_dirs ${worksrcpath}
+    } else {
+        foreach arch ${universal_archs_to_use} {
+            lappend worksrcpath_dirs ${worksrcpath}-${arch}
+        }
+    }
+}
+
 post-configure {
-    reinplace -E "s|(INST_PYMOD).*|\\1\t=\t${PYINST}|" \
-        ${worksrcpath}/GDALmake.opt
-    if {[variant_isset universal]} {
-        system "ed - ${worksrcpath}/port/cpl_config.h < ${filespath}/config.h.ed"
+    foreach w ${worksrcpath_dirs} {
+        reinplace -E "s|(INST_PYMOD).*|\\1\t=\t${PYINST}|" \
+            ${w}/GDALmake.opt
     }
 }
 
 # Set target to none
 build.target
 
-variant lzma conflicts universal \
+variant lzma \
     description {Enable LZMA (7Z) compression support} {
     depends_lib-append      port:lzma
     configure.args-delete   --without-liblzma
@@ -152,7 +163,7 @@ variant ecw description {Enable ECW file format} {
     configure.args-delete   --without-ecw
     configure.args-append   --with-ecw=${prefix}/lib/ECW
 
-    if {${configure.cxx_stdlib} == "libc++" } { 
+    if {${configure.cxx_stdlib} == "libc++" } {
         patchfiles-append       patch-configure-ecw-libcxx.diff
     } else {
         patchfiles-append       patch-configure-ecw-libstdcxx.diff
@@ -163,23 +174,23 @@ variant ecw description {Enable ECW file format} {
         (![file exists /Intergraph/ERDASEcwJpeg2000SDK5.1.1/Desktop_Read-Only])} {
             ui_error "
 ****
-* The Intergraph ECW SDK version 5.1.1 is needed to 
+* The Intergraph ECW SDK version 5.1.1 is needed to
 * compile gdal with the ecw variant. It must be installed separately.
-* Please download the Mac OS X version of the SDK 
-* 'ERDAS ECW/JP2 SDK v5.1.1 (MacOSX)' from 
+* Please download the Mac OS X version of the SDK
+* 'ERDAS ECW/JP2 SDK v5.1.1 (MacOSX)' from
 * http://download.intergraph.com/
 * Choose to install it in ${prefix}/lib/ECW.
 * Then try to install GDAL again.
-****"       
+****"
             return -code error "ECW SDK 5.1.1 not installed."
         }
-        
+
         if {(![file exists ${prefix}/lib/ECW]) && \
             ([file exists /Intergraph/ERDASEcwJpeg2000SDK5.1.1/Desktop_Read-Only])} {
 
           ui_error "
 ****
-* Please create symbolic links from the /Intergraph directory to 
+* Please create symbolic links from the /Intergraph directory to
 * ${prefix}/lib/ECW, by executing at the prompt:
 * sudo ln -s /Intergraph/ERDASEcwJpeg2000SDK5.1.1/Desktop_Read-Only \
                   ${prefix}/lib/ECW
@@ -216,14 +227,14 @@ variant grib description {Enable GRIB (weather) file format} {
 }
 
 #JPEG-2K
-variant jasper conflicts openjpeg \
+variant jasper \
     description {Enable JasPer JPEG-2000 format support} {
     depends_lib-append      port:jasper
     configure.args-delete   --without-jasper
     configure.args-append   --with-jasper=${prefix}
 }
 
-variant openjpeg conflicts jasper \
+variant openjpeg \
     description {Enable OpenJPEG JPEG-2000 format support} {
     depends_lib-append      port:openjpeg
     configure.args-delete   --without-openjpeg
@@ -232,7 +243,7 @@ variant openjpeg conflicts jasper \
 
 
 variant xerces description {Enable xerces XML support for GML file format} {
-    depends_lib-append      port:xercesc
+    depends_lib-append      path:include/xercesc/util/XercesVersion.hpp:xercesc3
     configure.args-delete   --without-xerces
     configure.args-append   --with-xerces=${prefix}
 }
@@ -271,13 +282,21 @@ variant mysql5 description {Enable MySQL 5 support} {
     configure.args-append   --with-mysql=${prefix}/lib/mysql5/bin/mysql_config
 }
 
+variant mysql57 description {Enable MySQL 5 support} {
+    depends_lib-append      port:mysql57
+    configure.args-delete   --without-mysql
+    configure.args-append   --with-mysql=${prefix}/lib/mysql57/bin/mysql_config
+}
+
 variant sqlite3 description {Enable SQLite3 support} {
     depends_lib-append      port:sqlite3
     configure.args-delete   --without-sqlite3
     configure.args-append   --with-sqlite3=${prefix}
 
     post-configure {
-        reinplace -E "s|^LIBS(.*)\\\\$|LIBS\\1 -lsqlite3 \\\\|" ${worksrcpath}/GDALmake.opt
+        foreach w ${worksrcpath_dirs} {
+            reinplace -E "s|^LIBS(.*)\\\\$|LIBS\\1 -lsqlite3 \\\\|" ${w}/GDALmake.opt
+        }
     }
 }
 
@@ -317,16 +336,28 @@ variant perf description {Optimize for speed} {
 
 default_variants    +expat
 
+set jpeg2k 0
+foreach jpeg2kVariant {jasper openjpeg ecw} {
+    if {[variant_isset ${jpeg2kVariant}]} {
+        incr jpeg2k 1
+    }
+}
+if {${jpeg2k} > 1} {
+    notes-append "Multiple drivers are able to able to open JPEG-2000 datasets. See https://trac.osgeo.org/gdal/wiki/ConfigOptions#GDAL_SKIP."
+}
+
 # Postconfigure hack to avoid read ${include} .h files before
 # GDAL own include directories
 post-configure {
-    set FRMT_PATH ${worksrcpath}/ogr/ogrsf_frmts
-    foreach makefile [glob -dir $FRMT_PATH */GNUmakefile] {
-        reinplace "s|\$\(EXPAT_INCLUDE\)||" $makefile
+    foreach w ${worksrcpath_dirs} {
+        set FRMT_PATH ${w}/ogr/ogrsf_frmts
+        foreach makefile [glob -dir $FRMT_PATH */GNUmakefile] {
+            reinplace "s|\$\(EXPAT_INCLUDE\)||" $makefile
+        }
+
+        reinplace -E "s|(GEOS_CFLAGS.*=).*|\\1|" ${w}/GDALmake.opt
+        reinplace -E "s|^CPPFLAGS.*|CPPFLAGS = -I\$(GDAL_ROOT)/port -I${prefix} -I${prefix}/include|" ${w}/GDALmake.opt
     }
-    
-    reinplace -E "s|(GEOS_CFLAGS.*=).*|\\1|" ${worksrcpath}/GDALmake.opt
-    reinplace -E "s|^CPPFLAGS.*|CPPFLAGS = -I\$(GDAL_ROOT)/port -I${prefix} -I${prefix}/include|" ${worksrcpath}/GDALmake.opt
 }
 
 post-destroot {
@@ -398,7 +429,7 @@ post-destroot {
                     exec install_name_tool -change \
                         /Users/jenkins/hudson/workspace/RL_5.1.1_ECWJP2SDK_OSX/Master/libNCSEcw.dylib ${prefix}/lib/ECW/redistributable/libstdc++/libNCSEcw.dylib \
                         ${destroot}${prefix}/${f}
-                } 
+                }
             }
     }
 

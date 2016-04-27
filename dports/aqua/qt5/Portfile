@@ -325,16 +325,6 @@ array set modules {
         "very large and relatively new; requires newer version of XCode"
         "variant overrides: "
     }
-    qtxmlpatterns {
-        403a3b2377728629b6a3f1073b24af3f3360adf7
-        b537eb0252988e3805a32a16c65038973371d647baf246fdf703bde725d0e8ec
-        ""
-        ""
-        "qtbase"
-        {"Qt XML Patterns"}
-        ""
-        "variant overrides: "
-    }
     qtwebsockets {
         83dcc5d07dca6c1cccfaed13cd16fde940ad0b94
         cf4e834a867b90337188be504ef20184c52666370f721e704952988f8cb12deb
@@ -365,6 +355,16 @@ array set modules {
         "deprecated in favor of Qt WebEngine; doen't provide functionality"
         "variant overrides: ++examples"
     }
+    qtxmlpatterns {
+        403a3b2377728629b6a3f1073b24af3f3360adf7
+        b537eb0252988e3805a32a16c65038973371d647baf246fdf703bde725d0e8ec
+        ""
+        ""
+        "qtbase"
+        {"Qt XML Patterns"}
+        ""
+        "variant overrides: "
+    }
 }
 
 ############################################################################### SQL Plugin Format
@@ -389,6 +389,13 @@ array set sql_plugins {
         }
     }
     {psql PostgreSQL} {
+        {
+            "postgresql95"
+            "port:postgresql95"
+            "${prefix}/include/postgresql95"
+            "-L${prefix}/lib/postgresql95 -lpq"
+            ""
+        }
         {
             "postgresql94"
             "port:postgresql94"
@@ -582,8 +589,8 @@ if { ${subport} eq ${name} } {
     # special case
     if { ${subport} eq "${name}-qtlocation" } {
         # qtlocation uses
-        #    GeoClue (http://freedesktop.org/wiki/Software/GeoClue/) and
-        #    Gypsy (http://gypsy.freedesktop.org)
+        #    GeoClue (https://www.freedesktop.org/wiki/Software/GeoClue/) and
+        #    Gypsy (https://gypsy.freedesktop.org/wiki/)
         #    if they can be found
         # Ensure that test fails even if software is installed
         post-patch {

@@ -6,9 +6,10 @@ PortGroup           gobject_introspection 1.0
 
 name                at-spi2-core
 # you probably want to keep this at the same version as at-spi2-atk
-version             2.18.3
-checksums           rmd160  6327492620d3df6b7670982deb192c0d08f2b815 \
-                    sha256  ada26add94155f97d0f601a20cb7a0e3fd3ba1588c3520b7288316494027d629
+version             2.20.1
+
+checksums           rmd160  41bfbc5ace756ae02247ed141db35666db2bc20a \
+                    sha256  6ed858e781f5aa9a9662b3beb5ef82f733dac040afc8255d85dffd2097f16900
 
 license             LGPL
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -51,6 +52,7 @@ post-patch {
 configure.cmd       ./autogen.sh
 
 configure.args      --disable-xevie \
+                    --disable-silent-rules \
                     --x-includes=${prefix}/include \
                     --x-libraries=${prefix}/lib
 

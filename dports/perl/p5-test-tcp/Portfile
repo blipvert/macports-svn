@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22
-perl5.setup         Test-TCP 2.14
+perl5.setup         Test-TCP 2.16
 platforms           darwin
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
@@ -15,8 +15,8 @@ description         Test::TCP - for testing TCP/IP programs
 
 long_description    ${description}
 
-checksums           rmd160  b5a5e288841f2c7cf966cc677164389c40d35e32 \
-                    sha256  b96a3f364748280146fa30a129c72c104133f6768872788b688ea88d4f7d7d01
+checksums           rmd160  701202b47722ca093f2eb5ca8cae5a146a9b3d63 \
+                    sha256  b12b66986a938ea6a627b89cd8c44dc129dc43d11636139f1291dd3830bfb97b
 
 if {${perl5.major} != ""} {
     depends_lib-append \
