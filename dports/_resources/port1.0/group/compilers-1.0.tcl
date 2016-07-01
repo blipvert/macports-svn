@@ -46,12 +46,13 @@
 #   The default is all of them. Must come before compilers.setup in the Portfile to have an effect.
 # compilers.set_variants_conflict {args}
 #   Add specified variants to the conflicts list of all variants created by this PortGroup.
-#   Useful if another compiler variant is created explicitly in the Portfile.
+#   Useful if another compiler variant is created explicitly in the Portfile. Must come before compilers.setup.
 # compilers.setup {args}
 #   Possible arguments: any compiler variant name with a minus removes it from the list of variants, e.g. -llvm.
 #   -gcc, -dragonegg, -clang remove all compilers of that category. -fortran removes gfortran and g95.
 #   Blacklisted compilers are automatically removed, as are ones that do not support the compilers in compilers.choose:
 #   e.g. if choose is just f90, clang variants will not be added.
+#   List "default_fortran" to make a Fortran variant be selected by default.
 #   This procedure must be in the Portfile to create all the compiler variants and set the default.
 #   Appropriate conflicts, dependencies, etc. are created too.
 #   If a variant is declared already in the Portfile before this line, it will not be redefined.
@@ -87,6 +88,7 @@ default compilers.gcc_variants {}
 default compilers.clang_variants {}
 default compilers.dragonegg_variants {}
 default compilers.require_fortran 0
+default compilers.default_fortran 0
 default compilers.setup_done 0
 default compilers.required_c {}
 default compilers.required_f {}
@@ -100,8 +102,8 @@ set compilers.gcc_default gcc5
 
 set compilers.list {cc cxx cpp objc fc f77 f90}
 
-# build database of gcc {4{4..9} 5 6} compiler attributes
-set gcc_versions {44 45 46 47 48 49 5 6}
+# build database of gcc compiler attributes
+set gcc_versions {44 45 46 47 48 49 5 6 7}
 foreach v ${gcc_versions} {
     # if the string is more than one character insert a '.' into it: e.g 49 -> 4.9
     set version $v
@@ -128,7 +130,7 @@ foreach v ${gcc_versions} {
     set cdb(gcc$v,f90)      ${prefix}/bin/gfortran-mp-$version
 }
 
-set clang_versions {33 34 35 36 37 38}
+set clang_versions {33 34 35 36 37 38 39}
 foreach v ${clang_versions} {
     # if the string is more than one character insert a '.' into it: e.g 33 -> 3.3
     set version $v
@@ -478,8 +480,12 @@ proc add_from_list {L A} {
 }
 
 proc compilers.choose {args} {
-    global compilers.list
+    global compilers.list compilers.setup_done
 
+    if {${compilers.setup_done}} {
+        ui_warn "compilers.choose has an effect only before compilers.setup."
+    }
+    
     # zero out the variable before and append args
     set compilers.list {}
     foreach v $args {
@@ -591,7 +597,7 @@ proc compilers.action_enforce_some_f {args} {
 proc compilers.setup {args} {
     global cdb compilers.variants compilers.clang_variants compilers.gcc_variants
     global compilers.dragonegg_variants compilers.fortran_variants
-    global compilers.require_fortran compilers.setup_done compilers.list
+    global compilers.require_fortran compilers.default_fortran compilers.setup_done compilers.list
     global compilers.gcc_default
     global compiler.blacklist
 
@@ -642,6 +648,10 @@ proc compilers.setup {args} {
                 require_fortran {
                     # this signals that fortran is required and not optional
                     set compilers.require_fortran 1
+                    set compilers.default_fortran 1
+                }
+                default_fortran {
+                    set compilers.default_fortran 1
                 }
                 default {
                     if {[info exists cdb($v,variant)] == 0} {
@@ -695,7 +705,7 @@ proc compilers.setup {args} {
         }
         lappend ordered_variants {g95}
 
-        if {${compilers.require_fortran} && ![fortran_variant_isset]} {
+        if {${compilers.default_fortran} && ![fortran_variant_isset]} {
             foreach fv $ordered_variants {
                 # if the variant exists, then make it default
                 if {[lsearch -exact ${compilers.variants} $fv] > -1} {
@@ -712,7 +722,7 @@ proc compilers.setup {args} {
 # this might also need to be in pre-archivefetch
 pre-fetch {
     if {${compilers.require_fortran} && [fortran_variant_name] eq ""} {
-        return -code error "must set at least one Fortran variant"
+        return -code error "must set at least one Fortran variant (e.g. +gfortran, +gccX, +g95)"
     }
     eval compilers.action_enforce_c ${compilers.required_c}
     eval compilers.action_enforce_f ${compilers.required_f}

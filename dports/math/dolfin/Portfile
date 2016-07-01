@@ -149,4 +149,12 @@ variant slepc description {Build with SLEPc interface} requires petsc {
     configure.env-append  SLEPC_DIR=${prefix}/lib/slepc
 }
 
+variant vtk6 description {Build with vtk6} {
+	depends_lib-replace port:vtk5 port:vtk
+}
+
 default_variants +suitesparse
+
+platform darwin 15 {
+    default_variants +vtk6
+}

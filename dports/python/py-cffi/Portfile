@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-cffi
-version             1.5.2
+version             1.7.0
 revision            0
 categories-append   devel
 platforms           darwin
@@ -26,8 +26,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            cffi-${version}
 
-checksums           rmd160  012cc3b9a4d630a256d5771ec98b179b3bc7b1eb \
-                    sha256  da9bde99872e46f7bb5cff40a9b1cc08406765efafb583c704de108b6cb821dd
+checksums           rmd160  86e409197a61f5b7d76b942f0a0de7559ee539c7 \
+                    sha256  6ed5dd6afd8361f34819c68aaebf9e8fc12b5a5893f91f50c9e50c8886bb60df
 
 if {${name} ne ${subport}} {
     patchfiles-append   patch-setup.py.diff

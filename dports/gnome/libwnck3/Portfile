@@ -7,7 +7,7 @@ PortGroup           gobject_introspection 1.0
 
 name                libwnck3
 set gname           libwnck
-version             3.14.1
+version             3.20.1
 set branch          [join [lrange [split ${version} .] 0 1] .]
 maintainers         nomaintainer
 categories          gnome
@@ -27,8 +27,8 @@ use_xz              yes
 
 distname            ${gname}-${version}
 
-checksums           rmd160  e6e25218dd6d1f50adddf2cca2502b20c484cd86 \
-                    sha256  bb643c9c423c8aa79c59973ce27ce91d3b180d1e9907902278fb79391f52befa
+checksums           rmd160  81c8bb1aee6876d041bbd733f5b5bdc1fe3e8c31 \
+                    sha256  1cb03716bc477058dfdf3ebfa4f534de3b13b1aa067fcd064d0b7813291cba72
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -45,8 +45,6 @@ depends_lib         port:startup-notification \
 
 require_active_variants gtk3 x11
 gobject_introspection yes
-
-patchfiles          patch-redefine-introspection-dirs-e03e813.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 

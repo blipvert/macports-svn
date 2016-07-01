@@ -5,6 +5,7 @@ PortSystem          1.0
 PortGroup           compilers  1.0
 PortGroup           muniversal 1.0
 PortGroup           active_variants 1.1
+PortGroup           compiler_blacklist_versions 1.0
 PortGroup           select     1.0
 
 name                octave-devel
@@ -15,7 +16,7 @@ maintainers         mcalhoun openmaintainer
 description         a high-level language for numerical computations
 long_description    \
     GNU Octave is a high-level language, primarily intended for numerical \
-    computations.  It provides a convenient command line interface for \
+    computations. It provides a convenient command-line interface for \
     solving linear and nonlinear problems numerically.
 
 homepage            http://www.gnu.org/software/octave
@@ -23,30 +24,34 @@ homepage            http://www.gnu.org/software/octave
 #fetch.type          hg
 #hg.url              http://hg.savannah.gnu.org/hgweb/octave/
 
-set version_release 4.0.1
+set version_release 4.0.2
 set version_rc      4.0.1-rc4
 set version_tip     4.1.0+
 
 if { ${name} eq ${subport} } {
     version         ${version_tip}
-    revision        10
-    hg.tag          225d88a97104
+    revision        13
+    hg.tag          19e8eddd4773
 
     # see http://savannah.gnu.org/bugs/?41027
     patchfiles-append   \
         octave-bug_41027-half.patch
 
+    # see http://savannah.gnu.org/bugs/index.php?47886
+    patchfiles-append   \
+        patch-configure.diff
+
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  12db3bfd49342fcf948a47fd8814d2a2aee4779e \
-        sha256  e3734195ef42de35953e20c4dec9d741273e35c8a97b4a44777587a1d5e2642d
+        rmd160  bf6d26b12fa1f0e2a8434a54ffa395c2b4e7f31e \
+        sha256  934b7f116018e3f8d97c7bbd2d213a77c823d934a4865155e24eac5cb42a636b
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\ntip"
 }
 
 subport octave-devel-rc {
     version         ${version_rc}
-    revision        4
+    revision        7
     hg.tag          2b66f30a0de7
 
     if {${version_rc} eq ${version_release}} {
@@ -71,8 +76,8 @@ subport octave-devel-rc {
 
 subport octave-devel-release {
     version         ${version_release}
-    #revision        0
-    hg.tag          5162cdfb56d8
+    revision        3
+    hg.tag          acaf1e137c5e
 
     if {${version_release} eq ${version_rc}} {
         conflicts-append octave-devel-release
@@ -88,22 +93,41 @@ subport octave-devel-release {
 
     checksums-append               \
         ${hg.tag}${extract.suffix} \
-        rmd160  64c48708d456e8efb48877af6443a2c637f3d3a6 \
-        sha256  8b6b93d2fe830f7aa5b446856105436c51547e1ff8fe47a4184ea535bdd370d1
+        rmd160  454f0f6ef1657a49f9a41ff5bae03c09a332d77f \
+        sha256  3aafb5568bd46c1c6e6bae494cf8fdf457e8a84fea402b14a454e992c0885a8c
 
     livecheck.regex   "<a href=\"/hgweb/octave/rev/(\[a-zA-Z0-9.\]+)\">\nrelease-"
 }
 
+# Block compilers: Some older versions of CLANG do not honor the CPATH
+# environment variables, which is required for compiling this port
+# when using MacPorts.  The versions seem to be: MacPorts CLANG 2.9 or
+# earlier, and Apple CLANG 318.0.58 or older.
+#
+# See also < http://llvm.org/bugs/show_bug.cgi?id=8971 >
+#          < https://trac.macports.org/ticket/40250 >.
+compiler.blacklist-append { clang <= 318.0.61 }
+
 select.group octave
 select.file  ${filespath}/${subport}
 
-# check http://hg.savannah.gnu.org/hgweb/octave/gnulib-hg/rev for latest version
-set hg_gnu_tag      7f19e7f2afa2
+# see ${worksrcpath}/.hgsubstate to find revision of gnulib-hg subrepository that should be used
+if { ${subport} eq "octave-devel-rc" || ${subport} eq "octave-devel-release" } {
+    set hg_gnu_tag      7f19e7f2afa2
 
-checksums-append \
-    ${hg_gnu_tag}${extract.suffix} \
-    rmd160  9d906212fdb4201f8592da10524606dadb3f50e3 \
-    sha256  85add8ce0c53e8868d903c28c407d864ca54bd42e8d472e09b1a1bb4b105b741
+    checksums-append \
+        ${hg_gnu_tag}${extract.suffix} \
+        rmd160  9d906212fdb4201f8592da10524606dadb3f50e3 \
+        sha256  85add8ce0c53e8868d903c28c407d864ca54bd42e8d472e09b1a1bb4b105b741
+} else {
+    # check http://hg.savannah.gnu.org/hgweb/octave/gnulib-hg/rev for latest version
+    set hg_gnu_tag      4a3a7c6111c8
+
+    checksums-append \
+        ${hg_gnu_tag}${extract.suffix} \
+        rmd160  367b2811b5d4e3bab5ed22382c4ecfed808335e7 \
+        sha256  39f09d2000654d0d75a95b756fdd0724f869dfe65ef08f47814fbad230e8b25c
+}
 
 master_sites        http://hg.savannah.gnu.org/hgweb/octave/archive:octave \
                     http://hg.savannah.gnu.org/hgweb/octave/gnulib-hg/archive:gnulib
@@ -114,16 +138,10 @@ distfiles           \
 
 worksrcdir          octave-${hg.tag}
 
-#depends_extract-append port:git
 post-extract {
-    # command from bootstrap script file
-    #system -W ${worksrcpath} "${prefix}/bin/git clone --depth 2 git://git.sv.gnu.org/gnulib gnulib-hg"
+    # mimic presence of mercurial subrepository
     move ${worksrcpath}/../gnulib-hg-${hg_gnu_tag} ${worksrcpath}/gnulib-hg
 }
-
-# see http://git.savannah.gnu.org/cgit/gnulib.git/commit/lib/stdio.in.h?id=d6176702c3ffb6c56e6620397470e1b3bd540b10
-patchfiles-append   \
-    patch-stdio.in.h.diff
 
 pre-patch {
     # code located in pre-patch because variants from PortGroup compilers must
@@ -140,6 +158,17 @@ pre-patch {
     if { ${libcxxbug} } {
         patchfiles-append   \
             clang-libcxx-fix.patch
+    }
+
+    # see https://trac.macports.org/ticket/44704
+    set gl2psbug no
+    if { ${configure.cc} eq "/usr/bin/clang" && [vercmp ${xcodeversion} 5.0.0] < 0 } {
+        set gl2psbug yes
+    } elseif { [variant_exists clang33] && [variant_isset clang33] } {
+        set gl2psbug yes
+    }
+    if { ${gl2psbug} } {
+        patchfiles-append   patch-gl2ps_renderer.diff
     }
 }
 
@@ -217,15 +246,12 @@ compilers.setup     \
     -dragonegg      \
     -gcc49          \
     -gcc48          \
+    -gcc47          \
     -gcc46          \
     -gcc45          \
     -gcc44          \
     -g95            \
     -llvm           \
-    -gcc47          \
-    -gcc46          \
-    -gcc45          \
-    -gcc44          \
     -clang36        \
     -clang35        \
     -clang34        \
@@ -248,7 +274,6 @@ configure.args-append       \
 #configure.args-append --with-shell=???
 
 configure.args-append       \
-    --with-framework-opengl \
     --with-framework-carbon \
     --without-x             \
     --enable-static
@@ -258,13 +283,21 @@ configure.args-append       \
 
 configure.args-append       \
     --disable-java          \
-    --disable-gui           \
     --without-fltk          \
+    --without-opengl        \
     --disable-jit           \
     --without-sndfile       \
     --without-portaudio     \
     --without-magick        \
     --disable-docs
+
+if { ${subport} eq "octave-devel-rc" || ${subport} eq "octave-devel-release" } {
+    configure.args-append       \
+        --disable-gui
+} else {
+    configure.args-append       \
+        --without-qt
+}
 
 # in configure.ac, listed as one of "[p]rograms used when running Octave"
 depends_lib-append port:python27
@@ -284,7 +317,6 @@ configure.env-append DEFAULT_PAGER=${prefix}/bin/less
 
 depends_lib-append   port:ncurses
 depends_lib-append   port:readline
-depends_lib-append   port:fontconfig
 depends_lib-append   port:pcre
 
 #--without-amd
@@ -308,6 +340,7 @@ depends_lib-append  port:zlib
 #--without-hdf5
 if { ${name} eq ${subport} } {
     # see #51080
+    # see http://savannah.gnu.org/bugs/?47858 for upstream report
     depends_lib-append  port:hdf5-18
     configure.args-append \
         --with-hdf5-libdir=${prefix}/lib/hdf5-18 \
@@ -358,11 +391,6 @@ depends_run-append port:octave_select
 variant accelerate description {use BLAS from Apple's Accelerate.framework} conflicts atlas openblas {
     depends_lib-append port:vecLibFort
 
-    # dependents must be built with same BLAS and LAPACK
-    #require_active_variants port:arpack      accelerate
-    #require_active_variants port:SuiteSparse accelerate
-    #require_active_variants port:qrupdate    accelerate
-
     configure.args-append        \
         --with-blas=-lvecLibFort \
         --with-lapack=""
@@ -374,11 +402,6 @@ variant openblas description {use BLAS from MacPorts' openblas port} conflicts a
     # LAPACK required
     require_active_variants path:lib/libopenblas.dylib:OpenBLAS lapack
 
-    # dependents must be built with same BLAS and LAPACK
-    #require_active_variants port:arpack      openblas
-    #require_active_variants port:SuiteSparse openblas
-    #require_active_variants port:qrupdate    openblas
-
     # replicate default values if configure script finds openblas on its own
     configure.args-append        \
         --with-blas=-lopenblas   \
@@ -387,11 +410,6 @@ variant openblas description {use BLAS from MacPorts' openblas port} conflicts a
 
 variant atlas description {use BLAS from MacPorts' atlas port} conflicts accelerate openblas {
     depends_lib-append port:atlas
-
-    # dependents must be built with same BLAS and LAPACK
-    #require_active_variants port:arpack      atlas
-    #require_active_variants port:SuiteSparse atlas
-    #require_active_variants port:qrupdate    atlas
 
     # replicate default values if configure script finds atlas on its own
     configure.args-append        \
@@ -412,33 +430,48 @@ variant java description {enable Java interface} {
     PortGroup java 1.0
     configure.args-replace --disable-java --enable-java
 }
-default_variants-append +java
+# java variant seems to cause problems for both users and build bots
+#    https://lists.macosforge.org/pipermail/macports-users/2016-May/thread.html#41052
+#    #51480
+#default_variants-append +java
 
 variant qt4gui description {build the GUI using Qt4} {
     PortGroup qt4 1.0
     depends_lib-append  port:qscintilla
-    configure.args-replace --disable-gui --enable-gui
+
+    if { ${subport} eq "octave-devel-rc" || ${subport} eq "octave-devel-release" } {
+        configure.args-replace --disable-gui --enable-gui
+    } else {
+        configure.args-replace --without-qt --with-qt
+    }
 }
 default_variants-append +qt4gui
 
 variant fltk description {enable fltk as a graphics toolkit for plotting} {
     depends_lib-append path:lib/libfltk.dylib:fltk
 
-    # as of version 4.1.0+ revision 0:
-    #    without fltk, configure script turns off "native_graphics," and
-    #       does not look for either freetype or gl2ps
-    #    it still looks for and links against fontconfig, however
-    depends_lib-append \
-        port:freetype  \
-        port:gl2ps
-
     configure.args-replace --without-fltk --with-fltk
 }
 default_variants-append +fltk
 
+if {[variant_isset fltk] || [variant_isset qt4gui]} {
+
+    # native_graphics (fltk) and gui (Qt) require OpenGL and font and printing capabilities
+    depends_lib-append  \
+        port:fontconfig \
+        port:freetype   \
+        port:gl2ps
+
+    configure.args-replace --without-opengl --with-framework-opengl
+}
+
+if {[variant_isset fltk] && [variant_isset qt4gui]} {
+    notes-append "unless octave is run with --no-gui-libs, graphics_toolkit(\"fltk\") will cause a crash"
+}
+
 variant jit description {enable JIT compiler (EXPERIMENTAL)} {
     # JIT requires LLVM, so select a version to use
-    set llvm_ver 3.7
+    set llvm_ver 3.8
 
     # prevent multiple versions of llvm being required
     # if clangXY compiler is requested, use llvm-X.Y
@@ -454,10 +487,6 @@ variant jit description {enable JIT compiler (EXPERIMENTAL)} {
     configure.cxxflags-append -std=c++11
 }
 
-if {[variant_isset fltk] && [variant_isset qt4gui]} {
-    notes-append "unless octave is run with --no-gui-libs, graphics_toolkit(\"fltk\") will cause a crash"
-}
-
 variant sound description {enable audio support (file I/O and playback)} {
     depends_lib-append port:libsndfile
     depends_lib-append port:portaudio
@@ -470,13 +499,19 @@ default_variants-append +sound
 variant app description "build application bundle to launch ${subport}" {
     depends_build-append port:ImageMagick
 
+    if {[vercmp ${xcodeversion} 4.5] < 0} {
+        # need a way to generate icns file for XCode prior to 4.5
+        # see #51487
+        depends_build-append port:libicns
+    }
+
     global appName
     set appName Octave_${version}.app
 
     post-build {
-        xinstall -d -p -m 0755 ${worksrcpath}/${appName}/Contents
-        xinstall -d -p -m 0755 ${worksrcpath}/${appName}/Contents/Resources
-        xinstall -d -p -m 0755 ${worksrcpath}/${appName}/Contents/MacOS
+        xinstall -d -m 0755 ${worksrcpath}/${appName}/Contents
+        xinstall -d -m 0755 ${worksrcpath}/${appName}/Contents/Resources
+        xinstall -d -m 0755 ${worksrcpath}/${appName}/Contents/MacOS
 
         set script [open "${worksrcpath}/${appName}/Contents/MacOS/Octave" w 0755]
         if { [variant_isset qt4gui] } {
@@ -493,18 +528,25 @@ variant app description "build application bundle to launch ${subport}" {
         #NSHumanReadableCopyright      ''
         #LSUIElement                   1
         set values "
-            CFBundleDevelopmentRegion     English
-            CFBundleExecutable            Octave
-            CFBundleIconFile              Octave.icns
-            CFBundleDocumentTypes         {-array \'{\"CFBundleTypeExtensions\" = (\"m\"); \"CFBundleTypeOSTypes\" = (\"Mfile\"); \"CFBundleTypeRole\" = \"Editor\";}\'}
-            CFBundleIdentifier            org.octave.Octave
-            CFBundleInfoDictionaryVersion 6.0
-            CFBundleSignature             Octave
-            CFBundleVersion               ${version}
-            CFBundleShortVersionString    ${version}
+            CFBundleDevelopmentRegion                         string  English
+            CFBundleExecutable                                string  Octave
+            CFBundleIconFile                                  string  Octave.icns
+            CFBundleIdentifier                                string  org.octave.Octave
+            CFBundleInfoDictionaryVersion                     string  6.0
+            CFBundleSignature                                 string  Octave
+            CFBundleVersion                                   string  ${version}
+            CFBundleShortVersionString                        string  ${version}
+            CFBundleDocumentTypes                             array   {}
+            CFBundleDocumentTypes:                            dict    {}
+            CFBundleDocumentTypes:0:CFBundleTypeRole          string  \"Editor\"
+            CFBundleDocumentTypes:0:CFBundleTypeExtensions    array   {}
+            CFBundleDocumentTypes:0:CFBundleTypeExtensions:   string  \"m\"
+            CFBundleDocumentTypes:0:CFBundleTypeOSTypes       array   {}
+            CFBundleDocumentTypes:0:CFBundleTypeOSTypes:      string  \"Mfile\"
         "
-        foreach {key value} ${values} {
-            system "/usr/bin/defaults write ${worksrcpath}/${appName}/Contents/Info ${key} ${value}"
+
+        foreach {key type value} ${values} {
+            system -W "${worksrcpath}/${appName}/Contents" "/usr/libexec/PlistBuddy -c \"Add :${key} ${type} ${value}\" Info.plist"
         }
 
         # have Info.plist be human readable
@@ -536,7 +578,14 @@ variant app description "build application bundle to launch ${subport}" {
             system -W ${worksrcpath} "${prefix}/bin/convert -background transparent -resize ${hres}x${hres} -density ${hdenw}x${hdenh} ${svg} Octave.iconset/icon_${res}x${res}@2x.png"
         }
 
-        system -W ${worksrcpath} "/usr/bin/iconutil -c icns -o ${appName}/Contents/Resources/Octave.icns Octave.iconset"
+        if {[vercmp ${xcodeversion} 4.5] >= 0} {
+            system -W ${worksrcpath} "/usr/bin/iconutil -c icns -o ${appName}/Contents/Resources/Octave.icns Octave.iconset"
+        } else {
+            # /usr/bin/iconutil introduced in XCode 4.5
+            # see #51487
+            system -W ${worksrcpath}/Octave.iconset \
+                "${prefix}/bin/png2icns ${worksrcpath}/${appName}/Contents/Resources/Octave.icns icon_16x16.png icon_32x32.png icon_128x128.png icon_256x256.png icon_512x512.png"
+        }
     }
 
     post-destroot {
@@ -595,17 +644,17 @@ if { ${subport} eq "octave-devel-rc" || ${subport} eq "octave-devel-release" } {
         merger-post-destroot {
             foreach arch ${universal_archs_to_use} {
                 set hfile ${destroot}-${arch}${prefix}/include/octave-${version}/octave/oct-conf.h
-                reinplace "s:-arch ${arch}::g"   ${hfile}
-                reinplace {s:-m32::g}                ${hfile}
-                reinplace {s:-m64::g}                ${hfile}
+                reinplace -E "s:\\w*-arch ${arch}::g" ${hfile}
+                reinplace -E {s:\\w*-m32::g}          ${hfile}
+                reinplace -E {s:\\w*-m64::g}          ${hfile}
             }
         }
     } else {
         post-destroot {
             set hfile ${destroot}${prefix}/include/octave-${version}/octave/oct-conf.h
-            reinplace "s:-arch ${build_arch}::g" ${hfile}
-            reinplace {s:-m32::g}                ${hfile}
-            reinplace {s:-m64::g}                ${hfile}
+            reinplace -E "s:\\w*-arch ${build_arch}::g" ${hfile}
+            reinplace -E {s:\\w*-m32::g}                ${hfile}
+            reinplace -E {s:\\w*-m64::g}                ${hfile}
         }
     }
 }
@@ -632,15 +681,22 @@ post-destroot {
         ${destroot}${prefix}/share/appdata/www.octave.org-octave.appdata.xml \
         ${destroot}${prefix}/share/octave/${version}/appdata/
     foreach num {16 22 24 32 48 64 128 256 512} {
-        xinstall -d -m 0755 -p ${destroot}${prefix}/share/octave/${version}/icons/hicolor/${num}x${num}/apps
+        xinstall -d -m 0755 ${destroot}${prefix}/share/octave/${version}/icons/hicolor/${num}x${num}/apps
         move \
             ${destroot}${prefix}/share/icons/hicolor/${num}x${num}/apps/octave.png \
             ${destroot}${prefix}/share/octave/${version}/icons/hicolor/${num}x${num}/apps/octave.png
     }
-    xinstall -d -m 0755 -p ${destroot}${prefix}/share/octave/${version}/icons/hicolor/scalable/apps
+    xinstall -d -m 0755 ${destroot}${prefix}/share/octave/${version}/icons/hicolor/scalable/apps
     move \
         ${destroot}${prefix}/share/icons/hicolor/scalable/apps/octave.svg \
         ${destroot}${prefix}/share/octave/${version}/icons/hicolor/scalable/apps/octave.svg
+
+    if {[file exists ${worksrcpath}/liboctave/operators/libcxx-fix.h]} {
+        # install the libc++ fix, no matter if used or not, since it is
+        # required for projects including these headers.
+        xinstall -m 644 ${worksrcpath}/liboctave/operators/libcxx-fix.h \
+            ${destroot}${prefix}/include/${name}-${version}/${name}/libcxx-fix.h
+    }
 }
 
 test.run    yes

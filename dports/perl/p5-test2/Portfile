@@ -4,21 +4,20 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         Test2 0.000042 ../by-authors/id/E/EX/EXODIST
-license             {Artistic-1 GPL}
-maintainers         devans openmaintainer
-description         Test2 - Framework for writing test tools that all work together. (EXPERIMENTAL)
-long_description    ${description}
+# Test2 no longer considered experimental and
+# merged into Test::Simple as of version 1.302015
 
-platforms           darwin
+perl5.branches      5.22 5.24
+perl5.setup         Test2 0.000044
+revision            1
+license             none
 
-checksums           rmd160  130e7865a7c294dff0f0bc27d3f53b35abb8fd12 \
-                    sha256  9f37c2be5901b0c96fcdd445181fc2245fe18593144b5ea25235276cf9475aa0
+depends_lib
 
 if {${perl5.major} != ""} {
-    depends_lib-append \
-                    port:p${perl5.major}-scalar-list-utils
-
-    supported_archs noarch
+    replaced_by     p${perl5.major}-test-simple
+} else {
+    replaced_by     p5-test-simple
 }
+
+PortGroup           obsolete 1.0

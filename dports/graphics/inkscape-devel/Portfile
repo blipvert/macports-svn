@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                inkscape-devel
 conflicts           inkscape
-set bzr_rev         14860
+set bzr_rev         15002
 version             0.91.99.${bzr_rev}
 epoch               1
 license             GPL-2 LGPL-2.1
@@ -46,6 +46,7 @@ depends_lib         port:desktop-file-utils \
                     port:libexif \
                     port:libvisio-0.1 \
                     port:libwpg-0.3 \
+                    port:aspell \
                     port:gtkspell2 \
                     port:potrace \
                     port:py27-lxml \
@@ -72,7 +73,6 @@ variant gtk3 description {Enable experimental GTK+ 3 build} {
                     port:gtkmm
 
     depends_lib-append \
-                    port:gnome-themes-standard \
                     port:gtkspell3 \
                     port:gtk3 \
                     port:gtkmm3 \
@@ -96,8 +96,14 @@ configure.args      --without-gnome-vfs \
 configure.cppflags-append \
                     -I${worksrcpath}/src/extension/script
 
-if {[string match "*clang*" ${configure.compiler}]} {
-    configure.cxxflags-append -std=c++11
+platform darwin {
+    if {[string match "*clang*" ${configure.compiler}]} {
+        if {${configure.cxx_stdlib} eq "libstdc++"} {
+            configure.cxxflags-append -std=c++98
+        } else {
+            configure.cxxflags-append -std=c++11
+        }
+    }
 }
 
 variant strict description {Enable strict build} {

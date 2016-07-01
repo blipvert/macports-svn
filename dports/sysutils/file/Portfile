@@ -4,7 +4,7 @@
 PortSystem 1.0
 
 name                file
-version             5.26
+version             5.28
 categories          sysutils
 license             BSD
 maintainers         ryandesign openmaintainer
@@ -26,8 +26,8 @@ master_sites        freebsd \
                     ftp://ftp.astron.com/pub/${name}/ \
                     ftp://ftp.gw.com/mirrors/pub/unix/${name}/
 
-checksums           rmd160  72046e4fda517a36514d6f14d533be8f911fee1b \
-                    sha256  2ef32b4ec936b0ff7b59a021dce56086a716663b6df1138c7ea597d396bf50cf
+checksums           rmd160  ea054e34e1aa73ffe386f5401dfabbc9bda29a44 \
+                    sha256  0ecb5e146b8655d1fa84159a847ee619fc102575205a0ff9c6cc60fc5ee2e012
 
 patchfiles          patch-magic-Makefile.am.diff \
                     patch-getline.diff

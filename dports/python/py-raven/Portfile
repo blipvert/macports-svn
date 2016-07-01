@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-raven
-version             5.12.0
+version             5.21.0
 revision            0
 categories-append   devel
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  7f490fc0d72b0597f0b68ec65fa8a95d3aa351cf \
-                    sha256  45645ea7fce8a37bd581b0a661cdc0889f7f12ce837dff5d9211ccae1bc56210
+checksums           rmd160  f709d948a4fa4336bfb3bc9632759d4cf673ac13 \
+                    sha256  11ed9ed0c0759c608455861dc52a91ca634ace7bee536e61b7d04ad827eeabca
 
 if {${name} ne ${subport}} {
     # raven depends on pkg_resources from setuptools

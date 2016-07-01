@@ -5,10 +5,10 @@ PortSystem          1.0
 
 name                mariadb-10.1
 set name_mysql      ${name}
-version             10.1.11
+version             10.1.14
 set version_branch  [join [lrange [split ${version} .] 0 1] .]
 # Please set revision_client and revision_server to 0 if you bump version.
-set revision_client 3
+set revision_client 1
 set revision_server 0
 categories          databases
 platforms           darwin
@@ -18,15 +18,13 @@ homepage            http://mariadb.org/
 
 if {$subport eq $name} {
 
-    PortGroup           archcheck 1.0
     PortGroup           cmake 1.0
     PortGroup           select 1.0
 
     revision            ${revision_client}
     license             GPL-2
-    description         (Warning: Alpha version) Multithreaded SQL database server
-    long_description    (Warning: Alpha version) Mariadb is a fork of the MySQL server, a \
-                        multi-threaded SQL database.
+    description         Multithreaded SQL database server
+    long_description    Mariadb is a fork of the MySQL server, a multi-threaded SQL database.
 
     master_sites \
         http://ftp.osuosl.org/pub/mariadb/mariadb-${version}/source/ \
@@ -48,16 +46,14 @@ if {$subport eq $name} {
     patchfiles          patch-cmake-install_layout.cmake.diff \
                         patch-CMakeLists.txt.diff
 
-    checksums           rmd160  06af859ab2a65142d2c03f266eeba26a66ac338c \
-                        sha256  cd32927370343b4f14bcc6073bca163623c27843ae7bc59c8c6a9ebeda0325ce
+    checksums           rmd160  aca7e90b23b76bdb871d722bd1f289fceedc5caf \
+                        sha256  18e71974a059a268a3f28281599607344d548714ade823d575576121f76ada13
 
     depends_lib-append  port:zlib port:tcp_wrappers port:ncurses
     depends_run-append  port:mysql_select
 
     select.group        mysql
     select.file         ${filespath}/${name_mysql}
-
-    archcheck.files     lib/libz.dylib lib/libwrap.dylib
 
     post-extract {
         file mkdir ${cmake.build_dir}/macports
@@ -164,7 +160,6 @@ if {$subport eq $name} {
         depends_lib-append      path:lib/libssl.dylib:openssl
         configure.args-delete   -DWITH_SSL:STRING=no
         configure.args-append   -DWITH_SSL:STRING=system
-        archcheck.files-append  lib/libssl.dylib
     }
 
     variant system_readline description {Use system readline instead of bundled readline} {
@@ -175,7 +170,6 @@ if {$subport eq $name} {
         depends_lib-append      port:readline
         configure.args-delete   -DWITH_READLINE:BOOL=ON
         configure.args-append   -DWITH_READLINE:BOOL=OFF
-        archcheck.files-append  lib/libreadline.dylib
     }
 
     notes "

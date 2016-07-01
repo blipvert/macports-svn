@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-ipyparallel
-version             5.0.1
+version             5.1.1
 revision            0
 categories-append   devel science
 platforms           darwin
@@ -24,8 +24,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  9907655d1ff899d4f93f933877247cc6bcbf358b \
-                    sha256  48e319c16995a697c82e72dc4e5cb977be45cb0f0cdcfc482d5e8019ea6afeb2
+checksums           rmd160  f2bc6271361c66c6f37ff85526aa04fd03dc204d \
+                    sha256  c46cd3bad50bbe12106257241d671ce6edb3faca2ced54ed001b8f1d579720f0
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-ipython_genutils \
@@ -35,6 +35,10 @@ if {${name} ne ${subport}} {
                         port:py${python.version}-jupyter_client \
                         port:py${python.version}-ipykernel \
                         port:py${python.version}-tornado
+
+    if {${python.version} == 27} {
+        depends_lib-append  port:py${python.version}-futures
+    }
 
     livecheck.type      none
 } else {

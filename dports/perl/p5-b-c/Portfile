@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
+perl5.branches      5.22 5.24
 perl5.setup         B-C 1.54
 license             {Artistic-1 GPL}
 maintainers         devans openmaintainer
@@ -32,6 +32,7 @@ if {${perl5.major} != ""} {
     
 # help perldoc.t find perldoc executable
     patchfiles      patch-t-perldoc.t.diff
+
     post-patch {
         reinplace "s|@@MP_PERL5_MAJOR@@|${perl5.major}|" ${worksrcpath}/t/perldoc.t
     }

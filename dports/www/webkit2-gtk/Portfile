@@ -13,7 +13,7 @@ PortGroup           cxx11 1.0
 
 name                webkit2-gtk
 conflicts           webkit2-gtk-devel
-version             2.12.1
+version             2.12.3
 description         Apple's WebKit2 HTML rendering library for GTK+3 (with optional support for GTK+2 plugins)
 long_description    ${description}
 maintainers         jeremyhu devans
@@ -28,8 +28,8 @@ distname            webkitgtk-${version}
 
 dist_subdir         webkit-gtk
 
-checksums           rmd160  2ba457729ca19a8d21f17d994ff3753bfc025596 \
-                    sha256  5b1a2d5227553f3cecbdb258c68b384f9235747b2c07c15afb555fe4fa6ae896
+checksums           rmd160  e8313c34f57e2dd933f9197c7dd091167e47cbe1 \
+                    sha256  173cbb9a2eca23eee52e99965483ab25aa9c0569ef5b57041fc0c129cc26c307
 
 # don't overwrite build dependencies provided by cmake portgroup
 depends_build-append \
@@ -70,9 +70,13 @@ depends_lib         port:atk \
 
 # PR-152650-2.patch: WIP to re-enable gtk-doc support
 # PR-153138.patch: https://bugs.webkit.org/show_bug.cgi?id=153138
+# PR-157554.patch: https://bugs.webkit.org/show_bug.cgi?id=157554
+# PR-157574.patch: https://bugs.webkit.org/show_bug.cgi?id=157574
 patchfiles-append \
     PR-152650-2.patch \
-    PR-153138.patch
+    PR-153138.patch \
+    PR-157554.patch \
+    PR-157574.patch
 
 # Build out-of-tree
 configure.post_args     ../${worksrcdir}
@@ -180,4 +184,4 @@ if {![variant_isset quartz]} {
 
 livecheck.type      regex
 livecheck.url       http://webkitgtk.org/releases/
-livecheck.regex     "webkitgtk-(\\d+(?:\\.\\d+)*)"
+livecheck.regex     "webkitgtk-(\\d+\\.\\d*\[02468\](?:\\.\\d+)*)"

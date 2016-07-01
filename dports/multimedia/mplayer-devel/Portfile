@@ -6,8 +6,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                mplayer-devel
-version             37594
-revision            2
+version             37869
 categories          multimedia
 license             GPL-2+
 maintainers         jeremyhu openmaintainer
@@ -15,7 +14,7 @@ platforms           darwin
 
 set dvdnav_ver      1294
 set ffmpeg_branch   master
-set ffmpeg_ver      c29e87ad55a2be29cc8ac5c0e047512c1f5d34d4
+set ffmpeg_ver      81c3ce0855f144c89800b824db3e4e0dcdad9016
 
 description         The MPlayer movie player built from SVN.
 long_description    ${description} It plays most MPEG/VOB, AVI, Ogg/OGM, \
@@ -30,7 +29,7 @@ livecheck.type      none
 
 depends_build       port:pkgconfig port:yasm
 depends_lib \
-    port:jpeg port:openjpeg15 port:lame port:libiconv port:libmad \
+    port:jpeg port:openjpeg15 port:lame port:libiconv port:libmad port:gnutls \
     port:libogg port:libopus port:libpng port:libtheora port:libvorbis \
     port:lzo2 port:ncurses port:zlib port:bzip2 port:liboil port:libass
 

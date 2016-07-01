@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         Net-CLI-Interact 2.200002
+perl5.branches      5.22 5.24
+perl5.setup         Net-CLI-Interact 2.200005
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Net::CLI::Interact - A toolkit for CLI automation
@@ -13,8 +13,8 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  f31681837b377d124793ccdce3a68c2255a17db4 \
-                    sha256  c1dcb8f7c481f2ee018b8d717748849b1bb29b483bd46ca23cef0e8404719ca9
+checksums           rmd160  eb9ead3bc1a1febd8401adee0a188f5c9b6d59f7 \
+                    sha256  7b522d6496d38837b0d966deb2ea6be28c9238bb81be967e7167aa0f891b61cf
 
 if {${perl5.major} != ""} {
     depends_lib-append \

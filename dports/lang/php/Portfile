@@ -21,7 +21,7 @@ long_description        PHP is a widely-used general-purpose scripting \
                         scripting.
 
 # The list of PHP branches this port provides.
-php.branches            5.2 5.3 5.4 5.5 5.6 7.0
+php.branches            5.2 5.3 5.4 5.5 5.6 7.0 7.1
 
 # Fix for users specifying the subport name with the wrong case.
 set subport             [string tolower ${subport}]
@@ -97,36 +97,36 @@ switch ${subport_branch} {
     }
     5.5 {
         epoch           2
-        version         5.5.34
+        version         5.5.36
         use_xz          yes
-        checksums       rmd160  d27c781d63dd370883fdfbfcf57db28de2bb021d \
-                        sha256  6989a4f9900e6ddec7248790449bbb4aa55728730bff4973acb49d236c9e9e2a
+        checksums       rmd160  a2ac1cd00db5b69e68856f2a887a85ea716e59c2 \
+                        sha256  e1bbe33d6b4da66b15c483131520a9fc505eeb6629fa70c5cfba79590a1d0801
     }
     5.6 {
         epoch           2
-        version         5.6.20
+        version         5.6.23
         use_xz          yes
-        checksums       rmd160  2e5899d6fb2a4019b37ba79f7974c6f506c4ec11 \
-                        sha256  2b87d40213361112af49157a435e0d4cdfd334c9b7c731c8b844932b1f444e7a
+        checksums       rmd160  a6433b6319b10cbc838f5bbefce537837716d83a \
+                        sha256  39141e9a617af172aedbbacee7a63eb15502850f7cea20d759a9cffa7cfb0a1a
     }
     7.0 {
         epoch           2
-        version         7.0.5
+        version         7.0.8
         use_xz          yes
-        checksums       rmd160  d61227b75689d03465859237be97ec7b3fadc770 \
-                        sha256  c41f1a03c24119c0dd9b741cdb67880486e64349fc33527767f6dc28d3803abb
+        checksums       rmd160  d1bc56e62aff05c4dd45cfa454799076dceeeb0a \
+                        sha256  0a2142c458b0846f556b16da1c927d74c101aa951bb840549abe5c58584fb394
     }
     7.1 {
         # When this becomes a stable version, remove the overrides for homepage,
         # master_sites and livecheck, and update php.latest_stable_branch in the
         # php-1.1 portgroup.
         version         7.1.0alpha1
-        homepage        http://qa.php.net/
-        master_sites    http://downloads.php.net/~ab/
+        homepage        https://qa.php.net/
+        master_sites    https://downloads.php.net/~krakjoe/
         use_xz          yes
-        checksums       md5     0123456789abcdef0123456789abcdef \
-                        rmd160  0123456789abcdef0123456789abcdef01234567 \
-                        sha256  0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+        checksums       md5     bba5158cf155a63bc6a1daf51b7b34a7 \
+                        rmd160  0a6bc7ddaff6002b3b2b7498b75cfc5903c4f429 \
+                        sha256  e58c1e945200e2b03626a9429dd6f0079af390aa1009b5bf88e6e3105e8c34dd
         livecheck.url   ${homepage}
         livecheck.regex php-([strsed ${subport_branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*(?:(?:alpha|beta|RC)\\d+|-latest))\\.tar
     }
@@ -1234,7 +1234,7 @@ subport ${php}-tidy {
     
     depends_lib-append      port:tidy
     
-    if {[vercmp ${branch} 7.0] <= 0} {
+    if {[vercmp ${branch} 7.1] <= 0} {
         patchfiles-append   patch-${php}-ext-tidy-tidy.c.diff
     }
     

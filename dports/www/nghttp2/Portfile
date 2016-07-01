@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           cxx11 1.0
 PortGroup           github 1.0
 
-github.setup        tatsuhiro-t nghttp2 1.10.0 v
+github.setup        tatsuhiro-t nghttp2 1.12.0 v
 categories          www
 platforms           darwin
-maintainers         gmail.com:mschamschula openmaintainer
+maintainers         mps openmaintainer
 license             MIT
 
 description         nghttp2 is an implementation of HTTP/2 in C.
@@ -19,8 +19,8 @@ long_description    ${description} Included are a HTTP/2 client, server and prox
 github.tarball_from releases
 use_xz              yes
 
-checksums           rmd160 69bebd4e0ec0592f6c1212b77a9526f185a98ea2 \
-                    sha256 c7e4624d91f32cddfd81233361804c004ef5295851b93e31f95f54a224e5091f
+checksums           rmd160 ef4b6baa2df33c2bab08aa385623c898d02e3b06 \
+                    sha256 445c24243b8132b031c2c9fc9fe99f5abadbce2db4fbdf7eb6d3beaa5797dd4b
 
 if {![variant_isset python34] && ![variant_isset python35] } { default_variants +python27 }
 

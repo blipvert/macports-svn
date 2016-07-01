@@ -4,7 +4,7 @@
 PortSystem    1.0
 
 name          lft
-version       3.73
+version       3.76
 categories    net security
 maintainers   victor
 description   Layer Four Traceroute - advanced traceroute tool
@@ -23,9 +23,9 @@ homepage      http://pwhois.org/lft/
 platforms     darwin
 master_sites  http://pwhois.org/get/
 
-checksums     md5 fd1277f55019786a0f03d4ce61f0e2c4 \
-              sha1 c5a37bef74d7466d5202ee8136acc3213711252e \
-              rmd160 2734df8ff0b9f67132e5d8c0853c8320040cd390
+checksums     md5 8a9aaa5bd1665dd825c3ffdf26066f99 \
+              sha1 d57d29e07a024baa4ba09b69f0e850f55e889b3b \
+              rmd160 f969b6b19257a6a3ad2f1c90cc669796ddb2683c
 
 depends_lib   port:libpcap
 

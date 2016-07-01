@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        osh gr-pyqt d25464be1f72741d75af3c69d15230d35d5fd465
-version             20160210
-checksums           rmd160 98c85c98c128791ac335619f0e9684eca453178a \
-                    sha256 46ba3deff1894e090c46bdb88be8c79addec5216b2b1667ef7a155898f357451
+github.setup        osh gr-pyqt a54f68a931c24aa16358e60a15828122c96dd7f8
+version             20160622
+checksums           rmd160 9d86e22d73c8df287c08b7fce6cb6d3f12d55f38 \
+                    sha256 effdb61e25406f699e48874035ee99afbf4278ce03d78c4f480dde69c8a4088b
 
 # allow gr-pyqt to work with both gnuradio and gnuradio-devel ...
 

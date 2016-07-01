@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         Net-NfDump 1.19
+perl5.branches      5.22 5.24
+perl5.setup         Net-NfDump 1.24
 
 platforms           darwin
 maintainers         psg.com:pokui openmaintainer
@@ -17,5 +17,5 @@ long_description    This module implements basic operations and allows to read, 
                     create and write NetFlow/SFlow/IPFIX flow records in binary \
                     files produced with nfdump (http://nfdump.sourceforge.net/) tool.
 
-checksums           rmd160  4758eece7f132c6a1a52d16feee6cfccbdeafce2 \
-                    sha256  e22d918516186b02472c36853fd9ec45108134dc3003da5268c625cb7e03f7cc
+checksums           rmd160  3b5597b39d3d269608bd5fd6945dc73f2d17ce5b \
+                    sha256  85725fa5ba5639238924e1942f7cc7c1121ccb455790bc150ef10c63c811936f

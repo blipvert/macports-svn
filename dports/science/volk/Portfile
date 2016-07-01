@@ -20,6 +20,7 @@ dist_subdir         volk
 if {${name} eq ${subport}} {
 
     github.setup    gnuradio volk 1.2.2 v
+    revision        1
     checksums       \
         rmd160 ba5e73686ea80a479bfa0dd545b71b3e3b85a9d9 \
         sha256 f7f186205e05dc62448cd138a38cc4434142e8dd7c3eb914b79689b3055f1152
@@ -30,15 +31,21 @@ if {${name} eq ${subport}} {
 provides the release version, which is typically updated every month or so.
     conflicts       volk-devel
 
+    # temporary patchfile to correct API for volk_32f_index_max_16u to
+    # be the same as that provided by volk-devel, and thus correct
+    # with respect to usage by other ports.
+
+    patchfiles-append patch-update_1.2.2_to_current.diff
+
 }
 
 subport volk-devel {
 
-    github.setup    gnuradio volk 9e7e39f870a0bfb1439cc6fdd821a442201121de
-    version         20160412
+    github.setup    gnuradio volk 96112746c8a8be15c0c4c968e3cfa0e8c5d3d713
+    version         20160623
     checksums       \
-        rmd160 83c984564e35c8342a02bf6aa1350759c81fb780 \
-        sha256 a06dbb126410ce0a93f81faa373b0dfc114ca1c38c61dde4ee1bddc13d1b2875
+        rmd160 f17350be3f5b6feff0e7b0e4aa08836ae0775c68 \
+        sha256 efd6998229c68aaa985f695931f8d35b62f5120ea58a0556aa6075d1ab035a8f
 
     conflicts       volk
     long_description ${long_description} ${subport} \

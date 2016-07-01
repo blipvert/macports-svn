@@ -95,8 +95,8 @@ extract.only    ${distname}${extract.suffix}
 
 post-destroot {
     xinstall -m 755 -d ${destroot}${prefix}/share/doc/${name}u
-     foreach f {AUTHORS COPYING ChangeLog* INSTALL NEWS README README.org} {
-        eval xinstall -m 644 [glob ${worksrcpath}/${f}] ${destroot}${prefix}/share/doc/${name}u
+    foreach f {AUTHORS COPYING ChangeLog* INSTALL NEWS README README.org} {
+        xinstall -m 644 {*}[glob ${worksrcpath}/${f}] ${destroot}${prefix}/share/doc/${name}u
     }
     ln -s ../../${name}u/doc ${destroot}${prefix}/share/doc/${name}u/html
 
@@ -111,8 +111,6 @@ post-destroot {
 post-activate {
     system "ranlib ${prefix}/lib/lib${name}u.a"
 }
-
-universal_variant   no
 
 livecheck.type  regex
 livecheck.regex ${name}u-(\[0-9.-\]+)\\.tar

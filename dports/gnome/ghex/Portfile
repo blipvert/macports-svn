@@ -2,10 +2,10 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           compiler_blacklist_versions 1.0
 
 name                ghex
-version             3.18.0
-revision            1
+version             3.18.2
 license             GPL-2+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         GHex - a binary editor.
@@ -20,8 +20,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b307b493e8800e9bef812ac785a9cd6aab6dcc9c \
-                    sha256  c5b1eb50a8dd1334880b37617871498b778ea137f79bb43894ec68e4f63dc925
+checksums           rmd160  bfca3d81adf8c275a768da09bc295efa03a36862 \
+                    sha256  ebd341c49e2cc4e710230703cd20e9febb29b64e34a1b5396d6aa818936e55bf
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -39,6 +39,8 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:yelp \
                     port:gnome-themes-standard
 
+# blacklist old compilers that do not support gcc diagnostic pragmas in functions
+compiler.blacklist  *gcc* {clang < 300}
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 

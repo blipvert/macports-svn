@@ -110,6 +110,7 @@ configure.args      --enable-languages=c,c++,objc,obj-c++,lto,fortran,java \
                     --disable-multilib \
                     --enable-lto \
                     --enable-libstdcxx-time \
+                    --with-build-config=bootstrap-debug \
                     --with-as=${prefix}/bin/as \
                     --with-ld=${prefix}/bin/ld \
                     --with-ar=${prefix}/bin/ar \
@@ -145,7 +146,7 @@ compiler.blacklist-append {llvm-gcc-4.2 < 2336.1}
 configure.cxx_stdlib
 
 build.dir           ${configure.dir}
-build.target        bootstrap
+build.target        bootstrap-lean
 use_parallel_build  yes
 
 destroot.target     install install-info-host

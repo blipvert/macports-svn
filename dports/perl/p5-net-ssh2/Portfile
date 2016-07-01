@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         Net-SSH2 0.58
+perl5.branches      5.22 5.24
+perl5.setup         Net-SSH2 0.62
 license             {Artistic-1 GPL}
 maintainers         oaf.dk:mni openmaintainer
 platforms           darwin
@@ -16,8 +16,8 @@ long_description    Net::SSH2 is a perl interface to the libssh2 library. \
                     SSH1) with all of the key exchanges, ciphers, and \
                     compression of libssh2.
 
-checksums           rmd160  bcaf6eb782d9914f8b09f729e5bf37226d69de4f \
-                    sha256  1d1f5f4cdf267ded0cb17ace6def2204f1891fc1274e248e7332dcd48f6a189e
+checksums           rmd160  354502aab127bb0a779d6dddd07a6fb5451f3162 \
+                    sha256  f603edb08d6a9ab30251c8f2eb3b540d6e711fbcf6b61f7a43334ecc4d08e6ce
 
 if {${perl5.major} != ""} {
     depends_lib-append \

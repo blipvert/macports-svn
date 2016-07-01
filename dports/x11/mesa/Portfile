@@ -6,8 +6,8 @@ PortGroup           compiler_blacklist_versions 1.0
 
 name                mesa
 epoch               1
-version             11.1.2
-
+version             11.2.1
+revision            1
 categories          x11 graphics
 maintainers         jeremyhu openmaintainer
 license             MIT
@@ -21,9 +21,9 @@ use_xz              yes
 master_sites        ftp://ftp.freedesktop.org/pub/mesa/${version}/
 fetch.use_epsv      no
 
-checksums           sha1    f6c306828427ad694885ebd488d3b7681eaafa87 \
-                    rmd160  6d47d523dc79260dfbc57fa24724cef804c794b3 \
-                    sha256  8f72aead896b340ba0f7a4a474bfaf71681f5d675592aec1cb7ba698e319148b
+checksums           sha1    16860f93322dfc75dc55c078239dab266661d303 \
+                    rmd160  21c7615fab453efda971d5503fff0145f4b74a88 \
+                    sha256  a65207e9ae5c5f1c29f863c6a2cc98a7ab99762a24b82a248337f0ea9cfce01b
 
 depends_build       port:pkgconfig \
                     port:flex \
@@ -43,9 +43,9 @@ depends_lib         port:xorg-glproto \
 
 patch.pre_args      -p1
 patchfiles \
-    5001-glext.h-Add-missing-include-of-stddef.h-for-ptrdiff_.patch \
-    5002-darwin-Suppress-type-conversion-warnings-for-GLhandl.patch \
-    5003-applegl-Provide-requirements-of-_SET_DrawBuffers.patch
+    0001-mesa-Deal-with-size-differences-between-GLuint-and-G.patch \
+    0002-applegl-Provide-requirements-of-_SET_DrawBuffers.patch \
+    0003-glext.h-Add-missing-include-of-stddef.h-for-ptrdiff_.patch
 
 if {[string match *gcc* ${configure.compiler}]} {
     # Older gcc fail to do -Werror=missing-prototypes correctly

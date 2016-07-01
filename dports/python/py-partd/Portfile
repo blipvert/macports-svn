@@ -5,9 +5,9 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-partd
-version             0.3.2
+version             0.3.4
 revision            0
-categories-append   science
+categories-append   devel
 platforms           darwin
 license             BSD
 supported_archs     noarch
@@ -24,10 +24,15 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  66ca8d6c538773b153b89470dc9814e1c918f2d0 \
-                    sha256  0b8a2f313d07548ab5fbca89fae27d63ce81709ee544609b9e515d9c604ca910
+checksums           rmd160  69d8a6daa30a891e3f95c0acbda95df257a6ba61 \
+                    sha256  7dce2e5e95c48d8da1b0ea05efcfff1150731e3f4081aecf9d5e8337a30ad24e
 
 if {${name} ne ${subport}} {
+    depends_build-append \
+                        port:py${python.version}-setuptools
+    depends_lib-append  port:py${python.version}-locket \
+                        port:py${python.version}-toolz
+
     livecheck.type      none
 } else {
     livecheck.type      pypi

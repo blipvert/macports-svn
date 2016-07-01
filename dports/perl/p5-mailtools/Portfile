@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         MailTools 2.16 Mail
+perl5.branches      5.22 5.24
+perl5.setup         MailTools 2.18 Mail
 platforms           darwin
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
@@ -20,10 +20,11 @@ long_description    MailTools is a set of Perl modules related to mail \
                     in MacPorts). It is a little harder to learn, but at \
                     least implements all RFCs correctly.
 
-checksums           rmd160  ed9fd08372b5058d5d574b1672d290290c853065 \
-                    sha256  56a56ed11e9dc44995dd70159c3a67fdaf1c78488cfb1a7045d32e81b8b23814
+checksums           rmd160  20a1622f4809be13f94fb46f4751837480af2daf \
+                    sha256  dfee9e770257371112f20d978e637759e81bc4f19e97b083585c71ecab37b527
 
 if {${perl5.major} != ""} {
     depends_lib-append \
+                    port:p${perl5.major}-net \
                     port:p${perl5.major}-timedate
 }

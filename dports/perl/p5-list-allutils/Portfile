@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         List-AllUtils 0.09
+perl5.branches      5.22 5.24
+perl5.setup         List-AllUtils 0.11
 platforms           darwin
 maintainers         nomaintainer
 license             Artistic-2
@@ -15,12 +15,12 @@ description         List::AllUtils - mixes List::Utils and List::MoreUtils
 
 long_description    ${description}
 
-checksums           rmd160  7a55c7e571091ff729938228fdfde072552088f4 \
-                    sha256  4cfe6359cc6c9f4ba0d178e223f4b468d3cf7768d645334962f05de069bdaee2
+checksums           rmd160  c832ecd411e23b7afcc4cff8dd79c4dafd506dc6 \
+                    sha256  762dcb0067fdba061104be834747f6b8bd27897389e77aed458f35dfe4d04998
 
 if {${perl5.major} != ""} {
-    depends_build-append \
-                    port:p${perl5.major}-test-warnings
     depends_lib-append  \
-                    port:p${perl5.major}-list-moreutils
+                    port:p${perl5.major}-scalar-list-utils \
+                    port:p${perl5.major}-list-utilsby \
+                    port:p${perl5.major}-list-someutils
 }

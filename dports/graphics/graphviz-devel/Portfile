@@ -8,7 +8,7 @@ PortGroup                       xcodeversion 1.0
 
 name                            graphviz-devel
 set my_name                     graphviz
-version                         2.39.20160325.1353
+version                         2.39.20160614.0518
 set thisbranch                  [strsed ${name} "g/^${my_name}//"]
 set otherbranch                 [expr {${thisbranch} eq {} ? {-devel} : {}}]
 categories                      graphics
@@ -16,7 +16,6 @@ maintainers                     ryandesign
 license                         EPL-1
 homepage                        http://www.graphviz.org/
 master_sites                    ${homepage}pub/graphviz/development/SOURCES/
-master_sites                    macports_distfiles
 platforms                       darwin
 use_parallel_build              yes
 dist_subdir                     ${my_name}
@@ -32,8 +31,8 @@ long_description                Graphviz is ${description}. Graph visualization 
                                 simple text language, and produce output in a \
                                 variety of visual and text formats.
 
-checksums                       rmd160  d7986e8d9bd9276adb7c428a97a778e997446da0 \
-                                sha256  d15177898e64958173b978ebdb0b365957e5afae29ee2979e59d9b089bae4ca5
+checksums                       rmd160  4f554ec9315e25a03b5eec5dc23989a4051f63f8 \
+                                sha256  aabf064d24e06f4a710cffac2c27e1b5237bad2389dfff0676f722915dd319e7
 
 # graphviz needs Xcode 3.1+ to avoid the libGL error when building the smyrna variant
 # graphviz-gui needs Xcode 3.1.2+; see #18811

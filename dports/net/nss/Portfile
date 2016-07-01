@@ -2,10 +2,11 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           compiler_blacklist_versions 1.0
 PortGroup           muniversal 1.0
 
 name                nss
-version             3.23
+version             3.25
 set NSS_VMAJOR      [lindex [split ${version} .] 0]
 set NSS_VMINOR      [lindex [split ${version} .] 1]
 set NSS_VPATCH      [lindex [split ${version} .] 2]
@@ -29,8 +30,8 @@ use_bzip2           no
 master_sites        ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${my_release}/src/ \
                     http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${my_release}/src/
 
-checksums           rmd160  2cb9a448ec60a00edd7cf5a08321dd6583d03cb9 \
-                    sha256  94b383e31c9671e9dfcca81084a8a813817e8f05a57f54533509b318d26e11cf
+checksums           rmd160  a3a711df9516788c9f872f4946f68adabcded836 \
+                    sha256  5d1ad475da19d0c033a716350dc5f8a747999d3eba5ac07ee0368c5bad6e2359
 
 depends_lib     port:nspr \
                 port:zlib \
@@ -38,6 +39,9 @@ depends_lib     port:nspr \
 
 destroot.dir ${destroot.dir}/dist
 build.dir    ${build.dir}/nss
+
+# external tests require libc++ and don't build on some systems with libc++ anyways, just disable them
+build.args   NSS_DISABLE_GTESTS=1
 
 # muniversal destroot requires a Makefile
 post-extract {
@@ -88,6 +92,12 @@ post-destroot {
 }
 
 use_parallel_build  no
+
+# blacklist old compilers that don't understand -std=c++0x
+# to fix build on 10.6 and earlier
+# https://trac.macports.org/ticket/51196
+
+compiler.blacklist  *gcc* {clang < 300}
 
 # mimic nss/coreconf/Darwin.mk
 

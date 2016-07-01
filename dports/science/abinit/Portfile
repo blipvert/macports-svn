@@ -3,10 +3,11 @@
 
 PortSystem          1.0
 PortGroup           mpi 1.0
+PortGroup           linear_algebra 1.0
 
 name                abinit
-version             7.10.5
-revision            4
+version             8.0.7
+revision            1
 categories          science
 platforms           darwin
 license             GPL-3
@@ -32,14 +33,15 @@ long_description    ABINIT is a package whose main program allows one to find th
 homepage            http://www.abinit.org
 master_sites        http://ftp.abinit.org/
 
-checksums           rmd160  f77a9db5bcd97bcc46ea11a96bbf8f17cb1a19b3 \
-                    sha256  e9376a3e34790bce90992f28e5fa8554b51ba467bf5709c7fd25d300e7c4f56a
+checksums           rmd160  b1992e1cb040d06224b3ff5a199352921203a340 \
+                    sha256  9df2fe572af39cef937a4134d569321b99c6670f187edbac9b355ff2defd5afc
 
 compilers.choose    cc cxx fc
-# g95 is not compatible with OpenMP, and support will be removed in the next version
+# g95 is no longer supported by abinit
 mpi.setup           default require_fortran -g95
 
 configure.args-append  --enable-gw-dpc
+configure.fcflags-append  -ffree-line-length-none
 configure.optflags  -O3
 
 use_parallel_build  yes
@@ -49,21 +51,9 @@ use_parallel_build  yes
 # but did not provide the libraries. That situation should never happen for this port.
 #build.target        multi multi_nprocs=4
 
-default_variants +etsf_io +libxc
-
-patchfiles patch-src-10_defs-defs_wannier90.F90.diff
+default_variants +etsf_io +libxc +wannier90
 
 pre-configure {
-    if {[fortran_variant_name] eq "g95"} {
-        configure.fcflags-append -ffree-line-length-huge
-        if {[variant_isset threads]} {
-            ui_error "You can select only one of +g95 and +threads."
-            return -code error "+g95 and +threads are not compatible since g95 does not support OpenMP."
-        }
-    } else {
-        configure.fcflags-append -ffree-line-length-none
-    }
-
     if { [variant_isset etsf_io] } {
         configure.args-append  --with-trio-flavor="netcdf+etsf_io"
         if { [variant_isset g95] } {
@@ -111,25 +101,15 @@ pre-configure {
     set linalg-flavor "none"
     if { [variant_isset atlas] } {
         set linalg-flavor atlas
-        if {[variant_isset threads]} {
-            set linalg_libs    -ltatlas
-        } else {
-            set linalg_libs    -lsatlas
-        }
     } else {
         set linalg-flavor netlib
-        if { [variant_isset accelerate] } {
-            set linalg_libs        -lvecLibFort
-        } elseif { [variant_isset openblas] } {
-            set linalg_libs        -lopenblas
-        }
     }
     if { [variant_isset scalapack] } {
         set linalg-flavor ${linalg-flavor}+scalapack
-        set linalg_libs        "${linalg_libs} -lscalapack"
+        set linalglib        "${linalglib} -lscalapack"
     }
     configure.args-append   --with-linalg-flavor="${linalg-flavor}"
-    configure.args-append   --with-linalg-libs="${linalg_libs}"
+    configure.args-append   --with-linalg-libs="${linalglib}"
 }
 
 # install binaries and pkgconfig but not the very large number of test files
@@ -209,29 +189,8 @@ variant libxc description {Build with support for libXC exchange-correlation lib
     depends_lib-append      port:libxc
     compilers.enforce_fortran libxc
     configure.args-append   --with-libxc-incs="-I${prefix}/include"
-    # update below when libxc 2.2.x is enabled
-    configure.args-append   --with-libxc-libs="-L${prefix}/lib -lxc"
+    configure.args-append   --with-libxc-libs="-L${prefix}/lib -lxc -lxcf90"
     test.target-append      libxc
-}
-
-#3 possibilities for blas/lapack + ScaLapack
-#-------------------------------------------
-if {![variant_isset accelerate] && ![variant_isset atlas] && ![variant_isset openblas]} {
-    default_variants-append +accelerate
-}
-
-variant accelerate conflicts atlas openblas description {Build with linear algebra from built-in Accelerate framework} {
-    depends_lib-append      port:vecLibFort
-}
-
-variant atlas conflicts accelerate openblas description {Build with linear algebra from ATLAS} {
-    depends_lib-append      port:atlas
-}
-
-variant openblas conflicts accelerate atlas description {Build with linear algebra from OpenBLAS} {
-    # allow OpenBLAS-devel too
-    depends_lib-append      path:lib/libopenblas.dylib:OpenBLAS
-    require_active_variants path:lib/libopenblas.dylib:OpenBLAS lapack
 }
 
 variant scalapack description {Build with ScaLAPACK for parallel linear algebra} {
@@ -246,7 +205,6 @@ variant scalapack description {Build with ScaLAPACK for parallel linear algebra}
     mpi.enforce_variant     scalapack
 }
 
-# abinit does not work with Wannier90 version 2.0.x currently
 variant wannier90 description {Build with support for Wannier90} {
     depends_lib-append      port:wannier90
     test.target-append      wannier90 tutoplugs vdwxc
@@ -259,7 +217,7 @@ variant wannier90 description {Build with support for Wannier90} {
 
 #variant bigdft description {Build with support for the wavelet BigDFT library} {
     # avoid this error (and equivalent with OpenCL)
-    # :info:build ar cru libCUDA.a  
+    # :info:build ar cru libCUDA.a
     # :info:build ar: no archive members specified
 #    patchfiles-append       patch-fallbacks-sources-bigdft-1.7.0.93-src-Makefile.in.diff
 #}

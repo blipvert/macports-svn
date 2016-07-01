@@ -6,7 +6,7 @@ PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-pyflakes
-version             1.1.0
+version             1.2.3
 revision            0
 categories-append   devel
 platforms           darwin
@@ -28,8 +28,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            pyflakes-${version}
 
-checksums           rmd160  1582df00fefcce3749928ab4743657058372a962 \
-                    sha256  e5f959931987e2be178781554b485d52342ec9f1b43f891d2dad07a691c7a89a
+checksums           rmd160  98d3c71eb77e155fbbc60602a6bf202493e9fa1a \
+                    sha256  2e4a1b636d8809d8f0a69f341acf15b2e401a3221ede11be439911d23ce2139e
 
 if {${name} ne ${subport}} {
     depends_run         port:pyflakes_select

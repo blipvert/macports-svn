@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         JSON-Parse 0.39
+perl5.branches      5.22 5.24
+perl5.setup         JSON-Parse 0.41
 
 platforms           darwin
 maintainers         khindenburg openmaintainer
@@ -16,8 +16,8 @@ supported_archs     noarch
 description         Read JSON into a Perl variable
 long_description    JSON::Parse converts JSON into the nearest equivalent Perl.
 
-checksums           rmd160  e3fbee3f882b1a3c7c2cb78f86e3bff0827519f2 \
-                    sha256  8ca48d1887a846ed834cc985a4e29e3ccaccb5b2cb99e2595c5bd119ffd0be20
+checksums           rmd160  7803cfeff5fe365251db0e2643dbefbc1178f2b3 \
+                    sha256  f06b0c7a67b514c09d714b27895085ce102a3886f961514987faa396e1ef1cc7
 
 if {$subport ne $name} {
     livecheck.type  none

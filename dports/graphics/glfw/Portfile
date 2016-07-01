@@ -18,12 +18,11 @@ if {${subport} eq ${name}} {
 
     # release
 
-    github.setup    glfw glfw 3.1.2
-    revision        1
+    github.setup    glfw glfw 3.2
     # bump the epoch because I moved the version from 20151012 to 3.1.2
     epoch           1
-    checksums       rmd160 f0a34fda090c5d5e7aef2c916d6160faf777842f \
-                    sha256 a956537ed306746cf0bfe3e4a71758bff6d2a9e25f51fe718516f5b49ad9bfc5
+    checksums       rmd160 0b0e400f47b965af9fe6eb3eb7e373cb6efa105f \
+                    sha256 2d98746893b55a332d2861bfc525d91b557894318dc79de015c854a0ee818ed6
 
     # patch to fix install directory for cmake files and docs
 
@@ -37,10 +36,10 @@ if {${subport} eq ${name}} {
 
     # devel
 
-    github.setup    glfw glfw d97044d9acc0c76433edda5a75b3196957906ca5
-    version         20160420
-    checksums       rmd160 e0015a533ae3e6ad59be8bd6f027ba8ed27d8790 \
-                    sha256 75aaf546632f0b79756ff0bf871e5fe33d0a0f892d83aa3d2831f057fd9eec92
+    github.setup    glfw glfw 49f429018e5ef50db730439132a443c0bb1967e7
+    version         20160623
+    checksums       rmd160 b8945b1f4de5b2e676a9a9693ec30c0f0acc649e \
+                    sha256 68a1e47480e376142a89e5cc85cacb8d9fca4f76a6050995a038836fd3448a50
 
     # patch to fix install directory for cmake files and docs
 
@@ -52,6 +51,10 @@ if {${subport} eq ${name}} {
 
 }
 
+# patch to fix install name of library
+
+patchfiles-append   patch-src_CMakeLists.txt.diff
+
 # use the real home page, not github's
 
 homepage            http://www.glfw.org/
@@ -62,10 +65,11 @@ cmake.out_of_source yes
 
 # configuration arguments for MacPorts build
 
-configure.args      -DBUILD_SHARED_LIBS=on \
-                    -DGLFW_BUILD_EXAMPLES=off \
-                    -DGLFW_BUILD_TESTS=off \
-                    -DGLFW_CMAKE_CONFIG_PATH=share
+configure.args-append \
+    -DBUILD_SHARED_LIBS=on \
+    -DGLFW_BUILD_EXAMPLES=off \
+    -DGLFW_BUILD_TESTS=off \
+    -DGLFW_CMAKE_CONFIG_PATH=share
 
 # remove top-level library path, such that internal libraries are used
 # instead of any already-installed ones.
@@ -83,11 +87,15 @@ if {[variant_isset docs]} {
     configure.args-append -DDOXYGEN_EXECUTABLE=
 }
 
+# error out if trying to build on OSX 10.6 or earlier; not supported
+
 platform darwin {
-    pre-fetch {
-        if {${os.major} < 10} {
-            ui_error "\n\n${name} does not support Mac OS X 10.6 or earlier.\n"
-            return -code error "Unsupported Mac OS X version."
+    if {${os.major} < 11} {
+        set os_note "${name} ${version} is designed for OS X 10.7 Lion and newer."
+        notes-append "\n\n${os_note}"
+        pre-fetch {
+            ui_error ${os_note}
+            error "unsupported platform"
         }
     }
 }

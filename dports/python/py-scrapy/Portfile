@@ -5,8 +5,7 @@ PortSystem              1.0
 PortGroup               python 1.0
 
 name                    py-scrapy
-version                 1.0.5
-revision                1
+version                 1.1.0
 maintainers             khindenburg openmaintainer
 platforms               darwin
 
@@ -19,10 +18,10 @@ license                 BSD
 homepage                http://pypi.python.org/pypi/Scrapy
 
 distname                Scrapy-${version}
-master_sites            http://pypi.python.org/packages/source/S/Scrapy/
+master_sites            https://files.pythonhosted.org/packages/source/S/Scrapy/
 
-checksums               rmd160  831a5b2c3363880004b326f0d6c65cc691b73457 \
-                        sha256  0a51c785a310d65f6e70285a2da56d48ef7d049bd7fd60a08eef05c52328ca96
+checksums               rmd160  fd03f691ea2b0dc7bda0e9da00e6d8a305bc2ce8 \
+                        sha256  eb474ab9609994a4259ce2cd701010023e0af05ddd527be1b7128d7a88713862
 
 python.versions 27
 python.default_version 27

@@ -4,15 +4,34 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         Test-Simple 1.001014
+perl5.branches      5.22 5.24
+perl5.setup         Test-Simple 1.302035
 platforms           darwin
 supported_archs     noarch
-maintainers         nomaintainer
+maintainers         devans openmaintainer
 license             {Artistic-1 GPL}
 
-description         Basic utilities for writing perl tests
-long_description    ${description}
+description         Framework for writing test tools that all work together.
+long_description    ${description} Now includes new Test2 as preferred test framework.
 
-checksums           rmd160  93fbdc8a521ef0f89b82945c90c4f32b200d5af1 \
-                    sha256  55a414ce89eb7a5e9e84186f286b002054f10ae8ef4f8f2d61bb710e7549f16b
+checksums           rmd160  9eb074a9e00b7590692b7a1e37536c965a6289be \
+                    sha256  a1897e2710c9ebfeb5f9e6fc739a73595c6ab16fe2670f96619fc948757df4d8
+
+if {${perl5.major} != ""} {
+
+   # Test2, now part of this module, was previously provided by separate port p5-test2
+   # deactivate old conflicting p5-test2 before activation
+
+    pre-activate {
+        set pname p${perl5.major}-test2
+        if {![catch {set installed [lindex [registry_active $pname] 0]}]} {
+            set _version [lindex $installed 1]
+            if {[vercmp $_version 0.0.45] < 0} {
+                registry_deactivate_composite $pname "" [list ports_nodepcheck 1]
+            }
+        }
+    }
+
+    supported_archs noarch
+}
+

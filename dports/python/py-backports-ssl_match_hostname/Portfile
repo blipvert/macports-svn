@@ -12,15 +12,15 @@ platforms           darwin
 license             PSF
 supported_archs     noarch
 
-python.versions     27 33
+python.versions     27 33 34
 
 maintainers         stromnov openmaintainer
 
-description         The ssl.match_hostname() function from Python 3.4
+description         The ssl.match_hostname() function from Python 3.5
 long_description    ${description}
 
 homepage            http://bitbucket.org/brandon/backports.ssl_match_hostname
-master_sites        https://pypi.python.org/packages/source/b/backports.ssl_match_hostname/
+master_sites        pypi:b/backports.ssl_match_hostname/
 
 distname            backports.ssl_match_hostname-${version}
 

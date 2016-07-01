@@ -3,7 +3,8 @@
 PortSystem 1.0
 
 name		xorg-libxcb
-version		1.11.1
+version		1.12
+revision        2
 categories	x11 devel
 license		X11
 maintainers	jeremyhu openmaintainer
@@ -14,8 +15,8 @@ long_description The X C Binding (XCB) library
 master_sites	 ${homepage}dist/
 
 distname	libxcb-${version}
-checksums           rmd160  a8ac86a0b68b08a1600ae63b0102704f4dfeb8b9 \
-                    sha256  b720fd6c7d200e5371affdb3f049cc8f88cff9aed942ff1b824d95eedbf69d30
+checksums           rmd160  6deb619ae87e84f014987c24abdc46e44b21197c \
+                    sha256  4adfb1b7c67e99bc9c2ccb110b2f175686576d2f792c8a71b9c8b19014057b5b
 use_bzip2	yes
 use_parallel_build yes
 
@@ -27,6 +28,12 @@ depends_lib	port:xorg-libXau \
                 port:xorg-libpthread-stubs
 
 configure.args  --disable-build-docs
+
+patch.pre_args -p1
+patchfiles \
+    0001-Fix-inconsistent-use-of-tabs-vs.-space.patch \
+    0002-Remove-from-param-names-in-manually-written-headers.patch \
+    0003-Correct-param-e-to-error-in-xcb_poll_for_reply.patch
 
 variant docs description "Install extra documentation" {
     depends_build-append \

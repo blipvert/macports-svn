@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                pypy
-version             5.0.1
+version             5.3.1
 categories          lang python devel
 license             MIT PSF
 maintainers         jmr openmaintainer
@@ -19,10 +19,10 @@ platforms           darwin
 homepage            http://pypy.org/
 master_sites        https://bitbucket.org/pypy/pypy/downloads/
 use_bzip2           yes
-distname            ${name}-${version}-src
-checksums           md5 798c6e83536a5fa5ed7d6efb4d06db1a \
-                    rmd160 cf1e761f26bdec0b7da28fe55a9e87dd03b0213a \
-                    sha256 1573c9284d3ec236c8e6ef3b954753932dff29462c54b5885b761d1ee68b6e05
+distname            ${name}2-v${version}-src
+checksums           md5 2ebc87d24018c60cbf339de039dfecb0 \
+                    rmd160 0decc0141a64d49309d87cab50298a7b39fef3e4 \
+                    sha256 31a52bab584abf3a0f0defd1bf9a29131dab08df43885e7eeddfc7dc9b71836e
 
 depends_build       port:pkgconfig
 depends_lib         port:libffi \
@@ -49,8 +49,13 @@ use_configure       no
 #if {[file executable ${prefix}/lib/pypy/pypy]} {
 #    build.cmd       ${prefix}/lib/pypy/pypy
 #} else {
-    depends_build-append port:python27
-    build.cmd       ${prefix}/bin/python2.7
+    if {${os.platform} eq "darwin" && ${os.arch} eq "i386" && ![catch {sysctl hw.cpu64bit_capable} is64bit] && $is64bit == 1} {
+        depends_build-append port:pypy-bootstrap
+        build.cmd       ${prefix}/lib/pypy-bootstrap/bin/pypy
+    } else {
+        depends_build-append port:python27
+        build.cmd       ${prefix}/bin/python2.7
+    }
 #}
 
 # a lot of memory is used before the C compiler even runs, so limit build.jobs
@@ -127,4 +132,4 @@ variant opt1 description {use optimization level 1 for faster build (but slower 
 
 livecheck.type      regex
 livecheck.url       http://pypy.org/download.html
-livecheck.regex     pypy-(\[0-9.\]+)-src${extract.suffix}
+livecheck.regex     pypy2-v(\[0-9.\]+)-src${extract.suffix}

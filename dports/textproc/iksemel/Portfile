@@ -5,7 +5,7 @@ PortSystem              1.0
 
 name                    iksemel
 version                 1.4
-revision                3
+revision                4
 categories              textproc
 license                 LGPL-2.1
 platforms               darwin
@@ -26,6 +26,8 @@ checksums               md5     532e77181694f87ad5eb59435d11c1ca \
 depends_build           port:pkgconfig
 
 depends_lib             port:gnutls
+
+patchfiles              patch-src-stream.c.diff
 
 post-extract {
     # https://code.google.com/p/iksemel/issues/detail?id=29

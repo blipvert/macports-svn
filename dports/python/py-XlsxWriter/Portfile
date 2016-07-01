@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           github 1.0
-github.setup        jmcnamara XlsxWriter 0.8.4 RELEASE_
+github.setup        jmcnamara XlsxWriter 0.9.2 RELEASE_
 name                py-XlsxWriter
 python.versions     26 27 33 34 35
 python.default_version 27
@@ -21,8 +21,8 @@ long_description    XlsxWriter can be used to write text, numbers, formulas \
                     features such as formatting and many more.
 
 checksums \
-    rmd160  1a6b5ae4fa27b75c3c5fbe9f1456cbd9a4330de2 \
-    sha256  96e58fb1eea271b5230c3962b4898170f9698927881a18faad65bf368ab4a4ee
+    rmd160  d0604b5a552471c1cd4262e0e35ccb19b2e6e027 \
+    sha256  8a5510cb92913f2ffefd68f0fd1391eee7cbf7069a098a104f5c32b2cfe9a2a1
 
 if {${name} ne ${subport}} {
     depends_build-append    port:py${python.version}-setuptools

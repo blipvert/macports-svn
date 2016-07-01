@@ -3,9 +3,10 @@
 
 PortSystem          1.0
 PortGroup           muniversal 1.0
+PortGroup           compiler_blacklist_versions 1.0
 
 name                wavpack
-version             4.75.2
+version             4.80.0
 categories          audio
 license             BSD
 maintainers         nomaintainer
@@ -22,15 +23,18 @@ master_sites        ${homepage}
 
 use_bzip2           yes
 
-checksums           rmd160  26a20a4f8184340deee0cf443522fb1f7ffe8742 \
-                    sha256  7d31b34166c33c3109b45c6e4579b472fd05e3ee8ec6d728352961c5cdd1d6b0
+checksums           rmd160  ca569bde94705f8405c98f79131a9af0eb6e96ba \
+                    sha256  79182ea75f7bd1ca931ed230062b435fde4a4c2e0dbcad048007bd1ef1e66be9
 
 depends_lib         port:libiconv
 
-# asm optimizations fail on 10.6
+platform darwin {
+    compiler.blacklist {macports-clang-3.[34]} {clang < 500} *gcc*
 
-if {${os.platform} eq "darwin" && ${os.major} < 11} {
-    configure.args  --disable-asm
+    # handrolled asm has issues on older platforms.  Disable it if we don't find a good compiler.
+    if {${os.major} < 11 && ![string match "*macports*" ${configure.compiler}]} {
+        configure.args-append --disable-asm
+    }
 }
 
 # if host is not set in 32-bit mode, wrong assembly code is used

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-fiona
-version             1.6.3
+version             1.7.0.post2
 revision            0
 categories-append   gis
 platforms           darwin
@@ -26,12 +26,14 @@ master_sites        pypi:F/Fiona
 
 distname            Fiona-${version}
 
-checksums           rmd160  dbbfe7e9dacf43d9484a5d92745999f31ec84851 \
-                    sha256  313dfff022e7e1ffeffe678ca26be0b833e988738dc2fd9bc1f7d9978c0bb7e7
+checksums           rmd160  984dd645574b5d275a603df812a431878ec59ddc \
+                    sha256  cb1ec737457a2fee2ea6f524e5c03a49aa3f9f0c8531961fc5f2794db3406120
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-setuptools \
                         port:py${python.version}-six \
+                        port:py${python.version}-cligj \
+                        port:py${python.version}-click-plugins \
                         port:gdal
 
     livecheck.type      none

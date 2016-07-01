@@ -5,7 +5,7 @@
 PortSystem        1.0
 
 name              gwenhywfar4
-revision          6
+revision          7
 # This port offers the latest stable version (also as a gtk subport)
 # as well as the latest beta version as gwenhywfar4-devel!
 
@@ -50,7 +50,8 @@ subport gwenhywfar4-gtk {}
 subport gwenhywfar4-devel {}
 subport gwenhywfar4-gtk-devel {}
 
-patchfiles      patch-shlib-extensions.diff
+patchfiles      patch-shlib-extensions.diff \
+                patch-src-sio-syncio_tls.c.diff
 
 if {[string match "*-devel" $subport]} {
     version                 4.14.0

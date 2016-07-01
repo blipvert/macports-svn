@@ -5,22 +5,22 @@ PortSystem              1.0
 PortGroup               php 1.1
 
 name                    php-scrypt
-version                 1.3
 categories-append       security
 platforms               darwin
 maintainers             ryandesign openmaintainer
 license                 BSD
 
-php.branches            5.3 5.4 5.5 5.6
+php.branches            5.3 5.4 5.5 5.6 7.0
 php.pecl                yes
+
+version                 1.4.2
+checksums               rmd160  710895123d695e17565a9ca8aaa1b74535731ed7 \
+                        sha256  94c7e7f3378f6ddf1755f59d99f61570f380df2b2fa630853a932d58fa38389c
 
 description             a PHP wrapper for scrypt
 
 long_description        ${name} is ${description}, key derivation function \
                         designed to be secure against hardware brute-force attacks.
-
-checksums               rmd160  943a9008f5cf9fe52ec611e3ac1f985946a61994 \
-                        sha256  886e07b4660bc21b2d04eff1ff0c0d8e6c2f32720d844dc7c93b2b22cb1fbae9
 
 configure.args-append   --enable-scrypt
 

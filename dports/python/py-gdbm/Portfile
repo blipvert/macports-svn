@@ -15,7 +15,7 @@ long_description	${description}
 
 homepage		http://docs.python.org/library/gdbm.html
 
-python.versions 24 25 26 27 31 32 33 34 35
+python.versions 24 25 26 27 31 32 33 34 35 36
 
 set setup_py "setup.py"
 set extract_files "Modules/gdbmmodule.c"
@@ -46,10 +46,10 @@ subport py26-gdbm {
 }
 subport py27-gdbm {
     maintainers     jwa openmaintainer
-    version         2.7.11
+    version         2.7.12
     use_xz			yes
-    checksums       rmd160  215c72b1d81e878a675984783ed8df041ee7539c \
-                    sha256  962b4c45af50124ea61f11a30deb4342fc0bc21126790fa1d7f6c79809413f46
+    checksums       rmd160  c330f6ac08ed67f307de0e726a288bab16c832d5 \
+                    sha256  d7837121dd5652a05fef807c361909d255d173280c4e1a4ded94d73d80a1f978
     livecheck.regex	Python (2.7.\[0-9\]+)
 }
 subport py31-gdbm {
@@ -87,25 +87,36 @@ subport py33-gdbm {
 }
 subport py34-gdbm {
     maintainers     jwa openmaintainer
-    version         3.4.4
-    epoch           20151221
+    version         3.4.5
+    epoch           20160627
     use_xz			yes
-    checksums       rmd160  86f5979b30fb17b4b612007585d6a34d4ae75f2c \
-                    sha256  a797d3820155ec6cb654a652b9acfb11792d4e7d568eef1f9199009e042b6ba2
+    checksums       rmd160  47604be01f37671a16c17e27316af327a1048fd6 \
+                    sha256  ee64b1c8a47461009abf25252332d29a4e587cb4f0c1c96aa793a3732e9d898a
     set setup_py "setup-py3k.py"
     set extract_files "Modules/_gdbmmodule.c"
     livecheck.regex	Python (3.4.\[0-9\]+)
 }
 subport py35-gdbm {
     maintainers     jwa openmaintainer
-    version         3.5.1
-    epoch           20151206
+    version         3.5.2
+    epoch           20160627
     use_xz			yes
-    checksums       rmd160  9e63ee775b0bfebdbf4ea21969856b1f91c7e243 \
-                    sha256  c6d57c0c366d9060ab6c0cdf889ebf3d92711d466cc0119c441dbf2746f725c9
+    checksums       rmd160  709be7df28045c4fc8ed40cadd299478439f9522 \
+                    sha256  0010f56100b9b74259ebcd5d4b295a32324b58b517403a10d1a2aa7cb22bca40
     set setup_py "setup-py3k.py"
     set extract_files "Modules/_gdbmmodule.c Modules/clinic/_gdbmmodule.c.h"
-    livecheck.regex	Python (3.5.0\[abrc\]+\[0-9\]+)
+    livecheck.regex	Python (3.5.\[0-9\]+)
+}
+subport py36-gdbm {
+    maintainers     jwa openmaintainer
+    version         3.6.0a2
+    epoch           20160614
+    use_xz			yes
+    checksums       rmd160  39a9ddda680bb1c83c1541987ae043388d460381 \
+                    sha256  2dd2ddf22a63ef9642a20b1f5a40983209e8d7a8ad8371a881fde520edc9ff86
+    set setup_py "setup-py3k.py"
+    set extract_files "Modules/_gdbmmodule.c Modules/clinic/_gdbmmodule.c.h"
+    livecheck.regex	Python (3.6.0\[abrc\]+\[0-9\]+)
 }
 
 distname		Python-${version}

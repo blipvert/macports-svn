@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           python 1.0
 
-github.setup        gdabah distorm 3.3.0 v
+github.setup        gdabah distorm 3.3.4 v
 set realname        distorm
 name                py-${realname}
 categories-append   devel
@@ -22,8 +22,8 @@ long_description \
 
 supported_archs     noarch
 
-checksums           rmd160  d220b8f25961e661e799848338df835c4a1b7baa \
-                    sha256  1e87b361b52e2e085d2439e58bd263ec5bae9dde5372d61d368082ff73bd96bb
+checksums           rmd160  19587bc3370400be35db2c84cf20db73cdfd5535 \
+                    sha256  3f43a65cbfed489387c8feee00db2c9dbad5e96ce2b0be9d7f8df21a85f531cc
 
 python.versions     27
 

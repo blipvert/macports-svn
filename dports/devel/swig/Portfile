@@ -4,9 +4,9 @@
 PortSystem 1.0
 
 name            swig
-version         3.0.8
-checksums       rmd160 a8869d9ee1cc2411ceea48d8dde7d176a087b989 \
-                sha256 58a475dbbd4a4d7075e5fe86d4e54c9edde39847cdb96a3053d87cb64a23a453
+version         3.0.10
+checksums       rmd160 c92e1ba431078e35f0bfc156ae68c763aedc007d \
+                sha256 2939aae39dec06095462f1b95ce1c958ac80d07b926e48871046d17c0094f44c
 
 categories      devel
 maintainers     michaelld openmaintainer

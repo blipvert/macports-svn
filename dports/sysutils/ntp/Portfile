@@ -3,8 +3,7 @@
 PortSystem 1.0
 
 name		ntp
-version		4.2.8p6
-revision 1
+version		4.2.8p8
 categories	sysutils net
 maintainers	geeklair.net:dluke
 description	NTP is a protocol designed to synchronize the clocks of computers over a network.
@@ -17,9 +16,9 @@ long_description	NTP is an implementation of RFC-5905. It is widely \
 homepage	http://www.ntp.org/
 master_sites	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-[join [lrange [split ${version} .] 0 1] .]/ 
 
-checksums	md5	60049f51e9c8305afe30eb22b711c5c6 \
-		sha1	7244b0fb66ceb66283480e8f83a4c4a2099f9cd7 \
-		rmd160	5490daa9472a121184c64e5b84949a8c16a87ec0
+checksums	md5	4a8636260435b230636f053ffd070e34 \
+		sha1	208ae3e2ce1237ad684c3bc818b6314d28636e46 \
+		rmd160	45d393abb749c46bbd3a5fd93a53c892613587c8
 
 platforms	darwin
 

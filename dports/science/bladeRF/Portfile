@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        Nuand bladeRF cc1fcad6e923d3d9134c099d4b2511d7ea1cddf7
-version             20160426
-checksums           rmd160 961e275f36db479fc43cce4fbf36a337336a8856 \
-                    sha256 87ddd3e45b08a3a79d931089a98a07d9e65ce7822413c43b60f8cc748e0d3e0d
+github.setup        Nuand bladeRF ab12ebd3fb843a6df53521fbc2d47c32b835f5dd
+version             20160629
+checksums           rmd160 dbe959dbde3ef8da74b60d14fd6b8f520970a3d6 \
+                    sha256 964729b936c3c4cece1a9ca423dc21a862c5f8a94fb6240c144c7541b4285465
 
 categories          science comms
 maintainers         michaelld openmaintainer

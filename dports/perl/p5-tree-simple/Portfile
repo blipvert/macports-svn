@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22
-perl5.setup         Tree-Simple 1.27
+perl5.branches      5.22 5.24
+perl5.setup         Tree-Simple 1.29
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         A simple tree object
@@ -13,8 +13,8 @@ long_description    ${description}
 
 extract.suffix      .tgz
 
-checksums           rmd160  b5c67fb991a4289fb1f79dd442b7d3fedd035d53 \
-                    sha256  ec3f9447744172c798a2191276c8ab2f4296f51e3b4e3fd48fa242e8509c566c
+checksums           rmd160  733290dcc27a7c0ba540c1e36cc7ae1e9cff2b8e \
+                    sha256  695e693587241d56d6b5a6e1477f548bcf71a0b0e4bf14b06ef2965e499bfe2c
 
 platforms           darwin
 

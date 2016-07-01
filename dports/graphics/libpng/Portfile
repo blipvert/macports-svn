@@ -4,7 +4,7 @@
 PortSystem              1.0
 
 name                    libpng
-version                 1.6.21
+version                 1.6.23
 set branch              [join [lrange [split ${version} .] 0 1] ""]
 categories              graphics
 maintainers             ryandesign
@@ -29,8 +29,8 @@ long_description        Libpng was written as a companion to the PNG \
                         understand. Currently, this library only supports C. \
                         Support for other languages is being considered.
 
-checksums               rmd160  39ac9f94e76ed3daddb9c9e1990ae5f8cb9dc0ab \
-                        sha256  6c8f1849eb9264219bf5d703601e5abe92a58651ecae927a03d1a1aa15ee2083
+checksums               rmd160  bb2ddbd8d72ffd86b8a2225428f778da99cc1741 \
+                        sha256  6d921e7bdaec56e9f6594463ec1fe1981c3cd2d5fc925d3781e219b5349262f1
 
 depends_lib             port:zlib
 

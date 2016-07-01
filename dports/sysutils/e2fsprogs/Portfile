@@ -4,7 +4,7 @@
 PortSystem                  1.0
 
 name                        e2fsprogs
-version                     1.42.13
+version                     1.43.1
 categories                  sysutils
 platforms                   darwin
 maintainers                 ryandesign openmaintainer
@@ -20,8 +20,8 @@ long_description            Utilities to create, check and manipulate extended 2
 homepage                    http://e2fsprogs.sourceforge.net/
 master_sites                sourceforge:project/e2fsprogs/e2fsprogs/v${version}
 
-checksums                   rmd160  e1c5ef94f3fcdf672bdf3b0e07511171943f8e69 \
-                            sha256  59993ff3a44f82e504561e0ebf95e8c8fa9f9f5746eb6a7182239605d2a4e2d4
+checksums                   rmd160  0392ed04ae20b2d6150d2cbce9c0fbc7f9d85f57 \
+                            sha256  83dba1d96dfdba06f1ca0da6a77d539c22391b99fbd9bd733699689ca25dbebc
 
 depends_build               port:pkgconfig
 depends_lib                 port:gettext
@@ -45,7 +45,8 @@ if {${subport} eq ${name}} {
     depends_lib-append          port:ossp-uuid \
                                 port:libcomerr
 
-    patchfiles-append           patch-Makefile.in-remove-included-libcomerr.diff
+    patchfiles-append           patch-Makefile.in-remove-included-libcomerr.diff \
+                                patch-lib-ext2fs-ext2_err.et.in.diff
 
     pre-build {
         ln -fs ${prefix}/bin/compile_et ${worksrcpath}/lib/et/compile_et

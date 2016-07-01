@@ -5,10 +5,10 @@ PortSystem          1.0
 
 name                mariadb
 set name_mysql      ${name}
-version             5.5.48
+version             5.5.49
 set version_branch  [join [lrange [split ${version} .] 0 1] .]
 # Please set revision_client and revision_server to 0 if you bump version.
-set revision_client 1
+set revision_client 0
 set revision_server 0
 categories          databases
 platforms           darwin
@@ -18,7 +18,6 @@ homepage            http://mariadb.org/
 
 if {$subport eq $name} {
 
-    PortGroup           archcheck 1.0
     PortGroup           cmake 1.0
     PortGroup           select 1.0
 
@@ -48,16 +47,14 @@ if {$subport eq $name} {
     patchfiles          patch-cmake-install_layout.cmake.diff \
                         patch-CMakeLists.txt.diff
 
-    checksums           rmd160  71310a471e15f359cf24ea365fb85bc7f475f1e6 \
-                        sha256  50f753e003af6bd9c50b6257cca9d0cced5c877690824eac05f8d54fb9f6b421
+    checksums           rmd160  16a3ef78aa10099547f1a3569073dc4efa7003f5 \
+                        sha256  2c82f2af71b88a7940d5ff647498ed78922c92e88004942caa213131e20f4706
 
     depends_lib-append  port:zlib port:tcp_wrappers port:ncurses
     depends_run-append  port:mysql_select
 
     select.group        mysql
     select.file         ${filespath}/${name_mysql}
-
-    archcheck.files     lib/libz.dylib lib/libwrap.dylib
 
     post-extract {
         file mkdir ${cmake.build_dir}/macports
@@ -163,7 +160,6 @@ if {$subport eq $name} {
         depends_lib-append      path:lib/libssl.dylib:openssl
         configure.args-delete   -DWITH_SSL:STRING=no
         configure.args-append   -DWITH_SSL:STRING=system
-        archcheck.files-append  lib/libssl.dylib
     }
 
     variant system_readline description {Use system readline instead of bundled readline} {
@@ -174,7 +170,6 @@ if {$subport eq $name} {
         depends_lib-append      port:readline
         configure.args-delete   -DWITH_READLINE:BOOL=ON
         configure.args-append   -DWITH_READLINE:BOOL=OFF
-        archcheck.files-append  lib/libreadline.dylib
     }
 
     notes "

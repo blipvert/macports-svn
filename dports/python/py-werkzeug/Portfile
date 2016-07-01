@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-werkzeug
-version             0.11.8
+version             0.11.10
 revision            0
 categories-append   www
 platforms           darwin
@@ -30,8 +30,8 @@ master_sites        pypi:W/Werkzeug
 
 distname            Werkzeug-${version}
 
-checksums           rmd160  d70278027eda6252359962c0d9154587879a953e \
-                    sha256  729730a25f43a29ac6a79f08384ea18a3a125d07079492e15c3b3c2a3f090c37
+checksums           rmd160  df8af920b28360bd7a0d9fa04990d790f9227630 \
+                    sha256  cc64dafbacc716cdd42503cf6c44cb5a35576443d82f29f6829e5c49264aeeee
 
 if {${name} ne ${subport}} {
 

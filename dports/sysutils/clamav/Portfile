@@ -4,7 +4,7 @@ PortSystem 1.0
 PortGroup muniversal 1.0
 
 name			clamav
-version		 	0.99.1
+version		 	0.99.2
 revision		1
 categories	  	sysutils
 maintainers	 	geeklair.net:dluke
@@ -16,9 +16,9 @@ long_description	Clam AntiVirus is a GPL anti-virus toolkit for UNIX. The \
 			servers (attachment scanning).
 
 homepage		http://www.clamav.net
-master_sites		http://www.clamav.net/downloads/production
-checksums	rmd160	737baa05e20e81133d1e5539d06402bbb6871f1e \
-		sha256	e144689122d3f91293808c82cbb06b7d3ac9eca7ae29564c5d148ffe7b25d58a
+master_sites		http://www.clamav.net/downloads
+checksums	rmd160	4ddb7c4ff32b1233a5210da54f162a154043c48e \
+		sha256	167bd6a13e05ece326b968fdb539b05c2ffcfef6018a274a10aeda85c2c0027a
 
 platforms	   	darwin
 
@@ -32,15 +32,10 @@ configure.args  	--mandir=${prefix}/share/man \
 #- disable llvm because of upstream bug
 #- https://bugzilla.clamav.net/show_bug.cgi?id=11309
 
-#- upstream neglected to apply libtool patch or update 
-#- libtool for this release
-#- https://bugzilla.clamav.net/show_bug.cgi?id=11188
-patchfiles		patch-configure.diff
-
 use_parallel_build	yes
 
 depends_lib		port:libiconv port:zlib port:bzip2 port:ncurses path:lib/libssl.dylib:openssl \
-			port:pcre port:libxml2
+			port:pcre2 port:libxml2
 
 test.run		yes
 test.target		check
@@ -72,5 +67,5 @@ variant clamav_milter description {build with libmilter support} {
 			}
 
 livecheck.type		regex
-livecheck.url		http://sourceforge.net/projects/clamav/files
+livecheck.url		http://www.clamav.net/downloads
 livecheck.regex		${name}-(\\d+.\\d+.\\d+)${extract.suffix}
