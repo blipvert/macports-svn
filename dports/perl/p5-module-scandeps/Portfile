@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Module-ScanDeps 1.21
+perl5.setup         Module-ScanDeps 1.22
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Recursively scan Perl code for dependencies
@@ -17,8 +17,8 @@ long_description    This module scans potential modules used by \
 
 platforms           darwin
 
-checksums           rmd160  88575b50e8b16074ef4e98fee811a523048e9350 \
-                    sha256  1fc52addee2d01afd3f9bb86e5684460932c05e6b2a85d70c7d0f91973250794
+checksums           rmd160  f8a93108bce6c34b4bfabbd52c9dd37eea7f6ff1 \
+                    sha256  4670de213243cd0002838279f4d30c41879ff8d86a5740cd215cdb234f13f799
 
 if {${perl5.major} != ""} {
     depends_build-append \

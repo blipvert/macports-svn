@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           cxx11 1.0
+PortGroup           github 1.0
+
+github.setup        INRIA libpointing 1.0.2 v
+categories          devel
+platforms           darwin
+maintainers         gmail.com:christian.frisson inria.fr:izzatbek.mukhanov openmaintainer
+license             GPL-2+
+
+description         An open-source cross-platform library to get raw events \
+                    from pointing devices and master transfer functions.
+
+long_description    Libpointing is an open-source cross-platform library \
+                    that provides direct access to HID pointing devices \
+                    and supports the design of pointing transfer functions.
+
+homepage            http://libpointing.org
+github.tarball_from releases
+distname            ${name}-mac-${version}
+worksrcdir          ${name}-${version}
+
+checksums           rmd160  f65ba44f6d04d522887ae254e5451c7a55f83c34 \
+                    sha256  4f4234581772bace7e811da1643d53922d8e29efdb52a5a6d7aaa13c937159f1
+
+patchfiles          patch-Makefile.diff
+
+use_configure       no
+
+variant universal {}
+
+build.env           CXX="${configure.cxx}" \
+                    CXXFLAGS="${configure.cxxflags} [get_canonical_archflags cxx]" \
+                    LDFLAGS="${configure.ldflags} [get_canonical_archflags ld]" \
+                    PREFIX=${prefix}
+
+destroot.env        PREFIX=${prefix}

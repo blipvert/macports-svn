@@ -2,7 +2,6 @@
 # $Id$
 
 PortSystem          1.0
-PortGroup           archcheck 1.0
 PortGroup           muniversal 1.0
 PortGroup           xcodeversion 1.0
 PortGroup           active_variants 1.1
@@ -11,7 +10,7 @@ PortGroup           compiler_blacklist_versions 1.0
 name                gtk3
 set real_name       gtk+
 epoch               1
-version             3.20.6
+version             3.22.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 categories          gnome x11
 license             LGPL-2.1+
@@ -31,8 +30,8 @@ use_xz              yes
 
 master_sites        gnome:sources/gtk+/${branch}/
 
-checksums           rmd160  5ae385f38ec164ffa72b0f9dec4dc30d50c04feb \
-                    sha256  3f8016563a96b1cfef4ac9e795647f6316deb2978ff939b19e4e4f8f936fa4b2
+checksums           rmd160  ee7ee12424a7670a69f68402af1791e56c97903d \
+                    sha256  88d0bb584be7ecec965b82ba88a9cf0aafd6f03eff7447653295ab2341c74134
 
 minimum_xcodeversions {9 3.1}
 
@@ -48,19 +47,19 @@ depends_lib         port:atk \
 depends_run         port:shared-mime-info \
                     port:hicolor-icon-theme
 
-archcheck.files     lib/libatk-1.0.dylib \
-                    lib/libintl.dylib \
-                    lib/libjasper.dylib \
-                    lib/libpango-1.0.dylib \
-                    lib/libtiff.dylib
-
-patchfiles          nawk.patch cups.patch
+patchfiles          nawk.patch \
+                    bz765649-get-style-earlier.patch \
+                    O_CLOEXEC-10.6-and-earlier.patch
 
 # gtk3 +quartz uses instancetype which is not available
 # before approximately Xcode 4.6 (#49391)
 
+# blacklist compilers that do not support C11 (redefinition of typedef ‘GdkX11Monitor’ at gdkscreen-x11.h:33)
+
 if {[variant_isset quartz]} {
     compiler.blacklist  *gcc* {clang < 425}
+} else {
+    compiler.blacklist  *gcc* {clang < 300}
 }
 
 # gobject-introspection uses g-ir-scanner, which uses $CC from env

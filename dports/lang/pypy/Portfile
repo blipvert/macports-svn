@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                pypy
-version             5.3.1
+version             5.4.1
 categories          lang python devel
 license             MIT PSF
 maintainers         jmr openmaintainer
@@ -20,9 +20,9 @@ homepage            http://pypy.org/
 master_sites        https://bitbucket.org/pypy/pypy/downloads/
 use_bzip2           yes
 distname            ${name}2-v${version}-src
-checksums           md5 2ebc87d24018c60cbf339de039dfecb0 \
-                    rmd160 0decc0141a64d49309d87cab50298a7b39fef3e4 \
-                    sha256 31a52bab584abf3a0f0defd1bf9a29131dab08df43885e7eeddfc7dc9b71836e
+checksums           md5 d1d197d16331aa23a7fd4b5d4c3c1717 \
+                    rmd160 1fa3b9972637aeb597970c7b4666db51a6cffbd6 \
+                    sha256 45dbc50c81498f6f1067201b8fc887074b43b84ee32cc47f15e7db17571e9352
 
 depends_build       port:pkgconfig
 depends_lib         port:libffi \
@@ -82,6 +82,10 @@ platform darwin {
     # use arch -foo if available
     if {${os.major} >= 9} {
         build.cmd arch -${build_arch} ${build.cmd}
+    }
+    # MacOS Sierra patch
+    if {${os.major} >= 16} {
+        patchfiles-append rtime.py.diff
     }
 }
 build.env           PYPY_USESSION_DIR=${workpath} PYPY_LOCALBASE=${prefix} \

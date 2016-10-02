@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        Blosc c-blosc 1.9.2 v
+github.setup        Blosc c-blosc 1.11.1 v
 revision            0
 name                blosc
 categories          archivers devel
@@ -25,11 +25,13 @@ long_description    Blosc is a high performance compressor optimized \
 
 homepage            http://www.blosc.org/
 
-checksums           rmd160  424daab0e18e23c99d6576e044cee65d6a1149a6 \
-                    sha256  8b56a2b1a2da4594a4be559f09e83c6428c42ea681cf9d15e7df1240f47d8553
+checksums           rmd160  2a5a8362342cf8e21781924c11f5d270730c1f09 \
+                    sha256  a14c1457c5e4df2c7e3787c76077988157bf8b7beca4f3dd8ceb793c4e612355
 
 depends_lib-append  port:zlib \
-                    port:snappy
+                    port:lz4 \
+                    port:snappy \
+                    port:zstd
 
 cmake.out_of_source yes
 
@@ -37,6 +39,7 @@ configure.args-append \
                     -DBUILD_STATIC:BOOL=ON \
                     -DBUILD_TESTS:BOOL=OFF \
                     -DBUILD_BENCHMARKS:BOOL=OFF \
-                    -DPREFER_EXTERNAL_LZ4:BOOL=OFF \
+                    -DPREFER_EXTERNAL_ZLIB:BOOL=ON \
+                    -DPREFER_EXTERNAL_LZ4:BOOL=ON \
                     -DPREFER_EXTERNAL_SNAPPY:BOOL=ON \
-                    -DPREFER_EXTERNAL_ZLIB:BOOL=ON
+                    -DPREFER_EXTERNAL_ZSTD:BOOL=ON

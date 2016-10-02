@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Dancer-Plugin-Database-Core 0.14
+perl5.setup         Dancer-Plugin-Database-Core 0.20
 license             Artistic-2
 maintainers         nomaintainer
 description         Shared core library for Dancer and Dancer2 database plugins
@@ -13,8 +13,8 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  071d0ac0c03798fc35029f6e00d2c7df1eeba427 \
-                    sha256  9f4d6a651d23f9f1f0915c5dcfccf03120fa8495807e56b2c38edba8a5beb461
+checksums           rmd160  dcaf047f8e8317c60936030963b93af9df6b0c0e \
+                    sha256  345536603883e2fcc599ef79ead66d97a8ec0c2e31e24f60a55298e8d498150a
 
 if {${perl5.major} != ""} {
     depends_lib-append \

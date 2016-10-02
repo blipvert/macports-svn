@@ -6,7 +6,7 @@ PortGroup           compilers 1.0
 PortGroup           active_variants 1.1 
 
 name                gildas
-version             201606a
+version             201609b
 set my_version      [string tolower [clock format [clock scan 2000-[string range ${version} 4 5]-10] -format %b]][string range ${version} 2 3][string range ${version} 6 end]
 categories          science
 platforms           darwin
@@ -27,11 +27,12 @@ long_description    GILDAS is a collection of state-of-the-art softwares \
                     plotting, widgets).
 
 homepage            http://www.iram.fr/IRAMFR/GILDAS/gildas.html
-master_sites        http://www.iram.fr/~gildas/dist/
+master_sites        http://www.iram.fr/~gildas/dist/ \
+                    http://www.iram.fr/~gildas/dist/archive/gildas/
 distname            ${name}-src-${my_version}
 
-checksums           rmd160  748d9faf6318db1dcea9cb84ea48790b925a8289 \
-                    sha256  7043db2fbca6144d714aaaf23aa4c5a7932ca2fd9d79d274286f78a470acd141
+checksums           rmd160  16eaa2862d3e762915d7a0a11e9512242603effa \
+                    sha256  81ad4d2fb524875954a509141dbad8b65620e839512cfc18cf757c5443e8775f
 
 patch.pre_args      -p1
 patchfiles          patch-admin-Makefile.def.diff \

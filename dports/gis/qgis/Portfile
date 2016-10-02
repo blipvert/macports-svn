@@ -3,9 +3,10 @@
 
 PortSystem          1.0
 PortGroup           cmake   1.0
+PortGroup           github  1.0
 
-name                qgis
-version             2.14.3
+github.setup        qgis QGIS 2_16_2 final-
+version             2.16.2
 categories          gis
 maintainers         vince
 description         QGIS is a user-friendly GIS based on Qt 4
@@ -20,17 +21,13 @@ license             GPL
 use_parallel_build  no
 homepage            http://www.qgis.org/
 
-distname            ${name}-${version}
-master_sites        http://qgis.org/downloads/
-use_bzip2           yes
-
-checksums           rmd160  0392c7fa8a0976056c0f023ea5acec37aaf01fac \
-                    sha256  544deafe6a486b57fba4c3dcb34043d620f960544dc72eca4a517f6fabd86a37
+checksums           rmd160  eeda3e0bfc200c20d275c52c045d9fd380e77986 \
+                    sha256  4ddec990828ea792ff900c8eb914becaeb3ee560d241063eb66104eb0af63cf1
 
 patchfiles          patch-app_info_plist_in.diff \
                     patch-PyQtMacros.diff
 
-worksrcdir          ${name}-${version}
+worksrcdir          ${name}-${github.version}
 
 depends_lib-append  port:libiconv \
                     port:expat \
@@ -46,7 +43,8 @@ depends_lib-append  port:libiconv \
                     port:python27 \
                     port:py27-gdal \
                     port:qca \
-                    port:qca-ossl
+                    port:qca-ossl \
+                    port:qjson
 
 depends_build-append \
                     port:bison \
@@ -54,7 +52,8 @@ depends_build-append \
                     port:py27-sip
 
 depends_run-append  port:py27-psycopg2 \
-                    port:py27-spatialite
+                    port:py27-spatialite \
+                    port:py27-requests
 
 post-extract {
     system -W ${worksrcpath} "mkdir build"
@@ -88,6 +87,8 @@ configure.args-append  "-DWITH_GRASS=OFF"
 configure.args-append  "-DWITH_GRASS7=OFF"
 configure.args-append  "-DWITH_QWTPOLAR=FALSE"
 configure.args-append  "-DGIT_MARKER=NOTFOUND"
+configure.args-append  "-DENABLE_TEST=NO"
+#configure.args-append  "--trace"
 #configure.args-append  "-DPYUIC_PROGRAM=${prefix}/bin/pyuic4-2.7"
 #configure.args-append  "-DPYRCC_PROGRAM=${prefix}/bin/pyuic4-2.7"
 
@@ -113,7 +114,8 @@ variant qt5 conflicts qt4 description "Build with Qt5" {
     configure.args-append   "-DQWT_LIBRARY=${prefix}/libexec/qt5/lib/libqwt.dylib"
 
     depends_lib-append      port:py27-pyqt5 \
-                            port:qt5-qtscript 
+                            port:qt5-qtscript \
+                            port:qt5-sqlite-plugin
 
 }
 
@@ -123,14 +125,17 @@ variant qt4 conflicts qt5 description "Build with Qt4" {
     configure.args-append   "-DENABLE_QT5=OFF"
     configure.args-append   "-DPYTHON_CUSTOM_FRAMEWORK=${Py_FRM}"
     configure.args-append   "-DSIP_BINARY_PATH=${prefix}/bin/sip-2.7"
-    configure.args-append   "-DPYUIC4_PROGRAM=${prefix}/bin/pyuic4-2.7"
-    configure.args-append   "-DPYRCC4_PROGRAM=${prefix}/bin/pyrcc4-2.7"
+    configure.args-append   "-DPYUIC_PROGRAM=${prefix}/bin/pyuic4-2.7"
+    configure.args-append   "-DPYRCC_PROGRAM=${prefix}/bin/pyrcc4-2.7"
     configure.args-append   "-DWITH_SERVER=TRUE"
     configure.args-append   "-DWITH_SERVER_PLUGINS=TRUE"
+    configure.args-append   "-DQWT_INCLUDE_DIR=${prefix}/libexec/qt4/include/qwt"
+    configure.args-append   "-DQWT_LIBRARY=${prefix}/libexec/qt4/lib/libqwt.dylib"
 
     depends_lib-append      port:py27-pyqt4 \
                             port:py27-qscintilla \
-                            port:qwt61
+                            port:qwt61 \
+                            port:qt4-mac-sqlite3-plugin
 }
 
 # Database variants (from the GDAL port)
@@ -161,7 +166,7 @@ foreach s ${postgresql_suffixes} {
     set pgd "${pgd}!\[variant_isset postgresql${s}\] && "
 }
 set pgd [string range ${pgd} 0 end-4]
-set pgd "${pgd}} { default_variants +postgresql94 }"
+set pgd "${pgd}} { default_variants +postgresql95 }"
 eval ${pgd}
 
 variant grass               description "Build Grass 7 plugin" {
@@ -193,7 +198,8 @@ configure.args-append  "-DPROJ_INCLUDE_DIR=${prefix}/include"
 configure.args-append  "-DPROJ_LIBRARY=${prefix}/lib/libproj.dylib"
 configure.args-append  \
         "-DSPATIALINDEX_LIBRARY=${prefix}/lib/libspatialindex.dylib"
-configure.args-append  "-DCMAKE_BUILD_TYPE=Release"
+#configure.args-append  "-DCMAKE_BUILD_TYPE=DEBUG"
+configure.args-append  "-DCMAKE_BUILD_TYPE=RELEASE"
 
 use_parallel_build          yes
 build.dir                   ${worksrcpath}/build

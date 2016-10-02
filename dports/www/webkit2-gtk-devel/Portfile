@@ -10,7 +10,7 @@ PortGroup           active_variants 1.1
 PortGroup           cmake 1.0
 PortGroup           compiler_blacklist_versions 1.0
 PortGroup           cxx11 1.0
-PortGroup           github 1.0
+#PortGroup           github 1.0
 
 name                webkit2-gtk-devel
 conflicts           webkit2-gtk
@@ -22,15 +22,23 @@ platforms           darwin freebsd
 license             LGPL-2+ BSD
 homepage            http://webkitgtk.org/
 
-# r201982
-github.setup        WebKit webkit e5e9f0d843319985c5e13156cc47bb3b96e90b9b
-checksums           rmd160  b3971e256dc94443d74f8bbb74fd3171d83a4f8b \
-                    sha256  99f6e250b4a7436eb1b57b2291ea78f41de6c23ac1f8a25e28b75b237ec1e12e
+# r202372
+#github.setup        WebKit webkit 63f4f7120dfbc0235b90e6d2f2c68be36895d067
+#checksums           rmd160  3fd91e14df1668b34bf1cb2bb4ab19526a68b7eb \
+#                    sha256  3ae58d6c15052cae2ad1c76fa0ecb7c63555671d4f7fc2a16bbbf5b83977124a
 
 # version needs to come after github.setup
-version             2.13.0
-revision            14
+version             2.14.0
+revision            0
 epoch               1
+
+master_sites        http://webkitgtk.org/releases/
+use_xz              yes
+distname            webkitgtk-${version}
+dist_subdir         webkit-gtk
+
+checksums           rmd160  25116c98970867950e5b2e8e3506527aa2a9021c \
+                    sha256  0513ad836c624a3d24bdf1a99f4b4aead984ab6684150bc70f16db651590ea0a
 
 # don't overwrite build dependencies provided by cmake portgroup
 depends_build-append \
@@ -73,11 +81,15 @@ depends_lib         port:atk \
 # PR-153138.patch: https://bugs.webkit.org/show_bug.cgi?id=153138
 # PR-157554.patch: https://bugs.webkit.org/show_bug.cgi?id=157554
 # PR-157574.patch: https://bugs.webkit.org/show_bug.cgi?id=157574
+# PR-162261.patch: https://bugs.webkit.org/show_bug.cgi?id=162261
+# PR-162302.patch: https://bugs.webkit.org/show_bug.cgi?id=162302
 patchfiles-append \
     PR-152650-2.patch \
     PR-153138.patch \
     PR-157554.patch \
-    PR-157574.patch
+    PR-157574.patch \
+    PR-162261.patch \
+    PR-162302.patch
 
 # Build out-of-tree
 configure.post_args     ../${worksrcdir}
@@ -97,6 +109,12 @@ configure.args-append -DENABLE_GTKDOC=OFF
 
 # <rdar://problem/24031030>
 configure.optflags  -Os
+
+# clang 3.4, 503.0.35, and 600.0.57 (error: call to 'make_unique' is ambiguous, error: call to 'exchange' is ambiguous)
+# compiler.blacklist-append {clang < 602} macports-clang-3.4
+# clang 3.3 (error: no type named 'make_index_sequence' in namespace 'std')
+compiler.fallback-append macports-clang-3.8
+compiler.blacklist-append {clang < 602} macports-clang-3.4 macports-clang-3.3
 
 pre-configure {
     if {![variant_isset quartz] && ![variant_isset x11]} {
@@ -183,4 +201,7 @@ if {![variant_isset quartz]} {
     default_variants-append +x11 +gtk2
 }
 
-livecheck.type      none
+#livecheck.type      none
+livecheck.type      regex
+livecheck.url       http://webkitgtk.org/releases/
+livecheck.regex     "webkitgtk-(\\d+\\.\\d*\[13579\](?:\\.\\d+)*)"

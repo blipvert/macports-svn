@@ -23,8 +23,7 @@ checksums           rmd160  16258023f8ba0cba4ac798c4f380674bbda4933d \
 if {${perl5.major} != ""} {
     depends_build-append \
                     port:p${perl5.major}-module-build-tiny \
-                    port:p${perl5.major}-test-exception \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-exception
 
     depends_lib-append \
                     port:p${perl5.major}-autobox \

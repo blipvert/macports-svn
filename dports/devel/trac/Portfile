@@ -4,7 +4,7 @@ PortSystem 1.0
 PortGroup python 1.0
 
 name			trac
-version			1.0.11
+version			1.0.13
 categories		devel python
 platforms		darwin
 maintainers		geeklair.net:dluke
@@ -22,9 +22,9 @@ homepage	http://projects.edgewall.com/trac/
 master_sites	http://ftp.edgewall.com/pub/trac/
 distname	Trac-${version}
 
-checksums	md5	3154ef8cacf77ff59f81969c895c72cb \
-		sha1	709485af9479969a50fe384f74bba95adad3e8c1 \
-		rmd160	3cdc8cc96209e2097163b2d523eb0589d8841735
+checksums	md5	739dd6c2bd4aa09904cc667c41bc151c \
+		sha1	3157f38233c80fe76246e8a30584ca0efac89e51 \
+		rmd160	ba87f668548b67a3df6abd08b75c19fe85423786
 
 variant python26 conflicts python27 description {Use Python 2.6} {}
 variant python27 conflicts python26 description {Use Python 2.7} {}

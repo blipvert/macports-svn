@@ -7,11 +7,10 @@ PortGroup           github 1.0
 
 name                gr-baz
 
-github.setup        balint256 gr-baz 77d46dd874f7a9e1ec12a588049a313f2934dae8
-version             20160505
-revision            1
-checksums           rmd160 e049b8f960bd486ab0e877cc7720716b03cc931d \
-                    sha256 83f3e2330ba0b46b50d3ef459d03bcdead5489fa56242d5820121ab67e314b22
+github.setup        balint256 gr-baz b1abb4ecd26214efc472f0dcc0ffd5809fb58a55
+version             20160907
+checksums           rmd160 d2148f966bc43d3b586fbf89f320de868b0f16b5 \
+                    sha256 3c982d451db52e9fe0e151d9c4a2924044cb3bb6ceaaad2c3a2dc8f0d6580c0d
 
 # allow gr-baz to work with both gnuradio and gnuradio-devel ...
 
@@ -65,9 +64,9 @@ depends_lib-append \
 # specify the Python version to use
 
 configure.args-append \
-    -DPYTHON_EXECUTABLE=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 \
-    -DPYTHON_INCLUDE_DIR=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Headers \
-    -DPYTHON_LIBRARY=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Python \
+    -DPYTHON_EXECUTABLE=${frameworks_dir}/Python.framework/Versions/2.7/bin/python2.7 \
+    -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.7/Headers \
+    -DPYTHON_LIBRARY=${frameworks_dir}/Python.framework/Versions/2.7/Python \
     -DGR_PYTHON_DIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages
 
 # enable all variants except +debug and +universal

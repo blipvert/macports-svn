@@ -6,7 +6,7 @@ PortGroup           github 1.0
 PortGroup           python 1.0
 
 # keep this in sync with port brotli
-github.setup        google brotli 0.3.0 v
+github.setup        google brotli 0.5.2 v
 name                py-brotli
 categories          python archivers
 platforms           darwin
@@ -21,7 +21,7 @@ long_description    \
     in speed with deflate but offers more dense compression. This port installs \
     python modules, see also port brotli for the bro tool.
 
-checksums           rmd160  567107e47181fed44653cf3586455a1af913d726 \
-                    sha256  bf848b80f716dbf72422b6d4f3648d0be5786908a4ec8958ef8071e2e9e34564
+checksums           rmd160  e76dccbd6670499f800a7434cb1d66f7594d4f97 \
+                    sha256  2f01a70c9b525400d236ab89f4af96bed444a40cf55c87a4787a53520679a543
 
 python.versions     27 33 34 35

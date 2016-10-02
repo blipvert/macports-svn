@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         MooX-late 0.015
-revision            1
+revision            2
 
 platforms           darwin
 maintainers         nomaintainer
@@ -24,10 +24,10 @@ checksums           rmd160  b88e7059de1246ee997a071f23acb38ec9187705 \
 if {${perl5.major} != ""} {
     depends_build-append  \
                     port:p${perl5.major}-test-fatal \
-                    port:p${perl5.major}-test-requires \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-requires
 
     depends_lib-append  \
                     port:p${perl5.major}-moo \
+                    port:p${perl5.major}-moox-handlesvia \
                     port:p${perl5.major}-type-tiny
 }

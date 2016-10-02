@@ -18,7 +18,6 @@ license         LGPL-2.1+
 maintainers     michaelld toby
 
 use_parallel_build no
-dist_subdir     libusb
 
 subport libusb-devel {}
 
@@ -40,10 +39,10 @@ if {${subport} eq ${name}} {
     long_description ${long_description} \
         This port provides devel version of ${name}, updated weekly to monthly.
 
-    github.setup   libusb libusb 648fb8691f8b9701d7406bc339ce64b57545934b
-    version        20160529
-    checksums      rmd160 9ecd9098c78d177dbce08bf5027dad9f7652ed2f \
-                   sha256 539175038971508e774921b06690acbf2da19c5e3cc082aeb234fbed37ea0f95
+    github.setup   libusb libusb 5fa6d3bb666ca035b627d028fbb4e0d9b8d18c6b
+    version        20160921
+    checksums      rmd160 953e8ee970428c34c8ea652b688212133c10b36d \
+                   sha256 d9531ed247bf16065126e1a49473fee71a218a895c2a3b8f4f941d01aa8828dc
 
     conflicts      libusb
     patchfiles     patch-libusb_os_darwin_usb.h.devel.diff

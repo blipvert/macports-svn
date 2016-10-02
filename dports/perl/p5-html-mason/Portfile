@@ -26,8 +26,7 @@ checksums           rmd160  b8729a09284c9b4883245dd92b8199df5171d769 \
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-test-deep \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-deep
 
     depends_lib-append \
                     port:p${perl5.major}-cache-cache \

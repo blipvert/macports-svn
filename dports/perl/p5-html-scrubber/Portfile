@@ -20,8 +20,7 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-test-cpan-meta \
                     port:p${perl5.major}-test-eol \
                     port:p${perl5.major}-test-memory-cycle \
-                    port:p${perl5.major}-test-notabs \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-notabs
     
     depends_lib-append \
                     port:p${perl5.major}-html-parser

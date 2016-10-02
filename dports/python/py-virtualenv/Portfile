@@ -6,7 +6,7 @@ PortGroup           python 1.0
 PortGroup           select 1.0
 
 name                py-virtualenv
-version             15.0.1
+version             15.0.3
 categories-append   devel
 platforms           darwin
 license             MIT
@@ -20,9 +20,9 @@ homepage            http://pypi.python.org/pypi/${python.rootname}
 
 master_sites        pypi:v/${python.rootname}
 distname            ${python.rootname}-${version}
-checksums           md5     28d76a0d9cbd5dc42046dd14e76a6ecc \
-                    rmd160  5d45bc4b34c2483427c9556fd10833fcce9e661d \
-                    sha256  1a74278b8adb383ce4c7619e33c753b1eb7b58dc1e449601c096ca4b76125f84
+checksums           md5     a5a061ad8a37d973d27eb197d05d99bf \
+                    rmd160  bf32c45de7ac2f66d981c624979ff2cf08f498be \
+                    sha256  6d9c760d3fc5fa0894b0f99b9de82a4647e1164f0b700a7f99055034bf548b1d
 
 python.versions     26 27 33 34 35
 
@@ -41,8 +41,4 @@ if {${name} ne ${subport}} {
     }
 
     livecheck.type  none
-} else {
-    livecheck.type  regex
-    livecheck.url   https://pypi.python.org/pypi?:action=doap&name=${python.rootname}
-    livecheck.regex {<revision>(\d+(?:\.\d+)*)</revision>}
 }

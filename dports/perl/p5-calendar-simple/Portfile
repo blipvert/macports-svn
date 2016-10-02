@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         Calendar-Simple 1.21
-revision            4
+revision            5
 license             {Artistic-1 GPL}
 platforms           darwin
 maintainers         nomaintainer
@@ -19,8 +19,8 @@ checksums           rmd160  069a3791321272dbb7d414ac8ef7fd9eba707817 \
                     sha256  3f1f8f8408d9913ab4e0284f981065357ec6ebc8e8357c317100f5c627d3d465
 
 if {${perl5.major} != ""} {
-    perl5.use_module_build
+    depends_lib-append \
+                    port:p${perl5.major}-datetime
     
-    depends_build-append \
-                    port:p${perl5.major}-test-simple
+    perl5.use_module_build
 }

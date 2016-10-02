@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           bitbucket 1.0
 PortGroup           mpi 1.0
 
-bitbucket.setup     petsc petsc 3.6.3 v
-revision            2
+bitbucket.setup     petsc petsc 3.7.3 v
+revision            1
 categories          math science
 maintainers         sean
 license             BSD
@@ -19,8 +19,8 @@ long_description    PETSc, pronounced PET-see (the S is silent), is a suite \
 platforms           darwin
 universal_variant   no
 
-checksums           rmd160  474b5c0cfb17657cdeb8a1b68590efee509b99c5 \
-                    sha256  007f24c7ec8ef4656248253b17e8c5bde5831f888c3a18059a7c7b044ee9e203
+checksums           rmd160  c29e741f576b1efe62e6c07533baf3c752f250c1 \
+                    sha256  a2e807d6138389ebb2563b06615686011b3a30e18719d887dcb7fd972a89885e
 
 mpi.setup
 
@@ -29,12 +29,6 @@ use_parallel_build  no
 depends_build-append \
                     port:sowing \
                     port:c2html
-
-post-extract {
-    # superlu 4.3 works with 3.6.1, can remove this after next update
-    reinplace "s,4\.1,4.3,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU_DIST.py
-    reinplace "s,5\.0,5.1,g" ${worksrcpath}/config/BuildSystem/config/packages/SuperLU.py
-}
 
 pre-configure {
     configure.args-append \
@@ -66,14 +60,14 @@ pre-configure {
 }
 
 subport petsc-devel {
-    bitbucket.setup     petsc petsc d89f5e7a10d7
+    bitbucket.setup     petsc petsc d745d2547b89
     bitbucket.livecheck master
     name                petsc-devel
-    version             3.6.99
-    revision            21
+    version             3.7.99
+    revision            4
 
-    checksums           rmd160  8fa1620dc49be3282af95f368c3c8f3734660d4f \
-                        sha256  c596826c6f2451de154b441b943650782d812a317a516d2997488ecdc6e54527
+    checksums           rmd160  d67afbc8fd5ec371cd1debfff4b9c0bb41f04a78 \
+                        sha256  88beb37f34b5f997d47ff0950bc1b89a41035de05b292873d215e7fd78824f56
 }
 
 notes               "Add the following line to your .bash_profile if you plan to use\
@@ -127,11 +121,9 @@ variant sundials description {Build with CVODE interface for TS} {
     mpi.enforce_variant   sundials
 }
 
-if {[string first "-devel" $subport] > 0} {
 variant superlu description {Build with SuperLU interface for a serial direct solver} {
     depends_lib-append    port:superlu
     configure.args-append --with-superlu-dir=${prefix}
-}
 }
 
 variant mumps description {Build with MUMPS interface for a parallel direct solver} requires parmetis {

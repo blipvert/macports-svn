@@ -1,11 +1,18 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
+# This comment was inserted on 20160713 to force reindexing of
+# this port after the default homepage definition in the perl5
+# PortGroup was changed to use metacpan.org (r150080).
+# Reindexing is necessary for the new definition to take effect.
+# This comment may be removed in subsequent updates of this port.
+
 PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         Alien-Editline 0.06
+revision            1
 license             {Artistic-1 GPL}
 maintainers         devans openmaintainer
 description         Make available Editline (libedit)
@@ -18,8 +25,8 @@ checksums           rmd160  8143c3068802559cbbe740a166fdeb67a5b8bfac \
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-test-alien \
-                    port:p${perl5.major}-test-stream
+                    port:pkgconfig \
+                    port:p${perl5.major}-http-tiny
 
     depends_lib-append \
                     port:p${perl5.major}-alien-base \

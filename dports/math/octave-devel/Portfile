@@ -30,7 +30,7 @@ set version_tip     4.1.0+
 
 if { ${name} eq ${subport} } {
     version         ${version_tip}
-    revision        13
+    revision        14
     hg.tag          19e8eddd4773
 
     # see http://savannah.gnu.org/bugs/?41027
@@ -188,6 +188,9 @@ configure.env-append MKDIR_P="/bin/mkdir -p"
 # avoid depends_build-append port:cctools
 configure.env-append RANLIB=/usr/bin/ranlib
 
+# workaround for build failure with Xcode8 (#52301)
+configure.env-append "ac_cv_func_mkostemp=no"
+
 # main octave port lists as a depends_lib
 # configure.ac list it among the "[p]rograms used in Makefiles"
 depends_build-append port:gawk
@@ -343,8 +346,8 @@ if { ${name} eq ${subport} } {
     # see http://savannah.gnu.org/bugs/?47858 for upstream report
     depends_lib-append  port:hdf5-18
     configure.args-append \
-        --with-hdf5-libdir=${prefix}/lib/hdf5-18 \
-        --with-hdf5-includedir=${prefix}/include/hdf5-18
+        --with-hdf5-libdir=${prefix}/lib/hdf5-18/lib \
+        --with-hdf5-includedir=${prefix}/lib/hdf5-18/include
 } else {
     depends_lib-append  port:hdf5
 }

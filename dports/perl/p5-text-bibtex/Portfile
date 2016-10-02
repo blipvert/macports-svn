@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Text-BibTeX 0.74
+perl5.setup         Text-BibTeX 0.77
 platforms           darwin
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
@@ -16,18 +16,17 @@ long_description    Text::BibTeX is a Perl library for reading, parsing, and pro
                     BibTeX files.  It is the Perl half of btOOL, a pair of libraries for \
                     dealing with BibTeX data.
 
-checksums           rmd160  1ee1bb5788f6f5e02e2b1369e8fa87d394e06dc2 \
-                    sha256  d3788e6459c8e90d80770e103012627f8a95439a8324ba8db2611b0eb8fdf6ae
+checksums           rmd160  2347761b2a2499e34f3c72e18ac3885a1ef42456 \
+                    sha256  6459bb9d93ab5520959ce0ebd28cdf34dcf685774e40f377bcc39c3935ea6e4e
 
 if {${perl5.major} != ""} {
-# see #31769
-    patchfiles      patch-btparse_tests_namebug.c.diff \
-                    patch-btparse_tests_tex_test.c.diff
-
     depends_build-append \
                     port:p${perl5.major}-capture-tiny \
                     port:p${perl5.major}-extutils-libbuilder \
                     port:p${perl5.major}-config-autoconf
+
+    depends_lib-append \
+                    port:p${perl5.major}-unicode-normalize
 
     perl5.use_module_build
 }

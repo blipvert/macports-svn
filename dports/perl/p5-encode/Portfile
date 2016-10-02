@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Encode 2.84
+perl5.setup         Encode 2.86
 platforms           darwin
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
@@ -14,7 +14,7 @@ long_description    The "Encode" module provides the interfaces between \
                     Perl's strings and the rest of the system. Perl strings \
                     are sequences of characters.
 
-checksums           rmd160  ef025aa823c36eba8cc11dcabe5b1cac37b65c8c \
-                    sha256  4b539809fdd3760edf186e43c885b30c98cb9200db0775e923ed6b147bf969ef
+checksums           rmd160  2c2c5542f0fabc770cde2474067a991fc4080d6b \
+                    sha256  dfdb3dc709ce29a366eb162297378cbc8a1ae6720df3aba2ef0bae38478dfb2a
 
 perl5.link_binaries no

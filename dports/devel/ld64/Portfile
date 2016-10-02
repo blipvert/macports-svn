@@ -37,15 +37,15 @@ checksums           ld64-97-standalone-libunwind-headers.patch \
                     ld64-236.3.tar.gz \
                     rmd160  6a3f44aa9ae57a60d2cff5b3d47be7972ad83029 \
                     sha256  8ef36729b643201081ab45ebd8586ede8f9968bc17614b679a940faa82875ca6 \
-                    ld64-253.9.tar.gz \
-                    rmd160  99f42a9f2621d92f0140f0b94ad4bad4daff8bf2 \
-                    sha256  8fa3a1b65f665824ac129c02e2fab8926a06e503ec277ea32cd8bc27c8de11c3
+                    ld64-264.3.102.tar.gz \
+                    rmd160  c8169a8dd591989abdf45c0834397891ec72b458 \
+                    sha256  307f73678a3e5c9ed4d1bcf77da7399d84efac32916c5df6cd477c3b5c36f953
 
 
 subport ld64-97 {
     # XCode 3.2.6
     version             97.17
-    revision            2
+    revision            5
 
     set makefile	"Makefile-97"
     set ld64_ver        97
@@ -75,7 +75,7 @@ subport ld64-127 {
     # XCode 4.2
     # This was the last ld64 release that supported linking ppc executables.
     version             127.2
-    revision            4
+    revision            7
 
     set makefile	"Makefile-127"
     set ld64_ver        127
@@ -97,7 +97,7 @@ subport ld64-127 {
 subport ld64-136 {
     # XCode 4.6
     version             136
-    revision            4
+    revision            7
 
     set makefile        "Makefile-133"
     set ld64_ver        136
@@ -125,7 +125,7 @@ subport ld64-136 {
 subport ld64-236 {
     # XCode 5.1
     version             236.3
-    revision            2
+    revision            5
 
     # http://trac.macports.org/ticket/43737
     # < 100 is a guess.  Xcode 4.1 might work, so I'm leaving it as an option unless someone reports a failure.
@@ -156,14 +156,15 @@ subport ld64-236 {
 }
 
 subport ld64-latest {
-    # XCode 7.2
-    version             253.9
+    # XCode 7.3.1
+    version             264.3.102
+    revision            3
 
     # https://trac.macports.org/ticket/43737
     # https://trac.macports.org/ticket/50130
     compiler.blacklist-append *gcc* {clang < 300}
 
-    set makefile        "Makefile-253"
+    set makefile        "Makefile-264"
     set ld64_ver        latest
 
     patchfiles-append \
@@ -172,9 +173,6 @@ subport ld64-latest {
         ld64-134-missing-include.patch \
         ld64-136-i386-badAddress.patch \
         ld64-ppc-9610466.patch \
-        PR-23184186.patch \
-        PR-23184384.patch \
-        PR-23184771.patch \
         PR-49393.patch
 
     depends_lib-append port:libcxx
@@ -182,13 +180,6 @@ subport ld64-latest {
     configure.cxxflags-append -std=c++11
 
     supported_archs i386 x86_64
-
-    pre-fetch {
-        if {![file exists /usr/lib/libc++.dylib]} {
-            ui_error "$name requires a C++11 runtime, which your configuration does not allow"
-            error "unsupported configuration"
-        }
-    }
 }
 
 subport ld64-xcode {
@@ -265,55 +256,57 @@ if {${subport} eq ${name}} {
         depends_build-append port:cctools
     }
 
+    set all_llvm_variants {llvm38 llvm39 llvmdev}
+    if {${os.major} < 10} {
+        lappend all_llvm_variants llvm33
+    }
+    if {${os.major} < 11} {
+        lappend all_llvm_variants llvm34
+    }
+    array set llvm_variant_version {llvm33 3.3 llvm34 3.4 llvm38 3.8 llvm39 3.9 llvmdev devel}
+    set llvm_version {}
+
+    foreach variantname $all_llvm_variants {
+        set this_llvm_version $llvm_variant_version($variantname)
+        variant $variantname conflicts {*}[ldelete $all_llvm_variants $variantname] description "Use llvm-${this_llvm_version} for libLTO" "
+            set llvm_version        $this_llvm_version
+            depends_lib-append      port:llvm-${this_llvm_version}
+        "
+    }
+
+    proc some_llvm_variant_set {} {
+        global all_llvm_variants
+        foreach variantname $all_llvm_variants {
+            if {[variant_isset $variantname]} {
+                return yes
+            }
+        }
+        return no
+    }
+
     # We don't set llvmXX as the default variant on Tiger because it would introduce a
     # dependency cycle as llvm requires apple-gcc42 and ld64 to build correctly.  Users
     # wanting LTO support in ld64 on Tiger can install the +llvm variant after llvm
     # has been installed.
 
-    if {![variant_isset llvm33] && ![variant_isset llvm34] && ![variant_isset llvm35] && ![variant_isset llvm36] && ![variant_isset llvm37] && ![variant_isset llvm38]} {
-        if {${os.major} >= 13} {
-            default_variants +llvm37
-        } elseif {${os.major} >= 10} {
+    if {![some_llvm_variant_set]} {
+        if {${os.major} == 10} {
             default_variants +llvm34
-        } elseif {${os.major} >= 9} {
+        } elseif {${os.major} == 9} {
+            # Using llvm-3.3 to break dependency cycle (https://trac.macports.org/ticket/52091)
             default_variants +llvm33
         }
 
-        if {![variant_isset llvm33] && ![variant_isset llvm34] && ![variant_isset llvm35] && ![variant_isset llvm36] && ![variant_isset llvm37] && ![variant_isset llvm38] && ${os.major} >= 9} {
-            ui_error "Your platform cannot be configured without LTO support in ld64.  Please enable one of the llvmXX variants, and try again."
-            return -code error "Your platform cannot be configured without LTO support in ld64.  Please enable one of the llvmXX variants, and try again."
+        if {![some_llvm_variant_set] && ${os.major} >= 9} {
+            default_variants +llvm38
         }
-    }
 
-    set llvm_version {}
-    variant llvm33 conflicts llvm34 llvm35 llvm36 llvm37 llvm38 description {Use llvm-3.3 for libLTO} {
-        set llvm_version        3.3
-        depends_lib-append      port:llvm-${llvm_version}
-    }
-
-    variant llvm34 conflicts llvm33 llvm35 llvm36 llvm37 llvm38 description {Use llvm-3.4 for libLTO} {
-        set llvm_version        3.4
-        depends_lib-append      port:llvm-${llvm_version}
-    }
-
-    variant llvm35 conflicts llvm33 llvm34 llvm36 llvm37 llvm38 description {Use llvm-3.5 for libLTO} {
-        set llvm_version        3.5
-        depends_lib-append      port:llvm-${llvm_version}
-    }
-
-    variant llvm36 conflicts llvm33 llvm34 llvm35 llvm37 llvm38 description {Use llvm-3.6 for libLTO} {
-        set llvm_version        3.6
-        depends_lib-append      port:llvm-${llvm_version}
-    }
-
-    variant llvm37 conflicts llvm33 llvm34 llvm35 llvm36 llvm38 description {Use llvm-3.7 for libLTO} {
-        set llvm_version        3.7
-        depends_lib-append      port:llvm-${llvm_version}
-    }
-
-    variant llvm38 conflicts llvm33 llvm34 llvm35 llvm36 llvm37 description {Use llvm-3.8 for libLTO} {
-        set llvm_version        3.8
-        depends_lib-append      port:llvm-${llvm_version}
+        if {![some_llvm_variant_set] && ${os.major} >= 9} {
+            pre-fetch {
+                ui_error "Your platform cannot be configured without LTO support in ld64.  Please enable one of the llvmXX variants, and try again."
+                return -code error "Your platform cannot be configured without LTO support in ld64.  Please enable one of the llvmXX variants, and try again."
+            }
+        }
     }
 
     if {${os.major} < 10} {

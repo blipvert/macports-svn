@@ -5,7 +5,8 @@ PortSystem          1.0
 
 name                tor-devel
 conflicts           tor
-version             0.2.8.4-rc
+version             0.2.9.3-alpha
+revision            1
 categories          security
 platforms           darwin
 maintainers         maclemon.at:macports.org openmaintainer
@@ -24,8 +25,8 @@ homepage            https://www.torproject.org/
 master_sites        https://dist.torproject.org/
 distname            tor-${version}
 
-checksums           rmd160  c6789fb17a08c6672e313c8f0e00447848e6c82d \
-                    sha256  3070015123094bf576641a34aaf4cec17f548f0108447031445d42cae164f6ba
+checksums           rmd160  f270dd638d5189156c29efa9efeca062594fc442 \
+                    sha256  ee51f62191a33b2b3f50a2cf691dd6250fd0c110f97b8360785a1b56be5eee15
 
 depends_lib         port:libevent \
                     path:lib/libssl.dylib:openssl \

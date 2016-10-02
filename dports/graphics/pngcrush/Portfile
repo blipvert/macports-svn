@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                pngcrush
-version             1.8.1
+version             1.8.7
 categories          graphics
 maintainers         snc openmaintainer
 license             zlib
@@ -26,9 +26,10 @@ homepage            http://pmt.sourceforge.net/pngcrush/
 master_sites        sourceforge:project/pmt/pngcrush/${version}
 use_xz              yes
 
-checksums           rmd160  bb0d8786025bb52d9af463bff2209d8529e450a7 \
-                    sha256  64921ca7e6013a2ff3f4e1387c95cec6c30fd7396069e5ddf68008993f46768b
+checksums           rmd160  91119215f52b2847f3cf685b75fcaed6bd9c35c9 \
+                    sha256  030c90b4bd539d32f8949d08b59be1da34b6f337bb2c27b89370e8c9bb4d65f4
 
+patchfiles          patch-Makefile.diff
 # attempt to use Makefile-nolib for external libpng, zlib
 # currently undefined libpng symbols
 #depends_lib-append  port:libpng port:zlib

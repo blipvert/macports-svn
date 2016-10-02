@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         IO-Socket-IP 0.37
+perl5.setup         IO-Socket-IP 0.38
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         IO::Socket::IP - Family-neutral IP socket supporting both IPv4 and IPv6
@@ -13,7 +13,13 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  593feb930b47b44513346e2181af516c92575357 \
-                    sha256  2adc5f0b641d41f662b4d99c0795780c62f9af9119884d053265fc8858ae6f7b
+checksums           rmd160  e78edec9a9e1e2961daedd4978219f67e0a994d4 \
+                    sha256  0b7aca58643e821fade4c9da98fa99969c922d0317cca1007ad55bdea1b29a69
 
-supported_archs     noarch
+if {${perl5.major} != ""} {
+# use latest Socket for bugfixes not in core
+    depends_lib-append \
+                    port:p${perl5.major}-socket
+
+    supported_archs noarch
+}

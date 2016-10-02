@@ -21,7 +21,6 @@ checksums           rmd160  b73ac3858566b3fddbfda2979ec91120858d8d3d \
 
 if {${perl5.major} != ""} {
     depends_lib-append \
-                    port:p${perl5.major}-test-simple \
                     port:p${perl5.major}-sub-uplevel
 
     supported_archs noarch

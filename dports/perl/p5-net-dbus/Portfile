@@ -13,7 +13,6 @@ description         Net::DBus - Perl extension for the DBus message system
 
 long_description    ${description}
 
-homepage            http://search.cpan.org/~danberr/Net-DBus/
 distname            Net-DBus-${perl5.moduleversion}
 
 checksums           rmd160  c06f6a3f1f9669a8a702bbe33ddc2287903d99d8 \
@@ -23,6 +22,7 @@ if {${perl5.major} != ""} {
     depends_build-append \
                     port:pkgconfig
 
+# use Time::HiRes 1.9739+ for Sierra compatibility
     depends_lib-append \
                     port:dbus \
                     port:p${perl5.major}-time-hires \

@@ -4,7 +4,8 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        Carthage Carthage 0.17
+github.setup        Carthage Carthage 0.18
+name                carthage
 categories          devel
 platforms           darwin
 
@@ -23,7 +24,7 @@ use_configure       no
 build               {}
 
 destroot {
-    system -W ${worksrcpath} "${build.cmd} prefix_install PREFIX=${destroot}${prefix} TEMPORARY_FOLDER=${destroot} XCODEFLAGS=\"-workspace 'Carthage.xcworkspace' -scheme 'carthage' DSTROOT=${destroot} -IDECustomDerivedDataLocation=${worksrcpath}/custombuild\""
+    system -W ${worksrcpath} "${build.cmd} prefix_install PREFIX=${destroot}${prefix} TEMPORARY_FOLDER=${destroot} XCODEFLAGS=\"-workspace 'Carthage.xcworkspace' -scheme 'carthage' DSTROOT=${destroot} -IDECustomDerivedDataLocation=${worksrcpath}/custombuild CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO\""
 }
 
 post-destroot {

@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                nginx
-version             1.11.1
+version             1.11.4
 categories          www mail
 platforms           darwin
 license             BSD
@@ -34,8 +34,8 @@ master_sites        http://nginx.org/download:nginx \
 
 distfiles           ${name}-${version}${extract.suffix}:nginx
 checksums           ${name}-${version}${extract.suffix} \
-                    rmd160  486770048b580ae864e36ce4596aabb36e06a593 \
-                    sha256  5d8dd0197e3ffeb427729c045382182fb28db8e045c635221b2e0e6722821ad0
+                    rmd160  b3ccb71fc957ac1a53b37d98ed649a2d2018d63f \
+                    sha256  06221c1f43f643bc6bfe5b2c26d19e09f2588d5cde6c65bdb77dfcce7c026b3b
 
 depends_lib         port:pcre \
                     port:zlib

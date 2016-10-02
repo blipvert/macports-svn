@@ -16,9 +16,4 @@ checksums           rmd160  76baf20d08667a43b1f6ad263e76b22110eed5bb \
 
 platforms           darwin
 
-if {${perl5.major} != ""} {
-    depends_lib-append \
-                    port:p${perl5.major}-test-simple
-
-    supported_archs noarch
-}
+supported_archs     noarch

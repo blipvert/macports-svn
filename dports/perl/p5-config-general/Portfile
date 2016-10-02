@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Config-General 2.61
+perl5.setup         Config-General 2.63
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
 description         Generic Config Module
@@ -13,7 +13,7 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  c0efe117bb951f0d9aa7ca9636db136dcd827d59 \
-                    sha256  379a160ddac33c02045d2b7e20b37ca9b155722ce20374f9f245e519f7d7a6ca
+checksums           rmd160  b0f55608c2e0c568353615dc17d1e3df9f5930d7 \
+                    sha256  0a9bf977b8aabe76343e88095d2296c8a422410fd2a05a1901f2b20e2e1f6fad
 
 supported_archs     noarch

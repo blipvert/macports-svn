@@ -20,6 +20,7 @@ $svn_url = 'https://svn.macports.org/repository/macports/';
 $normal_downloads = 'https://distfiles.macports.org/MacPorts/';
 $sf_downloads = 'http://downloads.sourceforge.net/project/macports/MacPorts/' . $macports_version_latest . '/';
 $downloads = $normal_downloads;
+$sierra_pkg = $downloads . 'MacPorts-' . $macports_version_latest . '-10.12-Sierra.pkg';
 $elcapitan_pkg = $downloads . 'MacPorts-' . $macports_version_latest . '-10.11-ElCapitan.pkg';
 $yosemite_pkg = $downloads . 'MacPorts-' . $macports_version_latest . '-10.10-Yosemite.pkg';
 $mavericks_pkg = $downloads . 'MacPorts-' . $macports_version_latest . '-10.9-Mavericks.pkg';

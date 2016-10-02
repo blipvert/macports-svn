@@ -450,6 +450,13 @@ array set sql_plugins {
     }
     {mysql MySQL} {
         {
+            "mariadb55"
+            "port:mariadb"
+            "${prefix}/include/mariadb/mysql"
+            "-L${prefix}/lib/mariadb/mysql -lmysqlclient_r"
+            ""
+        }
+        {
             "mysql56"
             "port:mysql56"
             "${prefix}/include/mysql56/mysql"
@@ -540,6 +547,10 @@ foreach {sql_names sql_info} [array get sql_plugins] {
         description       ${dbms} Database Driver for Qt Tool Kit ${qt_major}
         long_description  ${dbms} Database Driver for Qt Tool Kit ${qt_major}
 
+        if { ${subport} eq "qt5-mysql-plugin" } {
+            revision      1
+        }
+
         # if there is more than one version of the database system, create variants for each version
         if { [llength ${sql_info}] > 1 } {
 
@@ -594,6 +605,10 @@ foreach {sql_names sql_info} [array get sql_plugins] {
         configure.dir ${worksrcpath}/src/plugins/sqldrivers/${driver}
         build.dir     ${configure.dir}
         destroot.dir  ${configure.dir}
+
+        # see #52200
+        # see https://codereview.qt-project.org/#/c/164673/
+        patchfiles-append patch-xcrun.diff
     }
 }
 
@@ -978,6 +993,10 @@ if { ${subport} eq ${name} } {
         # as of 5.6.1, avoid "... is lacking an install target"
         # see https://codereview.qt-project.org/#/c/156610/1
         patchfiles-append patch-install_examples.diff
+
+        # see #52200
+        # see https://codereview.qt-project.org/#/c/164673/
+        patchfiles-append patch-xcrun.diff
 
         #-----------------------------------------------------------------------------
         # qtbase is used for:

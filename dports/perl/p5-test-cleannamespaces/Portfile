@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Test-CleanNamespaces 0.19
+perl5.setup         Test-CleanNamespaces 0.22
 platforms           darwin
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
@@ -19,16 +19,19 @@ long_description    This module lets you check your module's namespaces for \
 
 supported_archs     noarch
 
-checksums           rmd160  246e1a610dbe8b5720261ea2de8bedcbcf0b69ae \
-                    sha256  b40859f8a893e093fc68894ed9abcef7b0d620bcee0f6c3c14dc298bcaa30f20
+checksums           rmd160  a2ad568d7e8a611c7ef2209d3da01b6842fbef65 \
+                    sha256  862a221994dd413b2f350450f22c96f57cac78784b1aca1a8fc763fc5449aaca
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-module-implementation \
+                    port:p${perl5.major}-file-pushd \
+                    port:p${perl5.major}-moo \
+                    port:p${perl5.major}-mouse \
                     port:p${perl5.major}-namespace-clean \
+                    port:p${perl5.major}-role-tiny \
                     port:p${perl5.major}-sub-exporter \
                     port:p${perl5.major}-test-deep \
-                    port:p${perl5.major}-test-requires \
+                    port:p${perl5.major}-test-needs \
                     port:p${perl5.major}-test-warnings
 
     depends_lib-append \
@@ -36,7 +39,6 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-package-stash \
                     port:p${perl5.major}-package-stash-xs \
                     port:p${perl5.major}-role-tiny \
-                    port:p${perl5.major}-sub-exporter-progressive \
                     port:p${perl5.major}-sub-identify
 
     supported_archs noarch

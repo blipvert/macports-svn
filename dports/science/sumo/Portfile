@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                sumo
-version             0.26.0
+version             0.27.1
 categories          science devel
 platforms           darwin
 maintainers         gmail.com:tlockhart1976 openmaintainer
@@ -23,8 +23,8 @@ master_sites        sourceforge:project/sumo/sumo/version%20${version}/
 distname            ${name}-src-${version}
 worksrcdir          ${name}-${version}
 
-checksums           rmd160  ca0720667e0060ff8ca65b2329519553e4d208e4 \
-                    sha256  258ed74514ab119b5a812908a8bf97b4ea6ef91a3b921499feff3b642e4bad39
+checksums           rmd160  f6a69aceda49bd0bd0d0518fa65c827609095a92 \
+                    sha256  4494190bd6570646df7a020befe25bc66355377273d922753685737c0d38bfdf
 
 default_variants    +subseconds +messages
 

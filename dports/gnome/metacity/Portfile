@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                metacity
-version             3.20.1.1
+version             3.22.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         A window manager for the adult in you.
 long_description    ${description}
@@ -18,8 +18,8 @@ master_sites        gnome:sources/${name}/${branch}
 
 use_xz              yes
 
-checksums           rmd160  9504351939a7b6820cce3bb78dc4e21031a05631 \
-                    sha256  ee2f7bcccdf976fbc5b311094259e00796bc8236fa9281deac3d9807bf2899db
+checksums           rmd160  7a83e5942dab6161ee26fba8197c95c6a9ff19b2 \
+                    sha256  860fed03839d0f1710f13516a747ecb1a620f0a72c4798794bfd1196e1bc5437
 
 depends_build       port:pkgconfig \
                     port:itstool \

@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.22 5.24
+perl5.setup         Test-Needs 0.002005
+license             {Artistic-1 GPL}
+maintainers         devans openmaintainer
+description         Test::Needs - Skip tests when modules not available.
+long_description    ${description} \
+                    Compatible with Test2 but does not require it.
+
+platforms           darwin
+
+checksums           rmd160  711f768b5530525fd668775bf7b20b7511b488c3 \
+                    sha256  5a4f33983586edacdbe00a3b429a9834190140190dab28d0f873c394eb7df399
+
+supported_archs     noarch

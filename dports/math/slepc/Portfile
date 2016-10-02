@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           bitbucket 1.0
 PortGroup           mpi 1.0
 
-bitbucket.setup     slepc slepc 3.6.2 v
+bitbucket.setup     slepc slepc 3.7.3 v
 categories          math science
 maintainers         sean
 license             LGPL
@@ -24,8 +24,8 @@ notes               "Add the following lines to your .bash_profile if you plan t
 platforms           darwin
 universal_variant   no
 
-checksums           rmd160  c5a15b922f00c80400b357174ec0447f60571379 \
-                    sha256  1cbb3de5673d5f2325b5a986b029ff12d9dc96c9659fe5ab11a444f0ee44878f
+checksums           rmd160  daf92f73deaabf529c3bfa883fbd178b33ca4825 \
+                    sha256  df907126ca75bb7ade45015e681269718b1f1dad7eb2e605fd40efebb8e4fdd3
 
 mpi.setup
 mpi.enforce_variant petsc

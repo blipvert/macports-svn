@@ -4,8 +4,8 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           compiler_blacklist_versions 1.0
 
-set vim_version     7.4
-set snapshot        90
+set vim_version     8.0
+set snapshot        110
 github.setup        macvim-dev macvim ${snapshot} snapshot-
 name                MacVim
 version             ${vim_version}.snapshot${snapshot}
@@ -20,15 +20,16 @@ long_description \
 
 homepage            https://macvim-dev.github.io/macvim/
 
-checksums           rmd160  bce9fe7494d9a79e1d5421eef4a59d67e0f6364c \
-                    sha256  677822e7c5db2524fb132efd63ffeadd5c1dc7a70ab28f982aae610f0a4b5e1e
+checksums           rmd160  08b672b2969c6a41ae3a85ec9a1306bc5d6f6a02 \
+                    sha256  d8b67a8bbb0893f6dfdc33d902aeafde4e6dfa4d63e650b3160aa30bf0e3d0c6
 
 depends_build       bin:grep:grep
 depends_lib         port:ncurses \
                     port:gettext \
                     port:libiconv
 
-patchfiles          patch-MacVim-GCC-VERSION.diff
+patchfiles          patch-MacVim-GCC-VERSION.diff \
+                    patch-remove-sparkle.diff
 
 pre-fetch {
     if {${os.platform} eq "darwin" && ${os.major} < 10} {
@@ -45,11 +46,15 @@ post-extract {
     file mkdir ${workpath}/caches
 }
 
-patchfiles-append patch-compat-sigaltstack.diff
-
 post-patch {
     reinplace "s|^# VIM_APP_DIR=/Applications$|VIM_APP_DIR=${applications_dir}|" \
          ${worksrcpath}/src/MacVim/mvim
+    
+    # recompile patched .nib
+    foreach nib {Preferences MainMenu} {
+        ui_info "--->  Running ibtool for ${nib}.nib"
+        system -W ${worksrcpath} "ibtool --compile src/MacVim/English.lproj/${nib}.nib/keyedobjects.nib src/MacVim/English.lproj/${nib}.nib"
+    }
 }
 
 autoconf.dir        ${worksrcpath}/src
@@ -190,8 +195,3 @@ variant lua description {Enable Lua scripting} {
 variant cscope description {Enable source code browsing with cscope} {
     configure.args-append   --enable-cscope
 }
-
-livecheck.type          regex
-livecheck.url           https://github.com/macvim-dev/macvim/releases
-livecheck.version       ${snapshot}
-livecheck.regex         snapshot-(\\d+)

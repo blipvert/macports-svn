@@ -31,7 +31,6 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-plack \
                     port:p${perl5.major}-template-provider-fromdata \
                     port:p${perl5.major}-template-toolkit \
-                    port:p${perl5.major}-test-simple \
                     port:p${perl5.major}-test-tcp \
                     port:p${perl5.major}-test-nowarnings \
                     port:p${perl5.major}-test-output \

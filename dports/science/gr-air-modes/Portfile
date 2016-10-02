@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        bistromath gr-air-modes c29eb6030ab045b5d9b71948bfb72236ad0417d0
-version             20160605
-checksums           rmd160 60a596cc05e0a580d0aa9bb536108a1b4888c87f \
-                    sha256 b270939341f73e2937dfc3d940cf97847643127b89a8b034ee21600d57a18bfd
+github.setup        bistromath gr-air-modes 8cbcc676c483fbeaee5b35af1677ab26d45c7571
+version             20160901
+checksums           rmd160 f506194babc9a4412ff3eb2c90e55f2c4af2bca9 \
+                    sha256 72484c9bdd0b013491c1edffb07140f4fa9c535d81ab2382e1ca98b99cc82d30
 
 # allow gr-air-modes to work with both gnuradio and gnuradio-devel ...
 
@@ -87,8 +87,8 @@ depends_lib-append \
 # specify the Python version to use
 
 configure.args-append \
-    -DPYTHON_EXECUTABLE=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 \
-    -DPYTHON_INCLUDE_DIR=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Headers \
-    -DPYTHON_LIBRARY=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Python \
-    -DGR_PYTHON_DIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages \
-    -DPYUIC4_EXECUTABLE=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/bin/pyuic4
+    -DPYUIC4_EXECUTABLE=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/bin/pyuic4 \
+    -DPYTHON_EXECUTABLE=${frameworks_dir}/Python.framework/Versions/2.7/bin/python2.7 \
+    -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.7/Headers \
+    -DPYTHON_LIBRARY=${frameworks_dir}/Python.framework/Versions/2.7/Python \
+    -DGR_PYTHON_DIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages

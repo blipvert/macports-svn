@@ -23,6 +23,5 @@ checksums           rmd160  abba9ab3caf7d02413b51749b16ee5530b31275d \
 if {${perl5.major} != ""} {
     depends_lib-append  \
                     port:p${perl5.major}-file-slurp-tiny \
-                    port:p${perl5.major}-test-simple \
                     port:p${perl5.major}-xml-libxml
 }

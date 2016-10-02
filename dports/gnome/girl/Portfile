@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                girl
-version             9.2.0
+version             9.5.1
 set branch          [join [lrange [split $version .] 0 1] .]
 categories          gnome
 platforms           darwin
@@ -16,8 +16,8 @@ long_description    Locate Internet Radio Stations
 homepage            http://people.gnome.org/~ole/girl/
 master_sites        gnome:sources/${name}/${branch}/
 
-checksums           rmd160  e96c8d0e9ec5b28bf437653304e553be1b8e0878 \
-                    sha256  039af9b3f9f41c1fbf0c6f58429f68940823603479730663b120ddd9d0406837
+checksums           rmd160  50f2554179325c7cb97eff1d9331424dd3661340 \
+                    sha256  a18b1803600a7f94ff8577276dd7094b858af970262d67486eb8828d4d39bd87
 
 use_xz              yes
 
@@ -65,4 +65,4 @@ post-activate {
    system "${prefix}/bin/update-desktop-database ${prefix}/share/applications"
 }
 
-livecheck.type      gnome
+livecheck.type      gnome-with-unstable

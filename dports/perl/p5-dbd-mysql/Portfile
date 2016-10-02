@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         DBD-mysql 4.033
+perl5.setup         DBD-mysql 4.036
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl5 Database Interface to the MySQL database
@@ -13,44 +13,58 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  0772a926c460531f9feddf3e8357f11f4319bf32 \
-                    sha256  cc98bbcc33581fbc55b42ae681c6946b70a26f549b3c64466740dfe9a7eac91c
+checksums           rmd160  f7401ab90a219c701fd5e9667193c38da13906fc \
+                    sha256  5c48a823f86b8110ccb6504c6176ca248b52f56829dd4548bc39c3509f4154cf
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-test-deep \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-deep
 
     depends_lib-append \
                     port:p${perl5.major}-dbi
 
-    variant mysql4 conflicts mysql5 mysql51 mysql55 mysql56 mariadb percona description {build with mysql4 port} {
+    variant mysql4 conflicts mysql5 mysql51 mysql55 mysql56 mysql57 mariadb mariadb10_0 mariadb10_1 percona description {build with mysql4 port} {
         depends_lib-append      port:mysql4
     }
 
-    variant mysql5 conflicts mysql4 mysql51 mysql55 mysql56 mariadb percona description {build with mysql5 port} {
+    variant mysql5 conflicts mysql4 mysql51 mysql55 mysql56 mysql57 mariadb mariadb10_0 mariadb10_1 percona description {build with mysql5 port} {
         depends_lib-append      path:bin/mysql_config5:mysql5
         configure.args-append   --mysql_config=${prefix}/bin/mysql_config5
     }
 
-    variant mysql51 conflicts mysql4 mysql5 mysql55 mysql56 mariadb percona description {build with mysql51 port} {
+    variant mysql51 conflicts mysql4 mysql5 mysql55 mysql56 mysql57 mariadb mariadb10_0 mariadb10_1 percona description {build with mysql51 port} {
         depends_lib-append      port:mysql51
         configure.args-append   --mysql_config=${prefix}/lib/mysql51/bin/mysql_config
     }
 
-    variant mysql55 conflicts mysql4 mysql5 mysql51 mysql56 mariadb percona description {build with mysql55 port} {
+    variant mysql55 conflicts mysql4 mysql5 mysql51 mysql56 mysql57 mariadb mariadb10_0 mariadb10_1 percona description {build with mysql55 port} {
         depends_lib-append      port:mysql55
         configure.args-append   --mysql_config=${prefix}/lib/mysql55/bin/mysql_config
     }
 
-    variant mysql56 conflicts mysql4 mysql5 mysql51 mysql55 mariadb percona description {build with mysql56 port} {
+    variant mysql56 conflicts mysql4 mysql5 mysql51 mysql55 mysql57 mariadb mariadb10_0 mariadb10_1 percona description {build with mysql56 port} {
         depends_lib-append      port:mysql56
         configure.args-append   --mysql_config=${prefix}/lib/mysql56/bin/mysql_config
     }
 
-    variant mariadb conflicts mysql4 mysql5 mysql51 mysql55 mysql56 percona description {build with mariadb port} {
+    variant mysql57 conflicts mysql4 mysql5 mysql51 mysql55 mysql56 mariadb mariadb10_0 mariadb10_1 percona description {build with mysql57 port} {
+        depends_lib-append      port:mysql57
+        configure.args-append   --mysql_config=${prefix}/lib/mysql57/bin/mysql_config
+    }
+
+    variant mariadb conflicts mysql4 mysql5 mysql51 mysql55 mysql56 mysql57 mariadb10_0 mariadb10_1 percona description {build with mariadb port} {
         depends_lib-append      port:mariadb
         configure.args-append   --mysql_config=${prefix}/lib/mariadb/bin/mysql_config
+    }
+
+    variant mariadb10_0 conflicts mysql4 mysql5 mysql51 mysql55 mysql56 mysql57 mariadb mariadb10_1 percona description {build with mariadb port} {
+        depends_lib-append      port:mariadb-10.0
+        configure.args-append   --mysql_config=${prefix}/lib/mariadb-10.0/bin/mysql_config
+    }
+
+    variant mariadb10_1 conflicts mysql4 mysql5 mysql51 mysql55 mysql56 mysql57 mariadb mariadb10_0 percona description {build with mariadb port} {
+        depends_lib-append      port:mariadb-10.1
+        configure.args-append   --mysql_config=${prefix}/lib/mariadb-10.1/bin/mysql_config
     }
 
     variant percona conflicts mysql4 mysql5 mysql51 mysql55 mysql56 mariadb description {build with percona port} {
@@ -63,7 +77,10 @@ if {${perl5.major} != ""} {
         && ![variant_isset mysql51]
         && ![variant_isset mysql55]
         && ![variant_isset mysql56]
+        && ![variant_isset mysql57]
         && ![variant_isset mariadb]
+        && ![variant_isset mariadb10_0]
+        && ![variant_isset mariadb10_1]
         && ![variant_isset percona]
     } {
         default_variants +mysql56

@@ -23,6 +23,5 @@ checksums           rmd160  7f44813a6a45f4404de2628fe6a22a6ad804c44a \
 
 if {${perl5.major} != ""} {
     depends_lib-append \
-                    port:p${perl5.major}-test-exception \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-exception
 }

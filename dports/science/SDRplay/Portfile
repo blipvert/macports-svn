@@ -1,0 +1,76 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                SDRplay
+maintainers         michaelld openmaintainer
+
+description         ${name} provides support for SDRplay hardware
+
+categories          science comms
+homepage            http://sdrplay.com/
+license             restrictive/distributable
+platforms           darwin macosx
+
+version             1.97.3
+checksums \
+    rmd160 4ff2034ad8dfb273f3a0f2fa12d6fae11e42e8df \
+    sha256 eb112f845699f4a8ce95a4ce3f0e6e76fe88efab88888fa501271fa4ee8687fd
+
+global sdrplay_lib
+set sdrplay_lib "libmirsdrapi-rsp.dylib"
+global sdrplay_header
+set sdrplay_header "mirsdrapi-rsp.h"
+global sdrplay_dir
+set sdrplay_dir "${worksrcpath}/sdrplay"
+global sdrplay_distfile
+set sdrplay_distfile "SDRplay_RSP_API_Installer_${version}.pkg"
+
+distfiles ${sdrplay_distfile}
+
+master_sites http://www.sdrplay.com/software/
+
+depends_lib-append path:lib/libusb-1.0.dylib:libusb
+
+extract {
+
+    # extract the PKGs we need here
+    global sdrplay_distfile sdrplay_dir
+    system "mkdir ${worksrcpath}"
+    system -W ${worksrcpath} "pkgutil --expand ${distpath}/${sdrplay_distfile} pkg"
+    system "mkdir ${sdrplay_dir}"
+    system -W ${sdrplay_dir} "mv ../pkg/libmirsdrapi*.pkg/Payload tmp0.tar.gz && /usr/bin/gzip -dc tmp0.tar.gz | /usr/bin/tar -xf -"
+    system -W ${sdrplay_dir} "mv ../pkg/mirsdrapirsp.pkg/Payload tmp1.tar.gz && /usr/bin/gzip -dc tmp1.tar.gz | /usr/bin/tar -xf -"
+
+}
+
+configure {}
+
+build {
+
+    # fix SDRPlay library to work with MacPorts
+    global sdrplay_lib sdrplay_dir
+    system -W ${sdrplay_dir} "mv libmirsdrapi-rsp* ${sdrplay_lib}"
+    system -W ${sdrplay_dir} "install_name_tool -id ${prefix}/lib/${sdrplay_lib} ${sdrplay_lib}"
+    system -W ${sdrplay_dir} "install_name_tool -change /usr/local/lib/libusb-1.0.0.dylib ${prefix}/lib/libusb-1.0.0.dylib ${sdrplay_lib}"
+
+    # prepend license to header
+    global sdrplay_header
+    move ${sdrplay_dir}/${sdrplay_header} ${sdrplay_dir}/tmp.h
+    copy ${portpath}/${filesdir}/license.txt ${sdrplay_dir}/${sdrplay_header}
+    system -W ${sdrplay_dir} "cat ${sdrplay_dir}/tmp.h >> ${sdrplay_dir}/${sdrplay_header}"
+
+}
+
+destroot {
+
+    # install sdrplay
+    global sdrplay_lib sdrplay_header sdrplay_dir
+    copy ${sdrplay_dir}/${sdrplay_lib} ${destroot}${prefix}/lib
+    copy ${sdrplay_dir}/${sdrplay_header} ${destroot}${prefix}/include
+
+}
+
+livecheck.url       http://sdrplay.com/mac.html
+livecheck.regex     Current API Installer: (\[0-9.\]+)

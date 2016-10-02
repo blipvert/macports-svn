@@ -20,6 +20,5 @@ platforms           darwin
 
 if {${perl5.major} != ""} {
     depends_lib-append \
-                    port:p${perl5.major}-pod-simple \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-pod-simple
 }

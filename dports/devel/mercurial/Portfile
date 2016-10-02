@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 PortGroup           bitbucket 1.0
 
-bitbucket.setup     seanfarley mercurial 3.8.3
+bitbucket.setup     seanfarley mercurial 3.9.1
 categories          devel python
 license             GPL-2+
 maintainers         sean openmaintainer
@@ -26,8 +26,8 @@ long_description    Mercurial is a fast, lightweight Source Control Management \
 
 homepage            http://www.selenic.com/mercurial/
 platforms           darwin
-checksums           rmd160  7fc0d6831b609e156fdd7cb9a5c85b72420c8886 \
-                    sha256  b1797e6158721e36eefd1716dd4f2f187710f34f01eff0b595e7993128759b05
+checksums           rmd160  bdd401616507b9d4c879a2ff53db39adc7bcf43a \
+                    sha256  739dacddf64ffb12f42741d9805185a78623570c0a8b22b1b595a18942c4d20d
 
 depends_build       port:py27-docutils
 
@@ -43,20 +43,20 @@ build.cmd           make
 build.target        all PYTHON=${python.bin}
 
 subport mercurial-devel {
-    bitbucket.setup     seanfarley mercurial 6d96658a22b0
+    bitbucket.setup     seanfarley mercurial f3c4edfd35e1
     name                mercurial-devel
-    version             3.8.99
-    revision            0
+    version             3.9.99
+    revision            1
 
-    conflicts           mercurial chg
-    checksums           rmd160  0622063484fdb78bc74fbc252e4b84b64ff95c29 \
-                        sha256  4532d8c9e2a23b97ec71554a1e801bfb7cf7a9b9c5382b982afc7035c218d3f6
+    conflicts           mercurial
+    checksums           rmd160  8717476f14bf5fd33b4e7771a4dd0f0a7d445a0d \
+                        sha256  9f07f9b064c5c3b728943462d90519625b49c5bd875908ab1165973951e36b82
 }
 
 # chg is not installed by default yet
 post-build {
     system -W ${worksrcpath}/contrib/chg "${build.cmd} CC=\"${configure.cc} \
-        [get_canonical_archflags]\" CFLAGS=${configure.cflags} \
+        [get_canonical_archflags]\" CFLAGS=\"${configure.cflags}\" \
         CPPFLAGS='-DHGPATH=\\\"${prefix}/bin/hg\\\"' \
         PYTHON=${prefix}/bin/python2.7 HG=${prefix}/bin/hg \
         HGEXTDIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages/hgext"

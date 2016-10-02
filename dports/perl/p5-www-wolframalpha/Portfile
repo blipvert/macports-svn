@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         WWW-WolframAlpha 1.10
-revision            2
+revision            3
 platforms           darwin
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
@@ -27,16 +27,4 @@ if {${perl5.major} != ""} {
     depends_lib-append  port:p${perl5.major}-libwww-perl \
                         port:p${perl5.major}-uri \
                         port:p${perl5.major}-xml-simple
-
-    post-destroot {
-        set docdir ${prefix}/share/doc/${name}
-        xinstall -d ${destroot}${docdir}
-        xinstall -m 644 -W ${worksrcpath} Changes README ${destroot}${docdir}
-
-        set exampledir ${docdir}/examples
-        xinstall -d ${destroot}${exampledir}
-        xinstall -m 644 -W ${worksrcpath}/ex \
-            asyncPod.pl query.pl validatequery.pl \
-            ${destroot}${exampledir}
-    }
 }

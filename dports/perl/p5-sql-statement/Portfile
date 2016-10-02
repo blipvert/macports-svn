@@ -18,8 +18,7 @@ checksums           rmd160  c75a1da826558682d89224105b00a0ce02881820 \
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-test-deep \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-deep
     
     depends_lib-append \
                     port:p${perl5.major}-clone \

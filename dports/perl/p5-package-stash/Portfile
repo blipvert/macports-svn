@@ -20,7 +20,6 @@ checksums           rmd160  b8fff25fb3c0cfd90e0c76ec7d718a1cd0554e32 \
 if {${perl5.major} != ""} {
     depends_build-append \
                     port:p${perl5.major}-test-fatal \
-                    port:p${perl5.major}-test-simple \
                     port:p${perl5.major}-test-requires
                     
     depends_lib-append \

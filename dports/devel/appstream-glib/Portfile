@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           github 1.0
 PortGroup           gobject_introspection 1.0
 
-github.setup        hughsie appstream-glib 0_5_16 appstream_glib_
+github.setup        hughsie appstream-glib 0_6_3 appstream_glib_
 version             [string map {_ .} ${version}]
 license             LGPL-2+
 categories          devel
@@ -18,13 +18,13 @@ description         This library provides objects and helper methods to help \
 
 long_description    ${description}
 
-checksums           rmd160  601041db9ce6a911622d72e47d7b3b0f51a3d5c1 \
-                    sha256  e03d1b2365bcc8338ac85f7d27dc2bbc6495c304e7e45032625e29903421f1da
+checksums           rmd160  7ca151a5bbf79ea786e51ac0a551f76f89c88de8 \
+                    sha256  384c859318e32611335cb13d86d3231754473560760ff64adfcc2884c14863b2
 
 depends_build       port:pkgconfig \
-                    port:intltool \
                     port:gtk-doc \
                     port:autoconf \
+                    port:autoconf-archive \
                     port:automake \
                     port:libtool
 
@@ -39,8 +39,7 @@ depends_lib         path:lib/pkgconfig/glib-2.0.pc:glib2 \
                     port:freetype \
                     port:json-glib
 
-patchfiles          patch-configure.ac.diff \
-                    patch-data-tests-Makefile.am.diff
+patchfiles          patch-data-tests-Makefile.am.diff
 
 gobject_introspection yes
 

@@ -3,8 +3,8 @@
 -->
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"[
-<!ENTITY macports-prev-version "2.3.2">
-<!ENTITY macports-version "2.3.3">
+<!ENTITY macports-prev-version "2.3.3">
+<!ENTITY macports-version "2.3.4">
 ]>
 <chapter id="using">
     <title>Using MacPorts</title>
@@ -103,13 +103,13 @@ Upgrade MacPorts itself and run the sync target
             <para><option>sync</option> does not accept any switches.</para>
         </section>
 
-        <section id="using.port.doctor">
-            <title>port doctor</title>
+        <section id="using.port.diagnose">
+            <title>port diagnose</title>
 
-            <para>The <option>doctor</option> action checks for common issues in the user's environment and reports all
+            <para>The <option>diagnose</option> action checks for common issues in the user's environment and reports all
                 issues it finds to the user, along with possible fixes for said problem.</para>
 
-            <para><option>doctor</option> accepts a single switch:</para>
+            <para><option>diagnose</option> accepts a single switch:</para>
 
             <variablelist>
                 <varlistentry>
@@ -1030,10 +1030,17 @@ apache2 has the variants:
             <title>Invoking Variants</title>
 
             <para>A variant can only be selected when a port is installed. After you have determined what variants
-                a given port has, if any, you may install a port using the variant by specifying its name preceded by
-                a plus or minus sign on the command line, for example</para>
+                a given port has, if any, you may install a port using a variant by specifying its name preceded by
+                a plus sign on the command line, for example</para>
 
             <programlisting><prompt>$ </prompt><userinput>sudo port install apache2 +openldap</userinput></programlisting>
+
+            <para>Multiple variants can be selected by simply listing them one after another separated by a space.</para>
+
+            <programlisting><prompt>$ </prompt><userinput>sudo port install apache2 +openldap +universal</userinput></programlisting>
+
+            <para>Use a minus sign to deselect a variant that is on by default.</para>
+
             <programlisting><prompt>$ </prompt><userinput>sudo port install apache2 -preforkmpm +workermpm</userinput></programlisting>
 
             <para>Note that you will not see any confirmation of successful variant selection and MacPorts will not warn
@@ -1046,9 +1053,9 @@ apache2 has the variants:
 
             <programlisting><prompt>$ </prompt><userinput>sudo port install apache2 +mariadb</userinput></programlisting>
 
-            <para>even though <option>apache2</option> does not have a <option>+mariadb</option> variant. Instead, this
-                will cause the <option>apr-util</option> port to be installed with the <option>+mariadb</option>
-                variant.</para>
+            <para>is accepted even though <option>apache2</option> does not have a <option>+mariadb</option> variant. However,
+                it depends on the <option>apr-util</option> port which does have the <option>+mariadb</option>
+                variant and will be installed with it.</para>
 
             <para>MacPorts will remember the variants that were used when installing a port. If you upgrade a port
                 later, the same variants will be used, unless you manually specify different variants.</para>
@@ -1287,10 +1294,15 @@ apache2 has the variants:
 
             <programlisting><prompt>$ </prompt><userinput>sudo port uninstall leaves</userinput></programlisting>
 
-            <para>Note that the uninstallation can mark new ports as leaves. To uninstall all leaves, you have to repeat
-                the process until <command>port echo leaves</command> comes back empty. To simplify this, consider
-                installing the <option>port_cutleaves</option> port and running <command>sudo
-                    port_cutleaves</command>.</para>
+            <para>Note that the uninstallation can cause new ports to become leaves. To uninstall all leaves, you would have to repeat
+                the process until <command>port echo leaves</command> comes back empty. To automate this, you can use
+                <option>--follow-dependencies</option> when uninstalling.</para>
+
+            <programlisting><prompt>$ </prompt><userinput>sudo port uninstall --follow-dependencies leaves</userinput></programlisting>
+
+                <para>To go through this process interactively so you can make sure you're not uninstalling anything you want to keep,
+                you can install the <option>port_cutleaves</option> port. After installation, run it with</para>
+                <programlisting><prompt>$ </prompt><userinput>sudo port_cutleaves</userinput></programlisting>
         </section>
 
         <section id="using.common-tasks.keeplean">

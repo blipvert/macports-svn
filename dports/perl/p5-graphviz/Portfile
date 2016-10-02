@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         GraphViz 2.21
+perl5.setup         GraphViz 2.22
 license             Artistic-2
 maintainers         ryandesign openmaintainer
 description         Interface to the GraphViz graphing tool
@@ -17,23 +17,23 @@ long_description    This modules provides an interface to layout and generate im
 platforms           darwin
 supported_archs     noarch
 
-checksums           rmd160  8c20f8eb3bcab98ac0b3cf374e924ecddce6f9bd \
-                    sha256  96db3f6bfa566c5027f5e2c4c061aedb4232cd0ca1118b2f278437b36541fc7d
+checksums           rmd160  38c356c1823f1e6f12e409b03d8075761e211971 \
+                    sha256  72ee8892421152ecd5d91a822fbfaeccb5ad83d7191c4b6e2f57f99e27d046a3
 
 if {${perl5.major} != ""} {
     extract.suffix  .tgz
 
     depends_build-append \
-                    port:p${perl5.major}-test-pod \
-                    port:p${perl5.major}-test-simple \
-                    port:p${perl5.major}-test2-suite
+                    port:p${perl5.major}-test-pod
 
+# use Time::HiRes 1.9739+ for Sierra compatibility
     depends_lib-append \
                     path:bin/dot:graphviz \
                     port:p${perl5.major}-file-which \
                     port:p${perl5.major}-ipc-run \
                     port:p${perl5.major}-libwww-perl \
                     port:p${perl5.major}-parse-recdescent \
+                    port:p${perl5.major}-time-hires \
                     port:p${perl5.major}-xml-twig \
                     port:p${perl5.major}-xml-xpath
 }

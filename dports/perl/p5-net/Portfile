@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         net 3.08 Net/SHAY
+perl5.setup         net 3.10 Net/SHAY
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 
@@ -15,11 +15,11 @@ description         libnet is a collection of Perl modules which provides a simp
 
 long_description    ${description}
 
-homepage            http://search.cpan.org/dist/libnet/
+homepage            https://metacpan.org/release/libnet/
 distname            libnet-${perl5.moduleversion}
 
-checksums           rmd160  80f410fcec65e368b1caa34ebf11858a443c5557 \
-                    sha256  21ebae642b53336576c370989d238cbe74378944079aca6f97665158c9f1750b
+checksums           rmd160  ee64a14fcf32784b0dd46b6d73cd79f50e9c855a \
+                    sha256  53bf4478301cf2377f04534c74ef116412dee8c726ae6245115c0ad11daa8061
 
 platforms           darwin
 

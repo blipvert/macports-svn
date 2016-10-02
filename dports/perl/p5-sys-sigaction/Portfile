@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Sys-SigAction 0.21
+perl5.setup         Sys-SigAction 0.23
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Sys::SigAction - Perl extension for Consistent Signal Handling
@@ -13,7 +13,13 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  9730dee55fa6ee0489ea7f00ebdc70398ce4c2e7 \
-                    sha256  e144207a6fd261eb9f98554c76bea66d95870ee1f62d2d346a1ea95fdccf80db
+checksums           rmd160  bf73dcb452beb0eea87ac71b77027d360b65aed7 \
+                    sha256  c4ef6c9345534031fcbbe2adc347fc7194d47afc945e7a44fac7e9563095d353
 
-supported_archs     noarch
+if {${perl5.major} != ""} {
+# use Time::HiRes 1.9739+ for Sierra compatibility
+    depends_lib-append \
+                    port:p${perl5.major}-time-hires
+    
+    supported_archs noarch
+}

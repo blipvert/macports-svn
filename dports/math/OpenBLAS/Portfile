@@ -20,10 +20,10 @@ archive_sites
 subport OpenBLAS-devel {}
 if {[string first "-devel" $subport] > 0} {
 
-    github.setup    xianyi OpenBLAS 437c7d64f267ade6d1efd8a972d68a6ccb7d42da 
-    version         20160627
-    checksums       rmd160 ef0724f8a053d1ef3be74f4a86a601ae57164786 \
-                    sha256 c2e486aea27a4d2fbad1a64d81a04a13842eea643c0cfd5a6ab1468f5609f718
+    github.setup    xianyi OpenBLAS 161c927071c4b1cb76ce19ce4a2af2eb99b50362 
+    version         20160922
+    checksums       rmd160 43793d1d2bf7ee94bd15172c9ebe9952d6cc242f \
+                    sha256 163b2994d182b3d2fc951a94ec0cce77548f1fe27d26eddd113d8664664684d8
 
     name            ${github.project}-devel
     conflicts       OpenBLAS
@@ -35,11 +35,11 @@ if {[string first "-devel" $subport] > 0} {
 
 } else {
 
-    github.setup    xianyi OpenBLAS 0.2.18 v
+    github.setup    xianyi OpenBLAS 0.2.19 v
     conflicts       OpenBLAS-devel
 
-checksums           rmd160  253901804432caa28dc0c5918f4d910fc739658e \
-                    sha256  65452e76c00e23ee49606d58bf8fd01b1859cdf91e6bc27fde246922f88ebf6d
+checksums           rmd160  11f85eb4bb382e10298ac40d1e1fd4ecc46bb3da \
+                    sha256  878353b52940e0d5be32011cd5ba8440758f5270c3fa0f6f6200c26eabc53f1c
 
     patchfiles      patch-libnoarch.release.diff \
                     patch-linkLib.release.diff

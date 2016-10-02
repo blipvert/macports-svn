@@ -11,7 +11,7 @@ categories              devel python
 platforms               darwin
 supported_archs         noarch
 license                 GPL-2
-maintainers             nomaintainer
+maintainers             ryandesign openmaintainer
 
 description             buildslave for buildbot continuous integration system
 
@@ -41,7 +41,7 @@ set plistfile           org.macports.buildslave.template.plist
 # Add a user that can be used to run the buildbot slave
 add_users               buildbot group=buildbot
 
-post-extract {
+pre-extract {
     file mkdir ${worksrcpath}/macports
     copy ${filespath}/${plistfile} ${worksrcpath}/macports/${plistfile}
 }
@@ -74,11 +74,10 @@ livecheck.regex         {buildbot-slave\/(\d+\.\d+(?:\.\d+))\"}
 #livecheck.regex        {buildbot-slave\/(\d+\.\d+(?:\.\d+)(?:b\d))}
 
 notes "
-
-An example launchd plist file is available in ${sharedir}.  After you have
-created your build slave, edit the WorkingDirectory field to appropriate
-values. As the root user, copy it to /Library/LaunchDaemons and instruct
+An example launchd plist file is available in ${sharedir}. After you have\
+created your build slave, edit the WorkingDirectory field to appropriate\
+values. As the root user, copy it to /Library/LaunchDaemons and instruct\
 launchd to run it with:
-sudo launchctl load -w /Library/LaunchDaemons/your.plist.name
 
+sudo launchctl load -w /Library/LaunchDaemons/your.plist.name
 "

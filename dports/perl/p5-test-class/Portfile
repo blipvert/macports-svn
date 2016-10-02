@@ -23,7 +23,6 @@ if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-module-runtime \
                     port:p${perl5.major}-mro-compat \
-                    port:p${perl5.major}-test-simple \
                     port:p${perl5.major}-try-tiny
 
     supported_archs noarch

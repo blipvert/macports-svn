@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        spyder-ide spyder 3.0.0b3 v
+github.setup        spyder-ide spyder 3.0.0b7 v
 name                py-spyder-devel
 revision            0
 # Preference on mailing list is to use small numbers for epoch.
@@ -40,8 +40,8 @@ universal_variant   no
 
 if {${name} ne ${subport}} {
     checksums \
-        rmd160  41a58f5e089e2500f444db5767b51697016a7a60 \
-        sha256  8baf16080ef286208b3380bd438d33dad5dd345318b5669f58feff65ca82b388
+        rmd160  41baf813aeaee76b26debbcb10e47d5ad14c3a7e \
+        sha256  7c0f7a7e8f58a07b05e110963405aae8273c2961fded96e5046932e09615a42c
 
     conflicts           py${python.version}-spyder
 
@@ -60,23 +60,19 @@ if {${name} ne ${subport}} {
 
     post-patch {
         reinplace "s|@@WINPDB_BIN_NAME@@|${WINPDB_BIN_NAME}|g" \
-            ${worksrcpath}/spyderlib/plugins/editor.py
+            ${worksrcpath}/spyder/plugins/editor.py
         reinplace "s|@@LINT_BIN_NAME@@|${LINT_BIN_NAME}|g" \
-            ${worksrcpath}/spyplugins/ui/pylint/widgets/pylintgui.py
+            ${worksrcpath}/spyder_pylint/widgets/pylintgui.py
         reinplace "s|\"assistant\"|\"Assistant\"|g" \
-            ${worksrcpath}/spyderlib/app/spyder.py
+            ${worksrcpath}/spyder/app/mainwindow.py
         reinplace "s|\"linguist\"|\"Linguist\"|g" \
-            ${worksrcpath}/spyderlib/app/spyder.py
+            ${worksrcpath}/spyder/app/mainwindow.py
         reinplace "s|\"designer\"|\"Designer\"|g" \
-            ${worksrcpath}/spyderlib/app/spyder.py
+            ${worksrcpath}/spyder/app/mainwindow.py
         reinplace "s|@@PREFIX@@|${prefix}|g" \
-            ${worksrcpath}/spyderlib/app/spyder.py
-        reinplace -E "s|IPython\.qt(\.console)?|qtconsole|g" \
-            ${worksrcpath}/spyderlib/config/ipython.py \
-            ${worksrcpath}/spyderlib/plugins/ipythonconsole.py \
-            ${worksrcpath}/spyderlib/widgets/ipython.py
+            ${worksrcpath}/spyder/app/mainwindow.py
         reinplace "s|@@APPS_DIR@@|${applications_dir}/Qt5|g" \
-            ${worksrcpath}/spyderlib/utils/programs.py
+            ${worksrcpath}/spyder/utils/programs.py
     }
 
     # Bare minimum
@@ -113,9 +109,8 @@ if {${name} ne ${subport}} {
             path:${python.pkgd}/pep8:py${python.version}-pep8 \
             port:py${python.version}-pyflakes \
             port:py${python.version}-rope \
-            port:py${python.version}-psutil
-        # Until spyder supports jedi >= 0.9.0, this doesn't do anything
-        #    port:py${python.version}-jedi
+            port:py${python.version}-psutil \
+            port:py${python.version}-jedi
     }
 
     # These add substantially to the install time
@@ -178,8 +173,4 @@ if {${name} ne ${subport}} {
 ### Spyder is launched from the terminal with ${EXENAME} ###
 ##############################################################"
     livecheck.type      none
-} else {
-    livecheck.type      regex
-    livecheck.url       https://bitbucket.org/spyder-ide/spyderlib/downloads
-    livecheck.regex     spyder-(\[0-9\]+(\.\[0-9betarc]+)*)\.zip
 }

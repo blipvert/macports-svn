@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         Dist-CheckConflicts 0.11 ../by-authors/id/D/DO/DOY/
-revision            1
+revision            2
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         declare version conflicts for your dist
@@ -18,10 +18,11 @@ checksums           rmd160  5228a84ce011d9bc1072411cf60b82b89e38354d \
                     sha256  ea844b9686c94d666d9d444321d764490b2cde2f985c4165b4c2c77665caedc4
 
 if {${perl5.major} != ""} {
-depends_lib-append  port:p${perl5.major}-list-moreutils \
-                    port:p${perl5.major}-sub-exporter \
-                    port:p${perl5.major}-test-fatal \
-                    port:p${perl5.major}-test-simple
+    depends_build-append \
+                    port:p${perl5.major}-test-fatal
 
-supported_archs     noarch
+    depends_lib-append \
+                    port:p${perl5.major}-module-runtime
+
+    supported_archs noarch
 }

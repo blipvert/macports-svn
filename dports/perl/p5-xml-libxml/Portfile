@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         XML-LibXML 2.0126
+perl5.setup         XML-LibXML 2.0128
 categories-append   textproc
 platforms           darwin
 maintainers         nomaintainer
@@ -17,8 +17,8 @@ long_description    This module is an interface to libxml2, providing XML and HT
                     parsers with DOM, SAX and XMLReader interfaces, a large subset \
                     of DOM Layer 3 interface and a XML::XPath-like interface to XPath API of libxml2.
 
-checksums           rmd160  ddd9422fe5d284a4be00d58096ac386c277a7e2b \
-                    sha256  0e735ab72e2ba77070a58a737fd6c61fa6aa198527abc59a5d5627f0650a60af
+checksums           rmd160  649b762817ea1a2dabf901635e0f312d5b5e0d6b \
+                    sha256  26e7ba451f3bade4d29ff00653a2ee01d13fe38b9a2ebcd0b0f3f82f9f688f2b
 
 if {${perl5.major} != ""} {
     depends_build-append  \
@@ -26,8 +26,8 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-uri
 
     depends_lib-append  \
-                    port:p${perl5.major}-xml-sax \
                     port:p${perl5.major}-xml-namespacesupport \
+                    port:p${perl5.major}-xml-sax \
                     port:libiconv \
                     port:libxml2
 }

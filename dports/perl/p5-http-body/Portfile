@@ -21,8 +21,7 @@ checksums           rmd160  efaac1281c64b4bb16b613f12d80082e90403f50 \
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-test-deep \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-test-deep
                     
     depends_lib-append \
                     port:p${perl5.major}-http-message

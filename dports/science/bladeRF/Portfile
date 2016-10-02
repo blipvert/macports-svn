@@ -5,10 +5,10 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        Nuand bladeRF ab12ebd3fb843a6df53521fbc2d47c32b835f5dd
-version             20160629
-checksums           rmd160 dbe959dbde3ef8da74b60d14fd6b8f520970a3d6 \
-                    sha256 964729b936c3c4cece1a9ca423dc21a862c5f8a94fb6240c144c7541b4285465
+github.setup        Nuand bladeRF fcd775f2b92bcb3cb70781df5824ca7ddfc3e00f
+version             20160824
+checksums           rmd160 4591bb30945e4c403b701678dd6a07e6c0c398d4 \
+                    sha256 3109a44cc97d0d2dc9e200d74717fde981a10c86edd35016aee6d085e48edd5f
 
 categories          science comms
 maintainers         michaelld openmaintainer
@@ -19,6 +19,10 @@ platforms           darwin
 
 depends_build-append port:pkgconfig
 depends_lib-append  path:lib/libusb-1.0.dylib:libusb
+
+# temporary patch to fix use of clock_gettime
+
+patchfiles-append   patch-clock_gettime.diff
 
 # do VPATH (out of source tree) build
 

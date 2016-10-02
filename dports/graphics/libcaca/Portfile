@@ -35,11 +35,11 @@ provides the release version.
 
 subport libcaca-devel {
 
-    github.setup    cacalabs libcaca 0e2362461d8c4ab57345acc4a8c42d998af6ed12
-    version         20160601
+    github.setup    cacalabs libcaca f7c072131a9bf300813a087b82d39a3bda0118ce
+    version         20160829
     checksums       \
-        rmd160 f98a466ebbf0fa32bbd25fe11301303007ca97ca \
-        sha256 b6213dcb4ca8e02be4bcb2d8ea3f24505ef427decbd7ce99b92f619e5bb337ec
+        rmd160 49d4e8ef054f0a02c2db6ef038a96b1f52befced \
+        sha256 856970fcac8415f28ecd2fd5c3505e794c9d5aee8a38078a1e5ff0996d43e172
 
     conflicts       libcaca
     long_description ${long_description} ${subport} \

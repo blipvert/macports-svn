@@ -16,7 +16,8 @@ checksums           rmd160  187b41c766cceb3fb4641ad1628dd4825398753c \
                     sha256  a8a4d5e986727206b1150f621c6f381078a16ffde7aa1a05d41846e74a2619fe
 
 if {${perl5.major} != ""} {
-    depends_build-append \
+# use Time::HiRes 1.9739+ for Sierra compatibility
+        depends_build-append \
                     port:p${perl5.major}-class-accessor-grouped \
                     port:p${perl5.major}-datetime-format-mysql \
                     port:p${perl5.major}-datetime-format-sqlite \

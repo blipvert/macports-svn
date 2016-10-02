@@ -7,7 +7,7 @@ PortGroup           github 1.0
 
 github.setup        bistromath gr-ais 56abd162cf4add878dbfa3bd60215001d4ae83ea
 version             20150414
-revision            4
+revision            5
 checksums           rmd160 7f32129d62958856aa4645681651167ec4d3ce01 \
                     sha256 cf8bfbf297e57b4c3f0fe987b5a7d244ccab240911c08f8abd0e8530e07810ff
 
@@ -69,7 +69,7 @@ depends_lib-append \
 # specify the Python version to use
 
 configure.args-append \
-    -DPYTHON_EXECUTABLE=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 \
-    -DPYTHON_INCLUDE_DIR=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Headers \
-    -DPYTHON_LIBRARY=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Python \
+    -DPYTHON_EXECUTABLE=${frameworks_dir}/Python.framework/Versions/2.7/bin/python2.7 \
+    -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.7/Headers \
+    -DPYTHON_LIBRARY=${frameworks_dir}/Python.framework/Versions/2.7/Python \
     -DGR_PYTHON_DIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages

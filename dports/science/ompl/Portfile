@@ -3,11 +3,11 @@
 PortSystem 1.0
 PortGroup           cmake 1.0
 PortGroup           active_variants 1.1
-PortGroup           compiler_blacklist_versions 1.0
+PortGroup           cxx11 1.0
 cmake.out_of_source yes
 
 name                ompl
-version             1.2.0
+version             1.2.1
 categories          science
 maintainers         mmoll
 description         The Open Motion Planning Library (OMPL)
@@ -18,26 +18,22 @@ platforms           darwin
 license             BSD
 master_sites        https://bitbucket.org/ompl/ompl/downloads
 distname            ${name}-${version}-Source
-checksums           rmd160  d1dabdd7dae01b9e37263e223b2b042adce0e569 \
-                    sha256  d1dd3ef8296d73ce0d60714559188d67aab505875ec5838260c2036ca667382d
+checksums           rmd160  7f4ccd3c36acca52d5ccb2e3c9ff8e388af12f1d \
+                    sha256  9d00fdb262222ba5ff5732be84212c6b0ba769b0b0fb64a1189e5f1db1c568eb
 depends_lib-append  port:boost port:ode port:flann port:triangle port:eigen3
 
-# We "inherit" the compiler blacklist from the Boost port, since OMPL depends heavily on Boost.
-compiler.blacklist {clang < 421} *llvm-gcc-4.2 *gcc-4.0 gcc-3.3
-
-# no universal of gccxml-devel
-universal_variant   no
-configure.args-append   -DOMPL_BUILD_DEMOS=OFF
+configure.args-append   -DOMPL_BUILD_DEMOS=OFF -DOMPL_BUILD_TESTS=OFF
 # generate the extra C++ code needed for Python bindings. This code seems
 # somewhat dependent on compiler and/or boost version, so we can't
 # pre-generate them and make them available as an extra download.
 post-configure {
-    # enable parallel build on at most 2 cores. Generating the bindings
-    # uses large amounts of memory, so don't use more cores.
-    if { ${use_parallel_build} } { set cj "-j 2" } else { set cj "" }
-    system -W ${cmake.build_dir} "${build.cmd} ${cj} update_bindings"
+    if {[variant_isset python27] || [variant_isset python34] || [variant_isset python35]} {
+        # enable parallel build on at most 2 cores. Generating the bindings
+        # uses large amounts of memory, so don't use more cores.
+        if { ${use_parallel_build} } { set cj "-j 2" } else { set cj "" }
+        system -W ${cmake.build_dir} "${build.cmd} ${cj} update_bindings"
+    }
 }
-configure.args-append   -DOMPL_BUILD_DEMOS=OFF
 
 # The +app variant includes all the content of the regular OMPL version, but
 # adds a simple GUI and an extra library with bindings to the assimp and fcl
@@ -57,8 +53,8 @@ http://ompl.kavrakilab.org/license.html#ricelicense"
     depends_lib-append  port:assimp port:fcl port:redis
     configure.args-append -DOMPLAPP_PQP=OFF -DOMPLAPP_RESOURCE_DIR=${prefix}/share/ompl/resources
     distname            omplapp-${version}-Source
-    checksums           rmd160  35a9f8c63fb043c2e1bf04cbfb2d0179a75dda39 \
-                        sha256  1bdddc6253d8e0075c15f16e946632dddadf04217585586fd7a096c2aed10a99
+    checksums           rmd160  9146096d1826a2f11b9b5eb89a6bbb8c1e4b5160 \
+                        sha256  e2a17e311ac980c73011e06902539314782da8eb54bb28d80abeeeeac2adb00d
     notes "
     If you intend to use ompl_webapp, you need to first launch the redis server:
 

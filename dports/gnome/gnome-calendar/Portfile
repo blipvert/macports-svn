@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                gnome-calendar
-version             3.20.2
+version             3.22.0
 license             GPL-3+
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Calendar is a calendar application for GNOME.
@@ -17,8 +17,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  4bdce959d4179c68e206762c064955c699253b12 \
-                    sha256  f132cff56310b83cf086628e949685b04cdaf872e989d67dbb8a3e4e9943deee
+checksums           rmd160  cd9219f02f35404e3bf479c5968a89624de7833b \
+                    sha256  e10670275df86ff2598261a7f755c02df4ba6be5d14081e906b94bf7bd03299c
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -37,8 +37,7 @@ depends_lib         port:desktop-file-utils \
 depends_run         port:gnome-themes-standard \
                     port:yelp
 
-patchfiles          patch-configure.ac.diff \
-                    patch-src-Makefile.am.diff
+patchfiles          patch-src-Makefile.am.diff
 
 # reconfigure using upstream autogen.sh for intltool 0.51 compatibility
 
@@ -51,7 +50,7 @@ post-patch {
 
 configure.cmd       ./autogen.sh
 
-configure.args      --enable-compile-warnings=minimum \
+configure.args      --enable-compile-warnings=no \
                     --disable-maintainer-mode \
                     --disable-schemas-compile \
                     --disable-silent-rules

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-pexpect
-version             4.1.0
+version             4.2.1
 revision            0
 categories-append   devel
 platforms           darwin
@@ -29,8 +29,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  33be045298d342d8d9a6ee75d490c10b52214792 \
-                    sha256  c381c60f1987355b65df8f08a27f428831914c8a81091bd1778ac336fa2f27e7
+checksums           rmd160  61174032c34eabd021bd60fbe311ee6984334660 \
+                    sha256  3d132465a75b57aa818341c6521392a06cc660feb3988d7f1074f39bd23c9a92
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-ptyprocess

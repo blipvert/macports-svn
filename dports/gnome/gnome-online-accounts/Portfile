@@ -7,7 +7,7 @@ PortGroup           gobject_introspection 1.0
 name                gnome-online-accounts
 
 # version 3.16.0+ requires webkit2gtk-4.0
-version             3.20.1
+version             3.22.0
 
 license             LGPL-2
 set branch          [join [lrange [split ${version} .] 0 1] .]
@@ -21,8 +21,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  dd35aeec9ad65872de7335a2e5457af9474d4498 \
-                    sha256  c37aebc1e12f31f5516d33a354181e4d202a07da4f7d3a95b0da8cf0028c0c93
+checksums           rmd160  df0cef9d4bc0409b41fd91aad8f3b7cfa49e867a \
+                    sha256  aacce93a71bf5e687a45ae0d00f31ea0625ddd8143235d6d8c64c4ec21bbfa33
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -44,6 +44,7 @@ depends_lib         port:gtk3 \
 gobject_introspection yes
 
 configure.args      --enable-ubuntu-online-accounts=no \
+                    --enable-compile-warnings=no \
                     --disable-exchange \
                     --disable-media-server \
                     --enable-inspector \

@@ -18,9 +18,4 @@ checksums           md5 b4f434992c286d531f26893c78541456 \
                     sha1 3fba2f3691b4b82a03ba569e816cc08c8f3bb10d \
                     rmd160 430e883a4400e98ff479cdb7f592c476ca880102
 
-if {${perl5.major} != ""} {
-    depends_lib-append \
-                    port:p${perl5.major}-test-simple
-
-    supported_archs noarch
-}
+supported_archs     noarch

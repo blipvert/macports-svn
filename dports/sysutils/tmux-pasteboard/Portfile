@@ -4,41 +4,47 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        ChrisJohnsen tmux-MacOSX-pasteboard 2.4 v
+github.setup        ChrisJohnsen tmux-MacOSX-pasteboard 2.5 v
 name                tmux-pasteboard
-license             BSD
 categories          sysutils
-maintainers         larryv
 platforms           darwin
-description         Wrapper to use pasteboard services in tmux
+license             BSD
+maintainers         larryv
+
+description         Wrapper for accessing the OS X pasteboard in tmux sessions
 long_description    ${description}
-
-checksums           rmd160  ef47540b45b515a219096bd754da95c6e491753c \
-                    sha256  c93ef1824bf933748e8d020eddc8811d09b6758729cd0384df58ea352aca59e0
-
-use_configure       no
-
-variant universal {}
 
 depends_run         path:bin/tmux:tmux
 
-build.args          ARCHES="[get_canonical_archs]"
+checksums           rmd160  4be706e4d7824ba8ccc3a239309ee4b3a1151fe7 \
+                    sha256  50a88af5d8ed9e0f37130e453a78fbeec3020e5e64c5f5a52b37084c89067bd2
+
+use_configure       no
+variant universal {}
 
 build.env           CC="${configure.cc}" \
                     CFLAGS="-I${prefix}/include" \
                     LDFLAGS="-L${prefix}/lib"
-
 build.target        reattach-to-user-namespace
+build.args          ARCHES="[get_canonical_archs]"
 
+set docdir ${prefix}/share/doc/${name}
 destroot {
-    xinstall -m 755 ${worksrcpath}/reattach-to-user-namespace \
-        ${destroot}${prefix}/bin/
+    xinstall -m 755 -W ${worksrcpath} \
+            reattach-to-user-namespace ${destroot}${prefix}/bin
+
+    xinstall -d ${destroot}${docdir}
+    xinstall -m 644 -W ${worksrcpath} \
+            README.md Usage.md ${destroot}${docdir}
 }
 
-notes \
-"To enable tmux-MacOSX-pasteboard add the following line to ~/.tmux.conf replacing 'bash' with your actual shell:
-    set-option -g default-command \"${prefix}/bin/reattach-to-user-namespace bash\"" \
-"You can then copy last tmux buffer into system general pasteboard using:
-    tmux save-buffer - | pbcopy" \
-"or define a handier alias for it"
+notes "
+Please refer to the tmux-MacOSX-pasteboard documentation for usage\
+instructions:
 
+${docdir}/README.md
+${github.homepage}/blob/${git.branch}/README.md
+
+${docdir}/Usage.md
+${github.homepage}/blob/${git.branch}/Usage.md
+"

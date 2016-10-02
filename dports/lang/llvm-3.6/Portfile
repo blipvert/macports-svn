@@ -7,7 +7,7 @@ PortGroup compiler_blacklist_versions 1.0
 set llvm_version        3.6
 set llvm_version_no_dot 36
 name                    llvm-${llvm_version}
-revision                2
+revision                4
 subport                 clang-${llvm_version} {}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/llvm-${llvm_version}
@@ -51,7 +51,6 @@ if {${subport} eq "llvm-${llvm_version}"} {
 
     depends_lib         port:libxml2 port:llvm-${llvm_version} port:python27
     depends_run         port:clang_select port:ld64
-    depends_extract     bin:svn:subversion
     depends_build       port:cctools
     depends_skip_archcheck-append cctools ld64 subversion
 
@@ -154,9 +153,13 @@ if {${subport} eq "clang-${llvm_version}"} {
 }
 
 build.env-append        VERBOSE=1 \
-                        REQUIRES_RTTI=1
+                        REQUIRES_RTTI=1 \
+                        LLVM_SUBMIT_VERSION=3 \
+                        LLVM_SUBMIT_SUBVERSION=7.1
 destroot.env-append     VERBOSE=1 \
-                        REQUIRES_RTTI=1
+                        REQUIRES_RTTI=1 \
+                        LLVM_SUBMIT_VERSION=3 \
+                        LLVM_SUBMIT_SUBVERSION=7.1
 
 configure.dir           ${workpath}/build
 build.dir               ${configure.dir}
@@ -193,7 +196,7 @@ if {${subport} eq "clang-${llvm_version}"} {
 
 # blacklist current and future versions if they're not available in order to
 # help break potential dependency cycles.
-foreach ver {3.6 3.7 3.8} {
+foreach ver {3.6 3.7 3.8 3.9 devel} {
     if {![file exists ${prefix}/bin/clang-mp-${ver}]} {
         compiler.blacklist-append macports-clang-${ver}
     }
@@ -402,6 +405,16 @@ if {${subport} eq "llvm-${llvm_version}"} {
         file delete -force ${destroot}${sub_prefix}/libexec/clang-format/Release+Debug+Asserts
         file delete -force ${destroot}${sub_prefix}/libexec/clang-format/CMakeLists.txt
         file delete -force ${destroot}${sub_prefix}/libexec/clang-format/ClangFormat.cpp
+    }
+}
+
+if {${os.platform} eq "darwin" && ${os.major} > 15} {
+    depends_lib
+    depends_run
+    archive_sites
+    pre-fetch {
+        ui_error "${name} is not supported on macOS Sierra or newer."
+        return -code error {unsupported platform}
     }
 }
 

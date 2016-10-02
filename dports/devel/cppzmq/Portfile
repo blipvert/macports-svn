@@ -5,10 +5,10 @@ PortSystem          1.0
 
 PortGroup           github 1.0
 
-github.setup        zeromq cppzmq 0db7521a647a2803640fe02e628180339d82af49
-version             20160406
-checksums           rmd160 797579982dda1085c25055507363aa9a755ddad8 \
-                    sha256 98041874d3e521be3c3e73c6225777ed027cc2fb7fbdacf822eefdb0ebeac589
+github.setup        zeromq cppzmq 7faa9b061843fcbceb7ed94984ee8f20284ee759
+version             20160919
+checksums           rmd160 98f9c26db0d2655805cb78be8b00eb1370a26808 \
+                    sha256 0ad567bca5bb96552829804efc64a1602eef384921211bd05dd8541fd2eb1c80
 
 maintainers         michaelld openmaintainer
 platforms           darwin

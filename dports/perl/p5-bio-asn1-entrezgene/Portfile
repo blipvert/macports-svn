@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Bio-ASN1-EntrezGene 1.70
+perl5.setup         Bio-ASN1-EntrezGene 1.72
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Bio::ASN1::EntrezGene - Regular expression-based Perl Parser for NCBI Entrez Gene
@@ -13,8 +13,8 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  5924d9a3f2634a2331da96ecaaf943760d4ea47f \
-                    sha256  342ce97702e101da813e76221e15414be3fd608fc9059fcc36a141d939048dfb
+checksums           rmd160  b9ac5281cffe1b16157b628905692d18e99ba0f4 \
+                    sha256  7f55f69cccfab37d976338ed77d245a62a44b03b7b9954484d8976eab14d575b
 
 if {${perl5.major} != ""} {
     depends_lib-append \

@@ -5,23 +5,19 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Text-PDF 0.29
-revision            4
+perl5.setup         Text-PDF 0.31
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl module for creating and manipulating PDF files.
 long_description    ${description}
 platforms           darwin
 
-checksums           md5 2fdf4c3170e53a083715888237914a9b
+checksums           rmd160  20462d9a30970c964e2ae90aea3617d92072ee90 \
+                    sha256  df9f515ee159804b0d5a75d5adb93c4584c7ec401d8c59c27e9f73925d8dac68
 
 if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-io-compress
 
-    distfiles       ${distname}a${extract.suffix}
-
     supported_archs noarch
 }
-
-livecheck.version   ${perl5.moduleversion}a

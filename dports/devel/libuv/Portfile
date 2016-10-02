@@ -2,26 +2,45 @@
 # $Id$
 
 PortSystem          1.0
+PortGroup           github 1.0
 
 name                libuv
-version             1.8.0
 categories          devel
 platforms           darwin
-maintainers         raimue \
-                    openmaintainer
-license             {MIT BSD} 
+maintainers         raimue michaelld openmaintainer
+license             {MIT BSD}
 
 description         Cross-platform asychronous I/O
 
 long_description \
     libuv is a multi-platform support library with a focus on asynchronous I/O.
 
-homepage            http://libuv.org/
-master_sites        http://dist.libuv.org/dist/v${version}/
-distname            ${name}-v${version}
+if {${subport} eq ${name}} {
 
-checksums           rmd160  707716dcbd072376ae82a46c4457305cc0472499 \
-                    sha256  6511f734da4fe082dacf85967606d600b7bce557bb9b2f0d2539193535323125
+    github.setup    libuv libuv 1.9.1 v
+    checksums       rmd160 6301fbdcf06822990ef09a2f115590dc7d638ce5 \
+                    sha256 999f02db738dbc8c07053f9f9e953ef69bb7639face97e6dbeb06f1e34861873
+
+    conflicts       libuv-devel
+
+}
+
+subport libuv-devel {
+
+    github.setup    libuv libuv 8221f9b305c09205be575d8d34a5c493ba03d392
+    version         20160923
+    checksums       rmd160 a545f7634448a34a1dd747337ef24e4ec346f2b9 \
+                    sha256 d4be34ab2318ddd3fe353eabefd393b2252142cd49b3711e36e8882b113022cd
+
+    long_description    ${long_description} \
+        This port is kept up with the libuv GIT 'master' branch, is typically updated weekly to monthly.
+    conflicts       libuv
+
+    livecheck.url   ${github.homepage}/commits/v1.x.atom
+
+}
+
+homepage            http://libuv.org/
 
 use_autoconf        yes
 autoconf.cmd        ./autogen.sh
@@ -30,7 +49,3 @@ depends_build       port:automake \
                     port:autoconf \
                     port:libtool \
                     port:pkgconfig
-
-livecheck.type      regex
-livecheck.url       http://dist.libuv.org/dist/
-livecheck.regex     v(\\d+(\\.\\d+)+)

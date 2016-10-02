@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rpy2
-version             2.8.1
+version             2.8.3
 revision            0
 categories-append   science
 platforms           darwin
@@ -27,8 +27,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  609c1f2a2c18cd0e66f29923206f65acfc30f991 \
-                    sha256  1775f503a1709d4b4907c4f59c40eb97fdc8233f71fbb8fb47989ec654d0dfb3
+checksums           rmd160  8f43754e10dc405e9254538b8288ec8cff0ef117 \
+                    sha256  24c2ea1c0d7321e6913d5d185efa19f29e920ff8e8afbc5c757f894f61c96873
 
 if {${name} ne ${subport}} {
     depends_build   port:py${python.version}-setuptools

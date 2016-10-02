@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Test-Deep 1.120
+perl5.setup         Test-Deep 1.123
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Provides lots of flexibility when testing deep structures
@@ -13,12 +13,7 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  657a339d3130eadbf5b22792aec71d11cd001da1 \
-                    sha256  207ef8ea71291e5cf8258d1a4d98d360b9b5870989d187b3e2ff3c0fb201becd
+checksums           rmd160  e4469d766e806607bb495f982f252836ee0cedde \
+                    sha256  15784c85b972f7497888db1b26bfa2b028d9c0636ade6d8a4a97fbb832a53db0
 
-if {${perl5.major} != ""} {
-    depends_lib-append \
-                    port:p${perl5.major}-test-simple
-
-    supported_archs noarch
-}
+supported_archs     noarch

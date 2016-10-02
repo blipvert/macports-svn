@@ -1,20 +1,11 @@
---- setup.py.orig	2016-01-22 00:42:02.000000000 +0300
-+++ setup.py	2016-01-24 14:46:21.000000000 +0300
-@@ -82,16 +82,7 @@
- 
- 
- def cmdline_entrypoints(versioninfo, platform, basename):
--    target = 'pytest:main'
--    if platform.startswith('java'):
--        points = {'py.test-jython': target}
--    else:
--        if basename.startswith('pypy'):
--            points = {'py.test-%s' % basename: target}
--        else: # cpython
--            points = {'py.test-%s.%s' % versioninfo[:2] : target}
--        points['py.test'] = target
--    return points
-+    return {'py.test': 'pytest:main'}
- 
- 
- def make_entry_points():
+--- setup.py.orig	2016-09-14 09:49:41.000000000 +0300
++++ setup.py	2016-09-14 09:50:00.000000000 +0300
+@@ -70,7 +70,7 @@
+         author='Holger Krekel, Bruno Oliveira, Ronny Pfannschmidt, Floris Bruynooghe, Brianna Laugher, Florian Bruhin and others',
+         author_email='holger at merlinux.eu',
+         entry_points={'console_scripts':
+-                          ['pytest=pytest:main', 'py.test=pytest:main']},
++                          ['py.test=pytest:main']},
+         classifiers=classifiers,
+         cmdclass={'test': PyTest},
+         # the following should be enabled for release

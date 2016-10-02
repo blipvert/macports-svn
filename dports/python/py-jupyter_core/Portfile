@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-jupyter_core
-version             4.1.0
+version             4.2.0
 revision            0
 platforms           darwin
 license             BSD
@@ -23,8 +23,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  e77b529671b528eb023e98ed030a94d13bfc628a \
-                    sha256  146af0679c33c56db4b85b785f3dacd933ffaca97e7d2d56ff577a5485c2bd13
+checksums           rmd160  4f3a9fe7f2563fa85b1a1ab378a066e82bf5ae55 \
+                    sha256  44ec837a53bebf4e937112d3f9ccf31fee4f8db3e406dd0dd4f0378a354bed9c
 
 if {${name} ne ${subport}} {
     depends_lib-append  port:py${python.version}-setuptools \

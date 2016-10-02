@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Test-TCP 2.16
+perl5.setup         Test-TCP 2.17
 platforms           darwin
 maintainers         nomaintainer
 license             {Artistic-1 GPL}
@@ -15,11 +15,13 @@ description         Test::TCP - for testing TCP/IP programs
 
 long_description    ${description}
 
-checksums           rmd160  701202b47722ca093f2eb5ca8cae5a146a9b3d63 \
-                    sha256  b12b66986a938ea6a627b89cd8c44dc129dc43d11636139f1291dd3830bfb97b
+checksums           rmd160  12f491bb83e4e80af2e66f659a0dd12e24b40040 \
+                    sha256  e8d7e5eeff413dad0b52eaadc543ed650bc573b0d89803e352a9f5ea7cfe4d14
 
 if {${perl5.major} != ""} {
+# use Time::HiRes 1.9739+ for Sierra compatibility
     depends_lib-append \
                     port:p${perl5.major}-io-socket-ip \
-                    port:p${perl5.major}-test-sharedfork
+                    port:p${perl5.major}-test-sharedfork \
+                    port:p${perl5.major}-time-hires
 }

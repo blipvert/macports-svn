@@ -3,14 +3,13 @@
 
 PortSystem          1.0
 
+replaced_by         py-obspy
+PortGroup           obsolete 1.0
 PortGroup           python 1.0
 
 name                py-obspy-devel
-version             1.0.0rc4
+version             1.0.2rc6
 revision            1
-
-replaced_by         py-obspy
-PortGroup           obsolete 1.0
 
 categories-append   science
 platforms           darwin
@@ -18,12 +17,13 @@ license             LGPL-3
 
 maintainers         petr openmaintainer
 
-description         This port is currently a stub replaced by py-obspy release
+description         This port is currently a stub replaced by py-obspy
 
 long_description    \
-    This port is currently a stub to provice a smooth upgrade path towards \
-    the recently released version. This port is expected to be reactivated \
-    in some weeks when a stable development snapshot becomes useful.
+    This port is currently a stub to provice a smooth upgrade path of a \
+    release candidate towards the released version. \
+    This port is expected to be reactivated either for some stable \
+    development snapshot or for the next release candidates.
 
 homepage            http://www.obspy.org/
 

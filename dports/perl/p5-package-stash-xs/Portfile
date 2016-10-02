@@ -18,7 +18,7 @@ checksums           rmd160  c09f73be8687e04d3e1c5e35846a232252e5c3e0 \
                     sha256  23d8c5c25768ef1dc0ce53b975796762df0d6e244445d06e48d794886c32d486
 
 if {${perl5.major} != ""} {
-depends_lib-append  port:p${perl5.major}-test-leaktrace \
-                    port:p${perl5.major}-test-fatal \
-                    port:p${perl5.major}-test-simple
+    depends_build-append \
+                    port:p${perl5.major}-test-requires \
+                    port:p${perl5.major}-test-fatal
 }

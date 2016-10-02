@@ -25,6 +25,5 @@ checksums           rmd160  8a00b94e97845715267b1da27b2c775a0f9436d6 \
 if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-sub-exporter \
-                    port:p${perl5.major}-capture-tiny \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-capture-tiny
 }

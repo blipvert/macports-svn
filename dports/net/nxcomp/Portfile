@@ -13,13 +13,13 @@ categories              net
 platforms               darwin
 license                 GPL-2
 
-maintainers             cal ionic openmaintainer
+maintainers             ionic openmaintainer
 
 description             nxcomp is the X compression library by NX
 long_description        nxcomp is a library compressing X commands to be passed over network \
                         for use with the X2Go suite.
 
-homepage                http://www.nomachine.com/
+homepage                http://wiki.x2go.org/doku.php/wiki:libs:nx-libs
 master_sites            http://code.x2go.org/releases/source/nx-libs/
 distname                nx-libs-${version}-lite
 
@@ -39,6 +39,10 @@ if {${name} eq ${subport}} {
 
     worksrcdir          nx-libs-${version}/nxcomp
 
+    if {${os.major} < 10} {
+        patchfiles          patch-nxcomp_cp-compat-for-10.5-.diff
+    }
+
     livecheck.url       [lindex ${master_sites} 0]
     livecheck.regex     nx-libs-(\[0-9\]+(\\.\[0-9\]+)+(-\[0-9\]+)?)-lite
 } else {
@@ -54,8 +58,8 @@ subport nxproxy {
 
     worksrcdir          nx-libs-${version}/nxproxy
 
-    patchfiles          patch-nxproxy__configure.in.diff \
-                        patch-nxproxy__Makefile.in.diff
+    patchfiles          patch-nxproxy_configure.in.diff \
+                        patch-nxproxy_Makefile.in.diff
 
     configure.ldflags-append \
                         -L${prefix}/lib/nx

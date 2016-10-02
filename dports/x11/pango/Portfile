@@ -11,7 +11,7 @@ name                    pango
 conflicts               pango-devel
 set my_name             pango
 epoch                   1
-version                 1.40.1
+version                 1.40.3
 set branch              [join [lrange [split ${version} .] 0 1] .]
 categories              x11
 maintainers             ryandesign openmaintainer
@@ -32,8 +32,8 @@ long_description \
     open-source framework for the layout and rendering \
     of internationalized text.
 
-checksums               rmd160  3a1456de11d699a21df9f5c4e5cec8d389241617 \
-                        sha256  e27af54172c72b3ac6be53c9a4c67053e16c905e02addcf3a603ceb2005c1a40
+checksums               rmd160  ab149f6322096c148c584db1219a37d042ca3095 \
+                        sha256  abba8b5ce728520c3a0f1535eab19eac3c14aeef7faa5aded90017ceac2711d3
 
 depends_build \
     port:pkgconfig

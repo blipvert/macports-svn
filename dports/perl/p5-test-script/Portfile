@@ -19,8 +19,7 @@ checksums           rmd160  71e9d31fe5d8170441bb4edbce55fe7aec68ae66 \
 if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-ipc-run3 \
-                    port:p${perl5.major}-probe-perl \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-probe-perl
 
     supported_archs noarch
 }

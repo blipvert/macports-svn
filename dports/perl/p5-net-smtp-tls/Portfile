@@ -6,8 +6,9 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         Net-SMTP-TLS 0.12
+revision            1
 license             {Artistic-1 GPL}
-maintainers         devans openmaintainer
+maintainers         devans master-developer.com:macports openmaintainer
 description         Net::SMTP::TLS - An SMTP client supporting TLS and AUTH
 long_description    ${description}
 
@@ -18,6 +19,7 @@ checksums           rmd160  0dbf85a683a9371a26f586cb831591881e46b7c4 \
 
 if {${perl5.major} != ""} {
     depends_lib-append \
+                    port:p${perl5.major}-digest-hmac \
                     port:p${perl5.major}-io-socket-ssl \
                     port:p${perl5.major}-net-ssleay
 

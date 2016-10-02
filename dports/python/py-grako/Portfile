@@ -1,0 +1,48 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-grako
+version             3.15.1
+revision            0
+categories-append   devel textproc
+platforms           darwin
+license             BSD
+
+python.versions     27 35
+
+maintainers         stromnov openmaintainer
+
+description         Tool that takes grammars in a variation of EBNF as input, and outputs memoizing PEG parsers in Python.
+long_description    ${description}
+
+homepage            http://bitbucket.org/apalala/grako
+master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
+
+distname            ${python.rootname}-${version}
+
+checksums           rmd160  f85b5bc54c6d2c6c994838a8a33081a26ac65869 \
+                    sha256  e36bd9e138274d7af481ede91fc4602f0cb215d9c7e678e02640cb1ad6954183
+
+if {${name} ne ${subport}} {
+    depends_build-append \
+                        port:py${python.version}-setuptools \
+                        port:py${python.version}-cython
+
+    # Fix permissions
+    post-extract {
+        fs-traverse item ${worksrcpath} {
+            if {[file isdirectory ${item}]} {
+                file attributes ${item} -permissions a+rx
+            } elseif {[file isfile ${item}]} {
+                file attributes ${item} -permissions a+r
+            }
+        }
+    }
+
+    livecheck.type      none
+} else {
+    livecheck.type      pypi
+}

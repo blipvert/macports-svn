@@ -6,7 +6,7 @@ PortGroup           perl5 1.0
 
 epoch               1
 perl5.branches      5.22 5.24
-perl5.setup         DateTime-Locale 1.05
+perl5.setup         DateTime-Locale 1.08
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Localization support for DateTime
@@ -19,16 +19,19 @@ long_description    DateTime::Locale is primarily a factory for the \
 
 platforms           darwin
 
-checksums           rmd160  16e1691b92ab7fe95954397af8503e6cf0adb4db \
-                    sha256  692d674558589e2a6ad2d68cf58a6e4e4b1bfe2f7f76caf20cb91b975a51d155
+checksums           rmd160  cefc3dee0ce984df2de1416ae8e586ef6aaf6f38 \
+                    sha256  f1f3f17f3cb3f3140daa88583302974e2d1517640f16f9cb586bf9803815c4c5
 
 if {${perl5.major} != ""} {
     depends_build-append \
+                    port:p${perl5.major}-cpan-meta-check \
                     port:p${perl5.major}-test-fatal \
                     port:p${perl5.major}-test-requires \
                     port:p${perl5.major}-test-warnings
 
     depends_lib-append \
                     port:p${perl5.major}-dist-checkconflicts \
-                    port:p${perl5.major}-params-validate
+                    port:p${perl5.major}-namespace-autoclean \
+                    port:p${perl5.major}-params-validationcompiler \
+                    port:p${perl5.major}-specio
 }

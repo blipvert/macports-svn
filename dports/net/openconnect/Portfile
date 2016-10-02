@@ -4,10 +4,11 @@
 PortSystem          1.0
 
 name                openconnect
-version             7.06
+version             7.07
+revision            1
 categories          net
 platforms           darwin
-maintainers         nomaintainer
+maintainers         hydroxide.nl:bjorn.ketelaars openmaintainer
 license             LGPL-2.1
 
 description         OpenConnect is a client for Cisco's AnyConnect SSL VPN
@@ -20,19 +21,21 @@ homepage            http://www.infradead.org/openconnect/
 
 depends_build       port:pkgconfig
 
-depends_lib         port:libxml2 \
-                    port:lz4 \
-                    port:zlib \
-                    port:gettext \
+depends_lib         port:gettext \
+                    port:libiconv \
                     port:libproxy \
-                    port:vpnc-scripts
+                    port:libxml2 \
+                    port:lz4 \
+                    port:p11-kit \
+                    port:vpnc-scripts \
+                    port:zlib
 
 master_sites        ftp://ftp.infradead.org/pub/openconnect/
 
 # md5 is needed for http master_site below
-checksums           md5     80f397911e1fed43d897d99be3d5f1a1 \
-                    rmd160  fb9f55e413bd3eb065521332d8632001fb14b12f \
-                    sha256  facf695368dc4537a6a30e2147be90b1d77ee3cb2d269eaef070b6d9ddab70f2
+checksums           md5     582692c4bd8c157daadfcc89d6680cb8 \
+                    rmd160  c62e4e50a76fb6cb0797ad8b066d8bef4b738bb9 \
+                    sha256  f3ecfcd487dcd916748db38b4138c1e72c86347d6328b11dfe1d0af2821b8366
 
 foreach {type checksum} ${checksums} {
     if {${type} == "md5"} {
@@ -42,8 +45,10 @@ foreach {type checksum} ${checksums} {
 
 configure.args      --disable-silent-rules \
                     --with-vpnc-script=${prefix}/etc/vpnc-scripts/vpnc-script \
-                    --without-openssl \
-                    --without-gnutls
+                    --without-gnutls \
+                    --without-gssapi \
+                    --without-libpskc \
+                    --without-openssl
 
 variant ssl conflicts gnutls description {Allow secure connections using OpenSSL} {
     depends_lib-append      path:lib/libssl.dylib:openssl
@@ -53,6 +58,16 @@ variant ssl conflicts gnutls description {Allow secure connections using OpenSSL
 variant gnutls conflicts ssl description {Allow secure connections using GNUTLS} {
     depends_lib-append      port:gnutls
     configure.args-replace  --without-gnutls --with-gnutls
+}
+
+variant kerberos description {Enable Kerberos support} {
+    depends_lib-append      port:kerberos5
+    configure.args-replace  --without-gssapi --with-gssapi
+}
+
+variant libpskc description {Allow RFC6030 PSKC file storage of HOTP/TOTP keys} {
+    depends_lib-append      port:oath-toolkit
+    configure.args-replace  --without-libpskc --with-libpskc
 }
 
 # Since Openconnect 5.00, GnuTLS is the default instead of OpenSSL

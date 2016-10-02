@@ -5,10 +5,11 @@ PortSystem          1.0
 PortGroup           muniversal 1.0
 PortGroup           cmake 1.0
 PortGroup           mpi 1.0
+PortGroup           linear_algebra 1.0
 
 name                gromacs
-version             5.1.2
 revision            1
+version             5.1.4
 categories          science math
 license             GPL-2
 maintainers         dstrubbe openmaintainer
@@ -24,11 +25,12 @@ long_description    GROMACS is a versatile package to perform molecular \
 platforms           darwin
 
 homepage            http://www.gromacs.org/
-master_sites        ftp://ftp.gromacs.org/pub/gromacs \
-                    http://cluster.earlham.edu/detail/home/charliep/packages
+master_sites        http://ftp.gromacs.org/pub/gromacs
 
-checksums           rmd160  27e9d35265f90abc2c6fecdefab881b501813de0 \
-                    sha256  39d6f1d7ae8ba38cea6089da40676bfa4049a49903d21551abc030992a58f304
+# md5 published at http://www.gromacs.org/Downloads
+checksums           rmd160  d14fdd219dfe3a0252fc594031b8e9ce890ef3c6 \
+                    sha256  0f3793d8f1f0be747cf9ebb0b588fb2b2b5dc5acc32c3046a7bee2d2c03437bc \
+                    md5 ba2e34d59b3982603b4935d650c08040
 
 depends_build-append \
                     port:pkgconfig
@@ -52,26 +54,40 @@ variant x11 description {Enable GMX view via X11} {
 #:info:configure   recent version, or a different compiler.  For now, we are proceeding by
 #:info:configure   turning off OpenMP.
 
-# FIXME: give choice of BLAS/LAPACK. uses dgemm.
-
 compilers.choose    cc cxx
 mpi.setup
 
 test.run     yes
 test.target  check
-test.env-append DYLD_LIBRARY_PATH=${worksrcpath}/lib
+pre-test {
+    if {[mpi_variant_isset]} {
+        set suffix _mpi
+    } else {
+        set suffix ""
+    }
+    system -W ${worksrcpath} "install_name_tool -change ${prefix}/lib/libgromacs${suffix}.1.dylib @executable_path/../lib/libgromacs${suffix}.1.dylib bin/gmx${suffix}"
+    # reset name for new executables that will be built in this phase
+    system -W ${worksrcpath} "install_name_tool -id @executable_path/../lib/libgromacs${suffix}.1.dylib lib/libgromacs${suffix}.1.dylib"
+}
+post-test {
+    # undo changes, in case 'install' is done afterward
+    system -W ${worksrcpath} "install_name_tool -change @executable_path/../lib/libgromacs${suffix}.1.dylib ${prefix}/lib/libgromacs.1.dylib bin/gmx${suffix}"
+    system -W ${worksrcpath} "install_name_tool -id ${prefix}/lib/libgromacs${suffix}.1.dylib lib/libgromacs${suffix}.1.dylib"
+}
 
 # I encountered this problem with the last test, when using MPI:
-#Program mdrun-mpi-test, VERSION 5.1.1
+#Program mdrun-mpi-test, VERSION 5.1.4
 #Memory allocation/freeing error:
 #Character buffer too small!
 #For more information and tips for troubleshooting, please check the GROMACS
 #website at http://www.gromacs.org/Documentation/Errors
 
+linalg.setup  noveclibfort
 pre-configure {
     if {[mpi_variant_isset]} {
         configure.args-append  -DGMX_MPI:BOOL=ON -DMPIEXEC:STRING="${mpi.exec}"
     }
+    configure.args-append      -DGMX_BLAS_USER="${linalglib}"
 }
 
 variant double description "Build in double precision" {

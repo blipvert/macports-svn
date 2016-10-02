@@ -24,7 +24,7 @@ depends_build-append    port:pkgconfig
 subport eigen3-devel {}
 
 if {${subport} eq ${name}} {
-    bitbucket.setup     eigen eigen 3.2.8
+    bitbucket.setup     eigen eigen 3.2.9
     revision            0
     name                eigen3
     conflicts           eigen3-devel
@@ -34,12 +34,12 @@ if {${subport} eq ${name}} {
     livecheck.regex     {Eigen (\d+(\.\d+)+) released}
 
     checksums \
-        rmd160  4bdbab3889920eede580dc945865bb5eeafdd039 \
-        sha256  722a63d672b70f39c271c5e2a4a43ba14d12015674331790414fcb167c357e55
+        rmd160  0cbbc6c41414f0170d50ba40dc7b959f92587cef \
+        sha256  4d1e036ec1ed4f4805d5c6752b76072d67538889f4003fadf2f6e00a825845ff
 
 } else {
     # No current development version (other than rolling snapshot)
-    bitbucket.setup     eigen eigen 3.3-beta1
+    bitbucket.setup     eigen eigen 3.3-rc1
     revision            0
     name                eigen3-devel
     conflicts           eigen3
@@ -49,8 +49,8 @@ if {${subport} eq ${name}} {
     # rc version seen as older than beta
     epoch               1 
     checksums \
-        rmd160  77a0fdba7716a843d68d7ffc3789cf0e1aae7f9e \
-        sha256  7b5edd634ce95ea876b504196d9c49d242ec383744524683282ea4ae929b466a
+        rmd160  15d771891b1f01304817fe6cb7335bea0d192397 \
+        sha256  ec5109cb4cfa2c7b728172d859f7ffef86ee35de78d3d40bbcc2ff78d8dcc854
 }
 
 homepage            http://eigen.tuxfamily.org/
@@ -132,11 +132,6 @@ pre-destroot {
                 # which makes muniversal hiccup. Just copy one set of docs
                 # into destroot directories.
                 file copy ${cmake.build_dir}${sfx}/doc/html ${docdir}
-                # Temporary fix for doxygen changes
-                file copy ${filespath}/ftv2node.png ${docdir}/html
-                file copy ${filespath}/ftv2pnode.png ${docdir}/html
-                file copy ${filespath}/ftv2node.png ${docdir}/html/unsupported
-                file copy ${filespath}/ftv2pnode.png ${docdir}/html/unsupported
             }
         }
 

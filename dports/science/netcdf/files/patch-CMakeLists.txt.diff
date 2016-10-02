@@ -1,5 +1,5 @@
---- CMakeLists.txt.orig	2016-01-14 06:40:17.000000000 +0900
-+++ CMakeLists.txt	2016-04-23 14:22:34.000000000 +0900
+--- CMakeLists.txt.orig	2016-08-03 15:12:13.000000000 +0900
++++ CMakeLists.txt	2016-08-03 15:17:39.000000000 +0900
 @@ -82,8 +82,7 @@
  ENDIF()
  
@@ -10,11 +10,14 @@
  
  # auto-configure style checks, other CMake modules.
  INCLUDE(${CMAKE_ROOT}/Modules/CheckLibraryExists.cmake)
-@@ -493,6 +492,7 @@
-   ##
-   IF(HDF5_C_LIBRARY AND HDF5_HL_LIBRARY AND HDF5_INCLUDE_DIR)
-     SET(HDF5_LIBRARIES ${HDF5_C_LIBRARY} ${HDF5_HL_LIBRARY})
-+    INCLUDE_DIRECTORIES(BEFORE ${HDF5_INCLUDE_DIR})
-     MESSAGE(STATUS "Using HDF5 C Library: ${HDF5_C_LIBRARY}")
-     MESSAGE(STATUS "Using HDF5 HL LIbrary: ${HDF5_HL_LIBRARY}")
-   ELSE(HDF5_C_LIBRARY AND HDF5_HL_LIBRARY AND HDF5_INCLUDE_DIR) # We are seeking out HDF5 with Find Package.
+@@ -613,8 +612,8 @@
+     # Find out if HDF5 was built with parallel support.
+     # Do that by checking for the targets H5Pget_fapl_mpiposx and
+     # H5Pget_fapl_mpio in ${HDF5_LIB}.
+-    CHECK_LIBRARY_EXISTS(hdf5 H5Pget_fapl_mpiposix "" HDF5_IS_PARALLEL_MPIPOSIX)
+-    CHECK_LIBRARY_EXISTS(hdf5 H5Pget_fapl_mpio "" HDF5_IS_PARALLEL_MPIO)
++    CHECK_LIBRARY_EXISTS(${HDF5_C_LIBRARY} H5Pget_fapl_mpiposix "" HDF5_IS_PARALLEL_MPIPOSIX)
++    CHECK_LIBRARY_EXISTS(${HDF5_C_LIBRARY} H5Pget_fapl_mpio "" HDF5_IS_PARALLEL_MPIO)
+     IF(HDF5_IS_PARALLEL_MPIPOSIX OR HDF5_IS_PARALLEL_MPIO)
+       SET(HDF5_PARALLEL ON)
+     ELSE()

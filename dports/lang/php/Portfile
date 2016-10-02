@@ -104,29 +104,30 @@ switch ${subport_branch} {
     }
     5.6 {
         epoch           2
-        version         5.6.23
+        version         5.6.26
         use_xz          yes
-        checksums       rmd160  a6433b6319b10cbc838f5bbefce537837716d83a \
-                        sha256  39141e9a617af172aedbbacee7a63eb15502850f7cea20d759a9cffa7cfb0a1a
+        checksums       rmd160  2d32c95ece7c426af5b3c3f454ddb74cd209711a \
+                        sha256  203a854f0f243cb2810d1c832bc871ff133eccdf1ff69d32846f93bc1bef58a8
     }
     7.0 {
         epoch           2
-        version         7.0.8
+        version         7.0.11
         use_xz          yes
-        checksums       rmd160  d1bc56e62aff05c4dd45cfa454799076dceeeb0a \
-                        sha256  0a2142c458b0846f556b16da1c927d74c101aa951bb840549abe5c58584fb394
+        checksums       rmd160  fd7cece47adc0976ac2e95c63a5d8c59ff347137 \
+                        sha256  d4cccea8da1d27c11b89386f8b8e95692ad3356610d571253d00ca67d524c735
     }
     7.1 {
         # When this becomes a stable version, remove the overrides for homepage,
         # master_sites and livecheck, and update php.latest_stable_branch in the
         # php-1.1 portgroup.
-        version         7.1.0alpha1
+        epoch           1
+        version         7.1.0RC3
         homepage        https://qa.php.net/
-        master_sites    https://downloads.php.net/~krakjoe/
+        master_sites    https://downloads.php.net/~davey/
         use_xz          yes
-        checksums       md5     bba5158cf155a63bc6a1daf51b7b34a7 \
-                        rmd160  0a6bc7ddaff6002b3b2b7498b75cfc5903c4f429 \
-                        sha256  e58c1e945200e2b03626a9429dd6f0079af390aa1009b5bf88e6e3105e8c34dd
+        checksums       md5     2bfa0ad51de4fce87d0175d655f6bf69 \
+                        rmd160  90ee1e6555402efe5e9fd9f3eb10c818971ffef1 \
+                        sha256  6a824c913ac30494acd721a2efe51689c5ed6b1e621a11c6c1ddddc0c8811fb8
         livecheck.url   ${homepage}
         livecheck.regex php-([strsed ${subport_branch} {g/\\./\\./}](?:\\.\[0-9.\]+)*(?:(?:alpha|beta|RC)\\d+|-latest))\\.tar
     }
@@ -1234,7 +1235,7 @@ subport ${php}-tidy {
     
     depends_lib-append      port:tidy
     
-    if {[vercmp ${branch} 7.1] <= 0} {
+    if {[vercmp ${branch} 7.0] <= 0} {
         patchfiles-append   patch-${php}-ext-tidy-tidy.c.diff
     }
     

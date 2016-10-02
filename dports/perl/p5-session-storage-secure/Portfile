@@ -6,6 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         Session-Storage-Secure 0.010 ../by-authors/id/D/DA/DAGOLDEN
+revision            1
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Session::Storage::Secure - Encrypted, expiring, compressed, \
@@ -28,6 +29,7 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-crypt-rijndael \
                     port:p${perl5.major}-crypt-urandom \
                     port:p${perl5.major}-digest-sha \
+                    port:p${perl5.major}-math-random-isaac \
                     port:p${perl5.major}-math-random-isaac-xs \
                     port:p${perl5.major}-moo \
                     port:p${perl5.major}-moox-types-mooselike \

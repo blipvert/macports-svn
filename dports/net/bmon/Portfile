@@ -1,33 +1,28 @@
 # $Id$
 
 PortSystem              1.0
+PortGroup               github 1.0
 
-name                  	bmon
-version                	2.1.0
-revision                1
+github.setup            tgraf bmon 3.9 v
 categories              net
-maintainers             nomaintainer
-description		An interface bandwidth monitor
-long_description	bmon is a bandwidth monitor with multiple modes and \
-			mrtg-like ascii diagram capability.
-homepage                http://people.suug.ch/~tgr/bmon
 platforms               darwin
-master_sites            ${homepage}/files
+maintainers             nomaintainer
+license                 BSD MIT
 
-checksums              	md5 3111a027907016c0902d67350c619df6 \
-			sha1 969084269f155583063832751fff5a22a6ac77e3 \
-			rmd160 7e0a5e0a82bfd3dc30fec899088f2206a75796a0
+description             An interface bandwidth monitor
 
-configure.args		--mandir=${prefix}/share/man
+long_description        bmon is a bandwidth monitor with multiple modes and \
+                        mrtg-like ascii diagram capability.
 
-patchfiles		patch-src-out_audio.c patch-src-out_xml_event.c
+github.tarball_from     releases
 
-depends_lib		port:ncurses
+checksums               rmd160  9886e5be930262ec288d8910ddf8c1b0584503ea \
+                        sha256  9c08332520497ef1d51a733ca531ffedbb5a30c7c3f55579efe86c36138f93e1
 
-destroot {		xinstall -m 755 -d ${destroot}${prefix}/bin
-			xinstall -m 755 -d ${destroot}${prefix}/share/man/man1
-     			file copy ${worksrcpath}/src/bmon \
-				${destroot}${prefix}/bin
-     			file copy ${worksrcpath}/man/bmon.1 \
-				${destroot}${prefix}/share/man/man1
-}
+depends_build           port:pkgconfig
+
+depends_lib             port:gettext \
+                        port:libconfuse \
+                        port:ncurses
+
+configure.args          --disable-silent-rules

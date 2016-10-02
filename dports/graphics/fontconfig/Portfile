@@ -5,7 +5,8 @@ PortSystem                  1.0
 PortGroup                   muniversal 1.0
 
 name                        fontconfig
-version                     2.12.0
+version                     2.12.1
+revision                    1
 categories                  graphics
 maintainers                 ryandesign
 license                     fontconfig
@@ -21,8 +22,8 @@ homepage                    https://www.freedesktop.org/wiki/Software/fontconfig
 master_sites                https://www.freedesktop.org/software/fontconfig/release/
 use_bzip2                   yes
 
-checksums                   rmd160  00b9af80c2abf6c69bf542f4d21a30a32ae728f4 \
-                            sha256  b433e4efff1f68fdd8aac221ed1df3ff1e580ffedbada020a703fe64017d8224
+checksums                   rmd160  66907dbb317309bcb5013ea45c53dbf5050e6376 \
+                            sha256  b449a3e10c47e1d1c7a6ec6e2016cca73d3bd68fbbd4f0ae5cc6b573f7d6c7f3
 
 depends_build               port:pkgconfig
 
@@ -39,13 +40,8 @@ lappend add_fonts           ${prefix}/share/fonts
 set docdir                  ${prefix}/share/doc/${name}
 
 patchfiles                  patch-docbook-4.2.diff
-
-# *** No scandir function available.
-# https://bugs.freedesktop.org/show_bug.cgi?id=77034
-# Can be removed when ccache 3.2 is released with proper clang compatibility
-if {[string match *clang* ${configure.compiler}]} {
-    configure.ccache        no
-}
+patchfiles-append           patch-src-fcweight.c.diff
+patchfiles-append           patch-src-fccache.c.diff
 
 configure.args              --disable-silent-rules HASDOCBOOK=no
 

@@ -5,10 +5,11 @@ PortSystem          1.0
 PortGroup           compiler_blacklist_versions 1.0
 PortGroup           conflicts_build 1.0
 PortGroup           cxx11 1.0
+PortGroup           xcodeversion 1.0
 
 name                mongodb
 epoch               1
-version             3.2.7
+version             3.2.10
 license             {AGPL-3 OpenSSLException}
 categories          databases
 maintainers         ryandesign
@@ -22,8 +23,8 @@ homepage            http://www.mongodb.org/
 master_sites        http://downloads.mongodb.org/src/
 distname            ${name}-src-r${version}
 
-checksums           rmd160  106a8bd4b6b1372d33e7ddcafbf6b6d6e6feb2a1 \
-                    sha256  cd89676af6f97561700a08b599c287fb638f14a6a1019ef9167cf55ed6a3952a
+checksums           rmd160  24bc6881712d247672b8f02326123fb8ed30bec7 \
+                    sha256  3bef44f50f302159c26194bcac9d51c81d98d57ea728f55400774850a70f5120
 
 depends_build       port:scons
 
@@ -46,14 +47,28 @@ compiler.blacklist-append *gcc* {clang < 503.0.40} macports-clang-3.3
 # TODO: fix me
 conflicts_build     libbson mongo-c-driver mongo-cxx-driver
 
+# https://jira.mongodb.org/browse/SERVER-20320
+minimum_xcodeversions   {11 4.4}
+if {[vercmp ${configure.sdk_version} 10.8] < 0} {
+    configure.sdk_version   10.8
+}
+
+configure.cflags    {*}${configure.cc_archflags}
+configure.ldflags   {*}${configure.ld_archflags}
+
+if {${configure.sdkroot} ne ""} {
+    configure.cflags-append -isysroot${configure.sdkroot}
+    configure.ldflags-append -Wl,-syslibroot,${configure.sdkroot}
+}
+
 build.cmd           ${prefix}/bin/scons
 build.target        all mongobridge mongosniff
 build.args          CC="${configure.cc}" \
-                    CCFLAGS="${configure.cc_archflags}" \
+                    CCFLAGS="${configure.cflags}" \
                     CPPPATH="${prefix}/include" \
                     CXX="${configure.cxx}" \
                     LIBPATH="${prefix}/lib" \
-                    LINKFLAGS="${configure.ld_archflags}" \
+                    LINKFLAGS="${configure.ldflags}" \
                     TARGET_ARCH=${build_arch} \
                     --disable-warnings-as-errors \
                     --libc++ \

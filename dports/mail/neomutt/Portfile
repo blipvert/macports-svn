@@ -1,0 +1,164 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           github 1.0
+
+github.setup        neomutt neomutt 20160916 neomutt-
+revision            3
+categories          mail
+platforms           darwin
+license             GPL-2
+maintainers         schenkel.net:leonardo openmaintainer
+
+description         The Mutt E-Mail Client (patched version with added features)
+long_description    Mutt is a small but very powerful text-based MIME \
+                    mail client. Mutt is highly configurable, and is \
+                    well suited to the mail power user with advanced \
+                    features like key bindings, keyboard macros, mail \
+                    threading, regular expression searches and \
+                    a powerful pattern matching language for selecting \
+                    groups of messages.
+homepage            https://www.neomutt.org
+
+conflicts           mutt
+depends_lib         port:gettext \
+                    port:libiconv \
+                    port:ncurses
+
+depends_run         path:share/curl/curl-ca-bundle.crt:curl-ca-bundle
+
+github.tarball_from releases
+checksums           rmd160  976fe21be5ceebce5189bad4a87cff752ec900e9 \
+                    sha256  99e62e8b95125289c5d19df30127037276170dc50c98bbc711e2689366896b1e
+
+configure.args      --disable-compressed \
+                    --disable-debug \
+                    --disable-gpgme \
+                    --disable-hcache \
+                    --disable-imap \
+                    --disable-nntp \
+                    --disable-notmuch \
+                    --disable-pop \
+                    --disable-sidebar \
+                    --disable-silent-rules \
+                    --disable-smtp \
+                    --disable-warnings \
+                    --mandir=${prefix}/share/man \
+                    --with-docdir=${prefix}/share/doc/mutt \
+                    --with-libiconv-prefix=${prefix} \
+                    --with-curses=${prefix} \
+                    --without-bdb \
+                    --without-gdbm \
+                    --without-gnutls \
+                    --without-gss \
+                    --without-idn \
+                    --without-lmdb \
+                    --without-qdbm \
+                    --without-regex \
+                    --without-sasl \
+                    --without-ssl \
+                    --without-tokyocabinet
+
+default_variants    +idn +imap +pop +ssl
+if {${install.user} ne "root"} {
+    default_variants-append +homespool
+}
+
+set hcache_variants {db4 gdbm lmdb qdbm tokyocabinet}
+if {[variant_isset headercache]} {
+    set found no
+    foreach hcache_impl {db4 gdbm lmdb qdbm tokyocabinet} {
+        if {[variant_isset $hcache_impl]} {
+            set found yes
+        }
+    }
+    if {!$found} {
+        # If no variant was chosen, choose one for the user
+        variant_set lmdb
+    }
+}
+
+post-destroot {
+    # delete pgpring to avoid a conflict with signing-party
+    delete ${destroot}${prefix}/bin/pgpring ${destroot}${prefix}/share/man/man1/pgpring.1
+    # delete horribly outdated ca bundle, I hope people weren't using that!
+    delete ${destroot}${prefix}/share/doc/mutt/samples/ca-bundle.crt
+}
+
+variant compress description {Compressed folders} {
+    configure.args-replace      --disable-compressed --enable-compressed
+}
+variant db4 conflicts {*}[lsearch -all -inline -not $hcache_variants db4] description {Use Berkeley DB database} {
+    configure.args-replace      --without-bdb --with-bdb=${prefix}
+    configure.cppflags-append   "-I${prefix}/include/db48"
+    configure.ldflags-append    "-L${prefix}/lib/db48"
+    depends_lib-append          port:db48
+}
+variant debug description {Debugging support} {
+    configure.args-append       --enable-debug
+}
+variant gdbm conflicts {*}[lsearch -all -inline -not $hcache_variants gdbm] description {Use GNU dbm database} {
+    configure.args-replace      --without-gdbm --with-gdbm=${prefix}
+    depends_lib-append          port:gdbm
+}
+variant gnuregex description {Use the GNU regular expression library} {
+    configure.args-replace      --without-regex -with-regex=${prefix}
+    depends_lib-append          port:gnuregex
+}
+variant gpgme description {Enable GPGME crypto support} {
+    configure.args-replace      --disable-gpgme --enable-gpgme
+    configure.args-append       --with-gpgme-prefix=${prefix}
+    depends_lib-append          port:gpgme
+}
+variant headercache description {Enable header caching (requires db4, gdbm, qdbm, lmdb or tokyocabinet)} {
+    configure.args-replace      --disable-hcache --enable-hcache
+}
+variant homespool description {Spool mail in home directory (allows installing without root privileges)} {
+    configure.args-append       --with-homespool
+}
+variant idn description {Internationalized Domain Name support} {
+    configure.args-replace      --without-idn --with-idn=${prefix}
+    depends_lib-append          port:libidn port:zlib
+}
+variant imap description {IMAP support} {
+    configure.args-replace      --disable-imap --enable-imap
+}
+variant lmdb conflicts {*}[lsearch -all -inline -not $hcache_variants lmdb] description {Use LMDB database} {
+    configure.args-replace      --without-lmdb --with-lmdb=${prefix}
+    depends_lib-append          port:lmdb
+}
+variant notmuch description {Notmuch support} {
+    configure.args-replace      --disable-notmuch --enable-notmuch
+    depends_lib-append          port:notmuch
+}
+variant nntp description {NNTP support} {
+    configure.args-replace      --disable-nntp --enable-nntp
+}
+variant pop description {POP support} {
+    configure.args-replace      --disable-pop --enable-pop
+}
+variant qdbm conflicts {*}[lsearch -all -inline -not $hcache_variants qdbm] description {Use QDBM database} {
+    configure.args-replace      --without-qdbm --with-qdbm=${prefix}
+    depends_lib-append          port:qdbm
+}
+variant sasl description {Simple Authentication and Security Layer support} {
+    configure.args-replace      --without-sasl --with-sasl=${prefix}
+    depends_lib-append          port:cyrus-sasl2
+}
+variant sidebar description {Add a sidebar with a list of folders} {
+    configure.args-replace      --disable-sidebar --enable-sidebar
+}
+variant smtp description {Include internal SMTP relay support} {
+    configure.args-replace      --disable-smtp --enable-smtp
+}
+variant ssl description {Secure Sockets Layer support} {
+    configure.args-replace      --without-ssl --with-ssl=${prefix}
+    depends_lib-append          path:lib/libssl.dylib:openssl
+}
+variant tokyocabinet conflicts {*}[lsearch -all -inline -not $hcache_variants tokyocabinet] description {Use Tokyo Cabinet database} {
+    configure.args-replace      --without-tokyocabinet --with-tokyocabinet=${prefix}
+    depends_lib-append          port:tokyocabinet
+}
+
+notes "This port does not install the pgpring binary. Please install the signing-party port if you need it."

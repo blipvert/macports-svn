@@ -4,8 +4,8 @@ PortSystem          1.0
 PortGroup           github 1.0
 
 name                vim
-set vim_version     7.4
-set vim_patchlevel  1129
+set vim_version     8.0
+set vim_patchlevel  0003
 github.setup        vim vim ${vim_version}.${vim_patchlevel} v
 categories          editors
 platforms           darwin freebsd
@@ -18,15 +18,13 @@ long_description \
 
 homepage            http://www.vim.org/
 
-checksums           rmd160  939d38159389e01271b4a1651e0f955e45dcdf4c \
-                    sha256  3d909819f15db6bbc1c8bf638ed97b69c3849e63b2b5e3aa130c51b2379e2a97
+checksums           rmd160  57836f9ae2f2fb6dddd3f93acc4092243436d6dc \
+                    sha256  d3d3c1e7d72fd0dda59e5ac319be742df08db7c948b992543b994d66c4dcabf0
 
 depends_build       bin:grep:grep
 depends_lib         port:ncurses \
                     port:gettext \
                     port:libiconv
-
-patchfiles-append patch-compat-sigaltstack.diff
 
 post-patch {
     set features [open ${worksrcpath}/src/feature.h a+]
@@ -66,22 +64,22 @@ variant x11 description {Build CLI version with X support} {
     depends_lib-append      port:xorg-libXt
 }
 
-variant athena description {Build GUI version using Athena widgets} requires x11 conflicts gtk1 gtk2 motif {
+variant athena description {Build GUI version using Athena widgets} requires x11 conflicts gtk2 gtk3 motif {
     configure.args-delete   --disable-gui
     configure.args-append   --enable-gui=athena --disable-darwin
     depends_lib-append      port:xorg-libXaw
 }
-variant gtk1 description {Build GUI version using GTK 1.x widgets} requires x11 conflicts athena gtk2 motif {
-    configure.args-delete   --disable-gui
-    configure.args-append   --enable-gui=gtk --disable-darwin
-    depends_lib-append      port:gtk1
-}
-variant gtk2 description {Build GUI version using GTK 2.x widgets} requires x11 conflicts athena gtk1 motif {
+variant gtk2 description {Build GUI version using GTK 2.x widgets} requires x11 conflicts athena gtk3 motif {
     configure.args-delete   --disable-gui
     configure.args-append   --enable-gui=gtk2 --disable-darwin
     depends_lib-append      port:gtk2
 }
-variant motif description {Build GUI version with Motif widgets} requires x11 conflicts athena gtk1 gtk2 {
+variant gtk3 description {Build GUI version using GTK 3.x widgets} requires x11 conflicts athena gtk2 motif {
+    configure.args-delete   --disable-gui
+    configure.args-append   --enable-gui=gtk3 --disable-darwin
+    depends_lib-append      port:gtk3
+}
+variant motif description {Build GUI version with Motif widgets} requires x11 conflicts athena gtk2 gtk3 {
     configure.args-delete   --disable-gui
     configure.args-append   --enable-gui=motif --disable-darwin
     depends_lib-append      lib:libXm:openmotif

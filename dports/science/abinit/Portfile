@@ -6,8 +6,7 @@ PortGroup           mpi 1.0
 PortGroup           linear_algebra 1.0
 
 name                abinit
-version             8.0.7
-revision            1
+version             8.0.8b
 categories          science
 platforms           darwin
 license             GPL-3
@@ -33,8 +32,11 @@ long_description    ABINIT is a package whose main program allows one to find th
 homepage            http://www.abinit.org
 master_sites        http://ftp.abinit.org/
 
-checksums           rmd160  b1992e1cb040d06224b3ff5a199352921203a340 \
-                    sha256  9df2fe572af39cef937a4134d569321b99c6670f187edbac9b355ff2defd5afc
+checksums           rmd160  e35b7546d6927f920176d5dba8130c5982a30962 \
+                    sha256  37ad5f0f215d2a36e596383cb6e54de3313842a0390ce8d6b48a423d3ee25af2
+
+# abinit-8.0.8b.tar.gz extracts to "abinit-8.0.8".
+worksrcdir          ${name}-8.0.8
 
 compilers.choose    cc cxx fc
 # g95 is no longer supported by abinit

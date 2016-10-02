@@ -7,7 +7,7 @@ PortGroup           github 1.0
 github.setup        robertdavidgraham masscan 1.0.3
 categories          net security
 platforms           darwin
-maintainers         yahoo.fr:jul_bsd openmaintainer
+maintainers         nomaintainer
 license             GPL-3
 
 description         Mass IP port scanner
@@ -19,8 +19,8 @@ long_description    This is the fastest Internet port scanner. It can \
                     famous port scanner. Internally, it operates \
                     more like scanrand, unicornscan, and ZMap, \
                     using asynchronous transmission. The major \
-                    difference is that it's faster than these \
-                    other scanners. In addition, it's more \
+                    difference is that it is faster than these \
+                    other scanners. In addition, it is more \
                     flexible, allowing arbitrary address ranges \
                     and port ranges.
 
@@ -33,14 +33,21 @@ worksrcdir          ${name}-${version}
 checksums           rmd160  ad733d1a7caa772c33712be204a23d9eef792e68 \
                     sha256  331edd529df1904bcbcfb43029ced7e2dafe1744841e74cd9fc9f440b8301085
 
+depends_lib         port:libpcap
+
 patchfiles          patch-Makefile.diff
+
+use_configure       no
+
+build.args          CC=${configure.cc} \
+                    CFLAGS="${configure.cflags} [get_canonical_archflags cc]"
 
 destroot.env        PREFIX=${prefix}
 post-destroot {
     xinstall -m 644 ${worksrcpath}/doc/masscan.8 ${destroot}${prefix}/share/man/man8/
 }
 
-use_configure       no
+variant universal {}
 
 test.run            yes
 test.target         regress

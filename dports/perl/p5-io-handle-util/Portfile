@@ -20,8 +20,7 @@ if {${perl5.major} != ""} {
     depends_lib-append \
                      port:p${perl5.major}-asa \
                      port:p${perl5.major}-io-string \
-                     port:p${perl5.major}-sub-exporter \
-                     port:p${perl5.major}-test-simple
+                     port:p${perl5.major}-sub-exporter
 
     supported_archs noarch
 }

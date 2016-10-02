@@ -11,7 +11,7 @@ PortGroup           select 1.0
 PortGroup           xcodeversion 1.0
 
 # don't forget to update both the git tag and the version
-github.setup        root-mirror root 6-06-04 v
+github.setup        root-mirror root 6-06-08 v
 version             [string map {- .} ${github.version}]
 livecheck.version   ${github.version}
 # github.setup      root-mirror root <sha>
@@ -20,8 +20,8 @@ livecheck.version   ${github.version}
 
 set version_major   [lindex [split ${version} .] 0]
 
-checksums           rmd160  36a0a47c63440b63d142f8c359145933c95777b4 \
-                    sha256  b3f85c6855c3e1e0a6a5149f5375073c0bfde788ee06778f164f1d77e3632394
+checksums           rmd160  547484b51868ee1368779a9e0aea310eda17a6f1 \
+                    sha256  ce5f6c56f353e449792ed3c8c5367e5407093261355b905e388cd8e708b41d39
 
 name                root${version_major}
 categories          science
@@ -400,7 +400,7 @@ foreach py_ver ${python_versions} {
         }
 
         # Setup python
-        set mypydir ${prefix}/Library/Frameworks/Python.framework/Versions/${py_ver}
+        set mypydir ${frameworks_dir}/Python.framework/Versions/${py_ver}
         configure.args-replace  -Dpython=OFF -Dpython=ON
         configure.args-append   -DPYTHON_INCLUDE_DIR="${mypydir}/Headers" \
                                 -DPYTHON_EXECUTABLE="${mypydir}/bin/python${py_ver}"
@@ -414,12 +414,12 @@ foreach py_ver ${python_versions} {
         
         post-destroot {
             # Install PyROOT lib in the correct place
-            set mypylibdir  ${prefix}/Library/Frameworks/Python.framework/Versions/${active_python_version}/lib/python${active_python_version}
+            set mypylibdir  ${frameworks_dir}/Python.framework/Versions/${active_python_version}/lib/python${active_python_version}
             set mypysitedir ${mypylibdir}/site-packages/
             file mkdir ${destroot}${mypysitedir}
             foreach pyfile [glob ${destroot}${install_prefix}/lib/root/*.py*] { move $pyfile ${destroot}${mypysitedir}/ }
             ln -sf ${install_prefix}/lib/root/libPyROOT.so ${destroot}${mypylibdir}/
-            # Fix python version in scripts 
+            # Fix python version in scripts
             set pystringtoreplace "/usr/bin/python"
             foreach f [ exec find ${destroot}${install_prefix} -type f -and -name "*.py" ] {
                 reinplace "s|${pystringtoreplace}|${prefix}/bin/python${active_python_version}|g" $f
@@ -440,7 +440,7 @@ variant ssl description {Build with ssl support} {
 }
 
 variant xml description {Build with xml support} {
-    configure.args-replace  -Dxml=OFF -Dxml=ON 
+    configure.args-replace  -Dxml=OFF -Dxml=ON
     configure.args-append   -DLIBXML2_INCLUDE_DIR="${prefix}/include/libxml2" \
                             -DLIBXML2_LIBRARIES="${prefix}/lib/libxml2.dylib" \
                             -DLIBXML2_XMLLINT_EXECUTABLE="${prefix}/bin/xmllint"
@@ -608,8 +608,8 @@ if { ${active_clang_variant} != "" } {
 # Note that g95 does not work here, so that variant is removed
 # ========================================================================================
 
-set gcc_versions { 4.7 4.8 4.9 5 }
-set default_fortran_variant +gcc5
+set gcc_versions { 4.7 4.8 4.9 5 6 }
+set default_fortran_variant +gcc6
 
 foreach gcc_ver ${gcc_versions} {
     set gcc_ver_no_dot [join [split ${gcc_ver} "."] ""]

@@ -20,8 +20,7 @@ checksums           rmd160  335e11046db124138ba14047cead8229de453c2c \
 
 if {${perl5.major} != ""} {
     depends_build-append \
-                    port:p${perl5.major}-dbix-class \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-dbix-class
 
     depends_lib-append \
                     port:p${perl5.major}-dbd-sqlite \

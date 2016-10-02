@@ -4,50 +4,55 @@
 PortSystem          1.0
 
 name                pcre
-version             8.38
+version             8.39
+subport pcre2 {
+    version         10.22
+}
 categories          devel
 license             BSD
 platforms           darwin freebsd
 maintainers         larryv
 
-description         Perl Compatible Regular Expressions Library
+description         Perl Compatible Regular Expressions
 long_description    The PCRE library is a set of functions that \
                     implement regular expression pattern matching \
                     using the same syntax and semantics as Perl 5. \
                     PCRE has its own native API, as well as a set of \
                     wrapper functions that correspond to the POSIX \
                     regular expression API.
-homepage            http://www.pcre.org/
+homepage            http://www.pcre.org
 
 depends_lib         port:bzip2 \
                     port:libedit \
                     port:zlib
 
-master_sites        sourceforge:project/pcre/pcre/${version} \
-                    ftp://ftp.fu-berlin.de/unix/misc/pcre/ \
-                    ftp://ftp.tin.org/pub/libs/pcre/ \
-                    ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
+master_sites        sourceforge:project/pcre/${subport}/${version} \
+                    ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre \
+                    ftp://ftp.fu-berlin.de/unix/misc/pcre \
+                    ftp://ftp.tin.org/pub/libs/pcre
+distname            ${subport}-${version}
 use_bzip2           yes
-checksums           rmd160  eba6da5ef34780f63f8b96c60bd70ac197df3b52 \
-                    sha256  b9e02d36e23024d6c02a2e5b25204b3a4fa6ade43e0a5f869f254f49535079df
+
+set rmd160(pcre)    bd3353494b85f184ebe3ba0de55584c3b9e74658
+set sha256(pcre)    b858099f82483031ee02092711689e7245586ada49e534a06e678b8ea9549e8b
+set rmd160(pcre2)   df5b3c6b431fff1a0a933a4ebeb07f209afc0d76
+set sha256(pcre2)   b2b44619f4ac6c50ad74c2865fd56807571392496fae1c9ad7a70993d018f416
+checksums           rmd160  $rmd160(${subport}) \
+                    sha256  $sha256(${subport})
 
 patchfiles          no-darwin-pthread-flag.patch
 
-# One of the tests currently fails when built with gcc49 @4.9-20130609.
-# Not that anyone cares.
-#
-# TODO Report upstream.
-compiler.blacklist  macports-gcc-4.9
-
 configure.args      --disable-silent-rules \
-                    --docdir=${prefix}/share/doc/${name} \
+                    --docdir=${prefix}/share/doc/${subport} \
                     --enable-jit \
-                    --enable-pcre16 \
-                    --enable-pcre32 \
-                    --enable-pcregrep-libbz2 \
-                    --enable-pcregrep-libz \
-                    --enable-pcretest-libedit \
-                    --enable-unicode-properties
+                    --enable-[regsub {\d$} ${subport} &-]16 \
+                    --enable-[regsub {\d$} ${subport} &-]32 \
+                    --enable-${subport}grep-libbz2 \
+                    --enable-${subport}grep-libz \
+                    --enable-${subport}test-libedit
+subport pcre {
+    configure.args-append --enable-unicode-properties
+}
 
 platform darwin 8 {
     # ticket #18448
@@ -57,3 +62,6 @@ platform darwin 8 {
 }
 
 test.run            yes
+test.target         check
+
+livecheck.distname  ${subport}

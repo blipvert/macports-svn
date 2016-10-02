@@ -1,11 +1,14 @@
 # $Id$
 
+# This is pretty much the only compiler that will build webkit-gtk-2.0,
+# but it really doesn't have much use other than that any more.
+
 PortSystem              1.0
 PortGroup select        1.0
 
 set llvm_version        3.3
-revision                8
 name                    llvm-${llvm_version}
+revision                10
 subport                 clang-${llvm_version} {}
 set suffix              mp-${llvm_version}
 set sub_prefix          ${prefix}/libexec/llvm-${llvm_version}
@@ -43,7 +46,6 @@ if {${subport} == "llvm-${llvm_version}"} {
 
     depends_lib         port:llvm-${llvm_version} port:libffi
     depends_run         port:clang_select port:ld64
-    depends_extract     bin:svn:subversion
     depends_build       port:cctools
     depends_skip_archcheck-append cctools ld64 subversion
 
@@ -107,9 +109,13 @@ if {${subport} == "clang-${llvm_version}"} {
 }
 
 build.env-append        VERBOSE=1 \
-                        REQUIRES_RTTI=1
+                        REQUIRES_RTTI=1 \
+                        LLVM_SUBMIT_VERSION=3 \
+                        LLVM_SUBMIT_SUBVERSION=7.1
 destroot.env-append     VERBOSE=1 \
-                        REQUIRES_RTTI=1
+                        REQUIRES_RTTI=1 \
+                        LLVM_SUBMIT_VERSION=3 \
+                        LLVM_SUBMIT_SUBVERSION=7.1
 
 configure.dir           ${workpath}/build
 build.dir               ${configure.dir}
@@ -169,7 +175,7 @@ if {${subport} eq "clang-${llvm_version}"} {
 
 # blacklist current and future versions if they're not available in order to
 # help break potential dependency cycles.
-foreach ver {3.3 3.4 3.5 3.6 3.7 3.8} {
+foreach ver {3.3 3.4 3.5 3.6 3.7 3.8 3.9 devel} {
     if {![file exists ${prefix}/bin/clang-mp-${ver}]} {
         compiler.blacklist-append macports-clang-${ver}
     }
@@ -372,6 +378,16 @@ if {${subport} == "llvm-${llvm_version}"} {
             xinstall -m 755 "${filespath}/llvm-bin" "${destroot}${prefix}/bin/scan-view-${suffix}"
             reinplace "s:EXEC_PATH:${sub_prefix}/bin/scan-view:" "${destroot}${prefix}/bin/scan-view-${suffix}"
         }
+    }
+}
+
+if {${os.platform} eq "darwin" && ${os.major} > 15} {
+    depends_lib
+    depends_run
+    archive_sites
+    pre-fetch {
+        ui_error "${name} is not supported on macOS Sierra or newer."
+        return -code error {unsupported platform}
     }
 }
 

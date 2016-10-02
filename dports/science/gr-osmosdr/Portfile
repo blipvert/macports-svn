@@ -18,10 +18,12 @@ platforms           darwin macosx
 
 set commit          164a09fc11cec2d8b15b38e8b512fa542d6cecc7
 version             20160228
-checksums           rmd160 1971a00f876eac172cf7e19c43bf736e566a01d6 \
+revision            3
+distname            ${name}-${commit}
+checksums           ${distname}.tar.gz \
+                    rmd160 1971a00f876eac172cf7e19c43bf736e566a01d6 \
                     sha256 0b10cd56a9c0319ff60f60fcf4f59e996a855b5f7b2efea55afc0d5a876d8bd6
 
-distname            ${name}-${commit}
 master_sites        http://cgit.osmocom.org/gr-osmosdr/snapshot/
 
 # allow gr-osmosdr to work with both gnuradio and gnuradio-devel ...
@@ -53,7 +55,7 @@ configure.ldflags-delete -L${prefix}/lib
 
 # per user concensus: enable all variants except +debug and +universal
 
-default_variants +docs +uhd +swig +hackrf +fcdproplus +rtlsdr +bladeRF +airspy
+default_variants +docs +uhd +swig +hackrf +fcdproplus +rtlsdr +bladeRF +airspy +soapysdr +sdrplay
 
 # common configure flags
 
@@ -64,7 +66,6 @@ configure.args-append \
     -DENABLE_FILE=ON \
     -DENABLE_MIRI=OFF \
     -DENABLE_RFSPACE=ON \
-    -DENABLE_SOAPY=OFF \
     -DENABLE_REDPITAYA=OFF
 
 # specify the Python dependencies
@@ -75,9 +76,9 @@ depends_lib-append \
 # specify the Python version to use
 
 configure.args-append \
-    -DPYTHON_EXECUTABLE=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 \
-    -DPYTHON_INCLUDE_DIR=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Headers \
-    -DPYTHON_LIBRARY=${prefix}/Library/Frameworks/Python.framework/Versions/2.7/Python \
+    -DPYTHON_EXECUTABLE=${frameworks_dir}/Python.framework/Versions/2.7/bin/python2.7 \
+    -DPYTHON_INCLUDE_DIR=${frameworks_dir}/Python.framework/Versions/2.7/Headers \
+    -DPYTHON_LIBRARY=${frameworks_dir}/Python.framework/Versions/2.7/Python \
     -DGR_PYTHON_DIR=${frameworks_dir}/Python.framework/Versions/2.7/lib/python2.7/site-packages
 
 variant docs description "Install ${name} documentation" {
@@ -216,5 +217,31 @@ variant airspy description "Install ${name} with support for airspy" {
 if {![variant_isset airspy]} {
 
     configure.args-append -DENABLE_AIRSPY=OFF
+
+}
+
+variant soapysdr description "Install ${name} with support for SoapySDR" {
+
+    depends_lib-append port:soapysdr
+    configure.args-append -DENABLE_SOAPY=ON
+
+}
+
+if {![variant_isset soapysdr]} {
+
+    configure.args-append -DENABLE_SOAPY=OFF
+
+}
+
+variant sdrplay description "Install ${name} with support for SDRplay" {
+
+    depends_lib-append port:sdrplay
+    configure.args-append -DENABLE_NONFREE=ON -DENABLE_SDRPLAY=ON
+
+}
+
+if {![variant_isset sdrplay]} {
+
+    configure.args-append -DENABLE_NONFREE=OFF -DENABLE_SDRPLAY=OFF
 
 }

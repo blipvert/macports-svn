@@ -27,22 +27,22 @@ if {$subport eq $name} {
     checksums           rmd160  8205779fe487d2fd01e122264d57a33c4b28fb07 \
                         sha256  ea8b3fc3f1169e149bc79885254731f46866a4b7a764ec6567e0e19141b1080f
 
-    livecheck.regex     {Zend Framework (2\.\d+\.\d+) Full}
+    livecheck.regex     {ZF (2\.\d+\.\d+)}
 }
 
 subport ZendFramework1 {
     conflicts ZendFramework2
 
-    version             1.12.18
+    version             1.12.20
     revision            0
 
     distname            ZendFramework-${version}
     master_sites        https://packages.zendframework.com/releases/ZendFramework-${version}/
 
-    checksums           rmd160  0c9082bfb2c57214078af1bcd15e8a5c9b43fd97 \
-                        sha256  53d091ed7378d847b471d5f7afde80ca36149095f7997608005c68805bdf3e4e
+    checksums           rmd160  7de3101bc67b929a7023274953b0a998b80d924e \
+                        sha256  984396e529a2de11bd29ba9662fbf652a1f1052ed18b69a06fa7602fdce84f83
 
-    livecheck.regex     {Zend Framework (1\.\d+\.\d+) Full}
+    livecheck.regex     {ZF (1\.\d+\.\d+)}
 }
 
 foreach php {php53 php54 php55 php56} {
@@ -91,4 +91,4 @@ notes               "If this is your first install, you might want to add \
                     (e.g. include_path = \".:${zf_main_dir}/library:${zf_main_dir}/extra/library\")."
 
 livecheck.type      regex
-livecheck.url       http://framework.zend.com/downloads/latest
+livecheck.url       https://framework.zend.com/downloads/archives

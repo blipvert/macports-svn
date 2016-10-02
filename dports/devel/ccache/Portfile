@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                ccache
-version             3.2.5
+version             3.3.1
 categories          devel
 platforms           darwin freebsd
 license             GPL-3+
@@ -23,8 +23,8 @@ homepage            https://ccache.samba.org/
 master_sites        https://www.samba.org/ftp/ccache/
 use_bzip2 yes
 
-checksums           rmd160  900ee72c93a4ac23647c5bd850115cfacca90610 \
-                    sha256  7a553809e90faf9de3a23ee9c5b5f786cfd4836bf502744bedb824a24bee1097
+checksums           rmd160  cd4a4fa1f4151e7629928fd6949b05f1dcbcaf88 \
+                    sha256  cb6e4bafbb19ba0a2ec43386b123a5f92a20e1e3384c071d5d13e0cb3c84bf73
 
 depends_lib         port:zlib
 

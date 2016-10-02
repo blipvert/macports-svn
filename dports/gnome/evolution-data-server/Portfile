@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           gobject_introspection 1.0
 
 name                evolution-data-server
-version             3.20.3
+version             3.22.0
 set branch          [join [lrange [split ${version} .] 0 1] .]
 description         Addressbook and calender libs for GNOME.
 long_description    Evolution Data Server provides a central location for \
@@ -19,8 +19,8 @@ master_sites        gnome:sources/${name}/${branch}/
 
 use_xz              yes
 
-checksums           rmd160  b3e8e031064f88a96380ce9ed29de2199d2515ae \
-                    sha256  910360685d832c97f617f02aa5a8eb10a9c0d7d7d5a8758b50aa6b88a60bee48
+checksums           rmd160  6f3192dd7c47dd518b2e9524244e9317c472ec59 \
+                    sha256  8653a9a28980e661e8b91ba335dae04a0553e12611ad155bc48fb3fb3c98653d
 
 depends_build       port:pkgconfig \
                     port:intltool \
@@ -102,7 +102,7 @@ platform darwin {
 # google auth requires webkitgtk-3.0 >= 2.4.9 json-glib >= 1.0.4
         configure.args-append --disable-google-auth
     } else {
-        depends_lib-append  path:lib/pkgconfig/webkitgtk-3.0.pc:webkit-gtk3 \
+        depends_lib-append  path:lib/pkgconfig/webkit2gtk-4.0.pc:webkit2-gtk \
                             port:json-glib
     }
 }

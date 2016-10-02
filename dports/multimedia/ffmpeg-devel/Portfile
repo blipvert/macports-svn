@@ -8,10 +8,10 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           active_variants 1.1
 PortGroup           github 1.0
 
-github.setup        FFmpeg FFmpeg 936751b6527cff789ef077a4e43a04ae9e658232
+github.setup        FFmpeg FFmpeg 99882d05a6635446d587ed51b095c627abc42587
 name                ffmpeg-devel
 conflicts           ffmpeg
-version             20160517
+version             20160831
 license             LGPL-2.1+
 categories          multimedia
 maintainers         devans jeremyhu openmaintainer
@@ -50,8 +50,8 @@ long_description    FFmpeg is a complete solution to record, convert and \
 platforms           darwin
 homepage            http://www.ffmpeg.org/
 
-checksums           rmd160  2bba53c672a730a069242675344e4a6480b86cbf \
-                    sha256  a48074a1d4580c3b4544712043850c1f2bf3e469c3380e8d05475a5ebe918701
+checksums           rmd160  f4bead13a045a6ea5b08e2036ac3b1b775dd287f \
+                    sha256  872e40c519d335e3ee0d86625c9a6f21986e50d654ae5b8eeef414ad43492b8e
 
 depends_build       port:pkgconfig \
                     port:gmake \
@@ -73,7 +73,7 @@ depends_lib         port:lame \
                     port:libass \
                     port:libbluray \
                     port:gnutls \
-                    port:openjpeg15 \
+                    port:openjpeg \
                     port:fontconfig \
                     port:freetype \
                     port:fribidi \
@@ -135,15 +135,22 @@ configure.args      --enable-swscale \
                     --enable-shared --enable-pthreads \
                     --cc=${configure.cc}
 
-# disable asm on Tiger
-# libblueray doesn't build on Tiger so disable for now (#39442)
 
 platform darwin {
+    # disable asm on Tiger
+    # libblueray doesn't build on Tiger so disable for now (#39442)
     if {${os.major} < 9} {
         depends_lib-delete    port:libbluray
         configure.args-delete --enable-libbluray
         configure.args-append --disable-libbluray
         configure.args-append --disable-asm
+    }
+
+    # filters coreimage and coreimagesrc don't build on 10.6
+    # and earlier due to use of bridged casts in Objective C (#51823)
+    if {${os.major} < 11} {
+        configure.args-append --disable-filter=coreimage \
+                              --disable-filter=coreimagesrc
     }
 
     # VDA (video hardware acceleration, mostly H264) is only supported on 10.6.3+ up to (excluding) 10.11.

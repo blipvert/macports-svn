@@ -20,6 +20,7 @@ long_description    Apache::Request is a subclass of the Apache class, \
                     application/x-www-form-urlencoded or \
                     multipart/form-data.
 
+homepage            https://metacpan.org/release/${perl5.module}
 platforms           darwin
 
 checksums           rmd160  8d7d2573624193b6dfbbe354b3771012257c1578 \

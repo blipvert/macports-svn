@@ -26,13 +26,13 @@ subport                 libomp-devel {}
 
 if {${subport} ne ${name}} {
     conflicts               libomp
-    github.setup            llvm-mirror openmp 58cc7e0
+    github.setup            llvm-mirror openmp 0f2e782
     worksrcdir              openmp-${version}/runtime
-    version                 270468
+    version                 280542 
     name                    ${subport}
     checksums \
-        rmd160  5acfa00f1bd8df9cec98c0bc2fb0a6e517c7f81b \
-        sha256  053d5a7e47cf9b71e05561ca8e7df84cdbe68eece9809ad97077753e9363bf6e
+        rmd160  4ff1586f6f876f8ad765102745de1b855ac6dd81 \
+        sha256  1cd9ce7ab44ec20f3e034cac9061a637e8ad398ca00df2ecc1263fe6ad6c39ee
 
     livecheck.url \
         http://llvm.org/viewvc/llvm-project/openmp/trunk/?view=log
@@ -40,15 +40,15 @@ if {${subport} ne ${name}} {
     livecheck.regex         revision=(\[0-9\]+)
 } else {
     conflicts               libomp-devel
-    github.setup            llvm-mirror openmp 380 svn-tags/RELEASE_
-    worksrcdir              openmp-${version}/final/runtime
-    version                 3.8.0
+    github.setup            llvm-mirror openmp 381 svn-tags/RELEASE_
+    worksrcdir              openmp-${version}/rc1/runtime
+    version                 3.8.1
     # Moved to epoch 1 for svn # -> version # change.
     epoch                   1
     name                    libomp
     checksums \
-        rmd160  59bd6743a4b4f56c8cab5abe641517991810b3be \
-        sha256  7ccfce5a8427ae0903e31b967dd16fe351e4c68f40645bb479381f3be2195697
+        rmd160  a41054068a127ef84610afef8090109078cb6c46 \
+        sha256  4c46b5946fe9b2a701661746d11c7c85c51a7f18673194a7ebd2a43470948a34
     livecheck.url           https://github.com/llvm-mirror/openmp/branches
     livecheck.regex         svn-tags/RELEASE_(\[0-9\]+)
 }
@@ -56,16 +56,7 @@ if {${subport} ne ${name}} {
 cmake.out_of_source     yes
 
 # According to documentation builds with clang >= 3.3
-compiler.whitelist      clang \
-    macports-clang-3.3 \
-    macports-clang-3.4 \
-    macports-clang-3.5 \
-    macports-clang-3.6 \
-    macports-clang-3.7 \
-    macports-clang-3.8 \
-    macports-clang-3.9
-
-compiler.blacklist-append {clang < 500}
+compiler.blacklist-append {clang < 500} *gcc*
 
 default_variants        +universal
 

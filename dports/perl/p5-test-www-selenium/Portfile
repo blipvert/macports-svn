@@ -6,6 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         Test-WWW-Selenium 1.36
+revision            1
 platforms           darwin
 license             {Artistic-1 GPL}
 maintainers         gmail.com:jon.hermansen openmaintainer
@@ -24,9 +25,14 @@ platforms           darwin
 supported_archs     noarch
 
 if {${perl5.major} != ""} {
+    depends_build-append \
+                    port:p${perl5.major}-test-exception \
+                    port:p${perl5.major}-test-mock-lwp
+
+# use Time::HiRes 1.9739+ for Sierra compatibility
     depends_lib-append \
-                    port:p${perl5.major}-test-simple \
                     port:p${perl5.major}-libwww-perl \
-                    port:p${perl5.major}-uri \
-                    port:p${perl5.major}-time-hires
+                    port:p${perl5.major}-namespace-clean \
+                    port:p${perl5.major}-time-hires \
+                    port:p${perl5.major}-uri
 }

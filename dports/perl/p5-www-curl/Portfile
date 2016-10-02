@@ -6,6 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         WWW-Curl 4.17
+revision            1
 license             {MPL MIT}
 maintainers         alum.wpi.edu:arno+macports openmaintainer
 description         Perl extension interface for libcurl
@@ -19,4 +20,9 @@ checksums           rmd160  786b6e0461051eae67bdcded046095895ea2a6a2 \
 
 if {${perl5.major} != ""} {
     depends_lib-append  port:curl
+
+# patch Makefile.PL for compatibility with curl 7.50.2+
+# https://rt.cpan.org/Public/Bug/Display.html?id=117793
+# https://github.com/szbalint/WWW--Curl/issues/16
+    patchfiles      curl-7.50.2-invalid-symbols.patch
 }

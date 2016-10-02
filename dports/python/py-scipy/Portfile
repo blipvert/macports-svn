@@ -7,11 +7,11 @@ PortGroup               active_variants 1.1
 PortGroup               github 1.0
 PortGroup               compilers 1.0
 
-github.setup            scipy scipy 0.17.1 v
+github.setup            scipy scipy 0.18.1 v
 name                    py-scipy
 
-checksums               rmd160 2feaed8b05731b29e16d1aec07e6d273c567b2a0 \
-                        sha256 6d95803fa1cf69f7853edb4fd1ea40754d47483936d3c2c50a44531fa581f15a
+checksums               rmd160 1d1f01fb55e0bb779f65cfcecdac2e99fd775285 \
+                        sha256 7216840b0db191fd2fddccb3ed4eb4d773cf7d9f31b75bc8402d72c2cff214ab
 
 platforms               darwin
 license                 BSD

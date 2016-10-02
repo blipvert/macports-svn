@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           elisp 1.0
 
 name                org-mode
-version             8.3.4
+version             8.3.6
 categories          editors
 license             GPL-3+
 maintainers         dports
@@ -21,8 +21,8 @@ homepage            http://orgmode.org/
 master_sites        ${homepage}
 distname            org-${version}
 
-checksums           rmd160  62161b76877b652e22f5814272eef4d8ce3a985e \
-                    sha256  e86d9ce32b26ee31c954c9a6210422c65ecbe89129003d426a7fa4b1a8864603
+checksums           rmd160  723f7f9b1091c97d08ee1d18752c91bfaa07aede \
+                    sha256  d95d295b44c7632f416f8844a5be7bdecd18592216961de69a9d47e6db8b6581
 
 depends_lib         path:${emacs_binary}:${emacs_binary_provider}
 depends_build       port:texinfo

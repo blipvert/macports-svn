@@ -6,7 +6,7 @@ PortGroup           muniversal 1.0
 PortGroup           compiler_blacklist_versions 1.0
 
 name                libressl
-version             2.3.4
+version             2.3.7
 
 categories          security devel
 platforms           darwin
@@ -21,11 +21,11 @@ long_description    LibreSSL is composed of four parts: \
                     libtls: a new TLS library, designed to make it easier to write foolproof applications
 homepage            http://www.libressl.org
 
-conflicts           openssl
+conflicts           openssl libressl-devel
 
 master_sites        http://ftp.openbsd.org/pub/OpenBSD/LibreSSL
-checksums           rmd160  5a9cb6e9ebd4f982d497e94d88d071f20308d78b \
-                    sha256  7a1135b2620f78928e89538c211a4df1d9415994001d1e7c9178c6b6d72de6a9
+checksums           rmd160  9032ee5d39a89707ae85a752065f8c8ef89ce6ad \
+                    sha256  f59f5d859ce4867cc4761a13d02024f699491e277d54a9fe76e053e5b5f70860
 
 patchfiles \
     openssldir-cert.pem.patch
@@ -45,5 +45,5 @@ compiler.blacklist *gcc-4.2* {clang < 100}
 set merger_configure_args(i386)     --disable-asm
 
 livecheck.type      regex
-livecheck.url       [lindex ${master_sites} 0]
-livecheck.regex     ${name}-(\\d+\\.\\d+(?:\\.\\d+)*)\\.tar\\.gz
+livecheck.url       ${homepage}
+livecheck.regex     "latest stable release is (\\d+\\.\\d+(?:\\.\\d+)*)"

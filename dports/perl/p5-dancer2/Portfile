@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
-perl5.setup         Dancer2 0.200002
+perl5.setup         Dancer2 0.203001
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Dancer2 - Lightweight yet powerful web application framework
@@ -13,13 +13,15 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  69940460648fd13971f9c92e0f9073cd3ddc82ef \
-                    sha256  5c39f924adf137919284a96bd12ba53d6fff7076da391510840a5dbe3347539d
+checksums           rmd160  bf6e30e636eee436ed3c5bc8811d44f391aa4fc3 \
+                    sha256  69d9e519bce3e8d0bcf1bb68619955e031a9cb8410cf3638f050cbf044908a5a
 
 if {${perl5.major} != ""} {
+# Use latest ExtUtils::MakeMaker requires 7.1101+
     depends_build-append \
                     port:p${perl5.major}-anyevent \
                     port:p${perl5.major}-capture-tiny \
+                    port:p${perl5.major}-extutils-makemaker \
                     port:p${perl5.major}-file-sharedir-install \
                     port:p${perl5.major}-test-fatal \
                     port:p${perl5.major}-test-memory-cycle \
@@ -28,23 +30,23 @@ if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-app-cmd \
                     port:p${perl5.major}-cgi-deurl-xs \
-                    port:p${perl5.major}-class-load \
-                    port:p${perl5.major}-class-load-xs \
                     port:p${perl5.major}-config-any \
+                    port:p${perl5.major}-cpanel-json-xs \
                     port:p${perl5.major}-crypt-urandom \
-                    port:p${perl5.major}-data-dumper \
-                    port:p${perl5.major}-encode \
+                    port:p${perl5.major}-exporter-tiny \
                     port:p${perl5.major}-file-sharedir \
                     port:p${perl5.major}-hash-merge-simple \
                     port:p${perl5.major}-http-body \
                     port:p${perl5.major}-http-date \
                     port:p${perl5.major}-http-message \
                     port:p${perl5.major}-http-tiny \
+                    port:p${perl5.major}-http-xscookies \
                     port:p${perl5.major}-import-into \
-                    port:p${perl5.major}-json \
-                    port:p${perl5.major}-json-xs \
+                    port:p${perl5.major}-json-maybexs \
+                    port:p${perl5.major}-math-random-isaac \
                     port:p${perl5.major}-math-random-isaac-xs \
                     port:p${perl5.major}-mime-types \
+                    port:p${perl5.major}-module-runtime \
                     port:p${perl5.major}-moo \
                     port:p${perl5.major}-moox-types-mooselike \
                     port:p${perl5.major}-plack \
@@ -56,11 +58,10 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-scope-upper \
                     port:p${perl5.major}-template-toolkit \
                     port:p${perl5.major}-template-tiny \
-                    port:p${perl5.major}-type-tiny \
-                    port:p${perl5.major}-type-tiny-xs \
                     port:p${perl5.major}-uri \
                     port:p${perl5.major}-url-encode-xs \
-                    port:p${perl5.major}-yaml
+                    port:p${perl5.major}-yaml \
+                    port:p${perl5.major}-yaml-libyaml
 
     supported_archs noarch
 }

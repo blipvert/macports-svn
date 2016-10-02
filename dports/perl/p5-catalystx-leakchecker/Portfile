@@ -6,6 +6,7 @@ PortGroup           perl5 1.0
 
 perl5.branches      5.22 5.24
 perl5.setup         CatalystX-LeakChecker 0.06
+revision            1
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         CatalystX::LeakChecker - Debug memory leaks in Catalyst applications
@@ -26,7 +27,7 @@ if {${perl5.major} != ""} {
                     port:p${perl5.major}-namespace-clean \
                     port:p${perl5.major}-padwalker \
                     port:p${perl5.major}-task-weaken \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-text-simpletable
 
     supported_archs noarch
 }

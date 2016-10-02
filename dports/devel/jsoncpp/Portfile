@@ -7,21 +7,41 @@ PortGroup           github 1.0
 PortGroup           cmake 1.0
 
 name                jsoncpp
-version             0.6.0-rc2
 blip.revision       1
-github.setup        open-source-parsers jsoncpp 1.7.2
-revision            1
 categories          devel
 platforms           darwin
-maintainers         gmail.com:felipou
+maintainers         michaelld openmaintainer
 license             MIT
 
 description         JSON C++ library
 
 long_description    JSON data format manipulation C++ library
 
-checksums           rmd160  e0a0258eca770e0eb1c3f904f534622054c8d446 \
-                    sha256  8fac28db30874c265f36c80ba997ad9cc1a54298b6ebf050c45258d6a78cf401
+subport jsoncpp-devel {}
+
+if {${subport} eq ${name}} {
+
+    # release
+    github.setup    open-source-parsers jsoncpp 1.7.6
+    checksums       rmd160 f31f064609035ace3b1b1bfff5170bbf85ffff9a \
+                    sha256 993f79e1fe1fb4242ef373cefd741886c1242957a86e0fcc9164124e85b128e7
+
+    conflicts       jsoncpp-devel
+
+} else {
+
+    # devel
+
+    github.setup    open-source-parsers jsoncpp 4b45b52f4ca64a403716842baae53a6a5a5231eb
+    version         20160927
+    checksums       rmd160 3cff5151d3c988528ed5b9a977c15439b5a60d55 \
+                    sha256 ecdbc1a954a5a4b87e2cc94f47bed9c9320352d21a46136d5fd2293eb77b0acb
+
+    conflicts       jsoncpp
+    long_description ${description}: \
+        This port follows the GIT master version of ${name}, which is typically updated every few days to weeks.
+
+}
 
 patchfiles          patch-CMakeLists.txt.diff
 

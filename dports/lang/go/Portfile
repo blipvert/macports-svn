@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                go
 epoch               2
-version             1.6.2
+version             1.7.1
 categories          lang
 platforms           darwin freebsd linux
 license             BSD
@@ -28,10 +28,10 @@ master_sites        https://storage.googleapis.com/golang/
 distfiles           ${name}${version}.src.tar.gz
 worksrcdir          ${name}
 
-checksums           rmd160  012b5845dad83c47cbc2d915ab062bf4341803cb \
-                    sha256  787b0b750d037016a30c6ed05a8a70a91b2e9db4bd9b1a2453aa502a63f1bccc
+checksums           rmd160  378d3fd9d3d8b7e331b7ce4531a704afcbd32a75 \
+                    sha256  2b843f133b81b7995f26d0cb64bbdbb9d0704b90c44df45f844d28881ad442d3
 
-depends_run         port:go-1.4
+depends_build       port:go-1.4
 
 set GOROOT          ${worksrcpath}
 set GOROOT_FINAL    ${prefix}/lib/${name}

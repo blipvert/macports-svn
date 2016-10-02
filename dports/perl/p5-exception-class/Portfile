@@ -23,6 +23,5 @@ checksums           rmd160  5ba38e326198c22c9350e533c5c91f8b6354b1c1 \
 if {${perl5.major} != ""} {
     depends_lib-append \
                     port:p${perl5.major}-devel-stacktrace \
-                    port:p${perl5.major}-class-data-inheritable \
-                    port:p${perl5.major}-test-simple
+                    port:p${perl5.major}-class-data-inheritable
 }

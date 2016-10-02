@@ -22,12 +22,14 @@ if {${subport} eq ${name}} {
     long_description ${description}: \
 Provides the release version, which is typically updated every month or so.
 
-    set base_version 3.9.4
-    github.setup    EttusResearch uhd 00[join [split ${base_version} "."] "_00"] release_
+    set base_version "3.10.0.0"
+    set spaced_base_version [join [split ${base_version} "."] " "]
+    set expended_base_version [eval "format %03i_%03i_%03i_%03i ${spaced_base_version}"]
+    github.setup    EttusResearch uhd ${expended_base_version} release_
     version         ${base_version}
     conflicts       uhd-devel
-    checksums       rmd160 ef5f20f77f47a65f1c90d8a59c5bbc5b3a0d396e \
-                    sha256 b269f395cee8a074cedaf5d576f76d7263448aa59ff57a5b3db90d8591a891cb
+    checksums       rmd160 dbe730a178e2b927de5a7bdd7948f961112add95 \
+                    sha256 40cab577fade0d0cef7ff97beeb14538a46ef21efb205333cd1ac643ad90a16a
 
     # set the version override string
 
@@ -47,10 +49,10 @@ Provides the UHD GIT maint or master branch, depending on which is more advanced
 
     name            uhd-devel
     conflicts       uhd
-    github.setup    EttusResearch uhd 9caf20c29956be283b032110096a81f99a121da7
-    version         20160622
-    checksums       rmd160 575a170474c753588d93a9eb15f158a2d885bbb1 \
-                    sha256 0ad6540ca506210ce0359d95e7691b7f4cf9f909e510010ac37270ea3aa409d6
+    github.setup    EttusResearch uhd 799446ba9b7517a9703ba05021eb8825ebe1ee61
+    version         20160926
+    checksums       rmd160 39fb6820e960656490c83df0628b6d78e657d783 \
+                    sha256 3a7d205c305f081d633a6cafb4fa02ea136f1b3dc7e1eb6042949738860fd525
 
     # overload the github livecheck URL with the maint branch,
     # when it is more advanced; comment out for master.

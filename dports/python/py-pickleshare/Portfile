@@ -5,8 +5,8 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-pickleshare
-version             0.7.2
-revision            1
+version             0.7.4
+revision            0
 categories-append   devel science
 platforms           darwin
 license             BSD
@@ -24,8 +24,8 @@ master_sites        pypi:[string index ${python.rootname} 0]/${python.rootname}
 
 distname            ${python.rootname}-${version}
 
-checksums           rmd160  bf481ca5296e9ded3298016179ec7b2c2164cc49 \
-                    sha256  92ee3b0e21632542ecc9a0a245e69a126f62e5114081bdb0d32e0edd10410033
+checksums           rmd160  18b2a7c03e3cb094b051a06d92323239b62bb675 \
+                    sha256  84a9257227dfdd6fe1b4be1319096c20eb85ff1e82c7932f36efccfe1b09737b
 
 if {${name} ne ${subport}} {
     depends_build-append \
