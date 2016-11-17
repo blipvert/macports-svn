@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22 5.24
-perl5.setup         Archive-Tar 2.10 ../by-authors/id/B/BI/BINGOS/
+perl5.branches      5.24
+perl5.setup         Archive-Tar 2.14 ../by-authors/id/B/BI/BINGOS/
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Creation and in-memory manipulation of tar files
@@ -13,8 +13,8 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  53fe685605bd5edc20fb6971c78e5b3bf3455dae \
-                    sha256  7abc8409f7180c44f20de914ca894e83335d43235096257c86c19c9e9c91ed51
+checksums           rmd160  c95c148b0a36fb181b0de9e2957744d2fbd23293 \
+                    sha256  5caa852e775b678b1dc6dd3f7d53a1455c93c9b583f29a398c94b14aa9079d70
 
 if {${perl5.major} != ""} {
     depends_lib-append \

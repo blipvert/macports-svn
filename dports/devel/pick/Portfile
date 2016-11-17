@@ -4,7 +4,7 @@
 PortSystem          1.0
 PortGroup           github 1.0
 
-github.setup        thoughtbot pick 1.5.0 v
+github.setup        calleerlandsson pick 1.5.2 v
 maintainers         chunyang openmaintainer
 categories          devel
 license             MIT
@@ -17,7 +17,7 @@ platforms           darwin
 
 github.tarball_from releases
 
-checksums           rmd160  c1ca4985a9ee18afc044aede8bb601442187308b \
-                    sha256  1dac1c9cf0b14b0bbb4d9eefb6af72cdf5314af7b2ff9e4c7c8858014ad63549
+checksums           rmd160  c8560e8c90f17ac7efedbedd1ddb557661f35035 \
+                    sha256  183b278981233c70ac7f4d9af0728bf99d9d237e3f88d979f93fcc5968c2f789
 
 depends_lib         port:ncurses

@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22 5.24
-perl5.setup         DBD-mysql 4.036
+perl5.branches      5.24
+perl5.setup         DBD-mysql 4.038
 license             {Artistic-1 GPL}
 maintainers         nomaintainer
 description         Perl5 Database Interface to the MySQL database
@@ -13,12 +13,14 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  f7401ab90a219c701fd5e9667193c38da13906fc \
-                    sha256  5c48a823f86b8110ccb6504c6176ca248b52f56829dd4548bc39c3509f4154cf
+checksums           rmd160  e0775af6d210794ce7b8cdbdae096fed508d204d \
+                    sha256  4174bb885a5ccb34d942fc10fafb8bfcbc6d4b4311681ed90727ae1d3bd122e8
 
 if {${perl5.major} != ""} {
+# use Time::HiRes 1.9739+ for Sierra compatibility
     depends_build-append \
-                    port:p${perl5.major}-test-deep
+                    port:p${perl5.major}-test-deep \
+                    port:p${perl5.major}-time-hires
 
     depends_lib-append \
                     port:p${perl5.major}-dbi

@@ -5,7 +5,7 @@ PortSystem              1.0
 PortGroup               compiler_blacklist_versions 1.0
 
 name                    nodejs6
-version                 6.7.0
+version                 6.9.1
 
 categories              devel net
 platforms               darwin
@@ -19,13 +19,13 @@ long_description        Node's goal is to provide an easy way to build scalable 
                         Machine or Python's Twisted. Node takes the event model a bit further-it \
                         presents the event loop as a language construct instead of as a library.
 
-conflicts               nodejs4 nodejs5
+conflicts               nodejs4 nodejs5 nodejs7
 
 homepage                http://nodejs.org/
 master_sites            ${homepage}dist/v${version}
 
-checksums               rmd160  faf56530e9b77c3411f8f89a5107b9e65b85b893 \
-                        sha256  02b8ee1719a11b9ab22bef9279519efaaf31dd0d39cba4c3a1176ccda400b8d6
+checksums               rmd160  e722d24bb066d198d1905ecfd49e9ea8e48cacaa \
+                        sha256  a98997ca3a4d10751f0ebe97839b2308a31ae884b4203cda0c99cf36bc7fe3bf
 
 distname                node-v${version}
 
@@ -214,4 +214,4 @@ if {${os.major} < 11} {
 
 livecheck.url       ${homepage}dist/
 livecheck.type      regex
-livecheck.regex     {v(\d+\.\d+\.\d+)}
+livecheck.regex     {v(6\.\d+\.\d+)}

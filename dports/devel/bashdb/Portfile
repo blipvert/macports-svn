@@ -1,33 +1,33 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id$
 
-PortSystem      1.0
+PortSystem          1.0
 
-name            bashdb
-version         4.3-0.91
-categories      devel
-maintainers     nomaintainer
-license         GPL-2
+name                bashdb
+version             4.4-0.92
+categories          devel
+platforms           darwin
+license             GPL-2
+maintainers         nomaintainer
 
-description     Debugger for scripts written in BASH
-long_description \
-    bashdb is a script debugger for BASH that follows the GNU Project Debugger \
-    (GDB) command syntax. bashdb can run your script, stop it on specified \
-    conditions, help you examine what has happened when it has stopped, and \
-    allow you to modify parts of your script so that you can experiment with \
-    your code and fix problems once they are identified.
+description         Debugger for scripts written in BASH
+long_description    bashdb is a script debugger for BASH that follows \
+                    the GNU Project Debugger (GDB) command syntax. \
+                    bashdb can run your script, stop it on specified \
+                    conditions, help you examine what has happened when \
+                    it has stopped, and allow you to modify parts of \
+                    your script so that you can experiment with your \
+                    code and fix problems once they are identified.
+homepage            http://bashdb.sourceforge.net
 
-homepage        http://bashdb.sourceforge.net/
-platforms       darwin
+depends_lib         port:bash
 
-master_sites    sourceforge
+master_sites        sourceforge:project/bashdb/${name}/${version}
+use_bzip2           yes
+checksums           rmd160  4f64b663195fea94089e8ec2db1003bf7520ac01 \
+                    sha256  6a8c2655e04339b954731a0cb0d9910e2878e45b2fc08fe469b93e4f2dbaaf92
 
-checksums       rmd160  5f6b8e6b2abaa55abb64e21371ab7ea20a6bd855 \
-                sha256  a8d76679d254b9f3195343d593c43004bba77acc284a35f2fa724472f5efceb1
+test.run            yes
+test.target         check
 
-depends_lib     port:bash
-
-test.run        yes
-test.target     check
-
-livecheck.type  sourceforge
+livecheck.regex     {/bashdb/(\d+(?:\.\d+)+-\d+(?:\.\d+)+)/}

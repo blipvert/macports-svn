@@ -6,7 +6,7 @@ PortSystem          1.0
 name                postgis2
 categories          databases gis
 license             GPL
-version             2.2.2
+version             2.3.0
 epoch               1
 platforms           darwin
 maintainers         vince openmaintainer
@@ -24,8 +24,8 @@ homepage            http://postgis.refractions.net/
 master_sites        http://download.osgeo.org/postgis/source
 distname            postgis-${version}
 
-checksums           rmd160  1107540f50e163a998e34659922044d7801d336e \
-                    sha256  40232391f8f66a6dc740ebb26088e568c8ccb663666998616c71c3bdaeed4163
+checksums           rmd160  b93c77e9f1c8d999e2f548ba79553a8d1f09d824 \
+                    sha256  0dbff06f4a196d49e5ac06ae6cc21bd5253aaa646af624c9bbf19df582d6cf55
 
 depends_build       port:autoconf \
                     port:automake \
@@ -43,30 +43,21 @@ conflicts           postgis
 
 # Neither is PostGIS 2.0 compatible with PostGreSQL 8
 
-variant postgresql93        description {Builds with postgresql 9.3} \
-                            conflicts postgresql95 postgresql94 {
-    depends_lib-append      port:postgresql93
-    configure.args-append   --libdir=${prefix}/lib/postgresql93\
-                            --with-pgconfig=${prefix}/lib/postgresql93/bin/pg_config
-    build.args-append       PGSQL_DOCDIR=${destroot}${prefix}/share/doc/postgresql93\
-                            PGSQL_MANDIR=${destroot}${prefix}/share/man
-}
-
-variant postgresql94        description {Builds with postgresql 9.4} \
-                            conflicts postgresql95 postgresql93 {
-    depends_lib-append      port:postgresql94
-    configure.args-append   --libdir=${prefix}/lib/postgresql94\
-                            --with-pgconfig=${prefix}/lib/postgresql94/bin/pg_config
-    build.args-append       PGSQL_DOCDIR=${destroot}${prefix}/share/doc/postgresql94\
-                            PGSQL_MANDIR=${destroot}${prefix}/share/man
-}
-
 variant postgresql95        description {Builds with postgresql 9.5} \
-                            conflicts postgresql94 postgresql93 {
+                            conflicts postgresql96 {
     depends_lib-append      port:postgresql95
     configure.args-append   --libdir=${prefix}/lib/postgresql95\
                             --with-pgconfig=${prefix}/lib/postgresql95/bin/pg_config
     build.args-append       PGSQL_DOCDIR=${destroot}${prefix}/share/doc/postgresql95\
+                            PGSQL_MANDIR=${destroot}${prefix}/share/man
+}
+
+variant postgresql96        description {Builds with postgresql 9.6} \
+                            conflicts postgresql95 {
+    depends_lib-append      port:postgresql96
+    configure.args-append   --libdir=${prefix}/lib/postgresql96\
+                            --with-pgconfig=${prefix}/lib/postgresql96/bin/pg_config
+    build.args-append       PGSQL_DOCDIR=${destroot}${prefix}/share/doc/postgresql96\
                             PGSQL_MANDIR=${destroot}${prefix}/share/man
 }
 
@@ -110,7 +101,7 @@ variant comments            description {Build comments -- ! broken } {
 
 default_variants            +raster +topology
 
-if {![variant_isset postgresql93] && ![variant_isset postgresql94] && ![variant_isset postgresql95]} {
+if {![variant_isset postgresql95] && ![variant_isset postgresql96]} {
     default_variants        +postgresql95
 }
 

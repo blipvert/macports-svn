@@ -5,11 +5,11 @@ PortSystem 1.0
 PortGroup           github 1.0
 PortGroup           cxx11 1.0
 
-github.setup        aria2 aria2 1.27.0 release-
+github.setup        aria2 aria2 1.28.0 release-
 github.tarball_from releases
 categories          net
 platforms           darwin
-maintainers         mww
+maintainers         mww mps
 license             {GPL-2+ OpenSSLException}
 description         download utility with resuming and segmented downloading
 long_description    aria2 is a download utility with resuming and segmented \
@@ -17,8 +17,8 @@ long_description    aria2 is a download utility with resuming and segmented \
                     
 use_xz              yes
 
-checksums           rmd160  d26d27a1bd910481f9ad4e1db89d7fd64ccc9af6 \
-                    sha256  166538f3460e405e9812981a4748799fb191ab0bd68e9b38a8e6be0553f9248c
+checksums           rmd160  2f24d49032cc4453b7695c0c99997553b28bffa9 \
+                    sha256  e0a125a557b9aacf23468374f63215e9b1d6165c990bd8ecb0603cdc1d5d72f0
 
 depends_build       port:pkgconfig
 depends_lib         port:gettext port:libiconv port:gnutls port:libxml2

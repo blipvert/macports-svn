@@ -4,8 +4,8 @@
 PortSystem          1.0
 PortGroup           perl5 1.0
 
-perl5.branches      5.22 5.24
-perl5.setup         MetaCPAN-Client 1.025000 ../by-authors/id/M/MI/MICKEY
+perl5.branches      5.24
+perl5.setup         MetaCPAN-Client 1.028003 ../by-authors/id/M/MI/MICKEY
 license             {Artistic-1 GPL}
 maintainers         devans openmaintainer
 description         MetaCPAN::Client - A comprehensive, DWIM-featured client to the MetaCPAN API
@@ -13,16 +13,16 @@ long_description    ${description}
 
 platforms           darwin
 
-checksums           rmd160  88fa18a39b1c179b45389ba988726cca165ff4e3 \
-                    sha256  8f3f2184f9d9f24b3aa93d7e61336118aa1c09695a15a9624090f203ec0e5e20
+checksums           rmd160  dd6975d722d179b9db60f683d2b1d5b61e29cec1 \
+                    sha256  aeab854528cad451f544e34b10105db8d8d53b06ab20904af2e632b4cd52cbcc
 
 if {${perl5.major} != ""} {
+# requires ExtUtils::MakeMaker version 7.1101, perl 5.24.0 core version is 7.10_01
     depends_build-append \
-                    port:p${perl5.major}-http-tiny-mech \
+                    port:p${perl5.major}-extutils-makemaker \
                     port:p${perl5.major}-lwp-protocol-https \
                     port:p${perl5.major}-test-fatal \
-                    port:p${perl5.major}-test-requires \
-                    port:p${perl5.major}-www-mechanize-cached
+                    port:p${perl5.major}-test-requires
 
     depends_lib-append \
                     port:p${perl5.major}-json-maybexs \

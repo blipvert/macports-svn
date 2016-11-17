@@ -22,9 +22,9 @@ subport jsoncpp-devel {}
 if {${subport} eq ${name}} {
 
     # release
-    github.setup    open-source-parsers jsoncpp 1.7.6
-    checksums       rmd160 f31f064609035ace3b1b1bfff5170bbf85ffff9a \
-                    sha256 993f79e1fe1fb4242ef373cefd741886c1242957a86e0fcc9164124e85b128e7
+    github.setup    open-source-parsers jsoncpp 1.7.7
+    checksums       rmd160 c78b702eadfc845b8d99bfbed07492c776fa7761 \
+                    sha256 00fe9895d03a693e0f876e1ce0f88059bebc185029d6bee9bf452a7c37986a02
 
     conflicts       jsoncpp-devel
 
@@ -32,10 +32,10 @@ if {${subport} eq ${name}} {
 
     # devel
 
-    github.setup    open-source-parsers jsoncpp 4b45b52f4ca64a403716842baae53a6a5a5231eb
-    version         20160927
-    checksums       rmd160 3cff5151d3c988528ed5b9a977c15439b5a60d55 \
-                    sha256 ecdbc1a954a5a4b87e2cc94f47bed9c9320352d21a46136d5fd2293eb77b0acb
+    github.setup    open-source-parsers jsoncpp a1db52b030416c0c03868e1be95689a6f05a20a5
+    version         20161024
+    checksums       rmd160 3e8d8bc104bea336d07af6c58a80daa7e3f6c367 \
+                    sha256 e86f1d4ba65c5b733d772dd58a3eed66ba48a9b27fa1169dcea7243a44b158b1
 
     conflicts       jsoncpp
     long_description ${description}: \
@@ -56,3 +56,32 @@ cmake.out_of_source yes
 configure.args-append \
                     -DBUILD_SHARED_LIBS=ON \
                     -DJSONCPP_WITH_POST_BUILD_UNITTEST=OFF
+
+# require c++11
+
+if {${configure.cxx_stdlib} eq "libstdc++"} {
+
+    # *clang* when using libstdc++ do not seem to support C++11;
+    # C++11 support seems to need GCC 4.7+ when using libstdc++;
+    # could use C++0x support on GCC4.[56], but just ignore it since
+    # there are newer compilers already in place as defaults.
+
+    # Blacklist GCC compilers not supporting C++11 and all CLANG.
+    # This is probably not necessary, but it's good practice.
+
+    compiler.blacklist-append *clang* {*gcc-3*} {*gcc-4.[0-6]}
+
+    # and whitelist those we do want to use. wish there were a better way.
+    # these will be used in the order provided.
+
+    compiler.whitelist macports-gcc-4.9 macports-gcc-4.8 macports-gcc-4.7
+
+} else {
+
+    # using libc++;
+    # Blacklist Clang not supporting C++11 in some form and all GCC.
+    # Just use the cxx11 PortGroup for this specific case.
+
+    PortGroup cxx11 1.0
+
+}

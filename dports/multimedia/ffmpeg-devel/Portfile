@@ -8,10 +8,10 @@ PortGroup           compiler_blacklist_versions 1.0
 PortGroup           active_variants 1.1
 PortGroup           github 1.0
 
-github.setup        FFmpeg FFmpeg 99882d05a6635446d587ed51b095c627abc42587
+github.setup        FFmpeg FFmpeg 85d23e5cbc9ad6835eef870a5b4247de78febe56
 name                ffmpeg-devel
 conflicts           ffmpeg
-version             20160831
+version             20161024
 license             LGPL-2.1+
 categories          multimedia
 maintainers         devans jeremyhu openmaintainer
@@ -50,8 +50,8 @@ long_description    FFmpeg is a complete solution to record, convert and \
 platforms           darwin
 homepage            http://www.ffmpeg.org/
 
-checksums           rmd160  f4bead13a045a6ea5b08e2036ac3b1b775dd287f \
-                    sha256  872e40c519d335e3ee0d86625c9a6f21986e50d654ae5b8eeef414ad43492b8e
+checksums           rmd160  4f82065f34a43fb381e6fa2d0b3523c00b23867e \
+                    sha256  98bd06d24ae17e567ef37633aaec2147bcef90e05b355b9b1e29ff90dc784e5f
 
 depends_build       port:pkgconfig \
                     port:gmake \
@@ -78,7 +78,7 @@ depends_lib         port:lame \
                     port:freetype \
                     port:fribidi \
                     path:lib/libspeex.dylib:speex \
-                    port:libsdl \
+                    port:libsdl2 \
                     port:soxr \
                     port:bzip2 \
                     port:xz \
@@ -253,12 +253,10 @@ variant x11 {
                             --disable-libxcb-xfixes \
 }
 
-default_variants +x11
-
 if {[variant_isset x11]} {
-    require_active_variants libsdl x11
+    require_active_variants libsdl2 x11
 } else {
-    require_active_variants libsdl "" x11
+    require_active_variants libsdl2 "" x11
 }
 
 variant libdc1394 description {Enable IIDC-1394 frame grabbing using libdc1394 (experimental)} {
@@ -328,10 +326,8 @@ variant gpl3 requires gpl2 description {Enable GPL code, license will be GPL-3+}
 
 variant nonfree description {enable nonfree code, libraries and binaries will not be redistributable} {
     configure.args-append   --enable-nonfree \
-                            --enable-libfdk-aac \
-                            --enable-libfaac
-    depends_lib-append      port:libfdk-aac \
-                            port:faac
+                            --enable-libfdk-aac
+    depends_lib-append      port:libfdk-aac
     license                 Restrictive
 }
 
@@ -340,7 +336,6 @@ notes "
 *******
 ******* This build of ${name} includes nonfree code as follows:
 *******
-*******     libfaac
 *******     libfdk-aac
 *******
 ******* The following libraries and binaries may not be redistributed:

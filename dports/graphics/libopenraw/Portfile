@@ -27,7 +27,8 @@ checksums       sha1    ca246099c5b4f9f1714579706f019382c547b061 \
 
 use_bzip2       yes
 
-patchfiles      patch-Makefile.am.diff
+patchfiles      patch-Makefile.am.diff \
+                patch-lib-jfifcontainer.cpp.diff
 
 depends_build   port:pkgconfig
 
@@ -48,6 +49,9 @@ variant gnome description {Build with GNOME/GTK+ support}  {
 }
 
 default_variants +gnome
+
+# Disable silent rules
+build.args      V=1
 
 post-activate {
     if {[variant_isset gnome]} {

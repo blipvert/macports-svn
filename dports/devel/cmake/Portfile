@@ -54,12 +54,12 @@ if {${subport} eq ${name}} {
 
     # devel
 
-    version         20160926
-    set dist_branch 3.6
-    set dist_date   20160926
-    set dist_hash   gcdaf3
-    checksums       rmd160 f16413d27c94a568d20e4a75140d37545c9b98f2 \
-                    sha256 d922c15c634e7827a7c563e64cd958ab96f53b310f132b36f3fb755a9999dd26
+    version         20161025
+    set dist_branch 3.7
+    set dist_date   20161025
+    set dist_hash   g552121
+    checksums       rmd160 7371708787ced3fbc0be0d667f12d9bf8a6baa49 \
+                    sha256 c008d5f93113f2f5a22871754d044015f89b1795cfa27bdb37ca2d9d6d6ce234
 
     master_sites    http://www.cmake.org/files/dev/
     distname        ${name}-${dist_branch}.${dist_date}-${dist_hash}

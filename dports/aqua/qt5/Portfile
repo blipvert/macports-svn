@@ -5,10 +5,10 @@ PortSystem          1.0
 
 name                qt5
 
-# sepcial case
+# special case
 if {       ${subport} eq "qt5-qtwebkit" } {
     version         5.5.1
-    revision        4
+    revision        5
 
     notes-append "Qt Webkit is no longer supported upstream.
 The port ${subport} will be removed if it becomes unfeasible to maintain."
@@ -24,6 +24,22 @@ The port ${subport} will be removed if it becomes unfeasible to maintain."
 The port ${subport} will be removed if it becomes unfeasible to maintain."
 } else {
     version         5.6.1
+}
+
+if { ${subport} eq "qt5-qtbase" } {
+    revision 1
+}
+
+if { ${subport} eq "qt5-mysql-plugin" } {
+    revision 2
+}
+
+if { ${subport} eq "qt5-psql-plugin" } {
+    revision 1
+}
+
+if { ${subport} eq "qt5-sqlite-plugin" } {
+    revision 1
 }
 
 # get Qt's version numbers
@@ -547,10 +563,6 @@ foreach {sql_names sql_info} [array get sql_plugins] {
         description       ${dbms} Database Driver for Qt Tool Kit ${qt_major}
         long_description  ${dbms} Database Driver for Qt Tool Kit ${qt_major}
 
-        if { ${subport} eq "qt5-mysql-plugin" } {
-            revision      1
-        }
-
         # if there is more than one version of the database system, create variants for each version
         if { [llength ${sql_info}] > 1 } {
 
@@ -872,6 +884,12 @@ if { ${subport} eq ${name} } {
     # special case
     if { ${subport} eq "${name}-qtserialbus" } {
         PortGroup cxx11 1.0
+    }
+
+    # special case
+    if { ${subport} eq "${name}-qtconnectivity" } {
+        # https://codereview.qt-project.org/#/c/172619/
+        patchfiles-append patch-qtconn-for-10.12.diff
     }
 
     # accommodating variant request varies depending on how qtbase was built

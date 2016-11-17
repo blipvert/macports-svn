@@ -4,7 +4,7 @@
 PortSystem          1.0
 
 name                npm3
-version             3.10.5
+version             3.10.9
 
 categories          devel
 platforms           darwin
@@ -18,7 +18,7 @@ long_description    npm is a package manager for node. \
                     You can use it to install and publish your node programs. \
 		            It manages dependencies and does other cool stuff.
 
-conflicts           npm2
+conflicts           npm2 npm4
 
 homepage            http://www.npmjs.org/
 
@@ -28,18 +28,16 @@ distname            npm-${version}
 
 extract.suffix      .tgz
 
-checksums           rmd160  3dad03cc3d7c60506440afda35a77fdd7ea9f290 \
-                    sha256  ff019769e186152098841c1fa6325e5a79f7903a45f13bd0046a4dc8e63f845f
+checksums           rmd160  8ffd8d88e10c40ccf79cdd61923200a4924e0d72 \
+                    sha256  fb0871b1aebf4b74717a72289fade356aedca83ee54e7386e38cb51874501dd6
 
 distname            npm-${version}
 
 worksrcdir          "package"
 
-depends_lib         path:bin/node:nodejs4
+depends_lib         path:bin/node:nodejs6
 
-#use_configure       no
-
-configure.args-append --prefix=${prefix}
+use_configure       no
 
 patchfiles          patch-lib-update.js.diff
 

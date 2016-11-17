@@ -180,38 +180,25 @@ set portfetch::mirror_sites::sites(gentoo) {
 }
 
 set portfetch::mirror_sites::sites(gimp) {
-    http://artfiles.org/gimp.org/
+    http://artfiles.org/gimp.org/pub/
     http://gimp.cp-dev.com/
-    http://mirrors.dominios.pt/
     http://download.gimp.org/pub/
     http://ftp.gtk.org/pub/
-    http://ftp.gwdg.de/pub/misc/grafik/gimp/
-    http://ftp.heanet.ie/mirrors/ftp.gimp.org/pub/
-    http://mirror.hessmo.com/
-    http://gimp.mirrors.hoobly.com/
+    http://ftp.gwdg.de/pub/grafik/
+    http://gimp.mirrors.hoobly.com/pub/
     http://mirror.ibcp.fr/pub/
     ftp://sunsite.icm.edu.pl/pub/graphics/
     ftp://ftp.is.co.za/mirror/ftp.gimp.org/
     http://www.mirrorservice.org/sites/ftp.gimp.org/pub/
-    ftp://ftp.sai.msu.su/pub/unix/graphics/gimp/mirror/
-    http://ftp.nluug.nl/graphics/
-    http://gimp.parentingamerica.com/
-    http://piotrkosoft.net/pub/mirrors/ftp.gimp.org/pub/
-    http://gimp.raffsoftware.com/
-    http://sunsite.rediris.es/mirror/
+    http://piotrkosoft.net/pub/mirrors/ftp.gimp.org/pub/gimp/pub/
     http://www.ring.gr.jp/pub/graphics/
-    http://mirrors.serverhost.ro/
-    http://gimp.skazkaforyou.com/
-    http://ftp.sunet.se/pub/gnu/
+    http://ftp.sunet.se/pub/gimp/
     ftp://ftp.tpnet.pl/pub/graphics/
-    ftp://ftp.u-aizu.ac.jp/pub/graphics/tools/gimp/
     http://mirror.umd.edu/gimp/
     http://ftp.iut-bm.univ-fcomte.fr/
-    ftp://ftp.cc.uoc.gr/mirrors/gimp/
+    http://ftp.cc.uoc.gr/mirrors/
     http://mirrors.fe.up.pt/mirrors/ftp.gimp.org/pub/
     http://ftp.snt.utwente.nl/pub/software/gimp/
-    http://mirrors.xmission.com/gimp/
-    http://mirrors.zerg.biz/
 }
 
 set portfetch::mirror_sites::sites(gnome) {
@@ -594,7 +581,7 @@ set portfetch::mirror_sites::sites(trolltech) {
 }
 
 set portfetch::mirror_sites::sites(xcontrib) {
-    ftp://ftp.gwdg.de/pub/x11/x.org/contrib/
+    http://ftp.gwdg.de/pub/x11/x.org/contrib/
     http://ftp.x.org/contrib/
     ftp://ftp.x.org/contrib/
     ftp://ftp2.x.org/contrib/
@@ -605,7 +592,7 @@ set portfetch::mirror_sites::sites(xfree) {
     ftp://ftp.esat.net/pub/X11/XFree86/
     http://ftp-stud.fht-esslingen.de/pub/Mirrors/ftp.xfree86.org/XFree86/
     http://www.gtlib.gatech.edu/pub/XFree86/
-    ftp://ftp.gwdg.de/pub/xfree86/XFree86/
+    http://ftp.gwdg.de/pub/xfree86/XFree86/
     http://www.mirrorservice.org/sites/ftp.xfree86.org/pub/XFree86/
     ftp://ftp.physics.uvt.ro/pub/XFree86/
     ftp://ftp.fit.vutbr.cz/pub/XFree86/
@@ -618,7 +605,7 @@ set portfetch::mirror_sites::sites(xorg) {
     http://xorg.freedesktop.org/archive/
     http://xorg.freedesktop.org/releases/
     http://mi.mirror.garr.it/mirrors/x.org/
-    ftp://ftp.gwdg.de/pub/x11/x.org/pub/
+    http://ftp.gwdg.de/pub/x11/x.org/pub/
     ftp://ftp.is.co.za/pub/x.org/pub/
     http://www.mirrorservice.org/sites/ftp.x.org/pub/
     ftp://ftp.ntua.gr/pub/X11/X.org/

@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           cmake 1.0
 PortGroup           github 1.0
 
-github.setup        bulletphysics bullet3 2.83.7
+github.setup        bulletphysics bullet3 2.85.1
 name                bullet
 categories          devel
 platforms           darwin
@@ -19,12 +19,17 @@ long_description    ${description}
 
 homepage            http://bulletphysics.org/
 
-checksums           rmd160  00b636162ca46fb92eb6002b44c7c89945bdf7f6 \
-                    sha256  6d96e7f4df1d0024191b04acc2187864eedb72d23c3796c0bd9611252f6c9c87
+checksums           rmd160  0d438f82f742ed45ff708cb9ca3301d9b815f4f0 \
+                    sha256  5d29f59b57bd686899d1b77ab938f59acb3c2f6f0e39741c41f91646d2ee3930
 
 cmake.out_of_source yes
 
 configure.args-append \
-                    -DBUILD_SHARED_LIBS=ON \
                     -DBUILD_DEMOS=OFF \
-                    -DINSTALL_LIBS=ON
+                    -DBUILD_BULLET2_DEMOS=OFF \
+                    -DBUILD_OPENGL3_DEMOS=OFF \
+                    -DBUILD_SHARED_LIBS=ON \
+                    -DINSTALL_LIBS=ON \
+                    -DINSTALL_EXTRA_LIBS=OFF \
+                    -DBUILD_UNIT_TESTS=OFF \
+                    -DUSE_GLUT=OFF

@@ -7,7 +7,7 @@ name                gpgme
 version             1.7.0
 categories          devel security crypto
 license             {LGPL-2.1+ GPL-3+}
-maintainers         devans openmaintainer
+maintainers         schenkel.net:leonardo devans openmaintainer
 description         A library for easy acces to GnuPG.
 long_description    GnuPG Made Easy (GPGME) is a library designed to make access \
                     to GnuPG easier for applications. It provides a High-Level \
@@ -78,6 +78,19 @@ post-destroot {
     xinstall -m 644 -W ${worksrcpath} AUTHORS COPYING COPYING.LESSER \
         ChangeLog INSTALL NEWS README THANKS TODO \
         ${destroot}${prefix}/share/doc/${name}
+}
+
+# deactivate kdepimlibs4 earlier than 4.14.3_4 to avoid
+# activation conflict on ${prefix}/include/gpgme++/*
+
+pre-activate {
+    if {![catch {set installed [lindex [registry_active kdepimlibs4] 0]}]} {
+        set _version [lindex $installed 1]
+        set _revision [lindex $installed 2]
+        if {[vercmp $_version 4.14.3] < 0 || ([vercmp $_version 4.14.3] == 0 && $_revision < 4)} {
+            registry_deactivate_composite kdepimlibs4 "" [list ports_nodepcheck 1]
+        }
+    }
 }
 
 livecheck.type      regex

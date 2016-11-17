@@ -7,7 +7,7 @@ PortGroup                   github 1.0
 github.setup                PromyLOPh pianobar 2016.06.02
 categories                  audio
 platforms                   darwin
-maintainers                 gmail.com:aguynamedryan+pianobar
+maintainers                 ryandesign openmaintainer
 license                     MIT
 
 description                 Console-based pandora.com player
@@ -30,6 +30,8 @@ depends_lib                 port:curl \
                             port:libao \
                             port:libgcrypt \
                             port:json-c
+
+patchfiles                  getline.patch
 
 configure.cflags-append     -std=c99
 
