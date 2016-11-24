@@ -1,0 +1,51 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      1.0
+PortGroup       active_variants 1.1
+
+PortGroup       github 1.0
+github.setup    bootchk resynthesizer 2.0.1
+github.tarball_from releases
+
+name            gimp-resynthesizer
+license         GPL-3+
+maintainers     net.blipvertica.com!blipvert
+categories      graphics
+platforms       darwin
+homepage        https://github.com/bootchk/resynthesizer
+master_sites    https://github.com/bootchk/resynthesizer/archive
+distname        ${version}
+worksrcdir      resynthesizer-${version}
+checksums       rmd160  2dc48a846f1d3e03c1f88dc4e309bc4b32341bb3 \
+                sha256  ef8d8137c43cba0a712cf1f9c6891e8606d4b8af9b218cea0efcaa7797aa0a87
+
+description     Resynthesizer plug-in for Gimp
+long_description \
+    Suite of gimp plugins for texture synthesis.
+
+universal_variant no
+
+depends_build-append \
+                port:autoconf \
+                port:automake \
+                port:libtool
+
+depends_lib-append \
+                port:gimp2
+
+compiler.blacklist *clang*
+configure.cmd   ./autogen.sh
+
+configure.cflags-append \
+                -fnested-functions
+
+variant quartz {}
+
+if {[variant_isset quartz]} {
+    require_active_variants gimp2 quartz
+} else {
+    require_active_variants gimp2 "" quartz
+}
+
+
