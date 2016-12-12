@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.22 5.24
+perl5.setup         Encode-Bootstring 0.03
+#perl5.setup         Encode-Bootstring 0.03 ../by-authors/id/S/SA/SAUBER
+
+platforms           darwin
+maintainers         blipvertica.com:blipvert
+license             {Artistic-1 GPL}
+
+# Uncomment this line if you know there will be no arch-specific code:
+supported_archs     noarch
+
+description         Encode::Bootstring (no description available)
+
+long_description    ${description}
+
+checksums           rmd160 d7fc90eb20867eddd97ea38177888f6afa5374d6 \
+                    sha256 1d38eec490a61bf314964fa70cdf97d1a1b5914516b08f51d697c45fecfb9ec9
+
+
