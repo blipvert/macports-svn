@@ -1,0 +1,19 @@
+--- GNUmakefile
++++ GNUmakefile
+@@ -149,12 +149,12 @@
+ 	gzip -9 $(distdir).tar
+ 
+ install: catdvi
+-	$(INSTALL_PROGRAM) catdvi $(bindir)/catdvi
+-	$(INSTALL_DATA) catdvi.1 $(man1dir)/catdvi.1
++	$(INSTALL_PROGRAM) catdvi $(DESTDIR)$(bindir)/catdvi
++	$(INSTALL_DATA) catdvi.1 $(DESTDIR)$(man1dir)/catdvi.1
+ 
+ uninstall:
+-	$(RM) $(bindir)/catdvi
+-	$(RM) $(man1dir)/catdvi.1
++	$(RM) $(DESTDIR)$(bindir)/catdvi
++	$(RM) $(DESTDIR)$(man1dir)/catdvi.1
+ 
+ # For fun ;-)
+ linecount :
