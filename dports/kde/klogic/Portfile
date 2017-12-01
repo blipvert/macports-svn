@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           kde4    1.1
+PortGroup           cmake   1.0
+
+name                klogic
+version             4.0.2
+categories          kde kde4
+maintainers         nomaintainer
+license             GPL-2+
+
+description         Digital circuit simulator
+long_description    ${description}
+platforms           darwin
+homepage            http://www.a-rostin.de
+
+depends_lib-append  port:qt4-mac \
+                    port:kdelibs4
+
+master_sites        http://www.a-rostin.de/${name}/releases
+checksums           rmd160  b5071237dd0ffe36e9aee0204cb9b4933e1d660a \
+                    sha256  8320e1ee9033f0ebc3eb582606b5a1d090dd9810db679a8914f896a2334f3c29
+
+configure.args-append  -DBUNDLE_INSTALL_DIR=${applications_dir}/KDE4
+

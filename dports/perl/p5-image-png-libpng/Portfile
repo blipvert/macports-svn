@@ -1,0 +1,25 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           perl5 1.0
+
+perl5.branches      5.22 5.24
+perl5.setup         Image-PNG-Libpng 0.43
+#perl5.setup         Image-PNG-Libpng 0.43 ../by-authors/id/B/BK/BKB
+
+platforms           darwin
+maintainers         com.blipvertica:blipvert
+license             {Artistic-1 GPL}
+
+# Uncomment this line if you know there will be no arch-specific code:
+#supported_archs     noarch
+
+description         Image::PNG::Libpng (no description available)
+
+long_description    ${description}
+
+checksums           rmd160 073a0ab9c0e9919a7a781df0e0f4044f948f58a5 \
+                    sha256 151507dab3abc11e2efae1cae68354557fb43ffb48ec31232d92c27b786d5918
+
+

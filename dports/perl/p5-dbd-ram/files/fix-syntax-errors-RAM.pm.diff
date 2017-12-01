@@ -1,0 +1,20 @@
+--- RAM.pm.orig	2016-12-05 12:01:40.000000000 -0500
++++ RAM.pm	2016-12-05 12:01:57.000000000 -0500
+@@ -411,7 +411,7 @@
+     my $first_line;
+     if ($col_names eq 'first_line'
+       && $data_type ne 'HASH' ) { $first_line = shift @{$data}; }
+-    else                        { $first_line = @{$data}->[0];  }
++    else                        { $first_line = $data->[0];  }
+     @col_names = $dbh->func(
+         $table_name,$data_type,$col_names,$first_line,
+     'get_column_names');
+@@ -569,7 +569,7 @@
+     for ( @columns ) { $colstr .= $_ . ' TEXT,'; }
+     $colstr =~ s/,$//;
+     my $sql = "CREATE TABLE $table_name ($colstr)";
+-    $dbh->do($sql) || die DBI::errstr, " : $sql";
++    $dbh->do($sql) || die $DBI::errstr, " : $sql";
+     $DBD::RAM::ramdata->{$table_name}->{data_type} = 'XML';
+     if ($remote_source){$data = $dbh->func($remote_source,'get_remote_data') or die; }
+     if ($file_source)   { $data = &get_file_data($dbh,$file_source); }
